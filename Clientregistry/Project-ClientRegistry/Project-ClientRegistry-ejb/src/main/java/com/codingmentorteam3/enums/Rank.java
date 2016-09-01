@@ -6,6 +6,6 @@ package com.codingmentorteam3.enums;
  */
 public enum Rank {
   
-    BOSS,MANAGER,SALES,EMPLOYEE
+    BOSS, MANAGER, EMPLOYEE, VISITOR 
     
 }

@@ -6,6 +6,6 @@ package com.codingmentorteam3.enums;
  */
 public enum RoleEnum {
 
-    ADMIN, PROJECTLEADER, USER
+    ADMIN, USER
     
 }
