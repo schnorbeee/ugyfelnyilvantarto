@@ -6,6 +6,6 @@ package com.codingmentorteam3.enums;
  */
 public enum Type {
 
-    EMAIL,PHONE
+    EMAIL, PHONE, FACEBOOK, TWITTER, LINCEDIN, YOUTUBE
     
 }

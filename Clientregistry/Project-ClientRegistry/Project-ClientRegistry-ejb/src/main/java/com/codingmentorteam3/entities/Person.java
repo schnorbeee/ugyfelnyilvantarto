@@ -18,11 +18,11 @@ import javax.persistence.MappedSuperclass;
  * @author norbeee sch.norbeee@gmail.com
  */
 @MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @Column(name = "first_name", length = 30)
@@ -32,8 +32,7 @@ public class Person implements Serializable {
     protected String lastName;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    protected Rank rank;
+    protected Rank rank = Rank.VISITOR;
 
     private String avatar;
 

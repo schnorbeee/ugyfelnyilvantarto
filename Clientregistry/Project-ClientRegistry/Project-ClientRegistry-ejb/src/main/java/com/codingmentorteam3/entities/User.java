@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -19,7 +17,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "user_table")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User extends Person implements Serializable {
 
     @Column(name = "user_name", nullable = false, length = 30)
