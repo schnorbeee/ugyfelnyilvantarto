@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <style>
+    </style>
+
+    <script rel="script" type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+    <script rel="script" type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script rel="script" type="text/javascript" src="../js/script.js"></script>
+
+    <title>ClientRegistry</title>
+</head>
+<body>
+
+    <!---------------
+    MAIN CONTAINER
+    ---------------->
+    <div class="container">
+
+        <!---------------
+        JUMBOTRON
+        ---------------->
+        <div class="jumbotron">
+            <div class="visitors-box pull-right">
+                Visitors today: <span id="visitors-today">123</span>
+            </div>
+            <div class="role-box pull-right">
+                See as:
+                <span id="role">
+                    <select>
+                        <option value="User">User</option>
+                        <option value="Contact">Contact</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </span>
+            </div>
+            <h1>ClientRegistry</h1>
+        </div>
+        <!---------------
+        END OF JUMBOTRON
+        ---------------->
+
+        <div class="row">
+
+            <!---------------
+            FIX LEFT-SIDE MENU
+            ---------------->
+            <div class="col-sm-2 col-sm-offset-1">
+                <img alt="profile-1" class="profile" src="../img/profile.png">
+                <a href="events.html" class="btn btn-default btn-color-default center-block btn-space active">Home</a>
+                <a href="myinvitations.html" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
+                <a href="myevents.html" class="btn btn-default btn-color-default center-block btn-space">My events</a>
+                <a href="myprofile.html" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
+                <hr>
+                <a href="manageevents.html" class="btn btn-default btn-color-default center-block btn-space">Manage events</a>
+                <a href="manageprojects.html" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                <hr>
+                <a href="manageusers.html" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
+                <a href="managecompanies.html" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                <hr>
+                <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
+            </div>
+            <!---------------
+            END OF FIX LEFT-SIDE MENU
+            ---------------->
+
+            <!---------------
+            MAIN CONTENT
+            ---------------->
+            <div class="col-sm-8">
+
+                <!---------------
+                CHANGING TOP MENU
+                ---------------->
+                <div class="row">
+                    <div class="btn-group btn-group-full-size">
+                        <a href="events.html" class="btn btn-default btn-color-default btn-width-third active">Events</a>
+                        <a href="users.html" class="btn btn-default btn-color-default btn-width-third">Users</a>
+                        <a href="companies.html" class="btn btn-default btn-color-default btn-width-third">Companies</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" aria-label="...">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Everywhere <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Events</a></li>
+                                        <li><a href="#">Users</a></li>
+                                        <li><a href="#">Companies</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Everywhere</a></li>
+                                    </ul>
+                                    <button type="button" class="btn btn-color-sign-in">Search</button>
+                                </div><!-- /btn-group -->
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                    </div><!-- /.row -->
+                </div>
+                <!---------------
+                END OF CHANGING TOP MENU
+                ---------------->
+
+                <!---------------
+                EVENTS LIST
+                ---------------->
+                <div class="col-xs-12 event-box">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <img alt="company-logo-1" class="company-logo center-block" src="../img/company-logo.png">
+                            </div>
+                            <div class="row">
+                                <a class="text-center" href="company.html">Company No.1</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <label><a href="event.html">Event title</a></label>
+                            </div>
+                            <div class="row">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Assumenda quas quibusdam tempora! Ab accusamus consectetur
+                                dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
+                                Accusantium error esse facilis harum molestias?
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>2016.09.01.</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>VII. Erzsébet körút 24.</label>
+                        </div>
+                    </div>
+                    <div class="row event-comment">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control" aria-label="...">
+                                <div class="input-group-btn">
+                                    <a href="#" class="btn btn-color-comment">Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row event-accept-or-decline">
+                        <div class="col-sm-3 col-sm-offset-9">
+                            <a href="#" class="btn btn-primary center-block btn-color-sign-in">Subscribe</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 event-box">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <img alt="company-logo-1" class="company-logo center-block" src="../img/company-logo.png">
+                            </div>
+                            <div class="row">
+                                <a class="text-center" href="company.html">Company No.1</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <label><a href="event.html">Event title</a></label>
+                            </div>
+                            <div class="row">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Assumenda quas quibusdam tempora! Ab accusamus consectetur
+                                dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
+                                Accusantium error esse facilis harum molestias?
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>2016.09.01.</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>VII. Erzsébet körút 24.</label>
+                        </div>
+                    </div>
+                    <div class="row event-comment">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control" aria-label="...">
+                                <div class="input-group-btn">
+                                    <a href="#" class="btn btn-color-comment">Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row event-accept-or-decline">
+                        <div class="col-sm-3 col-sm-offset-9">
+                            <a href="#" class="btn btn-primary center-block btn-color-sign-in">Subscribe</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 event-box">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <img alt="company-logo-1" class="company-logo center-block" src="../img/company-logo.png">
+                            </div>
+                            <div class="row">
+                                <a class="text-center" href="company.html">Company No.1</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <label><a href="event.html">Event title</a></label>
+                            </div>
+                            <div class="row">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Assumenda quas quibusdam tempora! Ab accusamus consectetur
+                                dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
+                                Accusantium error esse facilis harum molestias?
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>2016.09.01.</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>VII. Erzsébet körút 24.</label>
+                        </div>
+                    </div>
+                    <div class="row event-comment">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control" aria-label="...">
+                                <div class="input-group-btn">
+                                    <a href="#" class="btn btn-color-comment">Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row event-accept-or-decline">
+                        <div class="col-sm-3 col-sm-offset-9">
+                            <a href="#" class="btn btn-primary center-block btn-color-sign-in">Subscribe</a>
+                        </div>
+                    </div>
+                </div>
+                <!---------------
+                END OF EVENTS LIST
+                ---------------->
+
+            </div>
+            <!---------------
+            END OF MAIN CONTENT
+            ---------------->
+
+        </div>
+    </div>
+    <!---------------
+    END OF MAIN CONTAINER
+    ---------------->
+
+</body>
+</html>
