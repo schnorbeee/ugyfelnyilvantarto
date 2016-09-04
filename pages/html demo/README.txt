@@ -1,0 +1,1 @@
+The begginning page is the login.html, you can reach everything from this site.

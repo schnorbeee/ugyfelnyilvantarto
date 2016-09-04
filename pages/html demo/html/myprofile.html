@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <style>
+    </style>
+
+    <script rel="script" type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+    <script rel="script" type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script rel="script" type="text/javascript" src="../js/script.js"></script>
+
+    <title>My profile</title>
+</head>
+<body>
+
+<!---------------
+MAIN CONTAINER
+---------------->
+<div class="container">
+
+        <!---------------
+        JUMBOTRON
+        ---------------->
+        <div class="jumbotron">
+            <div class="visitors-box pull-right">
+                Visitors today: <span id="visitors-today">123</span>
+            </div>
+            <div class="role-box pull-right">
+                See as:
+                <span id="role">
+                    <select>
+                        <option value="User">User</option>
+                        <option value="Contact">Contact</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </span>
+            </div>
+            <h1>ClientRegistry</h1>
+        </div>
+        <!---------------
+        END OF JUMBOTRON
+        ---------------->
+
+        <div class="row">
+
+            <!---------------
+            FIX LEFT-SIDE MENU
+            ---------------->
+            <div class="col-sm-2 col-sm-offset-1">
+                <img alt="profile-1" class="profile" src="../img/profile.png">
+                <a href="events.html" class="btn btn-default btn-color-default center-block btn-space">Home</a>
+                <a href="myinvitations.html" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
+                <a href="myevents.html" class="btn btn-default btn-color-default center-block btn-space">My events</a>
+                <a href="myprofile.html" class="btn btn-default btn-color-default center-block btn-space active">My profile</a>
+                <hr>
+                <a href="manageevents.html" class="btn btn-default btn-color-default center-block btn-space">Manage events</a>
+                <a href="manageprojects.html" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                <hr>
+                <a href="manageusers.html" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
+                <a href="managecompanies.html" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                <hr>
+                <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
+            </div>
+            <!---------------
+            END OF FIX LEFT-SIDE MENU
+            ---------------->
+
+            <!---------------
+            MAIN CONTENT
+            ---------------->
+            <div class="col-sm-8">
+
+                <!---------------
+                MY DATA
+                ---------------->
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h2>First Last</h2>
+                        <h4>Username</h4>
+                        <h5><span id="rank">Visitor</span></h5>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="editprofile.html" class="btn btn-default btn-color-default center-block btn-space active">Edit</a>
+                        <a href="beacontact.html" class="btn btn-color-comment center-block btn-space">Be a contact person!</a>
+                    </div>
+                </div>
+                <!---------------
+                END OF MY DATA
+                ---------------->
+
+                <!---------------
+                CONNECTION CHANNELS
+                ---------------->
+                <h2>My connection channels</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Type</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
+                            <td>Email</td>
+                            <td><a href="mailto:">email@email.com</a></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-phone-square" aria-hidden="true"></i></td>
+                            <td>Telephone</td>
+                            <td><a href="tel:">+36 20 123 4567</a></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-facebook-square" aria-hidden="true"></i></td>
+                            <td>Facebook</td>
+                            <td><a href="facebook.com/">/face.book.name</a></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-twitter" aria-hidden="true"></i></td>
+                            <td>Twitter</td>
+                            <td><a href="twitter.com/">/twitter.name</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!---------------
+                END OF CONNECTION CHANNELS
+                ---------------->
+
+            </div>
+            <!---------------
+            END OF MAIN CONTENT
+            ---------------->
+
+        </div>
+    </div>
+    <!---------------
+    END OF MAIN CONTAINER
+    ---------------->
+
+</body>
+</html>

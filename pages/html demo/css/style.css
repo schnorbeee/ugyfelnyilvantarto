@@ -1,0 +1,200 @@
+/*OVERRIDE*/
+.jumbotron {
+    background-color: #81F7D8;
+}
+
+/*OVERRIDE*/
+.jumbotron h1 {
+    color: white;
+}
+
+a:focus,
+a:hover,
+a:active {
+    text-decoration: none;
+}
+
+.visitors-box, .role-box {
+    padding: 10px;
+    margin: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, .25);
+    font-weight: bold;
+}
+
+.btn-color-sign-in {
+    background-color: #01DFA5;
+    border-color: #04B486;
+}
+
+.btn-color-sign-in:focus,
+.btn-color-sign-in:hover,
+.btn-color-sign-in:active {
+    background-color: #04B486;
+    border-color: #04B486;
+}
+
+.btn-color-comment {
+    background-color: #FACC2E;
+    border-color: #FE9A2E;
+}
+
+.btn-color-comment:focus,
+.btn-color-comment:hover,
+.btn-color-comment:active {
+    background-color: #FE9A2E;
+    border-color: #FE9A2E;
+}
+
+.btn-color-register {
+    background-color: #8000FF;
+    border-color: #4C0B5F;
+}
+
+.btn-color-register:focus,
+.btn-color-register:hover,
+.btn-color-register:active {
+    background-color: #4C0B5F;
+    border-color: #4C0B5F;
+}
+
+.btn-color-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.btn-color-default.active {
+    color: white;
+    background-color: #01DFA5;
+    border-color: #04B486;
+}
+
+.btn-color-default:focus,
+.btn-color-default:hover,
+.btn-color-default:active {
+    color: white;
+    background-color: #04B486;
+    border-color: #04B486;
+}
+
+.btn-color-default.active:focus,
+.btn-color-default.active:hover,
+.btn-color-default.active:active {
+    color: white;
+    background-color: #04B486;
+    border-color: #04B486;
+}
+
+.btn-space {
+    margin: 10px 0;
+}
+
+.btn-group-full-size {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.btn-group-full-size .btn-width-half {
+    width: 50%;
+}
+
+.btn-group-full-size .btn-width-third {
+    width: 33.33%;
+}
+
+.btn-group-full-size .btn-width-fourth {
+    width: 25%;
+}
+
+.events-box {
+    height: 350px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.event-box, .invitation-box {
+    border: 1px solid grey;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 10px 0;
+    margin: 5px -5px;
+}
+
+.company-logo, .profile, .other-profile {
+    max-width: 100%;
+    max-height: 150px;
+    margin: 5px;
+}
+
+.other-profile {
+    max-height: 100px;
+}
+
+.profile-list, .company-logo-list {
+    max-height: 50px;
+    margin: 5px 40px;
+}
+
+.user-box, .company-box {
+    line-height: 60px;
+}
+
+.user-box:nth-of-type(2n), .company-box:nth-of-type(2n) {
+    background-color: #eeeeee;
+}
+
+.img-wrapper {
+    position: relative;
+}
+
+.img-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.img-overlay:before {
+    content: ' ';
+    display: block;
+    /* adjust 'height' to position overlay content vertically */
+    height: 50%;
+}
+
+.event-accept-or-decline {
+    margin: 5px;
+}
+
+.event-comment {
+    margin-right: 5px;
+}
+
+.scrollbar-style::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar-style::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar-style::-webkit-scrollbar-thumb
+{
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+#visitors-today {
+    color: #4C0B5F;
+}
