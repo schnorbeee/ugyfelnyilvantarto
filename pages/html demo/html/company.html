@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <style>
+    </style>
+
+    <script rel="script" type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+    <script rel="script" type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script rel="script" type="text/javascript" src="../js/script.js"></script>
+
+    <title>Somebody Else</title>
+</head>
+<body>
+
+<!---------------
+MAIN CONTAINER
+---------------->
+<div class="container">
+
+        <!---------------
+        JUMBOTRON
+        ---------------->
+        <div class="jumbotron">
+            <div class="visitors-box pull-right">
+                Visitors today: <span id="visitors-today">123</span>
+            </div>
+            <div class="role-box pull-right">
+                See as:
+                <span id="role">
+                    <select>
+                        <option value="User">User</option>
+                        <option value="Contact">Contact</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </span>
+            </div>
+            <h1>ClientRegistry</h1>
+        </div>
+        <!---------------
+        END OF JUMBOTRON
+        ---------------->
+
+        <div class="row">
+
+            <!---------------
+            FIX LEFT-SIDE MENU
+            ---------------->
+            <div class="col-sm-2 col-sm-offset-1">
+                <img alt="profile-1" class="profile" src="../img/profile.png">
+                <a href="events.html" class="btn btn-default btn-color-default center-block btn-space">Home</a>
+                <a href="myinvitations.html" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
+                <a href="myevents.html" class="btn btn-default btn-color-default center-block btn-space">My events</a>
+                <a href="myprofile.html" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
+                <hr>
+                <a href="manageevents.html" class="btn btn-default btn-color-default center-block btn-space">Manage events</a>
+                <a href="manageprojects.html" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                <hr>
+                <a href="manageusers.html" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
+                <a href="managecompanies.html" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                <hr>
+                <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
+            </div>
+            <!---------------
+            END OF FIX LEFT-SIDE MENU
+            ---------------->
+
+            <!---------------
+            MAIN CONTENT
+            ---------------->
+            <div class="col-sm-8">
+
+                <!---------------
+                COMPANY DATA
+                ---------------->
+                <div class="row">
+                    <div class="col-sm-2">
+                        <img alt="company-logo" class="company-logo" src="../img/company-logo.png">
+                    </div>
+                    <div class="col-sm-7">
+                        <h2>Company name</h2>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="companies.html" class="btn btn-primary center-block btn-color-register">Back</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Address:</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-1">
+                        <label>Country: </label> Hungary<br>
+                        <label>City: </label> Budapest<br>
+                        <label>Zip code: </label> 1234<br>
+                        <label>Street: </label> Erzsébet körút<br>
+                        <label>House number: </label> 24<br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Other info:</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-1">
+                        <label>Tax number: </label> 123456-123456<br>
+                    </div>
+                </div>
+                <!---------------
+                END OF COMPANY DATA
+                ---------------->
+
+                <!---------------
+                PROJECTS LIST
+                ---------------->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Projects:</h4>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Started</th>
+                        <th>Name</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th>Co-companies</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><label>2016.09.02.</label></td>
+                        <td>
+                            <div class="row">
+                                <label>Project name</label>
+                            </div>
+                            <div class="row">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Accusantium autem beatae cumque dolor dolore dolorem earum
+                                eius eum explicabo illum laboriosam libero magnam nostrum obcaecati,
+                                odit officiis placeat quae, qui?
+                            </div>
+                        </td>
+                        <td><label>2016.09.30.</label></td>
+                        <td><label>INACTIVE</label></td>
+                        <td>
+                            <ul>
+                                <li><a href="company.html">Company No.2</a></li>
+                                <li><a href="company.html">Company No.3</a></li>
+                                <li><a href="company.html">Company No.4</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>2016.09.02.</label></td>
+                        <td>
+                            <div class="row">
+                                <label>Project name</label>
+                            </div>
+                            <div class="row">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Accusantium autem beatae cumque dolor dolore dolorem earum
+                                eius eum explicabo illum laboriosam libero magnam nostrum obcaecati,
+                                odit officiis placeat quae, qui?
+                            </div>
+                        </td>
+                        <td><label>2016.09.30.</label></td>
+                        <td><label>BEGINNING</label></td>
+                        <td>
+                            <ul>
+                                <li><a href="company.html">Company No.2</a></li>
+                                <li><a href="company.html">Company No.3</a></li>
+                                <li><a href="company.html">Company No.4</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>2016.09.02.</label></td>
+                        <td>
+                            <div class="row">
+                                <label>Project name</label>
+                            </div>
+                            <div class="row">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Accusantium autem beatae cumque dolor dolore dolorem earum
+                                eius eum explicabo illum laboriosam libero magnam nostrum obcaecati,
+                                odit officiis placeat quae, qui?
+                            </div>
+                        </td>
+                        <td><label>2016.09.30.</label></td>
+                        <td><label>DONE</label></td>
+                        <td>
+                            <ul>
+                                <li><a href="company.html">Company No.2</a></li>
+                                <li><a href="company.html">Company No.3</a></li>
+                                <li><a href="company.html">Company No.4</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!---------------
+                END OF PROJECTS LIST
+                ---------------->
+
+                <!---------------
+                EVENTS LIST
+                ---------------->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Events:</h4>
+                    </div>
+                </div>
+                <div class="col-xs-12 event-box">
+                    <div class="row">
+                        <div class="col-sm-11 col-sm-offset-1">
+                            <label>Event title</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7 col-sm-offset-1">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Assumenda quas quibusdam tempora! Ab accusamus consectetur
+                            dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
+                            Accusantium error esse facilis harum molestias?
+                        </div>
+                        <div class="col-sm-2">
+                            <label>2016.09.01.</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>VII. Erzsébet körút 24.</label>
+                        </div>
+                    </div>
+                    <div class="row event-comment">
+                        <div class="col-sm-11 col-sm-offset-1">
+                            <div class="input-group">
+                                <input type="text" class="form-control" aria-label="...">
+                                <div class="input-group-btn">
+                                    <a href="#" class="btn btn-color-comment">Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row event-accept-or-decline">
+                        <div class="col-sm-3 col-sm-offset-9">
+                            <a href="#" class="btn btn-primary center-block btn-color-sign-in">Accept</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 event-box">
+                    <div class="row">
+                        <div class="col-sm-11 col-sm-offset-1">
+                            <label>Event title</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7 col-sm-offset-1">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Assumenda quas quibusdam tempora! Ab accusamus consectetur
+                            dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
+                            Accusantium error esse facilis harum molestias?
+                        </div>
+                        <div class="col-sm-2">
+                            <label>2016.09.01.</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>VII. Erzsébet körút 24.</label>
+                        </div>
+                    </div>
+                    <div class="row event-comment">
+                        <div class="col-sm-11 col-sm-offset-1">
+                            <div class="input-group">
+                                <input type="text" class="form-control" aria-label="...">
+                                <div class="input-group-btn">
+                                    <a href="#" class="btn btn-color-comment">Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row event-accept-or-decline">
+                        <div class="col-sm-3 col-sm-offset-9">
+                            <a href="#" class="btn btn-primary center-block btn-color-sign-in">Accept</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 event-box">
+                    <div class="row">
+                        <div class="col-sm-11 col-sm-offset-1">
+                            <label>Event title</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7 col-sm-offset-1">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Assumenda quas quibusdam tempora! Ab accusamus consectetur
+                            dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
+                            Accusantium error esse facilis harum molestias?
+                        </div>
+                        <div class="col-sm-2">
+                            <label>2016.09.01.</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>VII. Erzsébet körút 24.</label>
+                        </div>
+                    </div>
+                    <div class="row event-comment">
+                        <div class="col-sm-11 col-sm-offset-1">
+                            <div class="input-group">
+                                <input type="text" class="form-control" aria-label="...">
+                                <div class="input-group-btn">
+                                    <a href="#" class="btn btn-color-comment">Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row event-accept-or-decline">
+                        <div class="col-sm-3 col-sm-offset-9">
+                            <a href="#" class="btn btn-primary center-block btn-color-sign-in">Accept</a>
+                        </div>
+                    </div>
+                </div>
+                <!---------------
+                END OF EVENTS LIST
+                ---------------->
+
+                <!---------------
+                CONTACT PERSONS LIST
+                ---------------->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Contact members:</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 user-box">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <img alt="profile-1" class="profile profile-list center-block" src="../img/profile.png">
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="text-center" href="otherprofile.html">First Last</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 user-box">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <img alt="profile-1" class="profile profile-list center-block" src="../img/profile.png">
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="text-center" href="otherprofile.html">First Last</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 user-box">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <img alt="profile-1" class="profile profile-list center-block" src="../img/profile.png">
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="text-center" href="otherprofile.html">First Last</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 user-box">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <img alt="profile-1" class="profile profile-list center-block" src="../img/profile.png">
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="text-center" href="otherprofile.html">First Last</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------
+                END OF CONTACT PERSONS LIST
+                ---------------->
+
+            </div>
+            <!---------------
+            END OF MAIN CONTENT
+            ---------------->
+
+        </div>
+    </div>
+    <!---------------
+    END OF MAIN CONTAINER
+    ---------------->
+
+</body>
+</html>
