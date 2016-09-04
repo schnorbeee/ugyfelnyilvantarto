@@ -27,7 +27,7 @@ public class Note implements Serializable {
 
     private String content;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

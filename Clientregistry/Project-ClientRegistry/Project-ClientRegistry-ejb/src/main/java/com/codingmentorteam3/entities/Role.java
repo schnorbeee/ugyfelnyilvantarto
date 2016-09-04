@@ -1,6 +1,6 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.enums.RoleEnum;
+import com.codingmentorteam3.enums.RoleType;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -24,21 +24,22 @@ public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
     private Long id;
     
     @Enumerated(EnumType.STRING)
     @Column(name = "role_type")
-    private RoleEnum roleType;
+    private RoleType roleType;
     
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "username", referencedColumnName = "username")
+    private String username;
 
     public Role() {
         //Default constructor
     }
 
-    public Role(RoleEnum roleType) {
+    public Role(RoleType roleType) {
         this.roleType = roleType;
     }
 
@@ -50,20 +51,20 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-    public RoleEnum getRoleType() {
+    public RoleType getRoleType() {
         return roleType;
     }
 
-    public void setRoleType(RoleEnum roleType) {
+    public void setRoleType(RoleType roleType) {
         this.roleType = roleType;
     }
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override

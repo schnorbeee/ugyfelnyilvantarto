@@ -1,9 +1,11 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.enums.Rank;
+import com.codingmentorteam3.enums.RankType;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -11,13 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
-@MappedSuperclass
+@Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person implements Serializable {
 
@@ -32,20 +34,20 @@ public class Person implements Serializable {
     protected String lastName;
 
     @Enumerated(EnumType.STRING)
-    protected Rank rank = Rank.VISITOR;
+    protected RankType rank = RankType.VISITOR;
 
     private String avatar;
+    
+    @OneToMany(mappedBy = "owner", targetEntity = ConnectionChannel.class)
+    private List<ConnectionChannel> channels;
 
     public Person() {
         //Default constructor
     }
 
-    public Person(Long id, String firstName, String lastName, Rank rank, String avatar) {
-        this.id = id;
+    public Person(String firstName, String lastName, RankType rank) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.rank = rank;
-        this.avatar = avatar;
     }
 
     public Long getId() {
@@ -72,11 +74,11 @@ public class Person implements Serializable {
         this.lastName = lastName;
     }
 
-    public Rank getRank() {
+    public RankType getRank() {
         return rank;
     }
 
-    public void setRank(Rank rank) {
+    public void setRank(RankType rank) {
         this.rank = rank;
     }
 
@@ -86,6 +88,14 @@ public class Person implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public List<ConnectionChannel> getChannels() {
+        return channels;
+    }
+
+    public void setChannels(List<ConnectionChannel> channels) {
+        this.channels = channels;
     }
 
     @Override

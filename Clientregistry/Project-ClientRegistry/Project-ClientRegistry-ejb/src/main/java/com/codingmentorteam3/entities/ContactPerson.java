@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
  *
  * @author norbeee sch.norbeee@gmail.com
  */
-@Entity(name = "contact_person_table")
-public class ContactPerson extends User implements Serializable {
+@Entity(name = "contactperson_table")
+public class ContactPerson extends Person implements Serializable {
 
     @ManyToOne(targetEntity = Company.class)
     @JoinColumn(name = "company_id")

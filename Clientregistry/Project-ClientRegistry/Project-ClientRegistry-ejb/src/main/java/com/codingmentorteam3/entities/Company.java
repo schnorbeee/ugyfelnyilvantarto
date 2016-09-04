@@ -42,7 +42,7 @@ public class Company implements Serializable {
     private List<Event> events;
 
     @ManyToMany
-    @JoinTable(name = "company_project",
+    @JoinTable(name = "company_project_table",
             joinColumns = @JoinColumn(name = "company_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
     private List<Project> projects;

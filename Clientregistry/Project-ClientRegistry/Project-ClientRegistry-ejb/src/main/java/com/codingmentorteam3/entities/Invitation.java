@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.enums.FeedbackType;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -24,20 +26,27 @@ public class Invitation implements Serializable {
     
     private String message;
     
+    private FeedbackType feedback;
+    
     @ManyToOne(targetEntity = Event.class)
     @JoinColumn(name = "event_id")
     private Event event;
     
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "sender_id")
-    private User user;
+    private User sender;
+    
+    @OneToOne(targetEntity = User.class)
+    @JoinColumn(name = "receiver_id")
+    private User receiver;
 
     public Invitation() {
         //Default constructor
     }
 
-    public Invitation(String message) {
+    public Invitation(String message, FeedbackType feedback) {
         this.message = message;
+        this.feedback = feedback;
     }
 
     public Long getId() {
@@ -56,6 +65,13 @@ public class Invitation implements Serializable {
         this.message = message;
     }
 
+    public FeedbackType getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(FeedbackType feedback) {
+        this.feedback = feedback;
+    }
     public Event getEvent() {
         return event;
     }
@@ -64,12 +80,20 @@ public class Invitation implements Serializable {
         this.event = event;
     }
 
-    public User getUser() {
-        return user;
+    public User getSender() {
+        return sender;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
+
+    public User getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
     @Override
@@ -77,6 +101,7 @@ public class Invitation implements Serializable {
         int hash = 7;
         hash = 41 * hash + Objects.hashCode(this.id);
         hash = 41 * hash + Objects.hashCode(this.message);
+        hash = 41 * hash + Objects.hashCode(this.feedback);
         return hash;
     }
 
@@ -98,7 +123,10 @@ public class Invitation implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
+        if (!Objects.equals(this.feedback, other.feedback)) {
+            return false;
+        }
         return true;
     }
-    
+
 }
