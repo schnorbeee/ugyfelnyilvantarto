@@ -14,4 +14,5 @@ Remove-Item C:\wildfly+configuration\server\wildfly-10.0.0.Final\standalone\conf
 Copy-Item $PSScriptroot\files\standalone-full.xml C:\wildfly+configuration\server\wildfly-10.0.0.Final\standalone\configuration\
 #copy configuration files (JDBC driver, module.xml)
 New-Item C:\wildfly+configuration\server\wildfly-10.0.0.Final\modules\system\layers\base\org\postgres -type directory
-Copy-Item $PSScriptroot\files\postgres\* C:\wildfly+configuration\server\wildfly-10.0.0.Final\modules\system\layers\base\org\postgres\
+New-Item C:\wildfly+configuration\server\wildfly-10.0.0.Final\modules\system\layers\base\org\postgres\main -type directory
+Copy-Item $PSScriptroot\files\postgres\main\* C:\wildfly+configuration\server\wildfly-10.0.0.Final\modules\system\layers\base\org\postgres\main
