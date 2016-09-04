@@ -32,6 +32,8 @@ public class User extends Person implements Serializable {
 
     private String password;
 
+    private String avatar;
+
     @MapKeyEnumerated(EnumType.STRING)
     @ElementCollection
     @CollectionTable(name = "num_item_per_page_table")
@@ -80,6 +82,14 @@ public class User extends Person implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public Map<PageableTablesType, NumItemsPerPageType> getNumItemPerPage() {
@@ -136,6 +146,7 @@ public class User extends Person implements Serializable {
         hash = 41 * hash + Objects.hashCode(this.username);
         hash = 41 * hash + Objects.hashCode(this.password);
         hash = 41 * hash + Objects.hashCode(this.numItemPerPage);
+        hash = 41 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -157,7 +168,10 @@ public class User extends Person implements Serializable {
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        if (this.numItemPerPage != other.numItemPerPage) {
+        if (!Objects.equals(this.avatar, other.avatar)) {
+            return false;
+        }
+        if (!Objects.equals(this.numItemPerPage, other.numItemPerPage)) {
             return false;
         }
         return true;

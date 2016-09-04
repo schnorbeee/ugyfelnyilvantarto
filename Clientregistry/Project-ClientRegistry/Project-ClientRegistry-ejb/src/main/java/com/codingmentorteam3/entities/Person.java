@@ -36,10 +36,8 @@ public class Person implements Serializable {
     @Enumerated(EnumType.STRING)
     protected RankType rank;
 
-    private String avatar;
-
     @OneToMany(mappedBy = "owner", targetEntity = ConnectionChannel.class)
-    private List<ConnectionChannel> channels;
+    protected List<ConnectionChannel> channels;
 
     public Person() {
         //Default constructor
@@ -48,6 +46,7 @@ public class Person implements Serializable {
     public Person(String firstName, String lastName, RankType rank) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.rank = rank;
     }
 
     public Long getId() {
@@ -82,14 +81,6 @@ public class Person implements Serializable {
         this.rank = rank;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
     public List<ConnectionChannel> getChannels() {
         return channels;
     }
@@ -105,7 +96,6 @@ public class Person implements Serializable {
         hash = 19 * hash + Objects.hashCode(this.firstName);
         hash = 19 * hash + Objects.hashCode(this.lastName);
         hash = 19 * hash + Objects.hashCode(this.rank);
-        hash = 19 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -125,9 +115,6 @@ public class Person implements Serializable {
             return false;
         }
         if (!Objects.equals(this.lastName, other.lastName)) {
-            return false;
-        }
-        if (!Objects.equals(this.avatar, other.avatar)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
