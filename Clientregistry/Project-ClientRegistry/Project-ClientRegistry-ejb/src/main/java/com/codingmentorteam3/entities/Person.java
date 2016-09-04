@@ -1,9 +1,11 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.enums.Rank;
+import com.codingmentorteam3.enums.RankType;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -11,42 +13,40 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
-@MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @Column(name = "first_name", length = 30)
+    @Column(name = "first_name")
     protected String firstName;
 
-    @Column(name = "last_name", length = 30)
+    @Column(name = "last_name")
     protected String lastName;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    protected Rank rank;
+    protected RankType rank;
 
-    private String avatar;
+    @OneToMany(mappedBy = "owner", targetEntity = ConnectionChannel.class)
+    protected List<ConnectionChannel> channels;
 
     public Person() {
         //Default constructor
     }
 
-    public Person(Long id, String firstName, String lastName, Rank rank, String avatar) {
-        this.id = id;
+    public Person(String firstName, String lastName, RankType rank) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.rank = rank;
-        this.avatar = avatar;
     }
 
     public Long getId() {
@@ -73,20 +73,20 @@ public class Person implements Serializable {
         this.lastName = lastName;
     }
 
-    public Rank getRank() {
+    public RankType getRank() {
         return rank;
     }
 
-    public void setRank(Rank rank) {
+    public void setRank(RankType rank) {
         this.rank = rank;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public List<ConnectionChannel> getChannels() {
+        return channels;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setChannels(List<ConnectionChannel> channels) {
+        this.channels = channels;
     }
 
     @Override
@@ -96,7 +96,6 @@ public class Person implements Serializable {
         hash = 19 * hash + Objects.hashCode(this.firstName);
         hash = 19 * hash + Objects.hashCode(this.lastName);
         hash = 19 * hash + Objects.hashCode(this.rank);
-        hash = 19 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -116,9 +115,6 @@ public class Person implements Serializable {
             return false;
         }
         if (!Objects.equals(this.lastName, other.lastName)) {
-            return false;
-        }
-        if (!Objects.equals(this.avatar, other.avatar)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {

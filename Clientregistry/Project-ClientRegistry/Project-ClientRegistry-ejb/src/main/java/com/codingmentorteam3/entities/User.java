@@ -1,15 +1,21 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.enums.NumItemsPerPageType;
+import com.codingmentorteam3.enums.PageableTablesType;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.EnumType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.MapKeyEnumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,32 +25,39 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "user_table")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User extends Person implements Serializable {
 
-    @Column(name = "user_name", nullable = false, length = 30)
-    protected String username;
-    
-    @Column(nullable = false, length = 20)
-    protected String password;
-    
-    @OneToMany(mappedBy = "owner", targetEntity = ConnectionChannel.class)
-    protected List<ConnectionChannel> channels;
-    
-    @OneToMany(mappedBy = "user", targetEntity = Role.class)
-    protected List<Role> roles;
-    
-    @OneToMany(mappedBy = "user", targetEntity = Invitation.class)
-    protected List<Invitation> invitationsSent;
-    
+    @Column(name = "username")
+    private String username;
+
+    private String password;
+
+    private String avatar;
+
+    @MapKeyEnumerated(EnumType.STRING)
+    @ElementCollection
+    @CollectionTable(name = "num_item_per_page_table")
+    @MapKeyColumn(name = "table_enum")
+    @Column(name = "num_enum")
+    private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage;
+
+    @OneToMany(mappedBy = "username", targetEntity = Role.class)
+    private List<Role> roles;
+
+    @OneToMany(mappedBy = "sender", targetEntity = Invitation.class)
+    private List<Invitation> invitationsSent;
+
+    @OneToMany(mappedBy = "receiver", targetEntity = Invitation.class)
+    private List<Invitation> invitationsReceived;
+
     @OneToMany(mappedBy = "user", targetEntity = Note.class)
-    protected List<Note> notes;
-    
+    private List<Note> notes;
+
     @ManyToMany
-    @JoinTable(name = "user_event",
+    @JoinTable(name = "user_event_table",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))
-    protected List<Event> events;
+    private List<Event> events;
 
     public User() {
         //Default constructor
@@ -71,12 +84,20 @@ public class User extends Person implements Serializable {
         this.password = password;
     }
 
-    public List<ConnectionChannel> getChannels() {
-        return channels;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setChannels(List<ConnectionChannel> channels) {
-        this.channels = channels;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Map<PageableTablesType, NumItemsPerPageType> getNumItemPerPage() {
+        return numItemPerPage;
+    }
+
+    public void setNumItemPerPage(Map<PageableTablesType, NumItemsPerPageType> numItemPerPage) {
+        this.numItemPerPage = numItemPerPage;
     }
 
     public List<Role> getRoles() {
@@ -93,6 +114,14 @@ public class User extends Person implements Serializable {
 
     public void setInvitationsSent(List<Invitation> invitationsSent) {
         this.invitationsSent = invitationsSent;
+    }
+
+    public List<Invitation> getInvitationsReceived() {
+        return invitationsReceived;
+    }
+
+    public void setInvitationsReceived(List<Invitation> invitationsReceived) {
+        this.invitationsReceived = invitationsReceived;
     }
 
     public List<Note> getNotes() {
@@ -116,6 +145,8 @@ public class User extends Person implements Serializable {
         int hash = 7;
         hash = 41 * hash + Objects.hashCode(this.username);
         hash = 41 * hash + Objects.hashCode(this.password);
+        hash = 41 * hash + Objects.hashCode(this.numItemPerPage);
+        hash = 41 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -135,6 +166,12 @@ public class User extends Person implements Serializable {
             return false;
         }
         if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
+        if (!Objects.equals(this.avatar, other.avatar)) {
+            return false;
+        }
+        if (!Objects.equals(this.numItemPerPage, other.numItemPerPage)) {
             return false;
         }
         return true;

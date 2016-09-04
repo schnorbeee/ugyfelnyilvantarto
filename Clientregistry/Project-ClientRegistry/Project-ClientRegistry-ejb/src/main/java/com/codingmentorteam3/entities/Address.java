@@ -20,19 +20,16 @@ public class Address implements Serializable {
     @Column(name = "address_id")
     private Long id;
 
-    @Column(name = "zip_code", nullable = false, length = 5)
+    @Column(name = "zip_code")
     private String zipCode;
 
-    @Column(nullable = false, length = 20)
     private String country;
 
-    @Column(nullable = false, length = 30)
     private String city;
 
-    @Column(nullable = false, length = 30)
     private String street;
 
-    @Column(name = "house_number", nullable = false, length = 10)
+    @Column(name = "house_number")
     private String houseNumber;
 
     public Address() {
