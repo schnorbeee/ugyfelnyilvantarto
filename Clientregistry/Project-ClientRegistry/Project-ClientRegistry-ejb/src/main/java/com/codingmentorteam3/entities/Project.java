@@ -1,6 +1,6 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.enums.Status;
+import com.codingmentorteam3.enums.StatusType;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -28,16 +28,14 @@ public class Project implements Serializable {
     @Column(name = "project_id")
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "start_date", nullable = false)
+    @Column(name = "start_date")
     private Date startDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Status status;
+    private StatusType status;
 
     private String description;
 
@@ -51,7 +49,7 @@ public class Project implements Serializable {
         //Default constructor
     }
 
-    public Project(String name, Date startDate, Status status, String description, Date deadline) {
+    public Project(String name, Date startDate, StatusType status, String description, Date deadline) {
         this.name = name;
         this.startDate = startDate;
         this.status = status;
@@ -83,11 +81,11 @@ public class Project implements Serializable {
         this.startDate = startDate;
     }
 
-    public Status getStatus() {
+    public StatusType getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(StatusType status) {
         this.status = status;
     }
 

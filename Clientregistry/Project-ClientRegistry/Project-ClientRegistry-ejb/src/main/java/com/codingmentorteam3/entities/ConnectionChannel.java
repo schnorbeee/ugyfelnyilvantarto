@@ -1,6 +1,6 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.enums.Type;
+import com.codingmentorteam3.enums.ConnectionChannelType;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -17,29 +17,29 @@ import javax.persistence.ManyToOne;
  *
  * @author norbeee sch.norbeee@gmail.com
  */
-@Entity(name = "connection_channal_table")
+@Entity(name = "connectionchannel_table")
 public class ConnectionChannel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "connection_channal_id")
+    @Column(name = "connection_channel_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private ConnectionChannelType type;
 
-    @Column(name = "connection_value", nullable = false, length = 30)
+    @Column(name = "connection_value")
     private String value;
 
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = Person.class)
     @JoinColumn(name = "owner_id")
-    private User owner;
+    private Person owner;
 
     public ConnectionChannel() {
         //Default constuctor
     }
 
-    public ConnectionChannel(Type type, String value, User owner) {
+    public ConnectionChannel(ConnectionChannelType type, String value, User owner) {
         this.type = type;
         this.value = value;
         this.owner = owner;
@@ -53,11 +53,11 @@ public class ConnectionChannel implements Serializable {
         this.id = id;
     }
 
-    public Type getType() {
+    public ConnectionChannelType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(ConnectionChannelType type) {
         this.type = type;
     }
 
@@ -69,11 +69,11 @@ public class ConnectionChannel implements Serializable {
         this.value = value;
     }
 
-    public User getOwner() {
+    public Person getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(Person owner) {
         this.owner = owner;
     }
 

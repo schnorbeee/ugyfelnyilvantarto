@@ -4,8 +4,8 @@ package com.codingmentorteam3.enums;
  *
  * @author norbeee sch.norbeee@gmail.com
  */
-public enum RoleEnum {
+public enum RoleType {
 
-    ADMIN, USER
+    ADMIN, USER, VISITOR
     
 }
