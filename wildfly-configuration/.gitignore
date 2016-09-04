@@ -1,2 +1,2 @@
 #JDBC driver need for server configuration
-!.jar
+!files/postgres/main/*.jar
