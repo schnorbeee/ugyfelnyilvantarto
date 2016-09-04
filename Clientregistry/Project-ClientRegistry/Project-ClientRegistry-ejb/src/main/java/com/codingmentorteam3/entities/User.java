@@ -3,7 +3,6 @@ package com.codingmentorteam3.entities;
 import com.codingmentorteam3.enums.NumItemsPerPageType;
 import com.codingmentorteam3.enums.PageableTablesType;
 import java.io.Serializable;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;

@@ -6,7 +6,7 @@ package com.codingmentorteam3.enums;
  */
 public enum NumItemsPerPageType {
 
-    TEN(10),FIFTY(50),HUNDRED(100),TWOHUNDRED(200);
+    TEN(10),FIFTY(50),HUNDRED(100),TWO_HUNDRED(200);
     
     private final Integer numItemsPerPage;
     
