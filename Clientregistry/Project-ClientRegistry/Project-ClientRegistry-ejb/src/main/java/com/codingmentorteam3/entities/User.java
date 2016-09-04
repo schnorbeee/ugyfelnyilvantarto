@@ -28,38 +28,40 @@ import javax.persistence.Table;
 @Table(name = "user_table")
 public class User extends Person implements Serializable {
 
-    @Column(name = "username", nullable = false, length = 30)
+    @Column(name = "username")
     private String username;
-    
-    @Column(nullable = false)
+
     private String password;
-    
+
     @MapKeyEnumerated(EnumType.STRING)
     @ElementCollection
     @CollectionTable(name = "num_item_per_page_table")
-    @MapKeyColumn(name = "tables_enum")
+    @MapKeyColumn(name = "table_enum")
     @Column(name = "num_enum")
-    private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap(PageableTablesType.class);
-    
+    private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage;
+
     @OneToMany(mappedBy = "username", targetEntity = Role.class)
     private List<Role> roles;
-    
+
     @OneToMany(mappedBy = "sender", targetEntity = Invitation.class)
     private List<Invitation> invitationsSent;
-    
+
+    @OneToMany(mappedBy = "receiver", targetEntity = Invitation.class)
+    private List<Invitation> invitationsReceived;
+
     @OneToMany(mappedBy = "user", targetEntity = Note.class)
     private List<Note> notes;
-    
+
     @ManyToMany
     @JoinTable(name = "user_event_table",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))
     private List<Event> events;
-    
+
     public User() {
         //Default constructor
     }
-    
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -103,6 +105,14 @@ public class User extends Person implements Serializable {
 
     public void setInvitationsSent(List<Invitation> invitationsSent) {
         this.invitationsSent = invitationsSent;
+    }
+
+    public List<Invitation> getInvitationsReceived() {
+        return invitationsReceived;
+    }
+
+    public void setInvitationsReceived(List<Invitation> invitationsReceived) {
+        this.invitationsReceived = invitationsReceived;
     }
 
     public List<Note> getNotes() {

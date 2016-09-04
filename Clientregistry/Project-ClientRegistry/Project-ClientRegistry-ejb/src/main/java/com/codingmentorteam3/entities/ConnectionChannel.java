@@ -17,21 +17,21 @@ import javax.persistence.ManyToOne;
  *
  * @author norbeee sch.norbeee@gmail.com
  */
-@Entity(name = "connectionchannal_table")
+@Entity(name = "connectionchannel_table")
 public class ConnectionChannel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "connection_channal_id")
+    @Column(name = "connection_channel_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)
     private ConnectionChannelType type;
 
-    @Column(name = "connection_value", nullable = false, length = 30)
+    @Column(name = "connection_value")
     private String value;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Person.class)
     @JoinColumn(name = "owner_id")
     private Person owner;
 

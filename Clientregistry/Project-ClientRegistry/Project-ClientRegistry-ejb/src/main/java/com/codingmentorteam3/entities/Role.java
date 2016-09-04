@@ -26,11 +26,11 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
     private Long id;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role_type")
     private RoleType roleType;
-    
+
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "username", referencedColumnName = "username")
     private String username;
@@ -95,5 +95,5 @@ public class Role implements Serializable {
         }
         return true;
     }
-    
+
 }

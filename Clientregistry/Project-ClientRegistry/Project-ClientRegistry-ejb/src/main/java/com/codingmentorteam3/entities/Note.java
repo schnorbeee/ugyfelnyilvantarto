@@ -22,7 +22,6 @@ public class Note implements Serializable {
     @Column(name = "note_id")
     private Long id;
 
-    @Column(length = 30)
     private String label;
 
     private String content;

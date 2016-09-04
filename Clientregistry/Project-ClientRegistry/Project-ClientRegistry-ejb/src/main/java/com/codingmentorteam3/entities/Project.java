@@ -28,15 +28,13 @@ public class Project implements Serializable {
     @Column(name = "project_id")
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "start_date", nullable = false)
+    @Column(name = "start_date")
     private Date startDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private StatusType status;
 
     private String description;

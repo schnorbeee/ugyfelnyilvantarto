@@ -27,17 +27,17 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @Column(name = "first_name", length = 30)
+    @Column(name = "first_name")
     protected String firstName;
 
-    @Column(name = "last_name", length = 30)
+    @Column(name = "last_name")
     protected String lastName;
 
     @Enumerated(EnumType.STRING)
-    protected RankType rank = RankType.VISITOR;
+    protected RankType rank;
 
     private String avatar;
-    
+
     @OneToMany(mappedBy = "owner", targetEntity = ConnectionChannel.class)
     private List<ConnectionChannel> channels;
 

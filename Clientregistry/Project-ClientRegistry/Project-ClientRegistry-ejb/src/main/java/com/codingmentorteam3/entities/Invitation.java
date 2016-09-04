@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -23,20 +22,20 @@ public class Invitation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "invitation_id")
     private Long id;
-    
+
     private String message;
-    
+
     private FeedbackType feedback;
-    
+
     @ManyToOne(targetEntity = Event.class)
     @JoinColumn(name = "event_id")
     private Event event;
-    
+
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "sender_id")
     private User sender;
-    
-    @OneToOne(targetEntity = User.class)
+
+    @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "receiver_id")
     private User receiver;
 
@@ -72,6 +71,7 @@ public class Invitation implements Serializable {
     public void setFeedback(FeedbackType feedback) {
         this.feedback = feedback;
     }
+
     public Event getEvent() {
         return event;
     }

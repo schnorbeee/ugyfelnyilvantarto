@@ -26,14 +26,13 @@ public class Company implements Serializable {
     @Column(name = "company_id")
     private Long id;
 
-    @Column(length = 100, nullable = false)
     private String name;
 
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @Column(name = "tax_number", length = 50, nullable = false)
+    @Column(name = "tax_number")
     private Long taxNumber;
 
     private String logo;

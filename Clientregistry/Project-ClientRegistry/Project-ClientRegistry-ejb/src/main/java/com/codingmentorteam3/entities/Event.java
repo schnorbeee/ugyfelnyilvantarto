@@ -33,18 +33,17 @@ public class Event implements Serializable {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "address_id", nullable = false)
+    @JoinColumn(name = "address_id")
     private Address address;
 
-    @Column(length = 50, nullable = false)
     private String title;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "start_date", nullable = false)
+    @Column(name = "start_date")
     private Date startDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "end_date", nullable = false)
+    @Column(name = "end_date")
     private Date endDate;
 
     private String description;
