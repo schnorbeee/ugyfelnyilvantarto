@@ -18,8 +18,8 @@ public class RoleDaoImpl extends AbstractDao<Role> {
 
     public List<Role> getRolesListByRoleType(RoleType roleType) {
         try {
-            return em.createNamedQuery("role.list.by.role.type", Role.class).setParameter("rtype", roleType).getResultList();
-
+            List<Role> query = em.createNamedQuery("role.list.by.role.type", Role.class).setParameter("rtype", roleType).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }

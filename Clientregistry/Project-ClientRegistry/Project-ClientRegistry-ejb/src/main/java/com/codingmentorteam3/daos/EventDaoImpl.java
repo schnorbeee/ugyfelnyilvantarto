@@ -20,7 +20,8 @@ public class EventDaoImpl extends AbstractDao<Event> {
 
     public List<Event> getEventsListByTitleFilter(String title) {
         try {
-            return em.createNamedQuery("event.by.title.filter", Event.class).setParameter("title", title).getResultList();
+            List<Event> query = em.createNamedQuery("event.by.title.filter", Event.class).setParameter("title", title).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -28,7 +29,8 @@ public class EventDaoImpl extends AbstractDao<Event> {
 
     public List<Event> getEventsListByTypeFilter(String type) {
         try {
-            return em.createNamedQuery("event.by.type.filter", Event.class).setParameter("type", type).getResultList();
+            List<Event> query = em.createNamedQuery("event.by.type.filter", Event.class).setParameter("type", type).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -36,7 +38,8 @@ public class EventDaoImpl extends AbstractDao<Event> {
 
     public List<Event> getEventsList() {
         try {
-            return em.createNamedQuery("event.list", Event.class).getResultList();
+            List<Event> query = em.createNamedQuery("event.list", Event.class).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -46,7 +49,8 @@ public class EventDaoImpl extends AbstractDao<Event> {
         Event current = read(eventId);
         if (null != current) {
             try {
-                return em.createNamedQuery("event.list.users.by.id", User.class).setParameter("id", eventId).getResultList();
+                List<User> query = em.createNamedQuery("event.list.users.by.id", User.class).setParameter("id", eventId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }
@@ -58,7 +62,8 @@ public class EventDaoImpl extends AbstractDao<Event> {
         Event current = read(eventId);
         if (null != current) {
             try {
-                return em.createNamedQuery("event.list.notes.by.id", Note.class).setParameter("id", eventId).getResultList();
+                List<Note> query = em.createNamedQuery("event.list.notes.by.id", Note.class).setParameter("id", eventId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }

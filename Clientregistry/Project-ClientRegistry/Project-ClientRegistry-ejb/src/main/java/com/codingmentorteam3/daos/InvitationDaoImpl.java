@@ -20,7 +20,8 @@ public class InvitationDaoImpl extends AbstractDao<Invitation> {
 
     public List<Invitation> getInvitationsListByFeedbackFilter(String feedback) {
         try {
-            return em.createNamedQuery("invitation.by.feedback.filter", Invitation.class).setParameter("feedback", feedback).getResultList();
+            List<Invitation> query = em.createNamedQuery("invitation.by.feedback.filter", Invitation.class).setParameter("feedback", feedback).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -28,7 +29,8 @@ public class InvitationDaoImpl extends AbstractDao<Invitation> {
 
     public List<Invitation> getInvitationsList() {
         try {
-            return em.createNamedQuery("invitation.list", Invitation.class).getResultList();
+            List<Invitation> query = em.createNamedQuery("invitation.list", Invitation.class).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -38,7 +40,8 @@ public class InvitationDaoImpl extends AbstractDao<Invitation> {
         Event current = em.find(Event.class, eventId);
         if (null != current) {
             try {
-                return em.createNamedQuery("invitation.list.by.event.id", Invitation.class).setParameter("id", eventId).getResultList();
+                List<Invitation> query = em.createNamedQuery("invitation.list.by.event.id", Invitation.class).setParameter("id", eventId).getResultList();
+                return query; 
             } catch (Exception e) {
                 return null;
             }
@@ -50,7 +53,8 @@ public class InvitationDaoImpl extends AbstractDao<Invitation> {
         Event current = em.find(Event.class, eventId);
         if (null != current) {
             try {
-                return em.createNamedQuery("invitation.list.by.event.id.and.feedback", Invitation.class).setParameter("id", eventId).setParameter("feedback", ftype).getResultList();
+                List<Invitation> query = em.createNamedQuery("invitation.list.by.event.id.and.feedback", Invitation.class).setParameter("id", eventId).setParameter("feedback", ftype).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }

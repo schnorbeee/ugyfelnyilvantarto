@@ -23,7 +23,8 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
 
     public List<Company> getCompaniesListByNameFilter(String name) {
         try {
-            return em.createNamedQuery("company.by.name.filter", Company.class).setParameter("name", name).getResultList();
+            List<Company> query = em.createNamedQuery("company.by.name.filter", Company.class).setParameter("name", name).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -31,7 +32,8 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
 
     public List<Company> getCompaniesListByTaxFilter(Long tax) {
         try {
-            return em.createNamedQuery("company.by.tax.number.filter", Company.class).setParameter("tax", tax).getResultList();
+            List<Company> query = em.createNamedQuery("company.by.tax.number.filter", Company.class).setParameter("tax", tax).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -39,7 +41,8 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
 
     public List<Company> getCompaniesList() {
         try {
-            return em.createNamedQuery("company.list", Company.class).getResultList();
+            List<Company> query = em.createNamedQuery("company.list", Company.class).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -49,7 +52,8 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         Company current = read(companyId);
         if (null != current) {
             try {
-                return em.createNamedQuery("company.list.events.by.id", Event.class).setParameter("id", companyId).getResultList();
+                List<Event> query = em.createNamedQuery("company.list.events.by.id", Event.class).setParameter("id", companyId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }
@@ -61,7 +65,8 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         Company current = read(companyId);
         if (null != current) {
             try {
-                return em.createNamedQuery("company.list.projects.by.id", Project.class).setParameter("id", companyId).getResultList();
+                List<Project> query = em.createNamedQuery("company.list.projects.by.id", Project.class).setParameter("id", companyId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }
@@ -73,7 +78,8 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         Company current = read(companyId);
         if (null != current) {
             try {
-                return em.createNamedQuery("company.list.contacters.by.id", ContactPerson.class).setParameter("id", companyId).getResultList();
+                List<ContactPerson> query = em.createNamedQuery("company.list.contacters.by.id", ContactPerson.class).setParameter("id", companyId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }

@@ -19,7 +19,8 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
 
     public List<Project> getProjectsListByNameFilter(String name) {
         try {
-            return em.createNamedQuery("project.by.name.filter", Project.class).setParameter("name", name).getResultList();
+            List<Project> query = em.createNamedQuery("project.by.name.filter", Project.class).setParameter("name", name).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -27,7 +28,8 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
 
     public List<Project> getProjectsListByStatusFilter(String status) {
         try {
-            return em.createNamedQuery("project.by.status.filter", Project.class).setParameter("status", status).getResultList();
+            List<Project> query = em.createNamedQuery("project.by.status.filter", Project.class).setParameter("status", status).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -35,7 +37,8 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
 
     public List<Project> getProjectsList() {
         try {
-            return em.createNamedQuery("project.list", Project.class).getResultList();
+            List<Project> query = em.createNamedQuery("project.list", Project.class).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -45,7 +48,8 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
         Project current = read(projectId);
         if (null != current) {
             try {
-                return em.createNamedQuery("project.list.companies.by.id", Company.class).setParameter("id", projectId).getResultList();
+                List<Company> query = em.createNamedQuery("project.list.companies.by.id", Company.class).setParameter("id", projectId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }

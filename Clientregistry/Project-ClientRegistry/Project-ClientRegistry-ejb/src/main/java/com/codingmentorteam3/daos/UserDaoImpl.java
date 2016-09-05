@@ -26,7 +26,8 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     public List<User> getUsersListByUsernameFilter(String username) {
         try {
-            return em.createNamedQuery("user.by.username.filter", User.class).setParameter("name", username).getResultList();
+            List<User> query = em.createNamedQuery("user.by.username.filter", User.class).setParameter("name", username).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -34,7 +35,8 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     public List<User> getUsersListByFirstNameFilter(String firstName) {
         try {
-            return em.createNamedQuery("user.by.firstname.filter", User.class).setParameter("first", firstName).getResultList();
+            List<User> query = em.createNamedQuery("user.by.firstname.filter", User.class).setParameter("first", firstName).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -42,7 +44,8 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     public List<User> getUsersListByLastNameFilter(String lastName) {
         try {
-            return em.createNamedQuery("user.by.lastname.filter", User.class).setParameter("last", lastName).getResultList();
+            List<User> query = em.createNamedQuery("user.by.lastname.filter", User.class).setParameter("last", lastName).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -50,7 +53,8 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     public List<User> getUsersListByRankFilter(String rank) {
         try {
-            return em.createNamedQuery("user.by.rank.filter", User.class).setParameter("rank", rank).getResultList();
+            List<User> query = em.createNamedQuery("user.by.rank.filter", User.class).setParameter("rank", rank).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -58,7 +62,8 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     public List<User> getUsersList() {
         try {
-            return em.createNamedQuery("user.list", User.class).getResultList();
+            List<User> query = em.createNamedQuery("user.list", User.class).getResultList();
+            return query;
         } catch (Exception e) {
             return null;
         }
@@ -77,7 +82,8 @@ public class UserDaoImpl extends AbstractDao<User> {
         User current = read(userId);
         if (null != current) {
             try {
-                return em.createNamedQuery("user.num.item.per.page.by.id", NumItemsPerPageType.class).setParameter("id", userId).getResultList();
+                List<NumItemsPerPageType> query = em.createNamedQuery("user.num.item.per.page.by.id", NumItemsPerPageType.class).setParameter("id", userId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }
@@ -89,7 +95,8 @@ public class UserDaoImpl extends AbstractDao<User> {
         User current = read(userId);
         if (null != current) {
             try {
-                return em.createNamedQuery("user.list.roles.by.id", Role.class).setParameter("id", userId).getResultList();
+                List<Role> query = em.createNamedQuery("user.list.roles.by.id", Role.class).setParameter("id", userId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }
@@ -101,7 +108,8 @@ public class UserDaoImpl extends AbstractDao<User> {
         User current = read(userId);
         if (null != current) {
             try {
-                return em.createNamedQuery("user.list.invitation.sent.by.id", Invitation.class).setParameter("id", userId).getResultList();
+                List<Invitation> query = em.createNamedQuery("user.list.invitation.sent.by.id", Invitation.class).setParameter("id", userId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }
@@ -113,7 +121,8 @@ public class UserDaoImpl extends AbstractDao<User> {
         User current = read(userId);
         if (null != current) {
             try {
-                return em.createNamedQuery("user.list.invitation.received.by.id", Invitation.class).setParameter("id", userId).getResultList();
+                List<Invitation> query = em.createNamedQuery("user.list.invitation.received.by.id", Invitation.class).setParameter("id", userId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }
@@ -125,7 +134,8 @@ public class UserDaoImpl extends AbstractDao<User> {
         User current = read(userId);
         if (null != current) {
             try {
-                return em.createNamedQuery("user.list.notes.by.id", Note.class).setParameter("id", userId).getResultList();
+                List<Note> query = em.createNamedQuery("user.list.notes.by.id", Note.class).setParameter("id", userId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }
@@ -137,7 +147,8 @@ public class UserDaoImpl extends AbstractDao<User> {
         User current = read(userId);
         if (null != current) {
             try {
-                return em.createNamedQuery("user.list.events.by.id", Event.class).setParameter("id", userId).getResultList();
+                List<Event> query = em.createNamedQuery("user.list.events.by.id", Event.class).setParameter("id", userId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }
@@ -149,7 +160,8 @@ public class UserDaoImpl extends AbstractDao<User> {
         User current = read(userId);
         if (null != current) {
             try {
-                return em.createNamedQuery("user.list.channels.by.id", ConnectionChannel.class).setParameter("id", userId).getResultList();
+                List<ConnectionChannel> query = em.createNamedQuery("user.list.channels.by.id", ConnectionChannel.class).setParameter("id", userId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }

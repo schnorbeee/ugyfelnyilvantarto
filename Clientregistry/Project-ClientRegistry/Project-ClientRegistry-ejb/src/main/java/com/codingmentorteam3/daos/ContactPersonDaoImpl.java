@@ -21,7 +21,8 @@ public class ContactPersonDaoImpl extends AbstractDao<ContactPerson> {
         ContactPerson current = read(contacterId);
         if (null != current) {
             try {
-                return em.createNamedQuery("contact.person.channels.by.id", ConnectionChannel.class).setParameter("id", contacterId).getResultList();
+                List<ConnectionChannel> query = em.createNamedQuery("contact.person.channels.by.id", ConnectionChannel.class).setParameter("id", contacterId).getResultList();
+                return query;
             } catch (Exception e) {
                 return null;
             }

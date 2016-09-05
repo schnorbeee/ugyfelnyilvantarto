@@ -17,7 +17,8 @@ public class VisitorDaoImpl extends AbstractDao<Visitor> {
 
     public Integer getCountVisitorsPerDay(Date day) {
         try {
-            return em.createNamedQuery("visitors.of.day", Visitor.class).setParameter("day", day).getMaxResults();
+            int query = em.createNamedQuery("visitors.of.day", Visitor.class).setParameter("day", day).getMaxResults();
+            return query;
         } catch (Exception e) {
             return null;
         }
