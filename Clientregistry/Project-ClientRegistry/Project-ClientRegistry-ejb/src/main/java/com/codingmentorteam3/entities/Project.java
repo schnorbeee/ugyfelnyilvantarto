@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,6 +23,12 @@ import javax.persistence.TemporalType;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "project_table")
+@NamedQueries({
+    @NamedQuery(name = "project.by.name.filter", query = "SELECT p FROM project_table p WHERE p.name LIKE :name"),
+    @NamedQuery(name = "project.by.status.filter", query = "SELECT p FROM project_table p WHERE p.status LIKE :status"),
+    @NamedQuery(name = "project.list", query = "SELECT p FROM project_table p"),
+    @NamedQuery(name = "project.list.companies.by.id", query = "SELECT c FROM project_table p INNER JOIN p.companys c WHERE p.id =:id")
+})
 public class Project implements Serializable {
 
     @Id

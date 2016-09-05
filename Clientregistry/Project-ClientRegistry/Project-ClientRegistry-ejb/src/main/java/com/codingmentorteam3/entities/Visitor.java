@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -15,6 +16,7 @@ import javax.persistence.TemporalType;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "visitors_table")
+@NamedQuery(name = "visitors.of.day", query = "SELECT COUNT(v) FROM visitors_table v WHERE v.day =:day")
 public class Visitor implements Serializable {
 
     @Id

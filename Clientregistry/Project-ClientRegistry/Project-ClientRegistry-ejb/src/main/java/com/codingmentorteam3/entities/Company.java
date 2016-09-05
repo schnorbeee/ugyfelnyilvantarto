@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -19,6 +21,14 @@ import javax.persistence.OneToOne;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "company_table")
+@NamedQueries({
+    @NamedQuery(name = "company.by.name.filter", query = "SELECT c FROM company_table c WHERE c.name LIKE :name"),
+    @NamedQuery(name = "company.by.tax.number.filter", query = "SELECT c FROM company_table c WHERE c.taxNumber LIKE :tax"),
+    @NamedQuery(name = "company.list", query = "SELECT c FROM company_table c ORDER BY c.name"),
+    @NamedQuery(name = "company.list.events.by.id", query = "SELECT e FROM company_table c INNER JOIN c.events e WHERE c.id =:id"),
+    @NamedQuery(name = "company.list.projects.by.id", query = "SELECT p FROM company_table c INNER JOIN c.projects p WHERE c.id =:id"),
+    @NamedQuery(name = "company.list.contacters.by.id", query = "SELECT con FROM company_table c INNER JOIN c.contacters con WHERE c.id =:id")
+})
 public class Company implements Serializable {
 
     @Id

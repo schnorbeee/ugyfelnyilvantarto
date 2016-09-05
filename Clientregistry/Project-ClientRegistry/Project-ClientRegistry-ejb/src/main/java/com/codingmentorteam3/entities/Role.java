@@ -12,14 +12,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
-@Entity
-@Table(name = "role_table")
+@Entity(name = "role_table")
+@NamedQueries({
+    @NamedQuery(name = "role.list.by.role.type", query = "SELECT r FROM role_table r WHERE r.roleType =:rtype")
+})
 public class Role implements Serializable {
 
     @Id
