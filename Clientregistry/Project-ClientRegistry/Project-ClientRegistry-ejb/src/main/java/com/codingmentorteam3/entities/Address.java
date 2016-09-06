@@ -17,19 +17,22 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id")
+    @Column(name = "address_id", nullable = false)
     private Long id;
 
-    @Column(name = "zip_code")
+    @Column(name = "zip_code", nullable = false)
     private String zipCode;
 
+    @Column(nullable = false)
     private String country;
 
+    @Column(nullable = false)
     private String city;
 
+    @Column(nullable = false)
     private String street;
 
-    @Column(name = "house_number")
+    @Column(name = "house_number", nullable = false)
     private String houseNumber;
 
     public Address() {

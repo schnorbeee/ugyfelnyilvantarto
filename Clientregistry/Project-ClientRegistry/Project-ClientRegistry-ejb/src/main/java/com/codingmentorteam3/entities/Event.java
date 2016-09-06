@@ -29,17 +29,18 @@ public class Event implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "event_id")
+    @Column(name = "event_id", nullable = false)
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
+    @Column(nullable = false)
     private String title;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "start_date")
+    @Column(name = "start_date", nullable = false)
     private Date startDate;
 
     @Temporal(TemporalType.DATE)

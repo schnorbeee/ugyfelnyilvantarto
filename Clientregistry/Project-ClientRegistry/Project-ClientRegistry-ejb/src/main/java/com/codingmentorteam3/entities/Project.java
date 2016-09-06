@@ -25,9 +25,10 @@ public class Project implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "project_id")
+    @Column(name = "project_id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     @Temporal(TemporalType.DATE)
@@ -35,15 +36,17 @@ public class Project implements Serializable {
     private Date startDate;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private StatusType status;
 
+    @Column(nullable = false)
     private String description;
 
     @Temporal(TemporalType.DATE)
     private Date deadline;
 
     @ManyToMany(mappedBy = "projects", targetEntity = Company.class)
-    private List<Company> companys;
+    private List<Company> companies;
 
     public Project() {
         //Default constructor
@@ -105,12 +108,12 @@ public class Project implements Serializable {
         this.deadline = deadline;
     }
 
-    public List<Company> getCompanys() {
-        return companys;
+    public List<Company> getCompanies() {
+        return companies;
     }
 
-    public void setCompanys(List<Company> companys) {
-        this.companys = companys;
+    public void setCompanys(List<Company> companies) {
+        this.companies = companies;
     }
 
     @Override

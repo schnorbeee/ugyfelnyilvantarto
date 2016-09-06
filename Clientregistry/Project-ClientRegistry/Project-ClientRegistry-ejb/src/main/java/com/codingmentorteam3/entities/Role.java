@@ -24,15 +24,15 @@ public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
+    @Column(name = "role_id", nullable = false)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role_type")
+    @Column(name = "role_type", nullable = false)
     private RoleType roleType;
 
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "username", referencedColumnName = "username")
+    @JoinColumn(name = "username", referencedColumnName = "username", nullable = false)
     private String username;
 
     public Role() {

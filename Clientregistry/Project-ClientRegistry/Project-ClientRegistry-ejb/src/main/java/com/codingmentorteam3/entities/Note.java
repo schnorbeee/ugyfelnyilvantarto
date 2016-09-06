@@ -19,11 +19,12 @@ public class Note implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "note_id")
+    @Column(name = "note_id", nullable = false)
     private Long id;
 
     private String label;
 
+    @Column(nullable = false)
     private String content;
 
     @ManyToOne(targetEntity = User.class)
@@ -31,7 +32,7 @@ public class Note implements Serializable {
     private User user;
 
     @ManyToOne(targetEntity = Event.class)
-    @JoinColumn(name = "event_id")
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
     public Note() {

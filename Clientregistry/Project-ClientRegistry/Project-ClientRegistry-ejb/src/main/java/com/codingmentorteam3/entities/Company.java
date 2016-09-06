@@ -23,18 +23,20 @@ public class Company implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "company_id")
+    @Column(name = "company_id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
     @Column(name = "tax_number")
     private Long taxNumber;
 
+    @Column(nullable = false)
     private String logo;
 
     @OneToMany(mappedBy = "company", targetEntity = Event.class)

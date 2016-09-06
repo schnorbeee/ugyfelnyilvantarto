@@ -20,23 +20,24 @@ public class Invitation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "invitation_id")
+    @Column(name = "invitation_id", nullable = false)
     private Long id;
 
     private String message;
 
+    @Column(nullable = false)
     private FeedbackType feedback;
 
     @ManyToOne(targetEntity = Event.class)
-    @JoinColumn(name = "event_id")
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "sender_id")
+    @JoinColumn(name = "sender_id", nullable = false)
     private User sender;
 
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "receiver_id")
+    @JoinColumn(name = "receiver_id", nullable = false)
     private User receiver;
 
     public Invitation() {

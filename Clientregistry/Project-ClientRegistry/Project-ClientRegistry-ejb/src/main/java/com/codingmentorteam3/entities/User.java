@@ -27,11 +27,13 @@ import javax.persistence.Table;
 @Table(name = "user_table")
 public class User extends Person implements Serializable {
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     private String username;
 
+    @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String avatar;
 
     @MapKeyEnumerated(EnumType.STRING)
