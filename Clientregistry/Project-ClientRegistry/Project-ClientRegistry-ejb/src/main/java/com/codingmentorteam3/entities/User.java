@@ -144,7 +144,7 @@ public class User extends Person implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = super.hashCode();
         hash = 41 * hash + Objects.hashCode(this.username);
         hash = 41 * hash + Objects.hashCode(this.password);
         hash = 41 * hash + Objects.hashCode(this.numItemPerPage);
@@ -164,6 +164,9 @@ public class User extends Person implements Serializable {
             return false;
         }
         final User other = (User) obj;
+        if (!super.equals(other)) {
+            return false;
+        }
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }

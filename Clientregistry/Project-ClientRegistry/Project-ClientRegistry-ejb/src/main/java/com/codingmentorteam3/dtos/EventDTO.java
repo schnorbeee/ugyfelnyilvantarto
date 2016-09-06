@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Objects;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -22,8 +23,10 @@ public class EventDTO {
     private static final EventType DEFAULT_TYPE = EventType.MEETING;
     
     @NotNull
+    @Size(max = 30)
     private String title;
     
+    @Size(max = 1500)
     private String description;
     
     @NotNull

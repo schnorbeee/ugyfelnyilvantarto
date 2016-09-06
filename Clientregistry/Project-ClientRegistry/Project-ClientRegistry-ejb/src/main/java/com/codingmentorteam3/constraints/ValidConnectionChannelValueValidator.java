@@ -14,7 +14,7 @@ public class ValidConnectionChannelValueValidator
         implements ConstraintValidator<ValidConnectionChannelValue, ConnectionChannelDTO> {
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z-.]+$");
-    private static final Pattern PHONE_PATTERN = Pattern.compile("\\d{7}");
+    private static final Pattern PHONE_PATTERN = Pattern.compile("\\d{9}");
     
     @Override
     public void initialize(ValidConnectionChannelValue constraintAnnotation) {

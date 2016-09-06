@@ -1,7 +1,6 @@
 package com.codingmentorteam3.constraints;
 
 import com.codingmentorteam3.dtos.EventDTO;
-import java.util.Date;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -19,16 +18,10 @@ public class ValidStartAndEndDateValidator
 
     @Override
     public boolean isValid(EventDTO eventDTO, ConstraintValidatorContext context) {
-        if(eventDTO.getStartDate() == null) {
-            return false;
-        } else if(eventDTO.getEndDate() != null) {
-            return isEndDateLaterThanStartDate(eventDTO.getStartDate(), eventDTO.getEndDate());
-        }
-        return false;
-    }
-
-    private boolean isEndDateLaterThanStartDate(Date startDate, Date endDate) {
-        return startDate.before(endDate);
+       if(eventDTO.getEndDate() != null) {
+           return eventDTO.getStartDate().before(eventDTO.getEndDate());
+       }
+       return true;
     }
     
 }

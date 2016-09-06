@@ -1,6 +1,7 @@
 package com.codingmentorteam3.dtos;
 
 import com.codingmentorteam3.annotations.Validate;
+import com.codingmentorteam3.constraints.Password;
 import com.codingmentorteam3.constraints.Username;
 import com.codingmentorteam3.entities.User;
 import java.util.Objects;
@@ -19,9 +20,9 @@ public class UserDTO extends PersonDTO {
     @Username
     private String username;
     
-//    @NotNull
-//    @Password
-//    private String password;
+    @NotNull
+    @Password
+    private String password;
     
     @NotNull
     private String avatar = DEFAULT_AVATAR;
@@ -33,6 +34,7 @@ public class UserDTO extends PersonDTO {
     public UserDTO(User user) {
         super(user);
         this.username = user.getUsername();
+        this.password = user.getPassword();
         this.avatar = user.getAvatar();
     }
 
@@ -42,6 +44,14 @@ public class UserDTO extends PersonDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getAvatar() {
@@ -54,8 +64,9 @@ public class UserDTO extends PersonDTO {
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = super.hashCode();
         hash = 23 * hash + Objects.hashCode(this.username);
+        hash = 23 * hash + Objects.hashCode(this.password);
         hash = 23 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
@@ -72,7 +83,13 @@ public class UserDTO extends PersonDTO {
             return false;
         }
         final UserDTO other = (UserDTO) obj;
+        if(!super.equals(other)) {
+            return false;
+        }
         if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        if (!Objects.equals(this.password, other.password)) {
             return false;
         }
         if (!Objects.equals(this.avatar, other.avatar)) {
@@ -83,7 +100,7 @@ public class UserDTO extends PersonDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" + "username=" + username + ", avatar=" + avatar + '}';
+        return "UserDTO{" + "username=" + username + ", password=" + password + ", avatar=" + avatar + '}';
     }
     
 }

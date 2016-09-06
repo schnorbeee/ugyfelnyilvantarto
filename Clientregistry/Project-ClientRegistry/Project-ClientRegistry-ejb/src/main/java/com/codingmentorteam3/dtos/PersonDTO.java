@@ -17,11 +17,11 @@ public class PersonDTO {
     private static final RankType DEFAULT_RANK = RankType.VISITOR;
     
     @NotNull 
-    @Size(min = 2)
+    @Size(min = 2, max = 30)
     protected String firstName;
     
     @NotNull 
-    @Size(min = 2)
+    @Size(min = 2, max = 30)
     protected String lastName;
     
     @NotNull

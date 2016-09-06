@@ -22,7 +22,7 @@ public class ConnectionChannel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "connection_channel_id", nullable = false)
+    @Column(name = "connection_channel_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)

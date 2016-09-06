@@ -6,6 +6,7 @@ import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.User;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -14,9 +15,11 @@ import javax.validation.constraints.NotNull;
 @Validate
 public class NoteDTO {
     
+    @Size(max = 30)
     private String label;
     
     @NotNull
+    @Size(max = 1500)
     private String content;
     
     @NotNull

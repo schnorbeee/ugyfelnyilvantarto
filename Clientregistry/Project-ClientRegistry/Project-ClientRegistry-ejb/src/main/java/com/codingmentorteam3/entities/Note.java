@@ -19,7 +19,7 @@ public class Note implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "note_id", nullable = false)
+    @Column(name = "note_id")
     private Long id;
 
     private String label;

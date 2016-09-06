@@ -20,7 +20,7 @@ public class Invitation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "invitation_id", nullable = false)
+    @Column(name = "invitation_id")
     private Long id;
 
     private String message;

@@ -13,8 +13,10 @@ import javax.validation.constraints.NotNull;
 @Validate
 public class RoleDTO {
     
+    private static final RoleType DEFAULT_ROLE = RoleType.VISITOR;
+    
     @NotNull
-    private RoleType type;
+    private RoleType type = DEFAULT_ROLE;
     
     @NotNull
     private String username;

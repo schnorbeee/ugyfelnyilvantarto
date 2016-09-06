@@ -15,15 +15,15 @@ import javax.validation.constraints.Size;
 public class AddressDTO {
     
     @NotNull 
-    @Size(min = 3)
+    @Size(min = 3, max = 30)
     private String country;
     
     @NotNull 
-    @Size(min = 2)
+    @Size(min = 2, max = 30)
     private String city;
     
     @NotNull 
-    @Size(min = 3)
+    @Size(max = 30)
     private String street;
     
     @NotNull 

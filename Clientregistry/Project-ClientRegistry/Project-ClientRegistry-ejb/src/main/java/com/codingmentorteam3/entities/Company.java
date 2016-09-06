@@ -23,7 +23,7 @@ public class Company implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "company_id", nullable = false)
+    @Column(name = "company_id")
     private Long id;
 
     @Column(nullable = false)
@@ -33,8 +33,8 @@ public class Company implements Serializable {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @Column(name = "tax_number")
-    private Long taxNumber;
+    @Column(name = "tax_number", nullable = false)
+    private String taxNumber;
 
     @Column(nullable = false)
     private String logo;
@@ -55,7 +55,7 @@ public class Company implements Serializable {
         //Default constructor
     }
 
-    public Company(String name, Address address, Long taxNumber, String logo) {
+    public Company(String name, Address address, String taxNumber, String logo) {
         this.name = name;
         this.address = address;
         this.taxNumber = taxNumber;
@@ -86,11 +86,11 @@ public class Company implements Serializable {
         this.address = address;
     }
 
-    public Long getTaxNumber() {
+    public String getTaxNumber() {
         return taxNumber;
     }
 
-    public void setTaxNumber(Long taxNumber) {
+    public void setTaxNumber(String taxNumber) {
         this.taxNumber = taxNumber;
     }
 

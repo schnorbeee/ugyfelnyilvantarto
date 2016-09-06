@@ -7,6 +7,7 @@ import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.FeedbackType;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -26,6 +27,7 @@ public class InvitationDTO {
     @NotNull
     private Event event;
     
+    @Size(max = 1500)
     private String message;
     
     @NotNull
@@ -40,6 +42,7 @@ public class InvitationDTO {
         this.receiver = invitation.getReceiver();
         this.event = invitation.getEvent();
         this.message = invitation.getMessage();
+        this.feedback = invitation.getFeedback();
     }
 
     public User getSender() {

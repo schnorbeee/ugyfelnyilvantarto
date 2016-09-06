@@ -20,10 +20,6 @@ public class ContactPersonDTO extends PersonDTO {
         // Default constructor
     }
 
-    public ContactPersonDTO(Company company) {
-        this.company = company;
-    }
-
     public ContactPersonDTO(ContactPerson contactPerson) {
         super(contactPerson);
         this.company = contactPerson.getCompany();
@@ -56,7 +52,7 @@ public class ContactPersonDTO extends PersonDTO {
             return false;
         }
         final ContactPersonDTO other = (ContactPersonDTO) obj;
-        if(!super.equals(other)) {
+        if (!super.equals(other)) {
             return false;
         }
         if (!Objects.equals(this.company, other.company)) {
@@ -65,5 +61,9 @@ public class ContactPersonDTO extends PersonDTO {
         return true;
     }
 
-    
+    @Override
+    public String toString() {
+        return "ContactPersonDTO{" + "company=" + company + '}';
+    }
+
 }

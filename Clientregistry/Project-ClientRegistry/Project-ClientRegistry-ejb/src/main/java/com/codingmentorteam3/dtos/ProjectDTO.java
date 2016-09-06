@@ -1,29 +1,34 @@
 package com.codingmentorteam3.dtos;
 
 import com.codingmentorteam3.annotations.Validate;
+import com.codingmentorteam3.constraints.ValidDeadline;
 import com.codingmentorteam3.entities.Project;
 import com.codingmentorteam3.enums.StatusType;
 import java.util.Date;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author istvan.mosonyi
  */
 @Validate
+@ValidDeadline
 public class ProjectDTO {
     
     private static final StatusType DEFAULT_TYPE = StatusType.INACTIVE;
     
     @NotNull
+    @Size(max = 30)
     private String name;
     
     @NotNull
+    @Size(max = 1500)
     private String description;
     
     @NotNull
-    private StatusType type = DEFAULT_TYPE;
+    private StatusType status = DEFAULT_TYPE;
     
     private Date startDate;
     
@@ -38,6 +43,7 @@ public class ProjectDTO {
         this.description = project.getDescription();
         this.startDate = project.getStartDate();
         this.deadline = project.getDeadline();
+        this.status = project.getStatus();
     }
 
     public String getName() {
@@ -56,12 +62,12 @@ public class ProjectDTO {
         this.description = description;
     }
 
-    public StatusType getType() {
-        return type;
+    public StatusType getStatus() {
+        return status;
     }
 
-    public void setType(StatusType type) {
-        this.type = type;
+    public void setStatus(StatusType type) {
+        this.status = type;
     }
 
     public Date getStartDate() {
@@ -85,7 +91,7 @@ public class ProjectDTO {
         int hash = 7;
         hash = 89 * hash + Objects.hashCode(this.name);
         hash = 89 * hash + Objects.hashCode(this.description);
-        hash = 89 * hash + Objects.hashCode(this.type);
+        hash = 89 * hash + Objects.hashCode(this.status);
         hash = 89 * hash + Objects.hashCode(this.startDate);
         hash = 89 * hash + Objects.hashCode(this.deadline);
         return hash;
@@ -109,7 +115,7 @@ public class ProjectDTO {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (this.type != other.type) {
+        if (this.status != other.status) {
             return false;
         }
         if (!Objects.equals(this.startDate, other.startDate)) {
@@ -123,7 +129,7 @@ public class ProjectDTO {
 
     @Override
     public String toString() {
-        return "ProjectDTO{" + "name=" + name + ", description=" + description + ", type=" + type + ", startDate=" + startDate + ", deadline=" + deadline + '}';
+        return "ProjectDTO{" + "name=" + name + ", description=" + description + ", type=" + status + ", startDate=" + startDate + ", deadline=" + deadline + '}';
     }
     
 }

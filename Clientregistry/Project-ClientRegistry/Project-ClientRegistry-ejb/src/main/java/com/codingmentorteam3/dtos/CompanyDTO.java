@@ -5,6 +5,7 @@ import com.codingmentorteam3.entities.Address;
 import com.codingmentorteam3.entities.Company;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -15,19 +16,16 @@ import javax.validation.constraints.Size;
 public class CompanyDTO {
     
     private static final String DEFAULT_LOGO = "";
-//    private static final String DEFAULT_TAX_NUMBER = "00000000-0-00";
     
     @NotNull 
-    @Size(min = 2)
+    @Size(min = 2, max = 30)
     private String name;
     
     @NotNull
     private Address address;
-    
-    private Long taxNumber; // = default tax number (full of zeros)
-    
-//    @Pattern(regexp = "\\d{8}-\\d{1}-\\d{2}")
-//    private String taxNumber;
+
+    @Pattern(regexp = "\\d{8}-\\d{1}-\\d{2}")
+    private String taxNumber;
     
     @NotNull
     private String logo = DEFAULT_LOGO;
@@ -59,11 +57,11 @@ public class CompanyDTO {
         this.address = address;
     }
 
-    public Long getTaxNumber() {
+    public String getTaxNumber() {
         return taxNumber;
     }
 
-    public void setTaxNumber(Long taxNumber) {
+    public void setTaxNumber(String taxNumber) {
         this.taxNumber = taxNumber;
     }
 
