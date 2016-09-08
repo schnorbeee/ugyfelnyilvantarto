@@ -30,4 +30,5 @@ public class ContactPerson extends Person implements Serializable {
         this.company = company;
     }
 
+    
 }

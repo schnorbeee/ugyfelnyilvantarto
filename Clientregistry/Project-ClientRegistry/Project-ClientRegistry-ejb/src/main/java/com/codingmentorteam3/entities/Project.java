@@ -27,7 +27,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "project.by.name.filter", query = "SELECT p FROM project_table p WHERE p.name LIKE :name"),
     @NamedQuery(name = "project.by.status.filter", query = "SELECT p FROM project_table p WHERE p.status LIKE :status"),
     @NamedQuery(name = "project.list", query = "SELECT p FROM project_table p"),
-    @NamedQuery(name = "project.list.companies.by.id", query = "SELECT c FROM project_table p INNER JOIN p.companys c WHERE p.id =:id")
+    @NamedQuery(name = "project.list.companies.by.id", query = "SELECT c FROM project_table p INNER JOIN p.companys c WHERE p.id =:id"),
+    @NamedQuery(name = "project.list.contacter.connection.channel.by.id", query = "SELECT ch FROM project_table p INNER JOIN p.companys c INNER JOIN c.contacters con INNER JOIN con.channels ch WHERE p.id =:id"),
+    @NamedQuery(name = "project.list.in.this.week", query = "SELECT p FROM project_table p WHERE p.deadline BETWEEN :monday AND :sunday")
 })
 public class Project implements Serializable {
 

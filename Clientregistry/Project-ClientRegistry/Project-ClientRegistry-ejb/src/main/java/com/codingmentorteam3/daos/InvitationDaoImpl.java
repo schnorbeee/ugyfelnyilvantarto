@@ -4,6 +4,7 @@ import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.Invitation;
 import com.codingmentorteam3.enums.FeedbackType;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.BadRequestException;
 
@@ -14,13 +15,16 @@ import javax.ws.rs.BadRequestException;
 @Stateless
 public class InvitationDaoImpl extends AbstractDao<Invitation> {
 
+    @EJB 
+    private EventDaoImpl eventDao;
+    
     public InvitationDaoImpl() {
         super(Invitation.class);
     }
 
     public List<Invitation> getInvitationsListByFeedbackFilter(String feedback) {
         try {
-            List<Invitation> query = em.createNamedQuery("invitation.by.feedback.filter", Invitation.class).setParameter("feedback", feedback).getResultList();
+            List<Invitation> query = em.createNamedQuery("invitation.by.feedback.filter", Invitation.class).setParameter("feedback", "%" + feedback + "%").getResultList();
             return query;
         } catch (Exception e) {
             return null;
@@ -37,7 +41,7 @@ public class InvitationDaoImpl extends AbstractDao<Invitation> {
     }
 
     public List<Invitation> getInvitationsListByEventId(Long eventId) {
-        Event current = em.find(Event.class, eventId);
+        Event current = eventDao.read(eventId);
         if (null != current) {
             try {
                 List<Invitation> query = em.createNamedQuery("invitation.list.by.event.id", Invitation.class).setParameter("id", eventId).getResultList();
@@ -50,7 +54,7 @@ public class InvitationDaoImpl extends AbstractDao<Invitation> {
     }
 
     public List<Invitation> getInvitationsListByEventIdAndFeedbackStatus(Long eventId, FeedbackType ftype) {
-        Event current = em.find(Event.class, eventId);
+        Event current = eventDao.read(eventId);
         if (null != current) {
             try {
                 List<Invitation> query = em.createNamedQuery("invitation.list.by.event.id.and.feedback", Invitation.class).setParameter("id", eventId).setParameter("feedback", ftype).getResultList();

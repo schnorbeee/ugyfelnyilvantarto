@@ -17,7 +17,7 @@ public class ContactPersonDaoImpl extends AbstractDao<ContactPerson> {
         super(ContactPerson.class);
     }
 
-    public List<ConnectionChannel> getChannelsByContecterId(Long contacterId) {
+    public List<ConnectionChannel> getChannelsByContacterId(Long contacterId) {
         ContactPerson current = read(contacterId);
         if (null != current) {
             try {

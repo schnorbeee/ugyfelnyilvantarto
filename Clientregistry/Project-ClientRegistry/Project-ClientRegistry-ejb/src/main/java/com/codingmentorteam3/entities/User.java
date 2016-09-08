@@ -19,6 +19,7 @@ import javax.persistence.MapKeyEnumerated;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,7 +33,7 @@ import javax.persistence.OneToMany;
     @NamedQuery(name = "user.by.rank.filter", query = "SELECT u FROM user_table u WHERE u.rank LIKE :rank"), 
     @NamedQuery(name = "user.list", query = "SELECT u FROM user_table u ORDER BY u.username"),
     @NamedQuery(name = "user.by.username", query = "SELECT u FROM user_table u WHERE u.username =:name"),
-    //@NamedQuery(name = "user.num.item.per.page.by.id", query = "SELECT u.numItemPerPage FROM user_table u WHERE u.id =:id"),
+    @NamedQuery(name = "user.num.item.per.page.by.id", query = "SELECT n FROM user_table u INNER JOIN u.numItemPerPage n WHERE u.id =:id AND n.table_enum =:num"),
     @NamedQuery(name = "user.list.roles.by.id", query = "SELECT r FROM user_table u INNER JOIN u.roles r WHERE u.id =:id"),
     @NamedQuery(name = "user.list.invitation.sent.by.id", query = "SELECT i FROM user_table u INNER JOIN u.invitationsSent i WHERE u.id =:id"),
     @NamedQuery(name = "user.list.invitation.received.by.id", query = "SELECT i FROM user_table u INNER JOIN u.invitationsReceived i WHERE u.id =:id"),
@@ -45,6 +46,7 @@ public class User extends Person implements Serializable {
     @Column(name = "username")
     private String username;
 
+    @XmlTransient
     private String password;
 
     private String avatar;

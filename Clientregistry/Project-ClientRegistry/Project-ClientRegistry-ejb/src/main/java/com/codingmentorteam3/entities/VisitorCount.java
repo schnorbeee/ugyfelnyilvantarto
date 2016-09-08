@@ -16,8 +16,8 @@ import javax.persistence.TemporalType;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "visitors_table")
-@NamedQuery(name = "visitors.of.day", query = "SELECT COUNT(v) FROM visitors_table v WHERE v.day =:day")
-public class Visitor implements Serializable {
+@NamedQuery(name = "visitors.of.day", query = "SELECT v.count FROM visitors_table v WHERE v.day =:day")
+public class VisitorCount implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +28,11 @@ public class Visitor implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date day;
 
-    public Visitor() {
-        //Default contructor
+    public VisitorCount() {
+        //Default constructor
     }
 
-    public Visitor(int count, Date day) {
+    public VisitorCount(int count, Date day) {
         this.count = count;
         this.day = day;
     }
@@ -81,7 +81,7 @@ public class Visitor implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Visitor other = (Visitor) obj;
+        final VisitorCount other = (VisitorCount) obj;
         if (this.count != other.count) {
             return false;
         }

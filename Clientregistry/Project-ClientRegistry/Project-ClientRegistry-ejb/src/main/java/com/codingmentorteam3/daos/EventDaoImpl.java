@@ -20,7 +20,7 @@ public class EventDaoImpl extends AbstractDao<Event> {
 
     public List<Event> getEventsListByTitleFilter(String title) {
         try {
-            List<Event> query = em.createNamedQuery("event.by.title.filter", Event.class).setParameter("title", title).getResultList();
+            List<Event> query = em.createNamedQuery("event.by.title.filter", Event.class).setParameter("title", "%" + title + "%").getResultList();
             return query;
         } catch (Exception e) {
             return null;
@@ -29,7 +29,7 @@ public class EventDaoImpl extends AbstractDao<Event> {
 
     public List<Event> getEventsListByTypeFilter(String type) {
         try {
-            List<Event> query = em.createNamedQuery("event.by.type.filter", Event.class).setParameter("type", type).getResultList();
+            List<Event> query = em.createNamedQuery("event.by.type.filter", Event.class).setParameter("type", "%" + type + "%").getResultList();
             return query;
         } catch (Exception e) {
             return null;
@@ -55,7 +55,7 @@ public class EventDaoImpl extends AbstractDao<Event> {
                 return null;
             }
         }
-        throw new BadRequestException("We haven't got this event in datebase.");
+        throw new BadRequestException("We haven't got this event in database.");
     }
 
     public List<Note> getNotesListByEventId(Long eventId) {
@@ -68,7 +68,7 @@ public class EventDaoImpl extends AbstractDao<Event> {
                 return null;
             }
         }
-        throw new BadRequestException("We haven't got this event in datebase.");
+        throw new BadRequestException("We haven't got this event in database.");
     }
 
 }

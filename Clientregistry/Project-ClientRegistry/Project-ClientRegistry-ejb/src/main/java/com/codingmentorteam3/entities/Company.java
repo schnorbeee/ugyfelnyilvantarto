@@ -27,7 +27,9 @@ import javax.persistence.OneToOne;
     @NamedQuery(name = "company.list", query = "SELECT c FROM company_table c ORDER BY c.name"),
     @NamedQuery(name = "company.list.events.by.id", query = "SELECT e FROM company_table c INNER JOIN c.events e WHERE c.id =:id"),
     @NamedQuery(name = "company.list.projects.by.id", query = "SELECT p FROM company_table c INNER JOIN c.projects p WHERE c.id =:id"),
-    @NamedQuery(name = "company.list.contacters.by.id", query = "SELECT con FROM company_table c INNER JOIN c.contacters con WHERE c.id =:id")
+    @NamedQuery(name = "company.list.contacters.by.id", query = "SELECT con FROM company_table c INNER JOIN c.contacters con WHERE c.id =:id"),
+    @NamedQuery(name = "company.list.events.notes.by.id", query = "SELECT n FROM company_table c INNER JOIN c.events e INNER JOIN e.notes n WHERE c.id =:id"),
+    @NamedQuery(name = "company.list.n.mounth.no.event", query = "SELECT c FROM company_table c INNER JOIN c.events e WHERE e.startDate BETWEEN :now AND :past")
 })
 public class Company implements Serializable {
 
@@ -43,7 +45,7 @@ public class Company implements Serializable {
     private Address address;
 
     @Column(name = "tax_number")
-    private Long taxNumber;
+    private String taxNumber;
 
     private String logo;
 
@@ -63,7 +65,7 @@ public class Company implements Serializable {
         //Default constructor
     }
 
-    public Company(String name, Address address, Long taxNumber, String logo) {
+    public Company(String name, Address address, String taxNumber, String logo) {
         this.name = name;
         this.address = address;
         this.taxNumber = taxNumber;
@@ -94,11 +96,11 @@ public class Company implements Serializable {
         this.address = address;
     }
 
-    public Long getTaxNumber() {
+    public String getTaxNumber() {
         return taxNumber;
     }
 
-    public void setTaxNumber(Long taxNumber) {
+    public void setTaxNumber(String taxNumber) {
         this.taxNumber = taxNumber;
     }
 

@@ -18,7 +18,7 @@ import javax.ws.rs.BadRequestException;
 @Stateless
 public class UserDaoImpl extends AbstractDao<User> {
 
-    private static final String BADREQUESTMESSAGE = "We haven't got this user in database.";
+    private static final String BADREQUESTMESSAGE = "User is not in the database.";
 
     public UserDaoImpl() {
         super(User.class);
@@ -26,7 +26,7 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     public List<User> getUsersListByUsernameFilter(String username) {
         try {
-            List<User> query = em.createNamedQuery("user.by.username.filter", User.class).setParameter("name", username).getResultList();
+            List<User> query = em.createNamedQuery("user.by.username.filter", User.class).setParameter("name", "%" + username + "%").getResultList();
             return query;
         } catch (Exception e) {
             return null;
@@ -35,7 +35,7 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     public List<User> getUsersListByFirstNameFilter(String firstName) {
         try {
-            List<User> query = em.createNamedQuery("user.by.firstname.filter", User.class).setParameter("first", firstName).getResultList();
+            List<User> query = em.createNamedQuery("user.by.firstname.filter", User.class).setParameter("first", "%" + firstName + "%").getResultList();
             return query;
         } catch (Exception e) {
             return null;
@@ -44,7 +44,7 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     public List<User> getUsersListByLastNameFilter(String lastName) {
         try {
-            List<User> query = em.createNamedQuery("user.by.lastname.filter", User.class).setParameter("last", lastName).getResultList();
+            List<User> query = em.createNamedQuery("user.by.lastname.filter", User.class).setParameter("last", "%" + lastName + "%").getResultList();
             return query;
         } catch (Exception e) {
             return null;
@@ -53,7 +53,7 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     public List<User> getUsersListByRankFilter(String rank) {
         try {
-            List<User> query = em.createNamedQuery("user.by.rank.filter", User.class).setParameter("rank", rank).getResultList();
+            List<User> query = em.createNamedQuery("user.by.rank.filter", User.class).setParameter("rank", "%" + rank + "%").getResultList();
             return query;
         } catch (Exception e) {
             return null;
