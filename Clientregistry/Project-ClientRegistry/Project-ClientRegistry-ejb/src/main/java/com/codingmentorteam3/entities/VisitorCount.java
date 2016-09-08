@@ -1,8 +1,10 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.dtos.VisitorCountDTO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,24 +17,31 @@ import javax.persistence.TemporalType;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "visitors_table")
-public class Visitor implements Serializable {
+public class VisitorCount implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "visitors_per_day", nullable = false)
     private int count;
 
     @Temporal(TemporalType.DATE)
+    @Column(name = "actual_day", nullable = false, unique = true)
     private Date day;
 
-    public Visitor() {
+    public VisitorCount() {
         //Default contructor
     }
 
-    public Visitor(int count, Date day) {
+    public VisitorCount(int count, Date day) {
         this.count = count;
         this.day = day;
+    }
+    
+    public VisitorCount(VisitorCountDTO visitorCountDTO) {
+        this.count = visitorCountDTO.getCount();
+        this.day = visitorCountDTO.getDay();
     }
 
     public Long getId() {
@@ -79,7 +88,7 @@ public class Visitor implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Visitor other = (Visitor) obj;
+        final VisitorCount other = (VisitorCount) obj;
         if (this.count != other.count) {
             return false;
         }

@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.dtos.InvitationDTO;
 import com.codingmentorteam3.enums.FeedbackType;
 import java.io.Serializable;
 import java.util.Objects;
@@ -25,27 +26,39 @@ public class Invitation implements Serializable {
 
     private String message;
 
+    @Column(nullable = false)
     private FeedbackType feedback;
 
     @ManyToOne(targetEntity = Event.class)
-    @JoinColumn(name = "event_id")
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "sender_id")
+    @JoinColumn(name = "sender_id", nullable = false)
     private User sender;
 
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "receiver_id")
+    @JoinColumn(name = "receiver_id", nullable = false)
     private User receiver;
 
     public Invitation() {
         //Default constructor
     }
 
-    public Invitation(String message, FeedbackType feedback) {
+    public Invitation(String message, FeedbackType feedback, Event event, User sender, User receiver) {
         this.message = message;
         this.feedback = feedback;
+        this.event = event;
+        this.sender = sender;
+        this.receiver = receiver;
+    }
+    
+    public Invitation(InvitationDTO invitationDTO) {
+        this.message = invitationDTO.getMessage();
+        this.feedback = invitationDTO.getFeedback();
+        this.event = invitationDTO.getEvent();
+        this.sender = invitationDTO.getSender();
+        this.receiver = invitationDTO.getReceiver();
     }
 
     public Long getId() {

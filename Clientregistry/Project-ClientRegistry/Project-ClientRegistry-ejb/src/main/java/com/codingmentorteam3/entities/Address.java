@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.dtos.AddressDTO;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -20,28 +21,39 @@ public class Address implements Serializable {
     @Column(name = "address_id")
     private Long id;
 
-    @Column(name = "zip_code")
+    @Column(name = "zip_code", nullable = false)
     private String zipCode;
 
+    @Column(nullable = false)
     private String country;
 
+    @Column(nullable = false)
     private String city;
 
+    @Column(nullable = false)
     private String street;
 
-    @Column(name = "house_number")
+    @Column(name = "house_number", nullable = false)
     private String houseNumber;
 
     public Address() {
         //default contructor
     }
 
-    public Address(String zipCode, String state, String city, String street, String houseNumber) {
+    public Address(String zipCode, String country, String city, String street, String houseNumber) {
         this.zipCode = zipCode;
-        this.country = state;
+        this.country = country;
         this.city = city;
         this.street = street;
         this.houseNumber = houseNumber;
+    }
+    
+    public Address(AddressDTO addressDTO) {
+        this.zipCode = addressDTO.getZipCode();
+        this.country = addressDTO.getCountry();
+        this.city = addressDTO.getCity();
+        this.street = addressDTO.getStreet();
+        this.houseNumber = addressDTO.getHouseNumber();
     }
 
     public Long getId() {
