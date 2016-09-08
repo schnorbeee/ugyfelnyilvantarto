@@ -104,13 +104,10 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         throw new BadRequestException(BADREQUESTMESSAGE);
     }
     
-    //jobb nevet kellene neki adni
-    public List<Company> getCompaniesListWhoHaveEarlierEventLikeWePut(Long n) {
-        Date now = Date.valueOf(LocalDate.now());
-        LocalDate pastLocal = LocalDate.now().minusMonths(n);
-        Date past = Date.valueOf(pastLocal);        
+    //returns the list of companies, who did not have events in "n" months
+    public List<Company> getInactiveCompaniesList(Integer n) {
         try {
-                List<Company> query = em.createNamedQuery("company.list.n.mounth.no.event", Company.class).setParameter("now", now, TemporalType.DATE).setParameter("past", past, TemporalType.DATE).getResultList();
+                List<Company> query = em.createNamedQuery("company.list.n.mounth.no.event", Company.class).setParameter("n", n).getResultList();
                 return query;
             } catch (Exception e) {
                 return null;

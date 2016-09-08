@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
@@ -23,13 +24,14 @@ import javax.persistence.TemporalType;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "project_table")
+@NamedNativeQuery(name = "project.list.in.this.week",query = "SELECT p FROM project_table p WHERE EXTRACT(WEEK FROM CURRENT_TIMESTAMP) = EXTRACT(WEEK FROM p.deadline)")
 @NamedQueries({
     @NamedQuery(name = "project.by.name.filter", query = "SELECT p FROM project_table p WHERE p.name LIKE :name"),
     @NamedQuery(name = "project.by.status.filter", query = "SELECT p FROM project_table p WHERE p.status LIKE :status"),
     @NamedQuery(name = "project.list", query = "SELECT p FROM project_table p"),
     @NamedQuery(name = "project.list.companies.by.id", query = "SELECT c FROM project_table p INNER JOIN p.companys c WHERE p.id =:id"),
     @NamedQuery(name = "project.list.contacter.connection.channel.by.id", query = "SELECT ch FROM project_table p INNER JOIN p.companys c INNER JOIN c.contacters con INNER JOIN con.channels ch WHERE p.id =:id"),
-    @NamedQuery(name = "project.list.in.this.week", query = "SELECT p FROM project_table p WHERE p.deadline BETWEEN :monday AND :sunday")
+   //@NamedQuery(name = "project.list.in.this.week", query = "SELECT p FROM project_table p WHERE p.deadline BETWEEN :monday AND :sunday")
 })
 public class Project implements Serializable {
 

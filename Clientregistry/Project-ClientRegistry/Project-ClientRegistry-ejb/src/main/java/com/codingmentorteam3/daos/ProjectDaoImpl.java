@@ -76,14 +76,14 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
 
     public List<Project> getProjectsListDeadlineIsInThisWeek() {
         try {
-            List<Project> query = em.createNamedQuery("project.list.in.this.week", Project.class).setParameter("monday", setWeekDaysToNow().get(0)).setParameter("sunday", setWeekDaysToNow().get(1)).getResultList();
+            List<Project> query = em.createNamedQuery("project.list.in.this.week", Project.class).getResultList();
             return query;
         } catch (Exception e) {
             return null;
         }
     }
     
-    public List<Date> setWeekDaysToNow() {
+    /*public List<Date> setWeekDaysToNow() {
         LocalDate now = LocalDate.now();
         Date mondayDate;
         Date sundayDate;
@@ -112,15 +112,17 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
                 mondayDate = Date.valueOf(now.minusDays(5));
                 sundayDate = Date.valueOf(now.plusDays(1));
                 break;
-            default:
+            case SUNDAY:
                 mondayDate = Date.valueOf(now.minusDays(6));
                 sundayDate = Date.valueOf(now.plusDays(0));
                 break;
+            default:
+                throw new IllegalArgumentException("Illegal state of day registered.");
         }
         List<Date> days = new ArrayList();
         days.add(0, mondayDate);
         days.add(1, sundayDate);
         return days; 
-    }
+    }*/
     
 }
