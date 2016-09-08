@@ -32,7 +32,6 @@ public class UserDTO extends PersonDTO {
     }
 
     public UserDTO(User user) {
-        super(user);
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.avatar = user.getAvatar();

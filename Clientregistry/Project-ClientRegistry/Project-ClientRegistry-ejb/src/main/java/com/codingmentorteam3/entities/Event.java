@@ -1,7 +1,9 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.dtos.EventDTO;
 import com.codingmentorteam3.enums.EventType;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -57,22 +59,33 @@ public class Event implements Serializable {
     private Company company;
 
     @ManyToMany(mappedBy = "events", targetEntity = User.class)
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "event", targetEntity = Note.class)
-    private List<Note> notes;
+    private List<Note> notes = new ArrayList<>();
 
     public Event() {
         //Default constructor
     }
 
-    public Event(Address address, String title, Date startDate, Date endDate, String description, EventType type) {
+    public Event(Address address, String title, Date startDate, Date endDate, String description, EventType type, Company company) {
         this.address = address;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
         this.type = type;
+        this.company = company;
+    }
+    
+    public Event(EventDTO eventDTO) {
+        this.address = eventDTO.getAddress();
+        this.title = eventDTO.getTitle();
+        this.startDate = eventDTO.getStartDate();
+        this.endDate = eventDTO.getEndDate();
+        this.description = eventDTO.getDescription();
+        this.type = eventDTO.getType();
+        this.company = eventDTO.getCompany();
     }
 
     public Long getId() {

@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.dtos.NoteDTO;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -39,9 +40,18 @@ public class Note implements Serializable {
         //Default constructor
     }
 
-    public Note(String label, String content) {
+    public Note(String label, String content, User user, Event event) {
         this.label = label;
         this.content = content;
+        this.user = user;
+        this.event = event;
+    }
+    
+    public Note(NoteDTO noteDTO) {
+        this.label = noteDTO.getLabel();
+        this.content = noteDTO.getContent();
+        this.user = noteDTO.getUser();
+        this.event = noteDTO.getEvent();
     }
 
     public Long getId() {

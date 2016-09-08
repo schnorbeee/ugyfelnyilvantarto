@@ -1,8 +1,11 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.dtos.UserDTO;
 import com.codingmentorteam3.enums.NumItemsPerPageType;
 import com.codingmentorteam3.enums.PageableTablesType;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -41,33 +44,40 @@ public class User extends Person implements Serializable {
     @CollectionTable(name = "num_item_per_page_table")
     @MapKeyColumn(name = "table_enum")
     @Column(name = "num_enum")
-    private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage;
+    private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap<>(PageableTablesType.class);
 
     @OneToMany(mappedBy = "username", targetEntity = Role.class)
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "sender", targetEntity = Invitation.class)
-    private List<Invitation> invitationsSent;
+    private List<Invitation> invitationsSent = new ArrayList<>();
 
     @OneToMany(mappedBy = "receiver", targetEntity = Invitation.class)
-    private List<Invitation> invitationsReceived;
+    private List<Invitation> invitationsReceived = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", targetEntity = Note.class)
-    private List<Note> notes;
+    private List<Note> notes = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "user_event_table",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))
-    private List<Event> events;
+    private List<Event> events = new ArrayList<>();
 
     public User() {
         //Default constructor
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String avatar) {
         this.username = username;
         this.password = password;
+        this.avatar = avatar;
+    }
+    
+    public User(UserDTO userDTO) {
+        this.username = userDTO.getUsername();
+        this.password = userDTO.getPassword();
+        this.avatar = userDTO.getAvatar();
     }
 
     public String getUsername() {

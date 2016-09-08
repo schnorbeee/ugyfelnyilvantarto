@@ -1,7 +1,9 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.dtos.ProjectDTO;
 import com.codingmentorteam3.enums.StatusType;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -46,7 +48,7 @@ public class Project implements Serializable {
     private Date deadline;
 
     @ManyToMany(mappedBy = "projects", targetEntity = Company.class)
-    private List<Company> companies;
+    private List<Company> companies = new ArrayList<>();
 
     public Project() {
         //Default constructor
@@ -58,6 +60,14 @@ public class Project implements Serializable {
         this.status = status;
         this.description = description;
         this.deadline = deadline;
+    }
+    
+    public Project(ProjectDTO projectDTO) {
+        this.name = projectDTO.getName();
+        this.startDate = projectDTO.getStartDate();
+        this.status = projectDTO.getStatus();
+        this.description = projectDTO.getDescription();
+        this.deadline = projectDTO.getDeadline();
     }
 
     public Long getId() {

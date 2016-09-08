@@ -1,34 +1,33 @@
 package com.codingmentorteam3.dtos;
-
+ 
 import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.entities.ContactPerson;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
-
+ 
 /**
  *
  * @author istvan.mosonyi
  */
 @Validate
 public class ContactPersonDTO extends PersonDTO {
-    
+     
     @NotNull
     private Company company;
-
+ 
     public ContactPersonDTO() {
         // Default constructor
     }
 
     public ContactPersonDTO(ContactPerson contactPerson) {
-        super(contactPerson);
         this.company = contactPerson.getCompany();
     }
-
+ 
     public Company getCompany() {
         return company;
     }
-
+ 
     public void setCompany(Company company) {
         this.company = company;
     }
@@ -36,7 +35,7 @@ public class ContactPersonDTO extends PersonDTO {
     @Override
     public int hashCode() {
         int hash = super.hashCode();
-        hash = 11 * hash + Objects.hashCode(this.company);
+        hash = 83 * hash + Objects.hashCode(this.company);
         return hash;
     }
 
@@ -65,5 +64,5 @@ public class ContactPersonDTO extends PersonDTO {
     public String toString() {
         return "ContactPersonDTO{" + "company=" + company + '}';
     }
-
+    
 }

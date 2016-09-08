@@ -1,6 +1,8 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.dtos.CompanyDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -40,16 +42,16 @@ public class Company implements Serializable {
     private String logo;
 
     @OneToMany(mappedBy = "company", targetEntity = Event.class)
-    private List<Event> events;
+    private List<Event> events = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "company_project_table",
             joinColumns = @JoinColumn(name = "company_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
 
     @OneToMany(mappedBy = "company", targetEntity = ContactPerson.class)
-    private List<ContactPerson> contacters;
+    private List<ContactPerson> contacters = new ArrayList<>();
 
     public Company() {
         //Default constructor
@@ -60,6 +62,13 @@ public class Company implements Serializable {
         this.address = address;
         this.taxNumber = taxNumber;
         this.logo = logo;
+    }
+    
+    public Company(CompanyDTO companyDTO) {
+        this.name = companyDTO.getName();
+        this.address = companyDTO.getAddress();
+        this.taxNumber = companyDTO.getTaxNumber();
+        this.logo = companyDTO.getLogo();
     }
 
     public Long getId() {

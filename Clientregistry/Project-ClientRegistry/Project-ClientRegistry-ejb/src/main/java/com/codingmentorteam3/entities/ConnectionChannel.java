@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.dtos.ConnectionChannelDTO;
 import com.codingmentorteam3.enums.ConnectionChannelType;
 import java.io.Serializable;
 import java.util.Objects;
@@ -44,6 +45,12 @@ public class ConnectionChannel implements Serializable {
         this.type = type;
         this.value = value;
         this.owner = owner;
+    }
+    
+    public ConnectionChannel(ConnectionChannelDTO connectionChannelDTO) {
+        this.type = connectionChannelDTO.getType();
+        this.value = connectionChannelDTO.getValue();
+        this.owner = connectionChannelDTO.getOwner();
     }
 
     public Long getId() {
