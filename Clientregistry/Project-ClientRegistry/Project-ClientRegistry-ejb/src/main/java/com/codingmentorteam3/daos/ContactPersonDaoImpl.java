@@ -2,9 +2,10 @@ package com.codingmentorteam3.daos;
 
 import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.ContactPerson;
+import com.codingmentorteam3.exceptions.BadRequestException;
+import com.codingmentorteam3.exceptions.EmptyListException;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.ws.rs.BadRequestException;
 
 /**
  *
@@ -20,12 +21,11 @@ public class ContactPersonDaoImpl extends AbstractDao<ContactPerson> {
     public List<ConnectionChannel> getChannelsByContacterId(Long contacterId) {
         ContactPerson current = read(contacterId);
         if (null != current) {
-            try {
-                List<ConnectionChannel> query = em.createNamedQuery("contact.person.channels.by.id", ConnectionChannel.class).setParameter("id", contacterId).getResultList();
-                return query;
-            } catch (Exception e) {
-                return null;
+            List<ConnectionChannel> query = em.createNamedQuery("contact.person.channels.by.id", ConnectionChannel.class).setParameter("id", contacterId).getResultList();
+            if (query.isEmpty()) {
+                throw new EmptyListException("This contact person haven't any connection chennel.");
             }
+            return query;
         }
         throw new BadRequestException("We haven't got this contacter in database.");
     }
