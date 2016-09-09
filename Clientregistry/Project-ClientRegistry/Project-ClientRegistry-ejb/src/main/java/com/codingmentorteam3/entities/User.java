@@ -1,6 +1,5 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.UserDTO;
 import com.codingmentorteam3.enums.NumItemsPerPageType;
 import com.codingmentorteam3.enums.PageableTablesType;
 import java.io.Serializable;
@@ -72,12 +71,6 @@ public class User extends Person implements Serializable {
         this.username = username;
         this.password = password;
         this.avatar = avatar;
-    }
-    
-    public User(UserDTO userDTO) {
-        this.username = userDTO.getUsername();
-        this.password = userDTO.getPassword();
-        this.avatar = userDTO.getAvatar();
     }
 
     public String getUsername() {

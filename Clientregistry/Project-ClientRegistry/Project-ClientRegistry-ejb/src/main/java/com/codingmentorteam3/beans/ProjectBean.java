@@ -1,38 +1,52 @@
-package com.codingmentorteam3.dtos;
+package com.codingmentorteam3.beans;
 
-import com.codingmentorteam3.entities.Project;
+import com.codingmentorteam3.annotations.Validate;
+import com.codingmentorteam3.constraints.ValidDeadline;
 import com.codingmentorteam3.enums.StatusType;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author istvan.mosonyi
  */
-public class ProjectDTO {
+@Validate
+@ValidDeadline
+@SessionScoped
+@ManagedBean(name = "project")
+public class ProjectBean implements Serializable {
     
     private static final StatusType DEFAULT_TYPE = StatusType.INACTIVE;
-
+    
+    @NotNull
+    @Size(max = 30)
     private String name;
-
+    
+    @NotNull
+    @Size(max = 1500)
     private String description;
-
+    
+    @NotNull
     private StatusType status = DEFAULT_TYPE;
     
     private Date startDate;
     
     private Date deadline;
 
-    public ProjectDTO() {
+    public ProjectBean() {
         // Default constructor
     }
 
-    public ProjectDTO(Project project) {
-        this.name = project.getName();
-        this.description = project.getDescription();
-        this.startDate = project.getStartDate();
-        this.deadline = project.getDeadline();
-        this.status = project.getStatus();
+    public ProjectBean(String name, String description, Date startDate, Date deadline) {
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.deadline = deadline;
     }
 
     public String getName() {
@@ -97,7 +111,7 @@ public class ProjectDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ProjectDTO other = (ProjectDTO) obj;
+        final ProjectBean other = (ProjectBean) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -118,7 +132,7 @@ public class ProjectDTO {
 
     @Override
     public String toString() {
-        return "ProjectDTO{" + "name=" + name + ", description=" + description + ", type=" + status + ", startDate=" + startDate + ", deadline=" + deadline + '}';
+        return "ProjectBean{" + "name=" + name + ", description=" + description + ", type=" + status + ", startDate=" + startDate + ", deadline=" + deadline + '}';
     }
     
 }

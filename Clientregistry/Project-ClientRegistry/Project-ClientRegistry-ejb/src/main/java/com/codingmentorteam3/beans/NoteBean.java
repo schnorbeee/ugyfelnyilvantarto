@@ -1,33 +1,46 @@
-package com.codingmentorteam3.dtos;
+package com.codingmentorteam3.beans;
 
+import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.entities.Event;
-import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.User;
+import java.io.Serializable;
 import java.util.Objects;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author istvan.mosonyi
  */
-public class NoteDTO {
-
+@Validate
+@SessionScoped
+@ManagedBean(name = "note")
+public class NoteBean implements Serializable {
+    
+    @Size(max = 30)
     private String label;
-
+    
+    @NotNull
+    @Size(max = 1500)
     private String content;
-
+    
+    @NotNull
     private User user;
-
+    
+    @NotNull
     private Event event;
 
-    public NoteDTO() {
+    public NoteBean() {
         // Default constructor
     }
 
-    public NoteDTO(Note note) {
-        this.label = note.getLabel();
-        this.content = note.getContent();
-        this.user = note.getUser();
-        this.event = note.getEvent();
+    public NoteBean(String label, String content, User user, Event event) {
+        this.label = label;
+        this.content = content;
+        this.user = user;
+        this.event = event;
     }
 
     public String getLabel() {
@@ -83,7 +96,7 @@ public class NoteDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final NoteDTO other = (NoteDTO) obj;
+        final NoteBean other = (NoteBean) obj;
         if (!Objects.equals(this.label, other.label)) {
             return false;
         }
@@ -101,7 +114,7 @@ public class NoteDTO {
 
     @Override
     public String toString() {
-        return "NoteDTO{" + "label=" + label + ", content=" + content + ", user=" + user + ", event=" + event + '}';
+        return "NoteBean{" + "label=" + label + ", content=" + content + ", user=" + user + ", event=" + event + '}';
     }
     
 }

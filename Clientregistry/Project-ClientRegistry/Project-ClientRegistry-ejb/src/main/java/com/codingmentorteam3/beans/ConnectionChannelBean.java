@@ -1,30 +1,42 @@
-package com.codingmentorteam3.dtos;
+package com.codingmentorteam3.beans;
 
-import com.codingmentorteam3.entities.ConnectionChannel;
+import com.codingmentorteam3.annotations.Validate;
+import com.codingmentorteam3.constraints.ValidConnectionChannelValue;
 import com.codingmentorteam3.entities.Person;
 import com.codingmentorteam3.enums.ConnectionChannelType;
+import java.io.Serializable;
 import java.util.Objects;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author istvan.mosonyi
  */
-public class ConnectionChannelDTO {
-
+@Validate
+@ValidConnectionChannelValue
+@SessionScoped
+@ManagedBean(name="connectionChannel")
+public class ConnectionChannelBean implements Serializable {
+    
+    @NotNull
     private ConnectionChannelType type;
-
+    
+    @NotNull
     private String value;
-
+    
+    @NotNull
     private Person owner;
 
-    public ConnectionChannelDTO() {
+    public ConnectionChannelBean() {
         // Default constructor
     }
 
-    public ConnectionChannelDTO(ConnectionChannel connectionChannel) {
-        this.type = connectionChannel.getType();
-        this.value = connectionChannel.getValue();
-        this.owner = connectionChannel.getOwner();
+    public ConnectionChannelBean(ConnectionChannelType type, String value, Person owner) {
+        this.type = type;
+        this.value = value;
+        this.owner = owner;
     }
 
     public ConnectionChannelType getType() {
@@ -71,7 +83,7 @@ public class ConnectionChannelDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ConnectionChannelDTO other = (ConnectionChannelDTO) obj;
+        final ConnectionChannelBean other = (ConnectionChannelBean) obj;
         if (!Objects.equals(this.value, other.value)) {
             return false;
         }
@@ -86,7 +98,7 @@ public class ConnectionChannelDTO {
 
     @Override
     public String toString() {
-        return "ConnectionChannelDTO{" + "type=" + type + ", value=" + value + ", owner=" + owner + '}';
+        return "ConnectionChannelBean{" + "type=" + type + ", value=" + value + ", owner=" + owner + '}';
     }
     
 }
