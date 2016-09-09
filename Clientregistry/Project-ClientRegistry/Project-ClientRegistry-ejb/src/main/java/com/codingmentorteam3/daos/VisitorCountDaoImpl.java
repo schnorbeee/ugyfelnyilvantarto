@@ -11,9 +11,9 @@ import javax.ejb.Stateless;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Stateless
-public class VisitorDaoImpl extends AbstractDao<VisitorCount> {
+public class VisitorCountDaoImpl extends AbstractDao<VisitorCount> {
 
-    public VisitorDaoImpl() {
+    public VisitorCountDaoImpl() {
         super(VisitorCount.class);
     }
 

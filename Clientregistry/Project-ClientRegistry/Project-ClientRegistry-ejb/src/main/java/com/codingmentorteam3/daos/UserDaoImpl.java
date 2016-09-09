@@ -172,5 +172,5 @@ public class UserDaoImpl extends AbstractDao<User> {
         }
         throw new BadRequestException(BADREQUESTMESSAGE);
     }
-
+    
 }

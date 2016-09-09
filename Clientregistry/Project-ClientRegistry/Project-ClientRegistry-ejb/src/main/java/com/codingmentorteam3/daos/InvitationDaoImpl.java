@@ -7,8 +7,8 @@ import com.codingmentorteam3.exceptions.BadRequestException;
 import com.codingmentorteam3.exceptions.EmptyListException;
 import com.codingmentorteam3.exceptions.NoMatchForFilterException;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
@@ -17,7 +17,7 @@ import javax.ejb.Stateless;
 @Stateless
 public class InvitationDaoImpl extends AbstractDao<Invitation> {
 
-    @EJB
+    @Inject
     private EventDaoImpl eventDao;
 
     public InvitationDaoImpl() {

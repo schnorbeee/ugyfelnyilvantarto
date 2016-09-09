@@ -77,50 +77,9 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
     public List<Project> getProjectsListDeadlineIsInThisWeek() {
         List<Project> query = em.createNamedQuery("project.list.in.this.week", Project.class).getResultList();
         if (query.isEmpty()) {
-            throw new EmptyListException("In this week we haven't project is deadline period.");
+            throw new EmptyListException("In this week we haven't project in deadline period.");
         }
         return query;
     }
 
-    /*public List<Date> setWeekDaysToNow() {
-        LocalDate now = LocalDate.now();
-        Date mondayDate;
-        Date sundayDate;
-        switch(now.getDayOfWeek()) {
-            case MONDAY:
-                mondayDate = Date.valueOf(now);
-                sundayDate = Date.valueOf(now.plusDays(6));
-                break;
-            case TUESDAY:
-                mondayDate = Date.valueOf(now.minusDays(1));
-                sundayDate = Date.valueOf(now.plusDays(5));
-                break;
-            case WEDNESDAY:
-                mondayDate = Date.valueOf(now.minusDays(2));
-                sundayDate = Date.valueOf(now.plusDays(4));
-                break;    
-            case THURSDAY:
-                mondayDate = Date.valueOf(now.minusDays(3));
-                sundayDate = Date.valueOf(now.plusDays(3));
-                break;    
-            case FRIDAY:
-                mondayDate = Date.valueOf(now.minusDays(4));
-                sundayDate = Date.valueOf(now.plusDays(2));
-                break;
-            case SATURDAY:
-                mondayDate = Date.valueOf(now.minusDays(5));
-                sundayDate = Date.valueOf(now.plusDays(1));
-                break;
-            case SUNDAY:
-                mondayDate = Date.valueOf(now.minusDays(6));
-                sundayDate = Date.valueOf(now.plusDays(0));
-                break;
-            default:
-                throw new IllegalArgumentException("Illegal state of day registered.");
-        }
-        List<Date> days = new ArrayList();
-        days.add(0, mondayDate);
-        days.add(1, sundayDate);
-        return days; 
-    }*/
 }
