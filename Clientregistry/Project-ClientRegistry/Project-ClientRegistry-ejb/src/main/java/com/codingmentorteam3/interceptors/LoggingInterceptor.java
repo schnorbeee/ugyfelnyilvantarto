@@ -2,6 +2,7 @@ package com.codingmentorteam3.interceptors;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
@@ -12,12 +13,13 @@ import javax.interceptor.InvocationContext;
  */
 @Interceptor
 public class LoggingInterceptor {
-
-    private static final Logger LOGGER = Logger.getLogger(LoggingInterceptor.class.getName());
+    
+    @Inject
+    private Logger logger;
     
     @AroundInvoke
     public Object loggingMethod(InvocationContext ctx) throws Exception {
-        LOGGER.log(Level.INFO, createLogMessage(ctx));
+        logger.log(Level.INFO, createLogMessage(ctx));
         ctx.getClass().getName();
         
         return ctx.proceed();
