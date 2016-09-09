@@ -32,6 +32,7 @@ public class UserBean extends PersonBean implements Serializable {
     private String avatar = DEFAULT_AVATAR;
 
     public UserBean() {
+        // Default constructor
     }
 
     public UserBean(String username, String password) {
