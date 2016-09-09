@@ -19,9 +19,11 @@ public class NoMatchForFilterExceptionMapper implements ExceptionMapper<NoMatchF
     
     @Override
     public Response toResponse(NoMatchForFilterException exception) {
-        logger.log(Level.SEVERE, exception.getMessage(), exception);
+        logger.log(Level.SEVERE,
+                "NoMatchForFilterException was thrown: " + exception.getMessage(),
+                exception);
         return Response.status(Response.Status.NOT_FOUND)
-                .entity(exception.getMessage())
+                .entity(exception.getMessage() + ": " + exception.getCause().toString())
                 .type(MediaType.APPLICATION_JSON)
                 .build();
     }

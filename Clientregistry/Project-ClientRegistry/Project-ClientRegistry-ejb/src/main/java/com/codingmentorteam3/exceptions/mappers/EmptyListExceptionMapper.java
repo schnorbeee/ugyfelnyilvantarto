@@ -24,7 +24,7 @@ public class EmptyListExceptionMapper implements ExceptionMapper<EmptyListExcept
                 "EmptyListException was thrown: " + exception.getMessage(),
                 exception);
         return Response.status(Response.Status.NOT_FOUND)
-                .entity(new ExceptionMessage(exception.getMessage()))
+                .entity(new ExceptionMessage(exception.getMessage() + ": " + exception.getCause().toString()))
                 .type(MediaType.APPLICATION_JSON)
                 .build();
     }
