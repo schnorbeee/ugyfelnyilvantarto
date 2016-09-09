@@ -1,34 +1,29 @@
-package com.codingmentorteam3.entities;
+package com.codingmentorteam3.dtos;
 
-import java.io.Serializable;
+import com.codingmentorteam3.entities.Company;
+import com.codingmentorteam3.entities.ContactPerson;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+ 
 /**
  *
- * @author norbeee sch.norbeee@gmail.com
+ * @author istvan.mosonyi
  */
-@Entity(name = "contactperson_table")
-public class ContactPerson extends Person implements Serializable {
-
-    @ManyToOne(targetEntity = Company.class)
-    @JoinColumn(name = "company_id", nullable = false)
+public class ContactPersonDTO extends PersonDTO {
+    
     private Company company;
-
-    public ContactPerson() {
+ 
+    public ContactPersonDTO() {
         // Default constructor
     }
-    
-    public ContactPerson(Company company) {
-        this.company = company;
-    }
 
+    public ContactPersonDTO(ContactPerson contactPerson) {
+        this.company = contactPerson.getCompany();
+    }
+ 
     public Company getCompany() {
         return company;
     }
-
+ 
     public void setCompany(Company company) {
         this.company = company;
     }
@@ -36,7 +31,7 @@ public class ContactPerson extends Person implements Serializable {
     @Override
     public int hashCode() {
         int hash = super.hashCode();
-        hash = 71 * hash + Objects.hashCode(this.company);
+        hash = 83 * hash + Objects.hashCode(this.company);
         return hash;
     }
 
@@ -51,7 +46,7 @@ public class ContactPerson extends Person implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ContactPerson other = (ContactPerson) obj;
+        final ContactPersonDTO other = (ContactPersonDTO) obj;
         if (!super.equals(other)) {
             return false;
         }
@@ -59,6 +54,11 @@ public class ContactPerson extends Person implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactPersonDTO{" + "company=" + company + '}';
     }
     
 }

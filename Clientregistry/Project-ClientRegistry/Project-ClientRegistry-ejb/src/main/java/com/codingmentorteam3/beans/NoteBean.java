@@ -1,57 +1,46 @@
-package com.codingmentorteam3.entities;
+package com.codingmentorteam3.beans;
 
+import com.codingmentorteam3.annotations.Validate;
+import com.codingmentorteam3.entities.Event;
+import com.codingmentorteam3.entities.User;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author norbeee sch.norbeee@gmail.com
+ * @author istvan.mosonyi
  */
-@Entity(name = "note_table")
-public class Note implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "note_id")
-    private Long id;
-
+@Validate
+@SessionScoped
+@ManagedBean(name = "note")
+public class NoteBean implements Serializable {
+    
+    @Size(max = 30)
     private String label;
-
-    @Column(nullable = false)
+    
+    @NotNull
+    @Size(max = 1500)
     private String content;
-
-    @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "user_id", nullable = false)
+    
+    @NotNull
     private User user;
-
-    @ManyToOne(targetEntity = Event.class)
-    @JoinColumn(name = "event_id", nullable = false)
+    
+    @NotNull
     private Event event;
 
-    public Note() {
-        //Default constructor
+    public NoteBean() {
+        // Default constructor
     }
 
-    public Note(String label, String content, User user, Event event) {
+    public NoteBean(String label, String content, User user, Event event) {
         this.label = label;
         this.content = content;
         this.user = user;
         this.event = event;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLabel() {
@@ -89,9 +78,10 @@ public class Note implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.id);
-        hash = 83 * hash + Objects.hashCode(this.label);
-        hash = 83 * hash + Objects.hashCode(this.content);
+        hash = 97 * hash + Objects.hashCode(this.label);
+        hash = 97 * hash + Objects.hashCode(this.content);
+        hash = 97 * hash + Objects.hashCode(this.user);
+        hash = 97 * hash + Objects.hashCode(this.event);
         return hash;
     }
 
@@ -106,17 +96,25 @@ public class Note implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Note other = (Note) obj;
+        final NoteBean other = (NoteBean) obj;
         if (!Objects.equals(this.label, other.label)) {
             return false;
         }
         if (!Objects.equals(this.content, other.content)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
+        if (!Objects.equals(this.event, other.event)) {
             return false;
         }
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "NoteBean{" + "label=" + label + ", content=" + content + ", user=" + user + ", event=" + event + '}';
+    }
+    
 }
