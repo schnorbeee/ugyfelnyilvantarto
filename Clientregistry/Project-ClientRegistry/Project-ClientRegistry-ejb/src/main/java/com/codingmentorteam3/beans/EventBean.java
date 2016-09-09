@@ -1,46 +1,61 @@
-package com.codingmentorteam3.dtos;
+package com.codingmentorteam3.beans;
 
+import com.codingmentorteam3.annotations.Validate;
+import com.codingmentorteam3.constraints.ValidStartAndEndDate;
 import com.codingmentorteam3.entities.Address;
 import com.codingmentorteam3.entities.Company;
-import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.enums.EventType;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author istvan.mosonyi
  */
-public class EventDTO {
+@Validate
+@ValidStartAndEndDate
+@SessionScoped
+@ManagedBean(name = "event")
+public class EventBean implements Serializable {
     
     private static final EventType DEFAULT_TYPE = EventType.MEETING;
-
+    
+    @NotNull
+    @Size(max = 30)
     private String title;
-
+    
+    @Size(max = 1500)
     private String description;
-
+    
+    @NotNull
     private Address address;
     
     private EventType type = DEFAULT_TYPE;
     
+    @NotNull @Future
     private Date startDate;
     
     private Date endDate;
     
     private Company company;
 
-    public EventDTO() {
+    public EventBean() {
         // Default constructor
     }
 
-    public EventDTO(Event event) {
-        this.title = event.getTitle();
-        this.description = event.getDescription();
-        this.address = event.getAddress();
-        this.type = event.getType();
-        this.startDate = event.getStartDate();
-        this.endDate = event.getEndDate();
-        this.company = event.getCompany();
+    public EventBean(String title, String description, Address address, Date startDate, Date endDate, Company company) {
+        this.title = title;
+        this.description = description;
+        this.address = address;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.company = company;
     }
 
     public String getTitle() {
@@ -123,7 +138,7 @@ public class EventDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final EventDTO other = (EventDTO) obj;
+        final EventBean other = (EventBean) obj;
         if (!Objects.equals(this.title, other.title)) {
             return false;
         }
@@ -150,7 +165,7 @@ public class EventDTO {
 
     @Override
     public String toString() {
-        return "EventDTO{" + "title=" + title + ", description=" + description + ", address=" + address + ", type=" + type + ", startDate=" + startDate + ", endDate=" + endDate + ", company=" + company + '}';
+        return "EventBean{" + "title=" + title + ", description=" + description + ", address=" + address + ", type=" + type + ", startDate=" + startDate + ", endDate=" + endDate + ", company=" + company + '}';
     }
     
 }

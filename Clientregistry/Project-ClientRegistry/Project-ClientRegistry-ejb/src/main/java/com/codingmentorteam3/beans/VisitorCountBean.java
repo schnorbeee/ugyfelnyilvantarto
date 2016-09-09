@@ -1,28 +1,38 @@
-package com.codingmentorteam3.dtos;
+package com.codingmentorteam3.beans;
 
-import com.codingmentorteam3.entities.VisitorCount;
+import com.codingmentorteam3.annotations.Validate;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author istvan.mosonyi
  */
-public class VisitorCountDTO {
+@Validate
+@SessionScoped
+@ManagedBean(name = "visitorCount")
+public class VisitorCountBean implements Serializable {
     
     private static final Integer DEFAULT_COUNT = 0;
-
+    
+    @NotNull
     private Date day;
-
+    
+    @NotNull
+    @Min(0)
     private Integer count = DEFAULT_COUNT;
 
-    public VisitorCountDTO() {
+    public VisitorCountBean() {
         // Default constructor
     }
 
-    public VisitorCountDTO(VisitorCount visitorCount) {
-        this.day = visitorCount.getDay();
-        this.count = visitorCount.getCount();
+    public VisitorCountBean(Date day) {
+        this.day = day;
     }
 
     public Date getDay() {
@@ -60,7 +70,7 @@ public class VisitorCountDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final VisitorCountDTO other = (VisitorCountDTO) obj;
+        final VisitorCountBean other = (VisitorCountBean) obj;
         if (!Objects.equals(this.day, other.day)) {
             return false;
         }
@@ -72,7 +82,7 @@ public class VisitorCountDTO {
 
     @Override
     public String toString() {
-        return "VisitorCountDTO{" + "day=" + day + ", count=" + count + '}';
+        return "VisitorCountBean{" + "day=" + day + ", count=" + count + '}';
     }
     
 }

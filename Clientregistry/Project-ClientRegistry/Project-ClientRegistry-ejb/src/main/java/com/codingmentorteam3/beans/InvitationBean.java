@@ -1,39 +1,51 @@
-package com.codingmentorteam3.dtos;
+package com.codingmentorteam3.beans;
 
+import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.entities.Event;
-import com.codingmentorteam3.entities.Invitation;
 import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.FeedbackType;
+import java.io.Serializable;
 import java.util.Objects;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author istvan.mosonyi
  */
-public class InvitationDTO {
+@Validate
+@SessionScoped
+@ManagedBean(name = "invitation")
+public class InvitationBean implements Serializable {
     
     private static final FeedbackType DEFAULT_FEEDBACK = FeedbackType.UNANSWERED;
-
+    
+    @NotNull
     private User sender;
-
+    
+    @NotNull
     private User receiver;
-
+    
+    @NotNull
     private Event event;
-
+    
+    @Size(max = 1500)
     private String message;
-
+    
+    @NotNull
     private FeedbackType feedback = DEFAULT_FEEDBACK;
 
-    public InvitationDTO() {
+    public InvitationBean() {
         // Default constructor
     }
 
-    public InvitationDTO(Invitation invitation) {
-        this.sender = invitation.getSender();
-        this.receiver = invitation.getReceiver();
-        this.event = invitation.getEvent();
-        this.message = invitation.getMessage();
-        this.feedback = invitation.getFeedback();
+    public InvitationBean(User sender, User receiver, Event event, String message) {
+        this.sender = sender;
+        this.receiver = receiver;
+        this.event = event;
+        this.message = message;
     }
 
     public User getSender() {
@@ -98,7 +110,7 @@ public class InvitationDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final InvitationDTO other = (InvitationDTO) obj;
+        final InvitationBean other = (InvitationBean) obj;
         if (!Objects.equals(this.message, other.message)) {
             return false;
         }
@@ -119,7 +131,7 @@ public class InvitationDTO {
 
     @Override
     public String toString() {
-        return "InvitationDTO{" + "sender=" + sender + ", receiver=" + receiver + ", event=" + event + ", message=" + message + ", feedback=" + feedback + '}';
+        return "InvitationBean{" + "sender=" + sender + ", receiver=" + receiver + ", event=" + event + ", message=" + message + ", feedback=" + feedback + '}';
     }
     
 }

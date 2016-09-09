@@ -1,34 +1,47 @@
-package com.codingmentorteam3.dtos;
+package com.codingmentorteam3.beans;
 
+import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.entities.Address;
-import com.codingmentorteam3.entities.Company;
+import java.io.Serializable;
 import java.util.Objects;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author istvan.mosonyi
  */
-public class CompanyDTO {
+@Validate
+@SessionScoped
+@ManagedBean(name = "company")
+public class CompanyBean implements Serializable {
     
     private static final String DEFAULT_LOGO = "";
-
+    
+    @NotNull 
+    @Size(min = 2, max = 30)
     private String name;
-
+    
+    @NotNull
     private Address address;
 
+    @Pattern(regexp = "\\d{8}-\\d{1}-\\d{2}")
     private String taxNumber;
-
+    
+    @NotNull
     private String logo = DEFAULT_LOGO;
 
-    public CompanyDTO() {
+    public CompanyBean() {
         // Default constructor
     }
 
-    public CompanyDTO(Company company) {
-        this.name = company.getName();
-        this.address = company.getAddress();
-        this.taxNumber = company.getTaxNumber();
-        this.logo = company.getLogo();
+    public CompanyBean(String name, Address address, String taxNumber) {
+        this.name = name;
+        this.address = address;
+        this.taxNumber = taxNumber;
     }
 
     public String getName() {
@@ -84,7 +97,7 @@ public class CompanyDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final CompanyDTO other = (CompanyDTO) obj;
+        final CompanyBean other = (CompanyBean) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -102,7 +115,7 @@ public class CompanyDTO {
 
     @Override
     public String toString() {
-        return "CompanyDTO{" + "name=" + name + ", address=" + address + ", taxNumber=" + taxNumber + ", logo=" + logo + '}';
+        return "CompanyBean{" + "name=" + name + ", address=" + address + ", taxNumber=" + taxNumber + ", logo=" + logo + '}';
     }
     
 }

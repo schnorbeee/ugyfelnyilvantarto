@@ -1,23 +1,31 @@
-package com.codingmentorteam3.dtos;
+package com.codingmentorteam3.beans;
 
+import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.entities.Company;
-import com.codingmentorteam3.entities.ContactPerson;
+import java.io.Serializable;
 import java.util.Objects;
- 
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.validation.constraints.NotNull;
+
 /**
  *
  * @author istvan.mosonyi
  */
-public class ContactPersonDTO extends PersonDTO {
+@Validate
+@SessionScoped
+@ManagedBean(name = "contactPerson")
+public class ContactPersonBean extends PersonBean implements Serializable {
     
+    @NotNull
     private Company company;
  
-    public ContactPersonDTO() {
+    public ContactPersonBean() {
         // Default constructor
     }
 
-    public ContactPersonDTO(ContactPerson contactPerson) {
-        this.company = contactPerson.getCompany();
+    public ContactPersonBean(Company company) {
+        this.company = company;
     }
  
     public Company getCompany() {
@@ -46,7 +54,7 @@ public class ContactPersonDTO extends PersonDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ContactPersonDTO other = (ContactPersonDTO) obj;
+        final ContactPersonBean other = (ContactPersonBean) obj;
         if (!super.equals(other)) {
             return false;
         }
@@ -58,7 +66,7 @@ public class ContactPersonDTO extends PersonDTO {
 
     @Override
     public String toString() {
-        return "ContactPersonDTO{" + "company=" + company + '}';
+        return "ContactPersonBean{" + "company=" + company + '}';
     }
     
 }
