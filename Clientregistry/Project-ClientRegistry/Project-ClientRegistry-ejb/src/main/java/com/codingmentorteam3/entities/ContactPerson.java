@@ -1,6 +1,5 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.ContactPersonDTO;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -24,10 +23,6 @@ public class ContactPerson extends Person implements Serializable {
     
     public ContactPerson(Company company) {
         this.company = company;
-    }
-    
-    public ContactPerson(ContactPersonDTO contactPersonDTO) {
-        this.company = contactPersonDTO.getCompany();
     }
 
     public Company getCompany() {

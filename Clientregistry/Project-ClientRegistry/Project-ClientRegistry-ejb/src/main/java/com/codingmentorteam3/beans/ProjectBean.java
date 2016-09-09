@@ -34,6 +34,7 @@ public class ProjectBean implements Serializable {
     @NotNull
     private StatusType status = DEFAULT_TYPE;
     
+    @NotNull
     private Date startDate;
     
     private Date deadline;
@@ -42,11 +43,10 @@ public class ProjectBean implements Serializable {
         // Default constructor
     }
 
-    public ProjectBean(String name, String description, Date startDate, Date deadline) {
+    public ProjectBean(String name, String description, Date startDate) {
         this.name = name;
         this.description = description;
         this.startDate = startDate;
-        this.deadline = deadline;
     }
 
     public String getName() {

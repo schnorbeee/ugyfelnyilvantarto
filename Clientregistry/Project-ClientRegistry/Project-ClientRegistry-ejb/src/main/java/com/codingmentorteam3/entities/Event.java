@@ -1,6 +1,5 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.EventDTO;
 import com.codingmentorteam3.enums.EventType;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -76,16 +75,6 @@ public class Event implements Serializable {
         this.description = description;
         this.type = type;
         this.company = company;
-    }
-    
-    public Event(EventDTO eventDTO) {
-        this.address = eventDTO.getAddress();
-        this.title = eventDTO.getTitle();
-        this.startDate = eventDTO.getStartDate();
-        this.endDate = eventDTO.getEndDate();
-        this.description = eventDTO.getDescription();
-        this.type = eventDTO.getType();
-        this.company = eventDTO.getCompany();
     }
 
     public Long getId() {

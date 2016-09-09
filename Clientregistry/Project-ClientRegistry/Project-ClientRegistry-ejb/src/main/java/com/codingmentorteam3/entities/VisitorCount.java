@@ -1,6 +1,5 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.VisitorCountDTO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -37,11 +36,6 @@ public class VisitorCount implements Serializable {
     public VisitorCount(int count, Date day) {
         this.count = count;
         this.day = day;
-    }
-    
-    public VisitorCount(VisitorCountDTO visitorCountDTO) {
-        this.count = visitorCountDTO.getCount();
-        this.day = visitorCountDTO.getDay();
     }
 
     public Long getId() {

@@ -1,6 +1,5 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.RoleDTO;
 import com.codingmentorteam3.enums.RoleType;
 import java.io.Serializable;
 import java.util.Objects;
@@ -43,11 +42,6 @@ public class Role implements Serializable {
     public Role(RoleType roleType, String username) {
         this.roleType = roleType;
         this.username = username;
-    }
-    
-    public Role(RoleDTO roleDTO) {
-        this.roleType = roleDTO.getType();
-        this.username = roleDTO.getUsername();
     }
 
     public Long getId() {

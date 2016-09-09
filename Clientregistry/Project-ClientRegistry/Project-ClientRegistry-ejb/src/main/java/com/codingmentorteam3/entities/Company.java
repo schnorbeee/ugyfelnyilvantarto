@@ -1,6 +1,5 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.CompanyDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,13 +61,6 @@ public class Company implements Serializable {
         this.address = address;
         this.taxNumber = taxNumber;
         this.logo = logo;
-    }
-    
-    public Company(CompanyDTO companyDTO) {
-        this.name = companyDTO.getName();
-        this.address = companyDTO.getAddress();
-        this.taxNumber = companyDTO.getTaxNumber();
-        this.logo = companyDTO.getLogo();
     }
 
     public Long getId() {

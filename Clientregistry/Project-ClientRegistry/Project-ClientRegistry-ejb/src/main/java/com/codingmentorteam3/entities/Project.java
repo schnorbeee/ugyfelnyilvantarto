@@ -1,6 +1,5 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.ProjectDTO;
 import com.codingmentorteam3.enums.StatusType;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -60,14 +59,6 @@ public class Project implements Serializable {
         this.status = status;
         this.description = description;
         this.deadline = deadline;
-    }
-    
-    public Project(ProjectDTO projectDTO) {
-        this.name = projectDTO.getName();
-        this.startDate = projectDTO.getStartDate();
-        this.status = projectDTO.getStatus();
-        this.description = projectDTO.getDescription();
-        this.deadline = projectDTO.getDeadline();
     }
 
     public Long getId() {
