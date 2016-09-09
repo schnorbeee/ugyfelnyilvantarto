@@ -1,5 +1,6 @@
 package com.codingmentorteam3.exceptions.mappers;
 
+import com.codingmentorteam3.exceptions.createmessage.ExceptionMessage;
 import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +24,7 @@ public class NoMatchForFilterExceptionMapper implements ExceptionMapper<NoMatchF
                 "NoMatchForFilterException was thrown: " + exception.getMessage(),
                 exception);
         return Response.status(Response.Status.NOT_FOUND)
-                .entity(exception.getMessage() + ": " + exception.getCause().toString())
+                .entity(new ExceptionMessage(exception.getMessage() + ": " + exception.getCause().toString()))
                 .type(MediaType.APPLICATION_JSON)
                 .build();
     }
