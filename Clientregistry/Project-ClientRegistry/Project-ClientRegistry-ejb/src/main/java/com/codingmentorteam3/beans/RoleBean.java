@@ -1,28 +1,36 @@
-package com.codingmentorteam3.dtos;
+package com.codingmentorteam3.beans;
 
-import com.codingmentorteam3.entities.Role;
+import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.enums.RoleType;
+import java.io.Serializable;
 import java.util.Objects;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author istvan.mosonyi
  */
-public class RoleDTO {
+@Validate
+@SessionScoped
+@ManagedBean(name = "role")
+public class RoleBean implements Serializable {
     
     private static final RoleType DEFAULT_ROLE = RoleType.VISITOR;
-
+    
+    @NotNull
     private RoleType type = DEFAULT_ROLE;
-
+    
+    @NotNull
     private String username;
 
-    public RoleDTO() {
+    public RoleBean() {
         // Default constructor
     }
 
-    public RoleDTO(Role role) {
-        this.type = role.getRoleType();
-        this.username = role.getUsername();
+    public RoleBean(String username) {
+        this.username = username;
     }
 
     public RoleType getType() {
@@ -60,7 +68,7 @@ public class RoleDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final RoleDTO other = (RoleDTO) obj;
+        final RoleBean other = (RoleBean) obj;
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
@@ -72,7 +80,7 @@ public class RoleDTO {
 
     @Override
     public String toString() {
-        return "RoleDTO{" + "type=" + type + ", username=" + username + '}';
+        return "RoleBean{" + "type=" + type + ", username=" + username + '}';
     }
     
 }

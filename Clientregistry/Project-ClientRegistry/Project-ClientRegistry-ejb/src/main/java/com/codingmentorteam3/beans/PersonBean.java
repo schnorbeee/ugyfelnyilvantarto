@@ -1,9 +1,11 @@
-package com.codingmentorteam3.dtos;
+package com.codingmentorteam3.beans;
 
 import com.codingmentorteam3.annotations.Validate;
-import com.codingmentorteam3.entities.Person;
 import com.codingmentorteam3.enums.RankType;
+import java.io.Serializable;
 import java.util.Objects;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,24 +13,31 @@ import javax.validation.constraints.Size;
  *
  * @author istvan.mosonyi
  */
-public class PersonDTO {
+@Validate
+@SessionScoped
+@ManagedBean(name = "person")
+public class PersonBean implements Serializable {
     
     private static final RankType DEFAULT_RANK = RankType.VISITOR;
-
+    
+    @NotNull 
+    @Size(min = 2, max = 30)
     protected String firstName;
-
+    
+    @NotNull 
+    @Size(min = 2, max = 30)
     protected String lastName;
-
+    
+    @NotNull
     protected RankType rank = DEFAULT_RANK;
 
-    public PersonDTO() {
+    public PersonBean() {
         // Default constructor
     }
 
-    public PersonDTO(Person person) {
-        this.firstName = person.getFirstName();
-        this.lastName = person.getLastName();
-        this.rank = person.getRank();
+    public PersonBean(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getFirstName() {
@@ -75,7 +84,7 @@ public class PersonDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final PersonDTO other = (PersonDTO) obj;
+        final PersonBean other = (PersonBean) obj;
         if (!Objects.equals(this.firstName, other.firstName)) {
             return false;
         }
@@ -90,7 +99,7 @@ public class PersonDTO {
 
     @Override
     public String toString() {
-        return "PersonDTO{" + "firstName=" + firstName + ", lastName=" + lastName + ", rank=" + rank + '}';
+        return "PersonBean{" + "firstName=" + firstName + ", lastName=" + lastName + ", rank=" + rank + '}';
     }
     
 }

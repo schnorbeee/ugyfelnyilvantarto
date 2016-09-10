@@ -73,12 +73,6 @@ public class User extends Person implements Serializable {
         this.password = password;
         this.avatar = avatar;
     }
-    
-    public User(UserDTO userDTO) {
-        this.username = userDTO.getUsername();
-        this.password = userDTO.getPassword();
-        this.avatar = userDTO.getAvatar();
-    }
 
     public String getUsername() {
         return username;
