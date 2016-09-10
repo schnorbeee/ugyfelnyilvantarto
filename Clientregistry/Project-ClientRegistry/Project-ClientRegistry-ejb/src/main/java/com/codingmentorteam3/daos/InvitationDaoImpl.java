@@ -28,7 +28,7 @@ public class InvitationDaoImpl extends AbstractDao<Invitation> {
         if (null != feedback) {
             List<Invitation> query = em.createNamedQuery("invitation.by.feedback.filter", Invitation.class).setParameter("feedback", "%" + feedback + "%").getResultList();
             if (query.isEmpty()) {
-                throw new NoMatchForFilterException("We did not find any invitation with the given feedback" + feedback);
+                throw new NoMatchForFilterException("We did not find any invitation with the given feedback: " + feedback);
             }
             return query;
         }

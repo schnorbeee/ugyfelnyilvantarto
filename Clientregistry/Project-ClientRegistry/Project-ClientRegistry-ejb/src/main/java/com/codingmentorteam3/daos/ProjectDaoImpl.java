@@ -67,7 +67,7 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
         if (null != current) {
             List<ConnectionChannel> query = em.createNamedQuery("project.list.contacter.connection.channel.by.id", ConnectionChannel.class).setParameter("id", projectId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("There are no contacters connected to prject: " + current.getName());
+                throw new EmptyListException("There are no connection channels added to the contact person of this project: " + current.getName());
             }
             return query;
         }

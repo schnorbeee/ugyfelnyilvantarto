@@ -59,7 +59,7 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         if (null != current) {
             List<Event> query = em.createNamedQuery("company.list.events.by.id", Event.class).setParameter("id", companyId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This company has not any event right now.");
+                throw new EmptyListException("This company has not got any events right now.");
             }
             return query;
         }
@@ -71,7 +71,7 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         if (null != current) {
             List<Project> query = em.createNamedQuery("company.list.projects.by.id", Project.class).setParameter("id", companyId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This company has not any projects right now.");
+                throw new EmptyListException("This company has not got any projects right now.");
             }
             return query;
         }
@@ -83,7 +83,7 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         if (null != current) {
             List<ContactPerson> query = em.createNamedQuery("company.list.contacters.by.id", ContactPerson.class).setParameter("id", companyId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This company has not any contact persons right now.");
+                throw new EmptyListException("This company has not got any contact persons right now.");
             }
             return query;
         }
