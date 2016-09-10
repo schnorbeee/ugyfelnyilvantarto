@@ -2,6 +2,7 @@ package com.codingmentorteam3.entities;
 
 import com.codingmentorteam3.enums.StatusType;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +29,7 @@ public class Project implements Serializable {
     @Column(name = "project_id")
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     @Temporal(TemporalType.DATE)
@@ -35,15 +37,17 @@ public class Project implements Serializable {
     private Date startDate;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private StatusType status;
 
+    @Column(nullable = false)
     private String description;
 
     @Temporal(TemporalType.DATE)
     private Date deadline;
 
     @ManyToMany(mappedBy = "projects", targetEntity = Company.class)
-    private List<Company> companys;
+    private List<Company> companies = new ArrayList<>();
 
     public Project() {
         //Default constructor
@@ -105,12 +109,12 @@ public class Project implements Serializable {
         this.deadline = deadline;
     }
 
-    public List<Company> getCompanys() {
-        return companys;
+    public List<Company> getCompanies() {
+        return companies;
     }
 
-    public void setCompanys(List<Company> companys) {
-        this.companys = companys;
+    public void setCompanys(List<Company> companies) {
+        this.companies = companies;
     }
 
     @Override

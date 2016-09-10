@@ -26,9 +26,10 @@ public class ConnectionChannel implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private ConnectionChannelType type;
 
-    @Column(name = "connection_value")
+    @Column(name = "connection_value", nullable = false)
     private String value;
 
     @ManyToOne(targetEntity = Person.class)

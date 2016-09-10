@@ -2,6 +2,7 @@ package com.codingmentorteam3.entities;
 
 import com.codingmentorteam3.enums.RankType;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -27,17 +28,18 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     protected String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     protected String lastName;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     protected RankType rank;
 
     @OneToMany(mappedBy = "owner", targetEntity = ConnectionChannel.class)
-    protected List<ConnectionChannel> channels;
+    protected List<ConnectionChannel> channels = new ArrayList<>();
 
     public Person() {
         //Default constructor

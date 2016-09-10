@@ -1,34 +1,37 @@
-package com.codingmentorteam3.entities;
+package com.codingmentorteam3.beans;
 
+import com.codingmentorteam3.annotations.Validate;
+import com.codingmentorteam3.entities.Company;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author norbeee sch.norbeee@gmail.com
+ * @author istvan.mosonyi
  */
-@Entity(name = "contactperson_table")
-public class ContactPerson extends Person implements Serializable {
-
-    @ManyToOne(targetEntity = Company.class)
-    @JoinColumn(name = "company_id", nullable = false)
+@Validate
+@SessionScoped
+@ManagedBean(name = "contactPerson")
+public class ContactPersonBean extends PersonBean implements Serializable {
+    
+    @NotNull
     private Company company;
-
-    public ContactPerson() {
+ 
+    public ContactPersonBean() {
         // Default constructor
     }
-    
-    public ContactPerson(Company company) {
+
+    public ContactPersonBean(Company company) {
         this.company = company;
     }
-
+ 
     public Company getCompany() {
         return company;
     }
-
+ 
     public void setCompany(Company company) {
         this.company = company;
     }
@@ -36,7 +39,7 @@ public class ContactPerson extends Person implements Serializable {
     @Override
     public int hashCode() {
         int hash = super.hashCode();
-        hash = 71 * hash + Objects.hashCode(this.company);
+        hash = 83 * hash + Objects.hashCode(this.company);
         return hash;
     }
 
@@ -51,7 +54,7 @@ public class ContactPerson extends Person implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ContactPerson other = (ContactPerson) obj;
+        final ContactPersonBean other = (ContactPersonBean) obj;
         if (!super.equals(other)) {
             return false;
         }
@@ -59,6 +62,11 @@ public class ContactPerson extends Person implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactPersonBean{" + "company=" + company + '}';
     }
     
 }
