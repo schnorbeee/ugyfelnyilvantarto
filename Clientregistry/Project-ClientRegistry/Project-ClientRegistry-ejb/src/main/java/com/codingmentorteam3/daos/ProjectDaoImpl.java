@@ -24,7 +24,7 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
         if (null != name) {
             List<Project> query = em.createNamedQuery("project.by.name.filter", Project.class).setParameter("name", "%" + name + "%").getResultList();
             if (query.isEmpty()) {
-                throw new NoMatchForFilterException("The results can not be found with this parameter: " + name);
+                throw new NoMatchForFilterException("Results can not be found with this parameter: " + name);
             }
             return query;
         }
@@ -35,7 +35,7 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
         if (null != status) {
             List<Project> query = em.createNamedQuery("project.by.status.filter", Project.class).setParameter("status", "%" + status + "%").getResultList();
             if (query.isEmpty()) {
-                throw new NoMatchForFilterException("The results can not be found with this parameter: " + status);
+                throw new NoMatchForFilterException("Results can not be found with this parameter: " + status);
             }
             return query;
         }
@@ -45,7 +45,7 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
     public List<Project> getProjectsList() {
         List<Project> query = em.createNamedQuery("project.list", Project.class).getResultList();
         if (query.isEmpty()) {
-            throw new EmptyListException("The project list is empty now.");
+            throw new EmptyListException("There are no projects to show.");
         }
         return query;
     }
@@ -55,7 +55,7 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
         if (null != current) {
             List<Company> query = em.createNamedQuery("project.list.companies.by.id", Company.class).setParameter("id", projectId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This project haven't any company.");
+                throw new EmptyListException("There are no projects connected to company: " + current.getName());
             }
             return query;
         }
@@ -67,7 +67,7 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
         if (null != current) {
             List<ConnectionChannel> query = em.createNamedQuery("project.list.contacter.connection.channel.by.id", ConnectionChannel.class).setParameter("id", projectId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This project haven't contact person or contact person havan't any connection channel.");
+                throw new EmptyListException("There are no contacters connected to prject: " + current.getName());
             }
             return query;
         }
@@ -77,7 +77,7 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
     public List<Project> getProjectsListDeadlineIsInThisWeek() {
         List<Project> query = em.createNamedQuery("project.list.in.this.week", Project.class).getResultList();
         if (query.isEmpty()) {
-            throw new EmptyListException("In this week we haven't project in deadline period.");
+            throw new EmptyListException("There are no projects ending in this week.");
         }
         return query;
     }

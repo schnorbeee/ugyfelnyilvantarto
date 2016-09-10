@@ -28,7 +28,7 @@ public class InvitationDaoImpl extends AbstractDao<Invitation> {
         if (null != feedback) {
             List<Invitation> query = em.createNamedQuery("invitation.by.feedback.filter", Invitation.class).setParameter("feedback", "%" + feedback + "%").getResultList();
             if (query.isEmpty()) {
-                throw new NoMatchForFilterException("The results can not be found with this parameter: " + feedback);
+                throw new NoMatchForFilterException("We did not find any invitation with the given feedback" + feedback);
             }
             return query;
         }
@@ -38,7 +38,7 @@ public class InvitationDaoImpl extends AbstractDao<Invitation> {
     public List<Invitation> getInvitationsList() {
         List<Invitation> query = em.createNamedQuery("invitation.list", Invitation.class).getResultList();
         if (query.isEmpty()) {
-            throw new EmptyListException("The event list is empty now.");
+            throw new EmptyListException("There are no invitations to show.");
         }
         return query;
     }
@@ -48,7 +48,7 @@ public class InvitationDaoImpl extends AbstractDao<Invitation> {
         if (null != current) {
             List<Invitation> query = em.createNamedQuery("invitation.list.by.event.id", Invitation.class).setParameter("id", eventId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This event haven't any invitation.");
+                throw new EmptyListException("There are no invitations connected to this event : " + current.getTitle());
             }
             return query;
         }

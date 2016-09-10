@@ -45,7 +45,7 @@ public class EventDaoImpl extends AbstractDao<Event> {
     public List<Event> getEventsList() {
         List<Event> query = em.createNamedQuery("event.list", Event.class).getResultList();
         if (query.isEmpty()) {
-            throw new EmptyListException("The event list is empty now.");
+            throw new EmptyListException("There are no events. List is empty now.");
         }
         return query;
     }
@@ -55,7 +55,7 @@ public class EventDaoImpl extends AbstractDao<Event> {
         if (null != current) {
             List<User> query = em.createNamedQuery("event.list.users.by.id", User.class).setParameter("id", eventId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This event haven't any users.");
+                throw new EmptyListException("There are no users connected to this event : " + current.getTitle());
             }
             return query;
         }
@@ -67,7 +67,7 @@ public class EventDaoImpl extends AbstractDao<Event> {
         if (null != current) {
             List<Note> query = em.createNamedQuery("event.list.notes.by.id", Note.class).setParameter("id", eventId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This event haven't any notes.");
+                throw new EmptyListException("There are no notes connected to this event : " + current.getTitle());
             }
             return query;
         }

@@ -23,7 +23,7 @@ public class ContactPersonDaoImpl extends AbstractDao<ContactPerson> {
         if (null != current) {
             List<ConnectionChannel> query = em.createNamedQuery("contact.person.channels.by.id", ConnectionChannel.class).setParameter("id", contacterId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This contact person haven't any connection chennel.");
+                throw new EmptyListException("This contact person has no connection channel.");
             }
             return query;
         }
