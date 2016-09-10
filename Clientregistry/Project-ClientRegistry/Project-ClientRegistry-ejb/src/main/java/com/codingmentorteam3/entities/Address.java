@@ -23,13 +23,13 @@ public class Address implements Serializable {
     @Column(name = "zip_code", nullable = false)
     private String zipCode;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String country;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String city;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String street;
 
     @Column(name = "house_number", nullable = false)

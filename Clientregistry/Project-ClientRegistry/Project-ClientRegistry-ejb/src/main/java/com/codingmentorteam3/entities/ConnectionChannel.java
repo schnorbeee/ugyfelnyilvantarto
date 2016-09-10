@@ -33,7 +33,7 @@ public class ConnectionChannel implements Serializable {
     private String value;
 
     @ManyToOne(targetEntity = Person.class)
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", nullable = false)
     private Person owner;
 
     public ConnectionChannel() {

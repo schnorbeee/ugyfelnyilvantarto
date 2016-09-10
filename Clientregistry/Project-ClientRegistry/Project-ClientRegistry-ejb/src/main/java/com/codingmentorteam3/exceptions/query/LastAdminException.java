@@ -1,4 +1,4 @@
-package com.codingmentorteam3.exceptions;
+package com.codingmentorteam3.exceptions.query;
 
 /**
  *

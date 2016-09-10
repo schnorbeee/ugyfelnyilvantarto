@@ -49,8 +49,10 @@ public class User extends Person implements Serializable {
     private String username;
 
     @XmlTransient
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String avatar;
 
     @MapKeyEnumerated(EnumType.STRING)

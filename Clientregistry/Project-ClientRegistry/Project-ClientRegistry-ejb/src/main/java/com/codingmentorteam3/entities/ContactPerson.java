@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
 public class ContactPerson extends Person implements Serializable {
 
     @ManyToOne(targetEntity = Company.class)
-    @JoinColumn(name = "company_id")
+    @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
     public ContactPerson() {

@@ -39,15 +39,17 @@ public class Company implements Serializable {
     @Column(name = "company_id")
     private Long id;
 
+    @Column(nullable = false, length = 30)
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @Column(name = "tax_number")
+    @Column(name = "tax_number", nullable = false)
     private String taxNumber;
 
+    @Column(nullable = false)
     private String logo;
 
     @OneToMany(mappedBy = "company", targetEntity = Event.class)

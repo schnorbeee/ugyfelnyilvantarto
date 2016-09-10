@@ -33,21 +33,23 @@ public class Invitation implements Serializable {
     @Column(name = "invitation_id")
     private Long id;
 
+    @Column(length = 1500)
     private String message;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private FeedbackType feedback;
 
     @ManyToOne(targetEntity = Event.class)
-    @JoinColumn(name = "event_id")
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "sender_id")
+    @JoinColumn(name = "sender_id", nullable = false)
     private User sender;
 
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "receiver_id")
+    @JoinColumn(name = "receiver_id", nullable = false)
     private User receiver;
 
     public Invitation() {

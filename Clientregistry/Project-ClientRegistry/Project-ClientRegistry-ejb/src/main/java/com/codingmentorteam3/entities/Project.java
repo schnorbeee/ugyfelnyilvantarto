@@ -40,7 +40,7 @@ public class Project implements Serializable {
     @Column(name = "project_id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String name;
 
     @Temporal(TemporalType.DATE)
@@ -51,7 +51,7 @@ public class Project implements Serializable {
     @Column(nullable = false)
     private StatusType status;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1500)
     private String description;
 
     @Temporal(TemporalType.DATE)
