@@ -21,11 +21,11 @@ public class VisitorCountDaoImpl extends AbstractDao<VisitorCount> {
         if (null != day) {
             int query = em.createNamedQuery("visitors.of.day", VisitorCount.class).setParameter("day", day).getMaxResults();
             if (query == 0) {
-                throw new NoMatchForFilterException("In this day homepage haven't any visitors.");
+                throw new NoMatchForFilterException("Our page did not have any visitors on the given day");
             }
             return query;
         }
-        throw new BadRequestException("The date of what you want is bad.");
+        throw new BadRequestException("The requested date is incorrect");
     }
 
 }

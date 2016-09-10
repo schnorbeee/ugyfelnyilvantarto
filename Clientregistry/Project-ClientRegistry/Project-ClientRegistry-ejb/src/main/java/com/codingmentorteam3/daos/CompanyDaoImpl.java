@@ -18,7 +18,7 @@ import javax.ejb.Stateless;
 @Stateless
 public class CompanyDaoImpl extends AbstractDao<Company> {
 
-    private static final String BADREQUESTMESSAGE = "We haven't got this company in database.";
+    private static final String BAD_REQUEST_MESSAGE = "We haven't got this company in database.";
 
     public CompanyDaoImpl() {
         super(Company.class);
@@ -59,11 +59,11 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         if (null != current) {
             List<Event> query = em.createNamedQuery("company.list.events.by.id", Event.class).setParameter("id", companyId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This company haven't any event.");
+                throw new EmptyListException("This company has not any event right now.");
             }
             return query;
         }
-        throw new BadRequestException(BADREQUESTMESSAGE);
+        throw new BadRequestException(BAD_REQUEST_MESSAGE);
     }
 
     public List<Project> getProjectsListByCompanyId(Long companyId) {
@@ -71,11 +71,11 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         if (null != current) {
             List<Project> query = em.createNamedQuery("company.list.projects.by.id", Project.class).setParameter("id", companyId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This company haven't any project.");
+                throw new EmptyListException("This company has not any projects right now.");
             }
             return query;
         }
-        throw new BadRequestException(BADREQUESTMESSAGE);
+        throw new BadRequestException(BAD_REQUEST_MESSAGE);
     }
 
     public List<ContactPerson> getContactersListByCompanyId(Long companyId) {
@@ -83,11 +83,11 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         if (null != current) {
             List<ContactPerson> query = em.createNamedQuery("company.list.contacters.by.id", ContactPerson.class).setParameter("id", companyId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("This company haven't any contact person.");
+                throw new EmptyListException("This company has not any contact persons right now.");
             }
             return query;
         }
-        throw new BadRequestException(BADREQUESTMESSAGE);
+        throw new BadRequestException(BAD_REQUEST_MESSAGE);
     }
 
     public List<Note> getNotesListByAllEventsByCompanyId(Long companyId) {
@@ -99,7 +99,7 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
             }
             return query;
         }
-        throw new BadRequestException(BADREQUESTMESSAGE);
+        throw new BadRequestException(BAD_REQUEST_MESSAGE);
     }
 
     //returns the list of companies, who did not have events in "n" months
@@ -107,7 +107,7 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         if (null != n) {
             List<Company> query = em.createNamedQuery("company.list.n.mounth.no.event", Company.class).setParameter("n", n).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("In this interval we haven't company who is inactive.");
+                throw new EmptyListException("In this interval there are no companies, who are inactive.");
             }
             return query;
         }

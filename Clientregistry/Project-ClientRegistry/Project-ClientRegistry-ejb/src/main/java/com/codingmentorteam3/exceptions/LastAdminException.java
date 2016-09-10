@@ -7,6 +7,7 @@ package com.codingmentorteam3.exceptions;
 public class LastAdminException extends RuntimeException { 
 
     public LastAdminException() {
+        //Default contructor
     }
 
     public LastAdminException(String message) {

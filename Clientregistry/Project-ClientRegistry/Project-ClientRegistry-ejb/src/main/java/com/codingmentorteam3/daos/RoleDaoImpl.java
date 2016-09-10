@@ -22,11 +22,11 @@ public class RoleDaoImpl extends AbstractDao<Role> {
         if (null != roleType) {
             List<Role> query = em.createNamedQuery("role.list.by.role.type", Role.class).setParameter("rtype", roleType).getResultList();
             if (query.isEmpty()) {
-                throw new NoMatchForFilterException("The results can not be found with this parameter: " + roleType);
+                throw new NoMatchForFilterException("No results can be found with the given parameter: " + roleType);
             }
             return query;
         }
-        throw new BadRequestException("The role type is not be specificated in this query.");
+        throw new BadRequestException("Incorrect role type");
     }
 
 }
