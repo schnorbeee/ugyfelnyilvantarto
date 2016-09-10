@@ -33,7 +33,7 @@ public class ProjectBean implements Serializable {
     
     @NotNull
     private StatusType status = DEFAULT_TYPE;
-    
+
     private Date startDate;
     
     private Date deadline;
