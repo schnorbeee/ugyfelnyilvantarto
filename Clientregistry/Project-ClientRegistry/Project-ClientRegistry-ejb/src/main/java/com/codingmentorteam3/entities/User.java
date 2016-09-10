@@ -16,20 +16,37 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.MapKeyEnumerated;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
-@Entity
-@Table(name = "user_table")
+@Entity(name = "user_table")
+@NamedQueries({
+    @NamedQuery(name = "user.by.username.filter", query = "SELECT u FROM user_table u WHERE u.username LIKE :name"),
+    @NamedQuery(name = "user.by.firstname.filter", query = "SELECT u FROM user_table u WHERE u.firstName LIKE :first"),
+    @NamedQuery(name = "user.by.lastname.filter", query = "SELECT u FROM user_table u WHERE u.lastName LIKE :last"),
+    @NamedQuery(name = "user.by.rank.filter", query = "SELECT u FROM user_table u WHERE u.rank LIKE :rank"), 
+    @NamedQuery(name = "user.list", query = "SELECT u FROM user_table u ORDER BY u.username"),
+    @NamedQuery(name = "user.by.username", query = "SELECT u FROM user_table u WHERE u.username =:name"),
+    //@NamedQuery(name = "user.num.item.per.page.by.id", query = "SELECT n FROM user_table u INNER JOIN u.numItemPerPage n WHERE u.id =:id AND n.table_enum =:num"),
+    @NamedQuery(name = "user.list.roles.by.id", query = "SELECT r FROM user_table u INNER JOIN u.roles r WHERE u.id =:id"),
+    @NamedQuery(name = "user.list.invitation.sent.by.id", query = "SELECT i FROM user_table u INNER JOIN u.invitationsSent i WHERE u.id =:id"),
+    @NamedQuery(name = "user.list.invitation.received.by.id", query = "SELECT i FROM user_table u INNER JOIN u.invitationsReceived i WHERE u.id =:id"),
+    @NamedQuery(name = "user.list.notes.by.id", query = "SELECT n FROM user_table u INNER JOIN u.notes n WHERE u.id =:id"),
+    @NamedQuery(name = "user.list.events.by.id", query = "SELECT e FROM user_table u INNER JOIN u.events e WHERE u.id =:id"),
+    @NamedQuery(name = "user.list.channels.by.id", query = "SELECT ch FROM user_table u INNER JOIN u.channels ch WHERE u.id =:id")
+})
 public class User extends Person implements Serializable {
 
     @Column(name = "username")
     private String username;
 
+    @XmlTransient
     private String password;
 
     private String avatar;
