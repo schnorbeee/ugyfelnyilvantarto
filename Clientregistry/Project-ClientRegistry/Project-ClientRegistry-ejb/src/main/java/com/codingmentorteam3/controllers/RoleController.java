@@ -5,8 +5,8 @@ import com.codingmentorteam3.daos.UserDaoImpl;
 import com.codingmentorteam3.entities.Role;
 import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.RoleType;
-import com.codingmentorteam3.exceptions.BadRequestException;
-import com.codingmentorteam3.exceptions.LastAdminException;
+import com.codingmentorteam3.exceptions.query.BadRequestException;
+import com.codingmentorteam3.exceptions.query.LastAdminException;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
@@ -33,9 +33,7 @@ public class RoleController {
                     return role;
                 }
             }
-            Role newRole = new Role(adminRole);
-            newRole.setId(current.getId());
-            newRole.setUsername(current.getUsername());
+            Role newRole = new Role(adminRole, current.getUsername());
             return roleDao.create(newRole);
         }
         throw new BadRequestException("This user not exist in the database.");

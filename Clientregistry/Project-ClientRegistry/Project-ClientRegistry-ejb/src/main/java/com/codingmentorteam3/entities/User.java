@@ -49,7 +49,6 @@ public class User extends Person implements Serializable {
     private String username;
 
     @XmlTransient
-    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
@@ -97,6 +96,7 @@ public class User extends Person implements Serializable {
         this.username = username;
     }
 
+    @XmlTransient
     public String getPassword() {
         return password;
     }
