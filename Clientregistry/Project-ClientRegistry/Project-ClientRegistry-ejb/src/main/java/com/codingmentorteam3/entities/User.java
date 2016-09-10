@@ -3,6 +3,8 @@ package com.codingmentorteam3.entities;
 import com.codingmentorteam3.enums.NumItemsPerPageType;
 import com.codingmentorteam3.enums.PageableTablesType;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -43,7 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class User extends Person implements Serializable {
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     private String username;
 
     @XmlTransient
@@ -159,7 +161,7 @@ public class User extends Person implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = super.hashCode();
         hash = 41 * hash + Objects.hashCode(this.username);
         hash = 41 * hash + Objects.hashCode(this.password);
         hash = 41 * hash + Objects.hashCode(this.numItemPerPage);
@@ -179,6 +181,9 @@ public class User extends Person implements Serializable {
             return false;
         }
         final User other = (User) obj;
+        if (!super.equals(other)) {
+            return false;
+        }
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }

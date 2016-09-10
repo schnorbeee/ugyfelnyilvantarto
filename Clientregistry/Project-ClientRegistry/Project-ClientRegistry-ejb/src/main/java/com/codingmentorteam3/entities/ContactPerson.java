@@ -21,6 +21,10 @@ public class ContactPerson extends Person implements Serializable {
     public ContactPerson() {
         //Default constructor
     }
+    
+    public ContactPerson(Company company) {
+        this.company = company;
+    }
 
     public Company getCompany() {
         return company;
