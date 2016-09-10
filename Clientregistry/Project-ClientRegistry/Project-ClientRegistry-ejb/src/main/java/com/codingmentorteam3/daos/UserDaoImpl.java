@@ -94,7 +94,7 @@ public class UserDaoImpl extends AbstractDao<User> {
         if (null != current) {
             List<NumItemsPerPageType> query = em.createNamedQuery("user.num.item.per.page.by.id", NumItemsPerPageType.class).setParameter("id", userId).getResultList();
             if (query.isEmpty()) {
-                throw new EmptyListException("Number of pages have not defined for this user: " + current.getUsername());
+                throw new EmptyListException("Number of pages was not defined for this user: " + current.getUsername());
             }
             return query;
         }

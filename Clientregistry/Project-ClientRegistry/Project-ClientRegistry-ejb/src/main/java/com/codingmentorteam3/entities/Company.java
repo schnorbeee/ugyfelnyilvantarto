@@ -22,7 +22,7 @@ import javax.persistence.OneToOne;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "company_table")
-@NamedNativeQuery(name = "company.list.n.mounth.no.event", query = "SELECT c FROM company_table c, event_table e WHERE c.company_id = e.company_id AND EXTRACT(MONTH FROM CURRENT_DATE) >= EXTRACT(MONTH FROM e.start_date) AND EXTRACT(MONTH FROM e.start_date) >= (EXTRACT(MONTH FROM CURRENT_DATE) - :n)")
+@NamedNativeQuery(name = "company.list.n.month.no.event", query = "SELECT c FROM company_table c, event_table e WHERE c.company_id = e.company_id AND EXTRACT(MONTH FROM CURRENT_DATE) >= EXTRACT(MONTH FROM e.start_date) AND EXTRACT(MONTH FROM e.start_date) >= (EXTRACT(MONTH FROM CURRENT_DATE) - :n)")
 @NamedQueries({
     @NamedQuery(name = "company.by.name.filter", query = "SELECT c FROM company_table c WHERE c.name LIKE :name"),
     @NamedQuery(name = "company.by.tax.number.filter", query = "SELECT c FROM company_table c WHERE c.taxNumber LIKE :tax"),
@@ -137,43 +137,6 @@ public class Company implements Serializable {
 
     public void setContacters(List<ContactPerson> contacters) {
         this.contacters = contacters;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.name);
-        hash = 53 * hash + Objects.hashCode(this.taxNumber);
-        hash = 53 * hash + Objects.hashCode(this.logo);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Company other = (Company) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.logo, other.logo)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.taxNumber, other.taxNumber)) {
-            return false;
-        }
-        return true;
     }
 
 }
