@@ -1,0 +1,44 @@
+BUGLIST FOR DEMO HTML PRESENTATION
+----------------------------------
+
+1. See pages as admin/user (1)
+    Only those people can change the see as property, 
+    who have more than one roles.
+    Alternative solution: The left sided menu shows
+    all the pages, can reached by everyone, hr-s are 
+    the dividers what pages can be used by a simple 
+    user, contact person or an admin.
+    
+2. Change avatar
+    Design is unstable, not well organized at changing 
+    the avatar button in the edit profile page.
+
+3. Events design
+    Design is unstable, not well organized at the events,
+    on all the pages that show a list of events.
+    
+4. Create footer
+    Create footer for all the pages. It could contain
+    the people who created the site, and has to add to 
+    it a top margin (e.g. 50px).
+    
+5. Page numbers
+    Missing the slide/page change/page number field on 
+    the bottom of every list shown.
+    
+6. Correct css
+    See over all the pages in search of css mistakes,
+    not well organized constructions.
+    
+7. Responsivity
+    Responsivity of the pages are defected.
+    
+8. Link revisit (1)
+    Check if links are pointing to the correct place.
+    
+9. Show comments
+    At an event we must show the already written comments.
+    There are no plans how to do it yet.
+    
+    
+(1) This might could be applied after the whole project is done.

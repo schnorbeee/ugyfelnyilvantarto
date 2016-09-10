@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <style>
+    </style>
+
+    <script rel="script" type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+    <script rel="script" type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script rel="script" type="text/javascript" src="../js/script.js"></script>
+
+    <title>Manage users</title>
+</head>
+<body>
+
+<!---------------
+MAIN CONTAINER
+---------------->
+<div class="container">
+
+        <!---------------
+        JUMBOTRON
+        ---------------->
+        <div class="jumbotron">
+            <div class="visitors-box pull-right">
+                Visitors today: <span id="visitors-today">123</span>
+            </div>
+            <div class="role-box pull-right">
+                See as:
+                <span id="role">
+                    <select>
+                        <option value="User">User</option>
+                        <option value="Contact">Contact</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </span>
+            </div>
+            <h1>ClientRegistry</h1>
+        </div>
+        <!---------------
+        END OF JUMBOTRON
+        ---------------->
+
+        <div class="row">
+
+            <!---------------
+            FIX LEFT-SIDE MENU
+            ---------------->
+            <div class="col-sm-2 col-sm-offset-1">
+                <img alt="profile-1" class="profile" src="../img/profile.png">
+                <a href="events.html" class="btn btn-default btn-color-default center-block btn-space">Home</a>
+                <a href="myinvitations.html" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
+                <a href="myevents.html" class="btn btn-default btn-color-default center-block btn-space">My events</a>
+                <a href="myprofile.html" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
+                <hr>
+                <a href="manageevents.html" class="btn btn-default btn-color-default center-block btn-space">Manage events</a>
+                <a href="manageprojects.html" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                <hr>
+                <a href="manageusers.html" class="btn btn-default btn-color-default center-block btn-space active">Manage users</a>
+                <a href="managecompanies.html" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                <hr>
+                <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
+            </div>
+            <!---------------
+            END OF FIX LEFT-SIDE MENU
+            ---------------->
+
+            <!---------------
+            MAIN CONTENT
+            ---------------->
+            <div class="col-sm-8">
+
+                <h2>Manage users</h2>
+                <h4>Users</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Rank</th>
+                            <th>Role</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="otherprofile.html">Username</a></td>
+                            <td><a href="mailto:">email@email.com</a></td>
+                            <td>First Last</td>
+                            <td>EMPLOYEE</td>
+                            <td>USER</td>
+                            <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="otherprofile.html">Username</a></td>
+                            <td><a href="mailto:">email@email.com</a></td>
+                            <td>First Last</td>
+                            <td>MANAGER</td>
+                            <td>ADMIN</td>
+                            <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="otherprofile.html">Username</a></td>
+                            <td><a href="mailto:">email@email.com</a></td>
+                            <td>First Last</td>
+                            <td>MANAGER</td>
+                            <td>USER</td>
+                            <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="otherprofile.html">Username</a></td>
+                            <td><a href="mailto:">email@email.com</a></td>
+                            <td>First Last</td>
+                            <td>VISITOR</td>
+                            <td>USER</td>
+                            <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="otherprofile.html">Username</a></td>
+                            <td><a href="mailto:">email@email.com</a></td>
+                            <td>First Last</td>
+                            <td>BOSS</td>
+                            <td>ADMIN</td>
+                            <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="otherprofile.html">Username</a></td>
+                            <td><a href="mailto:">email@email.com</a></td>
+                            <td>First Last</td>
+                            <td>MANAGER</td>
+                            <td>USER</td>
+                            <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="otherprofile.html">Username</a></td>
+                            <td><a href="mailto:">email@email.com</a></td>
+                            <td>First Last</td>
+                            <td>EMLOYEE</td>
+                            <td>ADMIN</td>
+                            <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <!---------------
+            END OF MAIN CONTENT
+            ---------------->
+
+        </div>
+    </div>
+    <!---------------
+    END OF MAIN CONTAINER
+    ---------------->
+
+</body>
+</html>
