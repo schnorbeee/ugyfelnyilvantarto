@@ -1,6 +1,7 @@
 package com.codingmentorteam3.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -39,28 +40,30 @@ public class Company implements Serializable {
     @Column(name = "company_id")
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @Column(name = "tax_number")
+    @Column(name = "tax_number", nullable = false)
     private String taxNumber;
 
+    @Column(nullable = false)
     private String logo;
 
     @OneToMany(mappedBy = "company", targetEntity = Event.class)
-    private List<Event> events;
+    private List<Event> events = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "company_project_table",
             joinColumns = @JoinColumn(name = "company_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
 
     @OneToMany(mappedBy = "company", targetEntity = ContactPerson.class)
-    private List<ContactPerson> contacters;
+    private List<ContactPerson> contacters = new ArrayList<>();
 
     public Company() {
         //Default constructor
@@ -135,6 +138,43 @@ public class Company implements Serializable {
 
     public void setContacters(List<ContactPerson> contacters) {
         this.contacters = contacters;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + Objects.hashCode(this.taxNumber);
+        hash = 53 * hash + Objects.hashCode(this.logo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Company other = (Company) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.logo, other.logo)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.taxNumber, other.taxNumber)) {
+            return false;
+        }
+        return true;
     }
 
 }
