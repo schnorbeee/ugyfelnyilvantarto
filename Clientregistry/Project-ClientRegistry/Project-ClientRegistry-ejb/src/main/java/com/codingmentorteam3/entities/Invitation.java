@@ -1,22 +1,31 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.InvitationDTO;
 import com.codingmentorteam3.enums.FeedbackType;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "invitation_table")
+@NamedQueries({
+    @NamedQuery(name = "invitation.by.feedback.filter", query = "SELECT i FROM invitation_table i WHERE i.feedback LIKE :feedback"),
+    @NamedQuery(name = "invitation.list", query = "SELECT i FROM invitation_table i"),
+    @NamedQuery(name = "invitation.list.by.event.id", query = "SELECT i FROM invitation_table i INNER JOIN i.event e WHERE e.id =:id"),
+    @NamedQuery(name = "invitation.list.by.event.id.and.feedback", query = "SELECT i FROM invitation_table i INNER JOIN i.event e WHERE e.id =:id AND i.feedback =:feedback")
+})
 public class Invitation implements Serializable {
 
     @Id
@@ -26,6 +35,7 @@ public class Invitation implements Serializable {
 
     private String message;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private FeedbackType feedback;
 
@@ -51,14 +61,6 @@ public class Invitation implements Serializable {
         this.event = event;
         this.sender = sender;
         this.receiver = receiver;
-    }
-    
-    public Invitation(InvitationDTO invitationDTO) {
-        this.message = invitationDTO.getMessage();
-        this.feedback = invitationDTO.getFeedback();
-        this.event = invitationDTO.getEvent();
-        this.sender = invitationDTO.getSender();
-        this.receiver = invitationDTO.getReceiver();
     }
 
     public Long getId() {

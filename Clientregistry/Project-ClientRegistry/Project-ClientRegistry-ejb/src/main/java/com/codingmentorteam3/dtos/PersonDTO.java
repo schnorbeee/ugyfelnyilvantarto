@@ -1,11 +1,8 @@
 package com.codingmentorteam3.dtos;
 
-import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.entities.Person;
 import com.codingmentorteam3.enums.RankType;
 import java.util.Objects;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *

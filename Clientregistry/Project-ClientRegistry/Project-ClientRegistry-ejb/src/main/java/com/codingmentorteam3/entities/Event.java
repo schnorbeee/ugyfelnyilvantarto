@@ -1,6 +1,5 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.EventDTO;
 import com.codingmentorteam3.enums.EventType;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -27,6 +28,13 @@ import javax.persistence.TemporalType;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "event_table")
+@NamedQueries({
+    @NamedQuery(name = "event.by.title.filter", query = "SELECT e FROM event_table e WHERE e.title LIKE :title"),
+    @NamedQuery(name = "event.by.type.filter", query = "SELECT e FROM event_table e WHERE e.type LIKE :type"),
+    @NamedQuery(name = "event.list", query = "SELECT e FROM event_table e ORDER BY e.startDate"),
+    @NamedQuery(name = "event.list.users.by.id", query = "SELECT u FROM event_table e INNER JOIN e.users u WHERE e.id =:id"),
+    @NamedQuery(name = "event.list.notes.by.id", query = "SELECT n FROM event_table e INNER JOIN e.notes n WHERE e.id =:id")
+})
 public class Event implements Serializable {
 
     @Id
@@ -76,16 +84,6 @@ public class Event implements Serializable {
         this.description = description;
         this.type = type;
         this.company = company;
-    }
-    
-    public Event(EventDTO eventDTO) {
-        this.address = eventDTO.getAddress();
-        this.title = eventDTO.getTitle();
-        this.startDate = eventDTO.getStartDate();
-        this.endDate = eventDTO.getEndDate();
-        this.description = eventDTO.getDescription();
-        this.type = eventDTO.getType();
-        this.company = eventDTO.getCompany();
     }
 
     public Long getId() {

@@ -1,17 +1,18 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.ContactPersonDTO;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "contactperson_table")
+@NamedQuery(name = "contact.person.channels.by.id", query = "SELECT ch FROM contactperson_table c INNER JOIN c.channels ch WHERE c.id =:id")
 public class ContactPerson extends Person implements Serializable {
 
     @ManyToOne(targetEntity = Company.class)
@@ -24,10 +25,6 @@ public class ContactPerson extends Person implements Serializable {
     
     public ContactPerson(Company company) {
         this.company = company;
-    }
-    
-    public ContactPerson(ContactPersonDTO contactPersonDTO) {
-        this.company = contactPersonDTO.getCompany();
     }
 
     public Company getCompany() {

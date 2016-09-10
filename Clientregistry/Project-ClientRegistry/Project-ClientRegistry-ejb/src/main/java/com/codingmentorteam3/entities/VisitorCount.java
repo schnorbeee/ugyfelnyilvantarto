@@ -1,6 +1,5 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.VisitorCountDTO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -9,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "visitors_table")
+@NamedQuery(name = "visitors.of.day", query = "SELECT v.count FROM visitors_table v WHERE v.day =:day")
 public class VisitorCount implements Serializable {
 
     @Id
@@ -31,17 +32,12 @@ public class VisitorCount implements Serializable {
     private Date day;
 
     public VisitorCount() {
-        //Default contructor
+        //Default constructor
     }
 
     public VisitorCount(int count, Date day) {
         this.count = count;
         this.day = day;
-    }
-    
-    public VisitorCount(VisitorCountDTO visitorCountDTO) {
-        this.count = visitorCountDTO.getCount();
-        this.day = visitorCountDTO.getDay();
     }
 
     public Long getId() {

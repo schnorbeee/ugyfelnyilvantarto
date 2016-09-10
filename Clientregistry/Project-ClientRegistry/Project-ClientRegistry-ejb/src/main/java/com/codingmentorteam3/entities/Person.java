@@ -1,6 +1,5 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.dtos.PersonDTO;
 import com.codingmentorteam3.enums.RankType;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -50,12 +49,6 @@ public class Person implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.rank = rank;
-    }
-    
-    public Person(PersonDTO personDTO) {
-        this.firstName = personDTO.getFirstName();
-        this.lastName = personDTO.getLastName();
-        this.rank = personDTO.getRank();
     }
 
     public Long getId() {
