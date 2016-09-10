@@ -1,8 +1,8 @@
 package com.codingmentorteam3.daos;
 
 import com.codingmentorteam3.entities.VisitorCount;
-import com.codingmentorteam3.exceptions.BadRequestException;
-import com.codingmentorteam3.exceptions.NoMatchForFilterException;
+import com.codingmentorteam3.exceptions.query.BadRequestException;
+import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.Date;
 import javax.ejb.Stateless;
 

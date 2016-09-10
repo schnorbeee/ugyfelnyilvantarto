@@ -5,9 +5,9 @@ import com.codingmentorteam3.entities.ContactPerson;
 import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.Project;
-import com.codingmentorteam3.exceptions.BadRequestException;
-import com.codingmentorteam3.exceptions.EmptyListException;
-import com.codingmentorteam3.exceptions.NoMatchForFilterException;
+import com.codingmentorteam3.exceptions.query.BadRequestException;
+import com.codingmentorteam3.exceptions.query.EmptyListException;
+import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.List;
 import javax.ejb.Stateless;
 
