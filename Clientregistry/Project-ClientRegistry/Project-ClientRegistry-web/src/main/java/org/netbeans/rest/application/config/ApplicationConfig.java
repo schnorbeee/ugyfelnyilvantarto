@@ -25,6 +25,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.codingmentorteam3.resource.AuthResource.class);
+        resources.add(com.codingmentorteam3.resource.UserResource.class);
     }
 
 }
