@@ -20,6 +20,8 @@ public class PersonBean implements Serializable {
     
     private static final RankType DEFAULT_RANK = RankType.VISITOR;
     
+    private static final String DEFAULT_AVATAR = "";
+    
     @NotNull 
     @Size(min = 2, max = 30)
     protected String firstName;
@@ -31,13 +33,19 @@ public class PersonBean implements Serializable {
     @NotNull
     protected RankType rank = DEFAULT_RANK;
 
+    @NotNull
+    private String avatar = DEFAULT_AVATAR;
+    
     public PersonBean() {
         // Default constructor
     }
 
-    public PersonBean(String firstName, String lastName) {
+    public PersonBean(String firstName, String lastName, RankType rank, String avatar) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.rank = rank;
+        this.avatar = avatar;
+        
     }
 
     public String getFirstName() {
@@ -64,12 +72,21 @@ public class PersonBean implements Serializable {
         this.rank = rank;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 29 * hash + Objects.hashCode(this.firstName);
         hash = 29 * hash + Objects.hashCode(this.lastName);
         hash = 29 * hash + Objects.hashCode(this.rank);
+        hash = 29 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -91,6 +108,9 @@ public class PersonBean implements Serializable {
         if (!Objects.equals(this.lastName, other.lastName)) {
             return false;
         }
+        if (!Objects.equals(this.avatar, other.avatar)) {
+            return false;
+        }
         if (this.rank != other.rank) {
             return false;
         }
@@ -99,7 +119,7 @@ public class PersonBean implements Serializable {
 
     @Override
     public String toString() {
-        return "PersonBean{" + "firstName=" + firstName + ", lastName=" + lastName + ", rank=" + rank + '}';
+        return "PersonBean{" + "firstName=" + firstName + ", lastName=" + lastName + ", rank=" + rank + ", avatar=" + avatar + '}';
     }
-    
+
 }

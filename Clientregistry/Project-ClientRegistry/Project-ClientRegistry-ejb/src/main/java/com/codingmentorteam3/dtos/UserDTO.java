@@ -9,19 +9,14 @@ import java.util.Objects;
  */
 public class UserDTO extends PersonDTO {
     
-    private static final String DEFAULT_AVATAR = "";
-
     private String username;
-
-    private String avatar = DEFAULT_AVATAR;
-
+    
     public UserDTO() {
         // Default constructor
     }
 
     public UserDTO(User user) {
         this.username = user.getUsername();
-        this.avatar = user.getAvatar();
     }
 
     public String getUsername() {
@@ -32,19 +27,10 @@ public class UserDTO extends PersonDTO {
         this.username = username;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
     @Override
     public int hashCode() {
         int hash = super.hashCode();
         hash = 23 * hash + Objects.hashCode(this.username);
-        hash = 23 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -66,15 +52,12 @@ public class UserDTO extends PersonDTO {
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
-        if (!Objects.equals(this.avatar, other.avatar)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "UserDTO{" + "username=" + username + ", avatar=" + avatar + '}';
+        return "UserDTO{" + "username=" + username + '}';
     }
     
 }
