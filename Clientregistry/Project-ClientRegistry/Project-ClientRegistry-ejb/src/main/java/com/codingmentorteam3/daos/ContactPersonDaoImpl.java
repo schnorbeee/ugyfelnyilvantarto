@@ -2,8 +2,8 @@ package com.codingmentorteam3.daos;
 
 import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.ContactPerson;
-import com.codingmentorteam3.exceptions.BadRequestException;
-import com.codingmentorteam3.exceptions.EmptyListException;
+import com.codingmentorteam3.exceptions.query.BadRequestException;
+import com.codingmentorteam3.exceptions.query.EmptyListException;
 import java.util.List;
 import javax.ejb.Stateless;
 

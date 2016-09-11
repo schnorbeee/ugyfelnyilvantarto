@@ -2,8 +2,8 @@ package com.codingmentorteam3.daos;
 
 import com.codingmentorteam3.entities.Role;
 import com.codingmentorteam3.enums.RoleType;
-import com.codingmentorteam3.exceptions.BadRequestException;
-import com.codingmentorteam3.exceptions.NoMatchForFilterException;
+import com.codingmentorteam3.exceptions.query.BadRequestException;
+import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.List;
 import javax.ejb.Stateless;
 
