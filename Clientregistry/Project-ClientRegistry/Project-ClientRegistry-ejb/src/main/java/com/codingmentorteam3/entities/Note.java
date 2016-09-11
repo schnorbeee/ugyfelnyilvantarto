@@ -22,9 +22,10 @@ public class Note implements Serializable {
     @Column(name = "note_id")
     private Long id;
 
+    @Column(length = 30)
     private String label;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1500)
     private String content;
 
     @ManyToOne(targetEntity = User.class)

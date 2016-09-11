@@ -82,9 +82,9 @@ public class UserDaoImpl extends AbstractDao<User> {
         if (null != username) {
             User query = em.createNamedQuery("user.by.username", User.class).setParameter("name", username).getSingleResult();
             if (null != query) {
-                throw new EmptyListException("User could not found with this username: " + username);
+                return query;
             }
-            return query;
+            throw new EmptyListException("User could not found with this username: " + username);
         }
         throw new BadRequestException("Username has not been defined correctly.");
     }

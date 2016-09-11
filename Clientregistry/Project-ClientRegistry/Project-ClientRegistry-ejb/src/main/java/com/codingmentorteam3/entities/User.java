@@ -1,10 +1,9 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.beans.UserBean;
 import com.codingmentorteam3.enums.NumItemsPerPageType;
 import com.codingmentorteam3.enums.PageableTablesType;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -51,42 +50,45 @@ public class User extends Person implements Serializable {
     @XmlTransient
     private String password;
 
-    @Column(nullable = false)
-    private String avatar;
-
     @MapKeyEnumerated(EnumType.STRING)
     @ElementCollection
     @CollectionTable(name = "num_item_per_page_table")
     @MapKeyColumn(name = "table_enum")
     @Column(name = "num_enum")
-    private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap<>(PageableTablesType.class);
+    private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage;
 
     @OneToMany(mappedBy = "username", targetEntity = Role.class)
-    private List<Role> roles = new ArrayList<>();
+    private List<Role> roles;
 
     @OneToMany(mappedBy = "sender", targetEntity = Invitation.class)
-    private List<Invitation> invitationsSent = new ArrayList<>();
+    private List<Invitation> invitationsSent;
 
     @OneToMany(mappedBy = "receiver", targetEntity = Invitation.class)
-    private List<Invitation> invitationsReceived = new ArrayList<>();
+    private List<Invitation> invitationsReceived;
 
     @OneToMany(mappedBy = "user", targetEntity = Note.class)
-    private List<Note> notes = new ArrayList<>();
+    private List<Note> notes;
 
     @ManyToMany
     @JoinTable(name = "user_event_table",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))
-    private List<Event> events = new ArrayList<>();
+    private List<Event> events;
 
     public User() {
         //Default constructor
     }
 
-    public User(String username, String password, String avatar) {
+    public User(UserBean user) {
+        super(user.getFirstName(), user.getLastName(), user.getRank(), user.getAvatar());
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+    }
+
+    
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.avatar = avatar;
     }
 
     public String getUsername() {
@@ -97,20 +99,13 @@ public class User extends Person implements Serializable {
         this.username = username;
     }
 
+    @XmlTransient
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public Map<PageableTablesType, NumItemsPerPageType> getNumItemPerPage() {
@@ -167,7 +162,6 @@ public class User extends Person implements Serializable {
         hash = 41 * hash + Objects.hashCode(this.username);
         hash = 41 * hash + Objects.hashCode(this.password);
         hash = 41 * hash + Objects.hashCode(this.numItemPerPage);
-        hash = 41 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -190,9 +184,6 @@ public class User extends Person implements Serializable {
             return false;
         }
         if (!Objects.equals(this.password, other.password)) {
-            return false;
-        }
-        if (!Objects.equals(this.avatar, other.avatar)) {
             return false;
         }
         if (!Objects.equals(this.numItemPerPage, other.numItemPerPage)) {

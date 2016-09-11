@@ -46,7 +46,7 @@ public class Event implements Serializable {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String title;
 
     @Temporal(TemporalType.DATE)
@@ -57,6 +57,7 @@ public class Event implements Serializable {
     @Column(name = "end_date")
     private Date endDate;
 
+    @Column(length = 1500)
     private String description;
 
     @Enumerated(EnumType.STRING)

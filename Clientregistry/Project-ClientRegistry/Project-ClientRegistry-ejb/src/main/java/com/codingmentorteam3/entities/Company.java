@@ -1,7 +1,6 @@
 package com.codingmentorteam3.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -40,7 +39,7 @@ public class Company implements Serializable {
     @Column(name = "company_id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String name;
 
     @OneToOne
@@ -54,16 +53,16 @@ public class Company implements Serializable {
     private String logo;
 
     @OneToMany(mappedBy = "company", targetEntity = Event.class)
-    private List<Event> events = new ArrayList<>();
+    private List<Event> events;
 
     @ManyToMany
     @JoinTable(name = "company_project_table",
             joinColumns = @JoinColumn(name = "company_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
-    private List<Project> projects = new ArrayList<>();
+    private List<Project> projects;
 
     @OneToMany(mappedBy = "company", targetEntity = ContactPerson.class)
-    private List<ContactPerson> contacters = new ArrayList<>();
+    private List<ContactPerson> contacters;
 
     public Company() {
         //Default constructor
