@@ -4,6 +4,7 @@ import com.codingmentorteam3.entities.Role;
 import com.codingmentorteam3.enums.RoleType;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
 import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 
@@ -30,11 +31,8 @@ public class RoleDaoImpl extends AbstractDao<Role> {
     }
     
     public List<Role> getRolesList() {
-        List<Role> query = em.createNamedQuery("role.list", Role.class).getResultList();
-//        if (query.isEmpty()) {
-//            throw new EmptyListException("There are no users to show.");
-//        }
-        return query;
+        // DELETE AT MERGE
+        return new ArrayList<>();
     }
 
 }

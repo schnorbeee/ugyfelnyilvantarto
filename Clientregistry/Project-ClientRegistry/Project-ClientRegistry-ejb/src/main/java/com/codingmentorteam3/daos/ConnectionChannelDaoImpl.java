@@ -1,6 +1,7 @@
 package com.codingmentorteam3.daos;
 
 import com.codingmentorteam3.entities.ConnectionChannel;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 
@@ -16,11 +17,8 @@ public class ConnectionChannelDaoImpl extends AbstractDao<ConnectionChannel> {
     }
     
     public List<ConnectionChannel> getConnectionChannelsList() {
-        List<ConnectionChannel> query = em.createNamedQuery("connectionChannel.list", ConnectionChannel.class).getResultList();
-//        if (query.isEmpty()) {
-//            throw new EmptyListException("There are no users to show.");
-//        }
-        return query;
+        // DELETE AT MERGE
+        return new ArrayList<>();
     }
 
 }

@@ -20,7 +20,7 @@
             <h:panelGrid columns="2">
                 <h:outputLabel value="#{userController.entity.username}"/>
             </h:panelGrid>
-            <clientregistry:profile-detail person="#{personController.entity}"/>
+            <clientregistry:profile-detail person="#{userController.entity}"/>
         </h:form>
         <h:link value="Back to List" outcome="cd-list" /><br/>
         <hr/>

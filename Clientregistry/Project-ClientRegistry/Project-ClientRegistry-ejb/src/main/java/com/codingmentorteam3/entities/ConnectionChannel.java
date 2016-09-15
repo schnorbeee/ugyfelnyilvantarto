@@ -12,17 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "connectionchannel_table")
-@NamedQueries(
-        @NamedQuery(name = "connectionChannel.list", query = "SELECT c FROM connectionchannel_table c")
-)
 public class ConnectionChannel implements Serializable {
 
     @Id

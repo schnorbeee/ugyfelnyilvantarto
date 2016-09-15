@@ -3,20 +3,16 @@ package com.codingmentorteam3.controllers;
 import com.codingmentorteam3.beans.ConnectionChannelBean;
 import com.codingmentorteam3.beans.RoleBean;
 import com.codingmentorteam3.beans.UserBean;
-import com.codingmentorteam3.controllers.general.PageableEntityController;
 import com.codingmentorteam3.daos.ConnectionChannelDaoImpl;
 import com.codingmentorteam3.daos.RoleDaoImpl;
 import com.codingmentorteam3.daos.UserDaoImpl;
-import com.codingmentorteam3.dtos.UserDTO;
 import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Role;
 import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.ConnectionChannelType;
-import com.codingmentorteam3.enums.RoleType;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.util.UtilBean;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -30,7 +26,7 @@ import javax.ws.rs.core.Response;
 @BeanValidation
 @SessionScoped
 @ManagedBean(name = "userController")
-public class UserController extends PageableEntityController<User> {
+public class UserController {
 
     @Inject
     private UserDaoImpl userDao;
@@ -82,42 +78,6 @@ public class UserController extends PageableEntityController<User> {
     public void changePassword(String oldPassword, UserBean user) {
         LOG.info("UserController.changePassword()");
         // TODO
-    }
-
-    @Override
-    public List<User> getEntities() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    protected User loadEntity(Long entityId) {
-        return new User();
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    protected User doUpdateEntity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    protected void doPersistEntity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    protected String getNoEntityMessage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getListPage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getNewItemOutcome() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
