@@ -1,4 +1,4 @@
-package org.netbeans.rest.application.config;
+package com.codingmentorteam3.config;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -25,7 +25,6 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.codingmentorteam3.resource.AuthResource.class);
-        resources.add(com.codingmentorteam3.resource.UserResource.class);
     }
 
 }

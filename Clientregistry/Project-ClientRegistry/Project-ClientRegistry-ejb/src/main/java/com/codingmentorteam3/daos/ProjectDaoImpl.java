@@ -8,6 +8,7 @@ import com.codingmentorteam3.exceptions.query.EmptyListException;
 import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -42,12 +43,11 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
         return em.createNamedQuery("project.list", Project.class).getResultList();
     }
 
-    public List<Project> getProjectsList() {
-        List<Project> query = em.createNamedQuery("project.list", Project.class).getResultList();
-        if (query.isEmpty()) {
-            throw new EmptyListException("There are no projects to show.");
-        }
-        return query;
+    public List<Project> getProjectsList(int limit, int offset) {
+        TypedQuery<Project> query = em.createNamedQuery("project.list", Project.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
     public List<Company> getCompaniesListByProjectId(Long projectId) {

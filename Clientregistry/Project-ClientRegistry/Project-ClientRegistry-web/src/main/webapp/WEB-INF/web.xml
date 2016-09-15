@@ -4,25 +4,42 @@
 	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	 version="3.1">
-    <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
-    <security-role>  
-        <role-name>ADMIN</role-name>  
-    </security-role>  
-<!--    <security-constraint>  
-        <web-resource-collection>  
-            <web-resource-name>all</web-resource-name>  
-            <url-pattern>/*</url-pattern>  
-            <http-method>GET</http-method>  
-        </web-resource-collection>  
-        <auth-constraint>  
-            <role-name>ADMIN</role-name>  
-        </auth-constraint>  
-    </security-constraint>  -->
-    <login-config>  
-        <auth-method>BASIC</auth-method>  
-    </login-config> 
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>secureDomain</realm-name>
+        <form-login-config>
+            <form-login-page>/login.html</form-login-page>
+            <form-error-page>/error.html</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <role-name>USER</role-name>
+    </security-role>
+    <security-role>
+       <role-name>ADMIN</role-name>
+    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Admin user</web-resource-name>
+            <url-pattern>/private/admin.html</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>User</web-resource-name>
+            <description/>
+            <url-pattern>/private/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ADMIN</role-name>
+            <role-name>USER</role-name>
+        </auth-constraint>
+    </security-constraint>
 </web-app>

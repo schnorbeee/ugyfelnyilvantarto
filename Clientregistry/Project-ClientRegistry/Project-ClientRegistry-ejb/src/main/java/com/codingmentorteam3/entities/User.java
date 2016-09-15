@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -27,6 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "user_table")
+@AttributeOverride(name = "user_id", column = @Column(name = "person_id"))
 @NamedQueries({
     @NamedQuery(name = "user.by.username.filter", query = "SELECT u FROM user_table u WHERE u.username LIKE :name"),
     @NamedQuery(name = "user.by.firstname.filter", query = "SELECT u FROM user_table u WHERE u.firstName LIKE :first"),
@@ -44,7 +48,7 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class User extends Person implements Serializable {
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @XmlTransient
@@ -57,7 +61,7 @@ public class User extends Person implements Serializable {
     @Column(name = "num_enum")
     private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage;
 
-    @OneToMany(mappedBy = "username", targetEntity = Role.class)
+    @OneToMany(mappedBy = "user", targetEntity = Role.class, cascade = CascadeType.REMOVE)
     private List<Role> roles;
 
     @OneToMany(mappedBy = "sender", targetEntity = Invitation.class)

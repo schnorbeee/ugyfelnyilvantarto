@@ -11,13 +11,12 @@ import com.codingmentorteam3.exceptions.query.BadRequestException;
 import com.codingmentorteam3.exceptions.query.EmptyListException;
 import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.List;
-import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
-@Stateless
 public class UserDaoImpl extends AbstractDao<User> {
 
     private static final String BAD_REQUEST_MESSAGE = "User is not in the database.";
@@ -70,21 +69,21 @@ public class UserDaoImpl extends AbstractDao<User> {
         return em.createNamedQuery("user.list", User.class).getResultList();
     }
 
-    public List<User> getUsersList() {
-        List<User> query = em.createNamedQuery("user.list", User.class).getResultList();
-        if (query.isEmpty()) {
-            throw new EmptyListException("There are no users to show.");
-        }
-        return query;
+    public List<User> getUsersList(int limit, int offset) {
+        TypedQuery<User> query = em.createNamedQuery("user.list", User.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
     public User getUserByUsername(String username) {
         if (null != username) {
-            User query = em.createNamedQuery("user.by.username", User.class).setParameter("name", username).getSingleResult();
-            if (null != query) {
-                return query;
+            try {
+                TypedQuery<User> query = em.createNamedQuery("user.by.username", User.class).setParameter("name", username);                
+                return query.getSingleResult();
+            } catch (Exception ex) {
+                return null;
             }
-            throw new EmptyListException("User could not found with this username: " + username);
         }
         throw new BadRequestException("Username has not been defined correctly.");
     }

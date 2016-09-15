@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -26,6 +27,7 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "person_id")
     protected Long id;
 
     @Column(name = "first_name", nullable = false, length = 30)
@@ -39,9 +41,9 @@ public class Person implements Serializable {
     protected RankType rank;
     
     @Column(nullable = false)
-    private String avatar;
+    protected String avatar;
 
-    @OneToMany(mappedBy = "owner", targetEntity = ConnectionChannel.class)
+    @OneToMany(mappedBy = "owner", targetEntity = ConnectionChannel.class, cascade = CascadeType.REMOVE)
     protected List<ConnectionChannel> channels = new ArrayList<>();
 
     public Person() {

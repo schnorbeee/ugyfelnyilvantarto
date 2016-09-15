@@ -40,12 +40,16 @@ public class PersonBean implements Serializable {
         // Default constructor
     }
 
+    public PersonBean(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public PersonBean(String firstName, String lastName, RankType rank, String avatar) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.rank = rank;
         this.avatar = avatar;
-        
     }
 
     public String getFirstName() {

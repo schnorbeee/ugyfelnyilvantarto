@@ -10,17 +10,13 @@ import java.util.Objects;
  */
 public class PersonDTO {
     
-    private static final RankType DEFAULT_RANK = RankType.VISITOR;
-    
-    private static final String DEFAULT_AVATAR = "";
-    
     protected String firstName;
 
     protected String lastName;
 
-    protected RankType rank = DEFAULT_RANK;
+    protected RankType rank;
     
-    private String avatar = DEFAULT_AVATAR;
+    protected String avatar;
 
 
     public PersonDTO() {

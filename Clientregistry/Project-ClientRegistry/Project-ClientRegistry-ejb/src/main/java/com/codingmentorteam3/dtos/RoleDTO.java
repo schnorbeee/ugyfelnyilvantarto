@@ -1,6 +1,7 @@
 package com.codingmentorteam3.dtos;
 
 import com.codingmentorteam3.entities.Role;
+import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.RoleType;
 import java.util.Objects;
 
@@ -22,7 +23,7 @@ public class RoleDTO {
 
     public RoleDTO(Role role) {
         this.type = role.getRoleType();
-        this.username = role.getUsername();
+        this.username = role.getUser().getUsername();
     }
 
     public RoleType getType() {

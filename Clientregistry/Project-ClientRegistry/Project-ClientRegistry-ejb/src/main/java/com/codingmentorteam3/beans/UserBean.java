@@ -3,6 +3,7 @@ package com.codingmentorteam3.beans;
 import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.constraints.Password;
 import com.codingmentorteam3.constraints.Username;
+import com.codingmentorteam3.enums.RankType;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.enterprise.context.SessionScoped;
@@ -28,6 +29,18 @@ public class UserBean extends PersonBean implements Serializable {
 
     public UserBean() {
         // Default constructor
+    }
+
+    public UserBean(String username, String password, String firstName, String lastName, RankType rank, String avatar) {
+        super(firstName, lastName, rank, avatar);
+        this.username = username;
+        this.password = password;
+    }
+
+    public UserBean(String username, String password, String firstName, String lastName) {
+        super(firstName, lastName);
+        this.username = username;
+        this.password = password;
     }
 
     public UserBean(String username, String password) {

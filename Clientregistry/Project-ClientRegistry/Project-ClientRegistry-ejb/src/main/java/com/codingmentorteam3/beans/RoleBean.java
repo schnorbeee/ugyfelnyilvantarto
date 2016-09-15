@@ -1,6 +1,7 @@
 package com.codingmentorteam3.beans;
 
 import com.codingmentorteam3.annotations.Validate;
+import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.RoleType;
 import java.io.Serializable;
 import java.util.Objects;
@@ -23,13 +24,13 @@ public class RoleBean implements Serializable {
     private RoleType type = DEFAULT_ROLE;
     
     @NotNull
-    private String username;
+    private User username;
 
     public RoleBean() {
         // Default constructor
     }
 
-    public RoleBean(String username) {
+    public RoleBean(RoleType type, User username) {
         this.username = username;
     }
 
@@ -41,11 +42,11 @@ public class RoleBean implements Serializable {
         this.type = type;
     }
 
-    public String getUsername() {
+    public User getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(User username) {
         this.username = username;
     }
 
