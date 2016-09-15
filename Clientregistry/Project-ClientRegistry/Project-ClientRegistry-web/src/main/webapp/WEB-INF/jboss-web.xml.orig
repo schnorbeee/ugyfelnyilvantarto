@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jboss-web version="8.0" xmlns="http://www.jboss.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee http://www.jboss.org/schema/jbossas/jboss-web_8_0.xsd">
 <<<<<<< HEAD
-  <security-domain>secureDomain</security-domain>
+  <!--<security-domain>secureDomain</security-domain>-->
 =======
     <!--<security-domain>secureDomain</security-domain>-->
->>>>>>> FE-feature-xhtmls
+>>>>>>> a7459c03e8098a61ad273867ba9b06bcce52d055
 </jboss-web>
