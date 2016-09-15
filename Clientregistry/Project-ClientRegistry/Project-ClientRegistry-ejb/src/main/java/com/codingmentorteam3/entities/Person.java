@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
  *
  * @author norbeee sch.norbeee@gmail.com
  */
-@Entity
+@Entity(name = "person_table")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person implements Serializable {
 
@@ -37,6 +37,9 @@ public class Person implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     protected RankType rank;
+    
+    @Column(nullable = false)
+    protected String avatar;
 
     @OneToMany(mappedBy = "owner", targetEntity = ConnectionChannel.class)
     protected List<ConnectionChannel> channels = new ArrayList<>();
@@ -45,12 +48,13 @@ public class Person implements Serializable {
         //Default constructor
     }
 
-    public Person(String firstName, String lastName, RankType rank) {
+    public Person(String firstName, String lastName, RankType rank, String avatar) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.rank = rank;
+        this.avatar = avatar;
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -83,6 +87,14 @@ public class Person implements Serializable {
         this.rank = rank;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public List<ConnectionChannel> getChannels() {
         return channels;
     }
@@ -98,6 +110,7 @@ public class Person implements Serializable {
         hash = 19 * hash + Objects.hashCode(this.firstName);
         hash = 19 * hash + Objects.hashCode(this.lastName);
         hash = 19 * hash + Objects.hashCode(this.rank);
+        hash = 19 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -117,6 +130,9 @@ public class Person implements Serializable {
             return false;
         }
         if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
+        if (!Objects.equals(this.avatar, other.avatar)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {

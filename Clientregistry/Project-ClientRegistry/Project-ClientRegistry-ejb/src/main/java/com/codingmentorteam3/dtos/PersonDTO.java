@@ -10,13 +10,13 @@ import java.util.Objects;
  */
 public class PersonDTO {
     
-    private static final RankType DEFAULT_RANK = RankType.VISITOR;
-
     protected String firstName;
 
     protected String lastName;
 
-    protected RankType rank = DEFAULT_RANK;
+    protected RankType rank;
+    
+    protected String avatar;
 
     public PersonDTO() {
         // Default constructor
@@ -26,6 +26,7 @@ public class PersonDTO {
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
         this.rank = person.getRank();
+        this.avatar = person.getAvatar();
     }
 
     public String getFirstName() {
@@ -52,12 +53,21 @@ public class PersonDTO {
         this.rank = rank;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 29 * hash + Objects.hashCode(this.firstName);
         hash = 29 * hash + Objects.hashCode(this.lastName);
         hash = 29 * hash + Objects.hashCode(this.rank);
+        hash = 29 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -79,6 +89,9 @@ public class PersonDTO {
         if (!Objects.equals(this.lastName, other.lastName)) {
             return false;
         }
+        if (!Objects.equals(this.avatar, other.avatar)) {
+            return false;
+        }
         if (this.rank != other.rank) {
             return false;
         }
@@ -87,7 +100,7 @@ public class PersonDTO {
 
     @Override
     public String toString() {
-        return "PersonDTO{" + "firstName=" + firstName + ", lastName=" + lastName + ", rank=" + rank + '}';
+        return "PersonDTO{" + "firstName=" + firstName + ", lastName=" + lastName + ", rank=" + rank + ", avatar=" + avatar + '}';
     }
     
 }
