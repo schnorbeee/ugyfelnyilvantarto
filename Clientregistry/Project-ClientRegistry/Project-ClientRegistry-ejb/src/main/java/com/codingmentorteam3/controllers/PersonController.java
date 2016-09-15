@@ -4,6 +4,7 @@ import com.codingmentorteam3.controllers.general.PageableEntityController;
 import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Person;
 import com.codingmentorteam3.interceptors.BeanValidation;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,8 +18,9 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "personController")
 public class PersonController extends PageableEntityController<Person> {
     
-    public void /*List<ConnectionChannel>*/ getConnectionChannels() {
+    public List<ConnectionChannel> getConnectionChannels() {
         // TODO
+        return new ArrayList<>();
     }
 
     @Override

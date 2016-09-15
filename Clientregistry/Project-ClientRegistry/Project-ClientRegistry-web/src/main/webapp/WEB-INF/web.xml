@@ -12,7 +12,7 @@
     <security-role>  
         <role-name>ADMIN</role-name>  
     </security-role>  
-    <!--    <security-constraint>  
+<!--        <security-constraint>  
         <web-resource-collection>  
             <web-resource-name>all</web-resource-name>  
             <url-pattern>/*</url-pattern>  
