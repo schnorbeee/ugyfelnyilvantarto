@@ -17,7 +17,11 @@ import javax.validation.constraints.NotNull;
 @ValidConnectionChannelValue
 @SessionScoped
 @ManagedBean(name="connectionChannelBean")
+<<<<<<< HEAD
+public class ConnectionChannelBean implements Serializable {
+=======
 public class ConnectionChannelBean {
+>>>>>>> BE-feature-controllers
     
     @NotNull
     private ConnectionChannelType type;

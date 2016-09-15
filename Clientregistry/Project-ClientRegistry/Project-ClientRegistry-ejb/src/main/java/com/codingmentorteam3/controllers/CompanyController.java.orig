@@ -5,14 +5,22 @@ import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+<<<<<<< HEAD
 import javax.faces.bean.SessionScoped;
+=======
+import javax.faces.bean.RequestScoped;
+>>>>>>> BE-feature-controllers
 
 /**
  *
  * @author istvan.mosonyi
  */
 @BeanValidation
+<<<<<<< HEAD
 @SessionScoped
+=======
+@RequestScoped
+>>>>>>> BE-feature-controllers
 @ManagedBean(name = "companyController")
 public class CompanyController extends PageableEntityController<Company> {
 
@@ -23,8 +31,12 @@ public class CompanyController extends PageableEntityController<Company> {
 
     @Override
     protected Company loadEntity(Long entityId) {
+<<<<<<< HEAD
         return new Company();
         // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+=======
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> BE-feature-controllers
     }
 
     @Override
@@ -51,6 +63,10 @@ public class CompanyController extends PageableEntityController<Company> {
     public String getNewItemOutcome() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+<<<<<<< HEAD
+=======
+
     
+>>>>>>> BE-feature-controllers
     
 }

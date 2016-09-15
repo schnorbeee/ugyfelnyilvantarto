@@ -1,11 +1,10 @@
 package com.codingmentorteam3.beans;
 
 import com.codingmentorteam3.annotations.Validate;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Validate
 @SessionScoped
 @ManagedBean(name = "visitorCount")
-public class VisitorCountBean implements Serializable {
+public class VisitorCountBean {
     
     private static final Integer DEFAULT_COUNT = 0;
     

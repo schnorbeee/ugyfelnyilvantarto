@@ -80,6 +80,7 @@
                                     <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Register" action="#{userController.registrate(user, connectionChannel)}"/>
                                 </div>
                             </div>
+<<<<<<< HEAD
                         </div>
                     </h:form>
                 </div>
@@ -91,10 +92,6 @@
                         <div class="col-sm-6">
                             <h1 id="cmt3outer">CodingMentorTeam<span id="cmt3inner">3</span></h1>
                         </div>
-<<<<<<< HEAD
-                        <div class="col-sm-4 col-sm-offset-4">
-                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Register" action="#{userController.registration(user)}"/>
-=======
                         <div class="col-sm-6">
                             <ul class="list-group">
                                 <li class="list-unstyled cmt3list">Norbert Schmelhaus <span class="cmt3email"> <a href="mailto:sch.norbeee@gmail.com">&lt;sch.norbeee@gmail.com&gt;</a></span></li>
@@ -102,9 +99,12 @@
                                 <li class="list-unstyled cmt3list">Dániel Bicsák <span class="cmt3email"> <a href="mailto:bicsak.dani@gmail.com">&lt;bicsak.dani@gmail.com&gt;</a></span></li>
                                 <li class="list-unstyled cmt3list">István Mosonyi <span class="cmt3email"> <a href="mailto:mosonyi15p@yahoo.com">&lt;mosonyi15p@yahoo.com&gt;</a></span></li>
                             </ul>
->>>>>>> a7459c03e8098a61ad273867ba9b06bcce52d055
                         </div>
                     </div>
+=======
+                        </div>
+                    </h:form>
+>>>>>>> BE-feature-controllers
                 </div>
             </footer>
             

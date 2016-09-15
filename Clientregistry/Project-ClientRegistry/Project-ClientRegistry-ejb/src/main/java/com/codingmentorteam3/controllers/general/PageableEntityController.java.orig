@@ -4,11 +4,22 @@ import java.util.List;
 
 /**
  *
+<<<<<<< HEAD
  * @author istvan.mosonyi
+=======
+ * @author norbeee sch.norbeee@gmail.com
+>>>>>>> BE-feature-controllers
  * @param <T>
  */
 public abstract class PageableEntityController<T> implements JSFController {
 
+<<<<<<< HEAD
+    private final static Integer DEFAULT_LIMIT = 25;
+    private Integer limit = DEFAULT_LIMIT;
+    private Integer offset = 0;
+    
+    private Long entityId;
+=======
     private final static Integer DEFAULT_LIMIT = 10;
     
     private Integer limit = DEFAULT_LIMIT;
@@ -17,6 +28,7 @@ public abstract class PageableEntityController<T> implements JSFController {
     
     private Long entityId;
     
+>>>>>>> BE-feature-controllers
     private T entity;
     
     public Integer getLimit() {
@@ -74,6 +86,11 @@ public abstract class PageableEntityController<T> implements JSFController {
     }
     
     public abstract List<T> getEntities();
+<<<<<<< HEAD
+    protected abstract T loadEntity(Long entityId);
+    protected abstract T doUpdateEntity();
+    protected abstract void doPersistEntity();
+=======
     
     protected abstract T loadEntity(Long entityId);
     
@@ -81,6 +98,7 @@ public abstract class PageableEntityController<T> implements JSFController {
     
     protected abstract void doPersistEntity();
     
+>>>>>>> BE-feature-controllers
     protected abstract String getNoEntityMessage();
     
 }

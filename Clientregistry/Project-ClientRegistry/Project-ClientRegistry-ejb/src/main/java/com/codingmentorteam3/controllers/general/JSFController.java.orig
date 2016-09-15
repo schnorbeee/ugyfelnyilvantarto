@@ -1,0 +1,30 @@
+package com.codingmentorteam3.controllers.general;
+
+/**
+ *
+<<<<<<< HEAD
+ * @author istvan.mosonyi
+ */
+public interface JSFController {
+    
+    void onPreRender();
+
+    String getDetailHeader();
+    
+    String getListPage();
+    
+=======
+ * @author norbeee sch.norbeee@gmail.com
+ */
+public interface JSFController {
+
+    void onPreRender();
+
+    String getDetailHeader();
+
+    String getListPage();
+
+>>>>>>> BE-feature-controllers
+    String getNewItemOutcome();
+    
+}

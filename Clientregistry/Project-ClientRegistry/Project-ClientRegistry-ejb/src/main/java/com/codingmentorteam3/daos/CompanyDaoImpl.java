@@ -10,6 +10,7 @@ import com.codingmentorteam3.exceptions.query.EmptyListException;
 import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -46,12 +47,11 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         return em.createNamedQuery("company.list", Company.class).getResultList();
     }
 
-    public List<Company> getCompaniesList() {
-        List<Company> query = em.createNamedQuery("company.list", Company.class).getResultList();
-        if (query.isEmpty()) {
-            throw new EmptyListException("The company list is empty now.");
-        }
-        return query;
+    public List<Company> getCompaniesList(int limit, int offset){
+        TypedQuery<Company> query = em.createNamedQuery("company.list", Company.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
     public List<Event> getEventsListByCompanyId(Long companyId) {

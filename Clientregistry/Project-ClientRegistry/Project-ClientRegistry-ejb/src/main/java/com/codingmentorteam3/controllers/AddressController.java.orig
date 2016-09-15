@@ -1,5 +1,10 @@
 package com.codingmentorteam3.controllers;
 
+<<<<<<< HEAD
+import com.codingmentorteam3.interceptors.BeanValidation;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+=======
 import com.codingmentorteam3.beans.AddressBean;
 import com.codingmentorteam3.daos.AddressDaoImpl;
 import com.codingmentorteam3.dtos.AddressDTO;
@@ -11,16 +16,23 @@ import javax.inject.Inject;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+>>>>>>> BE-feature-controllers
 
 /**
  *
- * @author norbeee sch.norbeee@gmail.com
+ * @author istvan.mosonyi
  */
 @BeanValidation
+<<<<<<< HEAD
+@SessionScoped
+=======
 @RequestScoped
+>>>>>>> BE-feature-controllers
 @ManagedBean(name = "addressController")
-public class AddressController {
+public class AddressController { // Kell-e ennek ez az öröklődés?
 
+<<<<<<< HEAD
+=======
     @Inject
     private AddressDaoImpl addressDao;
 
@@ -81,4 +93,5 @@ public class AddressController {
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
 
+>>>>>>> BE-feature-controllers
 }

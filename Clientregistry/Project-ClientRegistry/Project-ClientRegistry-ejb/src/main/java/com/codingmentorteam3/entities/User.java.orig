@@ -63,8 +63,13 @@ public class User extends Person implements Serializable {
     @Column(name = "num_enum")
     private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap<>(PageableTablesType.class);
 
+<<<<<<< HEAD
+    @OneToMany(mappedBy = "user", targetEntity = Role.class)
+    private List<Role> roles;
+=======
     @OneToMany(mappedBy = "user", targetEntity = Role.class, cascade = CascadeType.REMOVE)
     private List<Role> roles = new ArrayList<>();
+>>>>>>> BE-feature-controllers
 
     @OneToMany(mappedBy = "sender", targetEntity = Invitation.class)
     private List<Invitation> invitationsSent = new ArrayList<>();
@@ -84,17 +89,16 @@ public class User extends Person implements Serializable {
     public User() {
         //Default constructor
     }
+    
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public User(UserBean user) {
         super(user.getFirstName(), user.getLastName(), user.getRank(), user.getAvatar());
         this.username = user.getUsername();
         this.password = user.getPassword();
-    }
-
-    
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
     }
 
     public String getUsername() {
@@ -105,7 +109,6 @@ public class User extends Person implements Serializable {
         this.username = username;
     }
 
-    @XmlTransient
     public String getPassword() {
         return password;
     }

@@ -64,10 +64,15 @@ public class RoleController {
                     return Response.status(Response.Status.FOUND).entity(dto).type(MediaType.APPLICATION_JSON).build();
                 }
             }
+<<<<<<< HEAD
+            Role newRole = new Role(adminRole, current);
+            return roleDao.create(newRole);
+=======
             Role newRole = new Role(adminRole, currentUser);
             roleService.createRole(newRole);
             RoleDTO dto = new RoleDTO(newRole);
             return Response.status(Response.Status.CREATED).entity(dto).type(MediaType.APPLICATION_JSON).build();
+>>>>>>> BE-feature-controllers
         }
         throw new BadRequestException("This user not exist in the database.");
     }
@@ -80,10 +85,15 @@ public class RoleController {
                 if (roleService.getRolesListByRoleType(adminRole).size() == 1) {
                     throw new LastAdminException("This admin is last admin in database. So you can't delete his role.");
                 }
+<<<<<<< HEAD
+                if (role.getUser().getUsername().equals(username)) {
+                    return roleDao.delete(role);
+=======
                 if (current.equals(role.getUser())) {
                     roleService.deleteRole(role);
                     RoleDTO dto = new RoleDTO(role);
                     return Response.status(Response.Status.ACCEPTED).entity(dto).type(MediaType.APPLICATION_JSON).build();
+>>>>>>> BE-feature-controllers
                 }
             }
             throw new BadRequestException("This user haven't admin privilege.");

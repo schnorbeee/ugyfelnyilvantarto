@@ -69,11 +69,20 @@ public class UserDaoImpl extends AbstractDao<User> {
         return em.createNamedQuery("user.list", User.class).getResultList();
     }
 
+<<<<<<< HEAD
+    public List<User> getUsersList() {
+        List<User> query = em.createNamedQuery("user.list", User.class).getResultList();
+//        if (query.isEmpty()) {
+//            throw new EmptyListException("There are no users to show.");
+//        }
+        return query;
+=======
     public List<User> getUsersList(int limit, int offset) {
         TypedQuery<User> query = em.createNamedQuery("user.list", User.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
+>>>>>>> BE-feature-controllers
     }
 
     public User getUserByUsername(String username) {
