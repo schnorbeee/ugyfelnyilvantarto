@@ -4,6 +4,7 @@ import com.codingmentorteam3.entities.Role;
 import com.codingmentorteam3.enums.RoleType;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
 import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 
@@ -27,6 +28,11 @@ public class RoleDaoImpl extends AbstractDao<Role> {
             return query;
         }
         throw new BadRequestException("Incorrect role type");
+    }
+    
+    public List<Role> getRolesList() {
+        // DELETE AT MERGE
+        return new ArrayList<>();
     }
 
 }

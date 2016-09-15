@@ -39,7 +39,7 @@ public class Person implements Serializable {
     protected RankType rank;
     
     @Column(nullable = false)
-    private String avatar;
+    protected String avatar;
 
     @OneToMany(mappedBy = "owner", targetEntity = ConnectionChannel.class)
     protected List<ConnectionChannel> channels = new ArrayList<>();
@@ -54,7 +54,7 @@ public class Person implements Serializable {
         this.rank = rank;
         this.avatar = avatar;
     }
-
+    
     public Long getId() {
         return id;
     }

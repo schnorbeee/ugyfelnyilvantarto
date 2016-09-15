@@ -22,7 +22,7 @@ public class RoleDTO {
 
     public RoleDTO(Role role) {
         this.type = role.getRoleType();
-        this.username = role.getUsername();
+        this.username = role.getUser().getUsername();
     }
 
     public RoleType getType() {

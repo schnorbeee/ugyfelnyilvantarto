@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class User extends Person implements Serializable {
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @XmlTransient
@@ -57,7 +57,7 @@ public class User extends Person implements Serializable {
     @Column(name = "num_enum")
     private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage;
 
-    @OneToMany(mappedBy = "username", targetEntity = Role.class)
+    @OneToMany(mappedBy = "user", targetEntity = Role.class)
     private List<Role> roles;
 
     @OneToMany(mappedBy = "sender", targetEntity = Invitation.class)
@@ -79,7 +79,7 @@ public class User extends Person implements Serializable {
         //Default constructor
     }
 
-    public User(UserBean user) {
+    public User(String username, String password) {
         super(user.getFirstName(), user.getLastName(), user.getRank(), user.getAvatar());
         this.username = user.getUsername();
         this.password = user.getPassword();
@@ -91,6 +91,12 @@ public class User extends Person implements Serializable {
         this.password = password;
     }
 
+    public User(UserBean user) {
+        super(user.getFirstName(), user.getLastName(), user.getRank(), user.getAvatar());
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+    }
+
     public String getUsername() {
         return username;
     }
@@ -99,7 +105,6 @@ public class User extends Person implements Serializable {
         this.username = username;
     }
 
-    @XmlTransient
     public String getPassword() {
         return password;
     }

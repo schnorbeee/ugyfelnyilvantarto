@@ -9,8 +9,10 @@ import java.util.Objects;
  */
 public class UserDTO extends PersonDTO {
     
+    private static final String DEFAULT_AVATAR = "";
+
     private String username;
-    
+
     public UserDTO() {
         // Default constructor
     }

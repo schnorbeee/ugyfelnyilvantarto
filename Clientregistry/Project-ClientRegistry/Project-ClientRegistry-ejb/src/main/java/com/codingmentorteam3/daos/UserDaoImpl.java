@@ -72,9 +72,9 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     public List<User> getUsersList() {
         List<User> query = em.createNamedQuery("user.list", User.class).getResultList();
-        if (query.isEmpty()) {
-            throw new EmptyListException("There are no users to show.");
-        }
+//        if (query.isEmpty()) {
+//            throw new EmptyListException("There are no users to show.");
+//        }
         return query;
     }
 

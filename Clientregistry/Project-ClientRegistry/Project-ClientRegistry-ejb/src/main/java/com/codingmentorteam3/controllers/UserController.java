@@ -1,68 +1,83 @@
 package com.codingmentorteam3.controllers;
 
+import com.codingmentorteam3.beans.ConnectionChannelBean;
+import com.codingmentorteam3.beans.RoleBean;
 import com.codingmentorteam3.beans.UserBean;
+import com.codingmentorteam3.daos.ConnectionChannelDaoImpl;
+import com.codingmentorteam3.daos.RoleDaoImpl;
 import com.codingmentorteam3.daos.UserDaoImpl;
-import com.codingmentorteam3.dtos.UserDTO;
+import com.codingmentorteam3.entities.ConnectionChannel;
+import com.codingmentorteam3.entities.Role;
 import com.codingmentorteam3.entities.User;
+import com.codingmentorteam3.enums.ConnectionChannelType;
+import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.util.UtilBean;
-import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
-import javax.enterprise.context.SessionScoped;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
+@BeanValidation
 @SessionScoped
 @ManagedBean(name = "userController")
-public class UserController implements Serializable {
-    
+public class UserController {
+
     @Inject
     private UserDaoImpl userDao;
-    
+
     @Inject
     private UtilBean utilBean;
 
-    public Response login(@Context SecurityContext ctx,
-            @Context HttpServletRequest request, User user) throws ServletException {
-        request.getSession(true);
-        request.login(user.getUsername(), user.getPassword());
-        return Response.ok().build();
-    }
-    
-    public Response logout(@Context SecurityContext ctx, @Context HttpServletRequest request,
-            UserDTO dto) throws ServletException {
-        request.getSession(true);
-        request.logout();
-        return Response.ok().build();
-    }
-    
-    public Response registration(UserBean regUser) throws NoSuchAlgorithmException {
+    @Inject
+    private RoleDaoImpl roleDao;
+
+    @Inject
+    private ConnectionChannelDaoImpl connectionChannelDao;
+
+    private static final Logger LOG = Logger.getLogger(UserController.class.getName());
+
+    public String registrate(UserBean regUser, ConnectionChannelBean regChannal) throws NoSuchAlgorithmException {
+        LOG.info("UserController.registrate()");
         User newUser = new User(regUser);
-        User user = userDao.getUserByUsername(newUser.getUsername());
-        if(null == user) {
-            newUser.setPassword(utilBean.sha256coding(newUser.getPassword()));
-            userDao.create(newUser);
-            return Response.ok(new UserDTO(newUser)).build();
+        for(User user : userDao.getUsersList()) {
+            if(newUser.equals(user)) {
+                return Response.status(Response.Status.PRECONDITION_FAILED).build().toString();
+            }
         }
-        return Response.status(Response.Status.PRECONDITION_FAILED).build();
+        ConnectionChannel newConnectionChannel = new ConnectionChannel(ConnectionChannelType.EMAIL, regChannal.getValue(), newUser);
+        for(ConnectionChannel connectionChannel : connectionChannelDao.getConnectionChannelsList()) {
+            if(newConnectionChannel.equals(connectionChannel)) {
+                return Response.status(Response.Status.PRECONDITION_FAILED).build().toString();
+            }
+        }
+        RoleBean newRoleBean = new RoleBean(newUser);
+        Role newRole = new Role(newRoleBean);
+        for(Role role : roleDao.getRolesList()) {
+            if(newRole.equals(role)) {
+                return Response.status(Response.Status.PRECONDITION_FAILED).build().toString();
+            }
+        }
+        newUser.setPassword(utilBean.sha256coding(newUser.getPassword()));
+        userDao.create(newUser);
+        connectionChannelDao.create(newConnectionChannel);
+        roleDao.create(newRole);
+        return "SUCCESS";
     }
     
-    public Response registration(User regUser) throws NoSuchAlgorithmException {
-        try {
-            userDao.getUserByUsername(regUser.getUsername());
-            return Response.status(Response.Status.PRECONDITION_FAILED).build();
-        } catch (Exception ex) {
-            regUser.setPassword(utilBean.sha256coding(regUser.getPassword()));
-            userDao.create(regUser);
-            return Response.ok(new UserDTO(regUser)).build();
-        }
+    public void update(UserBean user) {
+        LOG.info("UserController.update()");
+        // TODO
     }
+    
+    public void changePassword(String oldPassword, UserBean user) {
+        LOG.info("UserController.changePassword()");
+        // TODO
+    }
+
 }
