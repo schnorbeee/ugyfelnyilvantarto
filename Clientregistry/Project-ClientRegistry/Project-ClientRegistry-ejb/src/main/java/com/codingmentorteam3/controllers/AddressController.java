@@ -1,7 +1,6 @@
 package com.codingmentorteam3.controllers;
 
 import com.codingmentorteam3.beans.AddressBean;
-import com.codingmentorteam3.controllers.general.PageableEntityController;
 import com.codingmentorteam3.daos.AddressDaoImpl;
 import com.codingmentorteam3.dtos.AddressDTO;
 import com.codingmentorteam3.entities.Address;

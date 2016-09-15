@@ -5,11 +5,10 @@ import com.codingmentorteam3.constraints.ValidStartAndEndDate;
 import com.codingmentorteam3.entities.Address;
 import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.enums.EventType;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,7 +21,7 @@ import javax.validation.constraints.Size;
 @ValidStartAndEndDate
 @SessionScoped
 @ManagedBean(name = "event")
-public class EventBean implements Serializable {
+public class EventBean {
     
     private static final EventType DEFAULT_TYPE = EventType.MEETING;
     

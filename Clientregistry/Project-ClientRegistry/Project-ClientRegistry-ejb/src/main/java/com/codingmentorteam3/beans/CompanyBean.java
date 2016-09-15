@@ -2,10 +2,9 @@ package com.codingmentorteam3.beans;
 
 import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.entities.Address;
-import java.io.Serializable;
 import java.util.Objects;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -17,7 +16,7 @@ import javax.validation.constraints.Size;
 @Validate
 @SessionScoped
 @ManagedBean(name = "company")
-public class CompanyBean implements Serializable {
+public class CompanyBean {
     
     private static final String DEFAULT_LOGO = "";
     

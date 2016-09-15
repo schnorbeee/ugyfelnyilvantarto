@@ -4,10 +4,9 @@ import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.constraints.ValidConnectionChannelValue;
 import com.codingmentorteam3.entities.Person;
 import com.codingmentorteam3.enums.ConnectionChannelType;
-import java.io.Serializable;
 import java.util.Objects;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -18,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @ValidConnectionChannelValue
 @SessionScoped
 @ManagedBean(name="connectionChannelBean")
-public class ConnectionChannelBean implements Serializable {
+public class ConnectionChannelBean {
     
     @NotNull
     private ConnectionChannelType type;
