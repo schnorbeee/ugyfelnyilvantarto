@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <composite:interface>
+        <composite:attribute name="isEmpty" required="true" />
+        <composite:attribute name="noEntityMessage" required="true" />
+        <composite:attribute name="newItemOutcome" required="true"/>
+        <composite:attribute name="paginationOutcome" required="true"/>
+        <composite:attribute name="entityType" required="true"/>
+        <composite:attribute name="offset" required="true"/>
+        <composite:attribute name="limit" required="true"/>
+    </composite:interface>
+
+    <composite:implementation>
+        <c:choose>
+            <c:when test="#{cc.attrs.isEmpty}">
+                <br/>
+                <h:outputLabel value="#{cc.attrs.noEntityMessage}"/>
+            </c:when>
+            <c:otherwise>
+                <composite:insertChildren />
+                <c:if test="${cc.attrs.offset > 0}">
+                    <h:link value="Previous #{cc.attrs.limit}" outcome="#{cc.attrs.paginationOutcome}">
+                        <f:param name="offset" value="#{cc.attrs.offset - cc.attrs.limit}" />
+                    </h:link>
+                </c:if> 
+                <h:link value="Next #{cc.attrs.limit}" outcome="#{cc.attrs.paginationOutcome}">
+                    <f:param name="offset" value="#{cc.attrs.offset + cc.attrs.limit}" />
+                </h:link>
+            </c:otherwise>
+        </c:choose>
+    </composite:implementation>
+    
+</html>

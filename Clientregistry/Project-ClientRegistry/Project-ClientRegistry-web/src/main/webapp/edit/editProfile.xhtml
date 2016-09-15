@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <style>
+        </style>
+
+        <script rel="script" type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+        <script rel="script" type="text/javascript" src="js/script.js"></script>
+
+        <title>Create Event</title>
+    </h:head>
+    <h:body>
+
+        <!--
+        MAIN CONTAINER
+        -->
+        <div class="container">
+
+            <!--
+            JUMBOTRON
+            -->
+            <div class="jumbotron">
+                <div class="visitors-box pull-right">
+                    Visitors today: <span id="visitors-today">123</span>
+                </div>
+                <h1>ClientRegistry</h1>
+            </div>
+            <!--
+            END OF JUMBOTRON
+            -->
+
+            <div class="row">
+                <!--
+                FIX LEFT-SIDE MENU
+                -->
+                <div class="col-sm-2 col-sm-offset-1">
+                    <img alt="profile-1" class="profile" src="img/profile.png"/>
+                    <a href="events.html" class="btn btn-default btn-color-default center-block btn-space">Home</a>
+                    <a href="myinvitations.html" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
+                    <a href="myevents.html" class="btn btn-default btn-color-default center-block btn-space">My events</a>
+                    <a href="myprofile.html" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
+                    <hr/>
+                    <a href="manageevents.html" class="btn btn-default btn-color-default center-block btn-space active">Manage events</a>
+                    <a href="manageprojects.html" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                    <hr/>
+                    <a href="manageusers.html" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
+                    <a href="managecompanies.html" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                    <hr/>
+                    <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
+                </div>
+                <!--
+                END OF FIX LEFT-SIDE MENU
+                -->
+
+                <!-- 
+                EDIT MY DATA
+                -->
+                <h4>Edit personal info</h4>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h:form class="form-horizontal">
+                            <div class="form-group">
+                                <h:outputLabel value="First name"/>
+                                <h:inputText id="firstName" value="#{user.firstName}" class="form-control" required="true" label="John" requiredMessage="First name required">
+                                    <f:validateLength minimum="2" maximum="30"/>
+                                </h:inputText>
+                                <h:message id="firstNameMessage" for="firstName" style="color:red"/>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Last name"/>
+                                <h:inputText id="lastName" value="#{user.lastName}" class="form-control" required="true" label="Smith" requiredMessage="Last name required">
+                                    <f:validateLength minimum="2" maximum="30"/>
+                                </h:inputText>
+                                <h:message id="lastNameMessage" for="lastName" style="color:red"/>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Username"/>
+                                <h:inputText id="username" value="#{user.username}" class="form-control" required="true" label="Username" requiredMessage="Username required">
+                                    <f:validator validatorId="UsernameValidator"/>
+                                </h:inputText>
+                                <h:message id="usernameMessage" for="username" style="color:red"/>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        <a href="myprofile.html" class="btn btn-primary center-block btn-color-register">Cancel</a>
+                                    </div>
+                                    <div class="col-sm-4 col-sm-offset-4">
+                                        <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Save" action="#{userController.update(user)}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+                <!--
+                END OF EDIT MY DATA
+                -->
+
+                <hr/>
+
+                <!---------------
+                CHANGE PASSWORD
+                ---------------->
+                <h4>Change password</h4>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h:form class="form-horizontal">
+                            <div class="form-group">
+                                <h:outputLabel for="oldPassword" value="Old password:"/>
+                                <h:inputSecret id="oldPassword" value="#{oldPassword}" class="form-control" required="true" label="*******" requiredMessage="Old password required"/>
+                                <h:message id="oldPasswordMessage" for="oldPassword" style="color:red"/>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Password"/>
+                                <h:inputSecret id="password" value="#{user.password}" class="form-control" required="true" label="*******" requiredMessage="New password required">
+                                    <f:validator validatorId="PasswordValidator"/>
+                                    <f:attribute name="confirmPassword" value="#{confirmPassword}"/>
+                                </h:inputSecret>
+                                <h:message id="passwordMessage" for="password" style="color:red"/>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Confirm password"/>
+                                <h:inputSecret id="confirmPassword" value="#{user.password}" class="form-control" required="true" label="*******" requiredMessage="Confirm new password required" binding="#{confirmPassword}"/>
+                                <h:message id="confirmPasswordMessage" for="confirmPassword" style="color:red"/>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        <a href="myprofile.html" class="btn btn-primary center-block btn-color-register">Cancel</a>
+                                    </div>
+                                    <div class="col-sm-4 col-sm-offset-4">
+                                        <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Save" action="#{userController.changePassword(oldPassword, user)}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+                <!---------------
+                END OF CHANGE PASSWORD
+                ---------------->
+
+                <hr/>
+
+                <!---------------
+                EDIT CONNECTION CHANNELS
+                ---------------->
+                <h4>Edit connection channels</h4>
+                <clientregistry:connection-channel-list 
+                    newItemOutcome="#{connectionChannelController.newItemOutcome}" 
+                    paginationOutcome="connectionChannels"   
+                    entityType="ConnectionChannel"
+                    isEmpty="#{empty connectionChannelController.entities}"
+                    limit="#{connectionChannelController.limit}"
+                    offset="#{connectionChannelController.offset}" 
+                    noEntityMessage="#{connectionChannelController.noEntityMessage}">
+
+                    <h:dataTable value="#{personController.connectionChannels}" var="cd">
+                        <h:column>    				
+                            <f:facet name="header">Title</f:facet>    				
+                                #{connectionChannel.type}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Price</f:facet>
+                                #{connectionChannel.value}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Edit</f:facet>
+                            <h:link value="Edit" outcome="composite/connectionChannel.xhtml">
+                                <f:param name="entityId" value="#{connectionChannel.id}"/>
+                            </h:link>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Delete</f:facet>
+                            <h:link value="Delete" outcome="composite/connectionChannel.xhtml">
+                                <f:param name="entityId" value="#{connectionChannel.id}"/>
+                            </h:link>
+                        </h:column>
+                    </h:dataTable>
+
+                </clientregistry:connection-channel-listt>
+
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Type</th>
+                            <th>Link</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
+                            <td>Email</td>
+                            <td><a href="mailto:">email@email.com</a></td>
+                            <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-phone-square" aria-hidden="true"></i></td>
+                            <td>Telephone</td>
+                            <td><a href="tel:">+36 20 123 4567</a></td>
+                            <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-facebook-square" aria-hidden="true"></i></td>
+                            <td>Facebook</td>
+                            <td><a href="facebook.com/">/face.book.name</a></td>
+                            <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-twitter" aria-hidden="true"></i></td>
+                            <td>Twitter</td>
+                            <td><a href="twitter.com/">/twitter.name</a></td>
+                            <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td><i class="" aria-hidden="true"></i></td>
+                            <td>
+                                <select>
+                                    <option value="Email">Email</option>
+                                    <option value="Telephone">Telephone</option>
+                                    <option value="Facebook">Facebook</option>
+                                    <option value="Twitter">Twitter</option>
+                                    <option value="LinkedIn">LinkedIn</option>
+                                    <option value="Youtube">Youtube</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="url" class="form-control" id="new-ct" placeholder="connection link">
+                            </td>
+                            <td></td>
+                            <td><a href="#"><i class="fa fa-check" aria-hidden="true"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!---------------
+                END OF EDIT CONNECTION CHANNELS
+                ---------------->
+
+            </div>
+
+            <footer class="footer panel-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h1 id="cmt3outer">CodingMentorTeam<span id="cmt3inner">3</span></h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-group">
+                                <li class="list-unstyled cmt3list">Norbert Schmelhaus <span class="cmt3email"> <a href="mailto:sch.norbeee@gmail.com">&lt;sch.norbeee@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Zsolt Nagy <span class="cmt3email"> <a href="mailto:zsolt023.bme.vik@gmail.com">&lt;zsolt023.bme.vik@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Dániel Bicsák <span class="cmt3email"> <a href="mailto:bicsak.dani@gmail.com">&lt;bicsak.dani@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">István Mosonyi <span class="cmt3email"> <a href="mailto:mosonyi15p@yahoo.com">&lt;mosonyi15p@yahoo.com&gt;</a></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </h:body>
+</html>

@@ -15,7 +15,7 @@
 
         <script rel="script" type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
         <script rel="script" type="text/javascript" src="js/script.js"></script>
-    
+
         <title>Registration</title>
     </h:head>
     <h:body>
@@ -51,10 +51,6 @@
                             </h:inputText>
                             <h:message id="lastNameMessage" for="lastName" style="color:red"/>
                         </div>
-                    </h:form>
-                </div>
-                <div class="col-md-3">
-                    <h:form>
                         <div class="form-group">
                             <h:outputLabel value="Username"/>
                             <h:inputText id="username" value="#{user.username}" class="form-control" required="true" label="Username" requiredMessage="Username is required">
@@ -75,20 +71,38 @@
                             <h:inputSecret id="confirmPassword" value="#{user.password}" class="form-control" required="true" label="*******" requiredMessage="Confirm password is required" binding="#{confirmPassword}"/>
                             <h:message id="confirmPasswordMessage" for="confirmPassword" style="color:red"/>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="col-sm-4">
+                                    <a href="login.xhtml" class="btn btn-primary center-block btn-color-register">Cancel</a>
+                                </div>
+                                <div class="col-sm-4 col-sm-offset-4">
+                                    <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Register" action="#{userController.registrate(user, connectionChannel)}"/>
+                                </div>
+                            </div>
+                        </div>
                     </h:form>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <div class="col-sm-4">
-                            <a href="login.html" class="btn btn-primary center-block btn-color-register">Cancel</a>
+            </div>
+            
+            <footer class="footer panel-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h1 id="cmt3outer">CodingMentorTeam<span id="cmt3inner">3</span></h1>
                         </div>
-                        <div class="col-sm-4 col-sm-offset-4">
-                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Register" action="#{userController.register()}"/>
+                        <div class="col-sm-6">
+                            <ul class="list-group">
+                                <li class="list-unstyled cmt3list">Norbert Schmelhaus <span class="cmt3email"> <a href="mailto:sch.norbeee@gmail.com">&lt;sch.norbeee@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Zsolt Nagy <span class="cmt3email"> <a href="mailto:zsolt023.bme.vik@gmail.com">&lt;zsolt023.bme.vik@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Dániel Bicsák <span class="cmt3email"> <a href="mailto:bicsak.dani@gmail.com">&lt;bicsak.dani@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">István Mosonyi <span class="cmt3email"> <a href="mailto:mosonyi15p@yahoo.com">&lt;mosonyi15p@yahoo.com&gt;</a></span></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </div>
+            </footer>
+            
         </div>
-        
     </h:body>
 </html>

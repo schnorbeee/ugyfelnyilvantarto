@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:metadata>
+        <f:viewParam name="entityId" value="#{userController.entityId}" />
+        <f:event type="preRenderView" listener="#{userController.onPreRender}" />
+    </f:metadata>
+    <h:head>
+        <title>Profile</title>
+    </h:head>
+    <h:body>
+
+        <h1>Profile</h1>
+
+        <hr/>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{userController.entity.username}"/>
+            </h:panelGrid>
+            <clientregistry:profile-detail person="#{personController.entity}"/>
+        </h:form>
+        <h:link value="Back to List" outcome="cd-list" /><br/>
+        <hr/>
+        
+    </h:body>
+</html>
+

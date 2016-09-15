@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:o="http://omnifaces.org/ui">
+    <f:metadata>
+        <f:viewParam name="entityId" value="#{connectionChannelController.entityId}" />
+        <f:event type="preRenderView" listener="#{connectionChannelController.onPreRender}" />
+    </f:metadata>
+    <h:head>
+
+        <title>Connection channel</title>
+
+    </h:head>
+    <h:body>
+
+        <h1>Create a connection channel</h1>
+
+        <hr/>
+
+        <h:form>
+            <!--<clientregistry:item-detail item="#{connectionChannelController.entity}"/>-->
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Type: "/>
+                <o:importConstants type="com.codingmentorteam3.enums.ConnectionChannelType"/>
+                <h:selectOneMenu value="#{connectionChannelController.entity.type}" >
+                    <f:selectItems value="#{ConnectionChannelType}" />
+                </h:selectOneMenu>
+                <h:outputLabel value="Value: "/>
+                <h:inputText value="#{connectionChannelController.entity.value}"/>
+            </h:panelGrid>
+            <h:commandButton value="Save" action="#{connectionChannelController.saveEntity}"/>
+        </h:form>
+
+        <hr/>
+
+        <h:link value="Back" outcome="" />
+
+    </h:body>
+</html>
+

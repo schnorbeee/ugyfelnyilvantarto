@@ -28,5 +28,13 @@ public class RoleDaoImpl extends AbstractDao<Role> {
         }
         throw new BadRequestException("Incorrect role type");
     }
+    
+    public List<Role> getRolesList() {
+        List<Role> query = em.createNamedQuery("role.list", Role.class).getResultList();
+//        if (query.isEmpty()) {
+//            throw new EmptyListException("There are no users to show.");
+//        }
+        return query;
+    }
 
 }
