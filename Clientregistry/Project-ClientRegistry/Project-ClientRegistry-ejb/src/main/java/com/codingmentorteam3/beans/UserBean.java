@@ -18,8 +18,6 @@ import javax.validation.constraints.NotNull;
 @ManagedBean(name = "user")
 public class UserBean extends PersonBean implements Serializable {
     
-    private static final String DEFAULT_AVATAR = "";
-    
     @NotNull
     @Username
     private String username;
@@ -27,9 +25,6 @@ public class UserBean extends PersonBean implements Serializable {
     @NotNull
     @Password
     private String password;
-    
-    @NotNull
-    private String avatar = DEFAULT_AVATAR;
 
     public UserBean() {
         // Default constructor
@@ -56,20 +51,11 @@ public class UserBean extends PersonBean implements Serializable {
         this.password = password;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 53 * hash + Objects.hashCode(this.username);
         hash = 53 * hash + Objects.hashCode(this.password);
-        hash = 53 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -91,15 +77,12 @@ public class UserBean extends PersonBean implements Serializable {
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        if (!Objects.equals(this.avatar, other.avatar)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "UserBean{" + "username=" + username + ", password=" + password + ", avatar=" + avatar + '}';
+        return "UserBean{" + "username=" + username + ", password=" + password + '}';
     }
     
 }

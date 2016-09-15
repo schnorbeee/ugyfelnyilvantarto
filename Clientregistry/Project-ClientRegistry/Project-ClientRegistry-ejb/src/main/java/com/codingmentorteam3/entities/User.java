@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.beans.UserBean;
 import com.codingmentorteam3.enums.NumItemsPerPageType;
 import com.codingmentorteam3.enums.PageableTablesType;
 import java.io.Serializable;
@@ -45,14 +46,11 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class User extends Person implements Serializable {
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @XmlTransient
     private String password;
-
-    @Column(nullable = false)
-    private String avatar;
 
     @MapKeyEnumerated(EnumType.STRING)
     @ElementCollection
@@ -61,7 +59,7 @@ public class User extends Person implements Serializable {
     @Column(name = "num_enum")
     private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap<>(PageableTablesType.class);
 
-    @OneToMany(mappedBy = "username", targetEntity = Role.class)
+    @OneToMany(mappedBy = "user", targetEntity = Role.class)
     private List<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "sender", targetEntity = Invitation.class)
@@ -83,10 +81,15 @@ public class User extends Person implements Serializable {
         //Default constructor
     }
 
-    public User(String username, String password, String avatar) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.avatar = avatar;
+    }
+
+    public User(UserBean user) {
+        super(user.getFirstName(), user.getLastName(), user.getRank(), user.getAvatar());
+        this.username = user.getUsername();
+        this.password = user.getPassword();
     }
 
     public String getUsername() {
@@ -103,14 +106,6 @@ public class User extends Person implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public Map<PageableTablesType, NumItemsPerPageType> getNumItemPerPage() {
@@ -167,7 +162,6 @@ public class User extends Person implements Serializable {
         hash = 41 * hash + Objects.hashCode(this.username);
         hash = 41 * hash + Objects.hashCode(this.password);
         hash = 41 * hash + Objects.hashCode(this.numItemPerPage);
-        hash = 41 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -190,9 +184,6 @@ public class User extends Person implements Serializable {
             return false;
         }
         if (!Objects.equals(this.password, other.password)) {
-            return false;
-        }
-        if (!Objects.equals(this.avatar, other.avatar)) {
             return false;
         }
         if (!Objects.equals(this.numItemPerPage, other.numItemPerPage)) {

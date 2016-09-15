@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Validate
 @ValidConnectionChannelValue
 @SessionScoped
-@ManagedBean(name="connectionChannel")
+@ManagedBean(name="connectionChannelBean")
 public class ConnectionChannelBean implements Serializable {
     
     @NotNull

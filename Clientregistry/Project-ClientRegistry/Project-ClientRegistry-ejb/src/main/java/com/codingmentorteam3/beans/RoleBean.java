@@ -1,6 +1,7 @@
 package com.codingmentorteam3.beans;
 
 import com.codingmentorteam3.annotations.Validate;
+import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.RoleType;
 import java.io.Serializable;
 import java.util.Objects;
@@ -23,14 +24,14 @@ public class RoleBean implements Serializable {
     private RoleType type = DEFAULT_ROLE;
     
     @NotNull
-    private String username;
+    private User user;
 
     public RoleBean() {
         // Default constructor
     }
 
-    public RoleBean(String username) {
-        this.username = username;
+    public RoleBean(User user) {
+        this.user = user;
     }
 
     public RoleType getType() {
@@ -41,19 +42,19 @@ public class RoleBean implements Serializable {
         this.type = type;
     }
 
-    public String getUsername() {
-        return username;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(User user) {
+        this.user = user;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 47 * hash + Objects.hashCode(this.type);
-        hash = 47 * hash + Objects.hashCode(this.username);
+        hash = 47 * hash + Objects.hashCode(this.user);
         return hash;
     }
 
@@ -69,7 +70,7 @@ public class RoleBean implements Serializable {
             return false;
         }
         final RoleBean other = (RoleBean) obj;
-        if (!Objects.equals(this.username, other.username)) {
+        if (!Objects.equals(this.user, other.user)) {
             return false;
         }
         if (this.type != other.type) {
@@ -80,7 +81,7 @@ public class RoleBean implements Serializable {
 
     @Override
     public String toString() {
-        return "RoleBean{" + "type=" + type + ", username=" + username + '}';
+        return "RoleBean{" + "type=" + type + ", user=" + user + '}';
     }
     
 }
