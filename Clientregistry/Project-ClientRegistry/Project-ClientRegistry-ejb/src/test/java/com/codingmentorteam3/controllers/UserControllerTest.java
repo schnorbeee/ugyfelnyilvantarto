@@ -92,7 +92,7 @@ public class UserControllerTest {
      * Test of registration method, of class UserController.
      * @throws java.lang.Exception
      */
-    @Test
+    /*@Test
     public void testRegistration() throws Exception {
         LOG.info("registration");
         UserController userController = new UserController();
@@ -108,5 +108,5 @@ public class UserControllerTest {
         Response result = userController.registration(regUser);
         assertEquals(expResult, result);
     }
-    
+    */
 }

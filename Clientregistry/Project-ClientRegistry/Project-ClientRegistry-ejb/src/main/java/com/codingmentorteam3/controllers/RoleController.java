@@ -33,7 +33,7 @@ public class RoleController {
                     return role;
                 }
             }
-            Role newRole = new Role(adminRole, current.getUsername());
+            Role newRole = new Role(adminRole, current);
             return roleDao.create(newRole);
         }
         throw new BadRequestException("This user not exist in the database.");
@@ -47,7 +47,7 @@ public class RoleController {
                 if (roleDao.getRolesListByRoleType(adminRole).size() == 1) {
                     throw new LastAdminException("This admin is last admin in database. So you don't know delete his role.");
                 }
-                if (role.getUsername().equals(username)) {
+                if (role.getUser().getUsername().equals(username)) {
                     return roleDao.delete(role);
                 }
             }

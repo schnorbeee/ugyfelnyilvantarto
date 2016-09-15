@@ -78,13 +78,6 @@ public class User extends Person implements Serializable {
     public User() {
         //Default constructor
     }
-
-    public User(String username, String password) {
-        super(user.getFirstName(), user.getLastName(), user.getRank(), user.getAvatar());
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-    }
-
     
     public User(String username, String password) {
         this.username = username;
