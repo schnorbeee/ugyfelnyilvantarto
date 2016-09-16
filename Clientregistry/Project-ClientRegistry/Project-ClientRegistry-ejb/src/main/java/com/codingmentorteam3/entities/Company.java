@@ -48,7 +48,7 @@ public class Company implements Serializable {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @Column(name = "tax_number", nullable = false)
+    @Column(name = "tax_number", nullable = false, unique = true)
     private String taxNumber;
 
     @Column(nullable = false)

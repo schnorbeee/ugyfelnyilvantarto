@@ -10,7 +10,6 @@ import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.AddressService;
 import com.codingmentorteam3.services.CompanyService;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -38,7 +37,7 @@ public class CompanyController extends PageableEntityController<Company> {
     public Response registrateCompany(CompanyBean regCompany, AddressBean regAddress) {
         Company newCompany = new Company(regCompany);
         Address newAddress = new Address(regAddress);
-        if(!companyService.getCompaniesListByNameFilter(newCompany.getName()).isEmpty()) {
+        if(!companyService.getCompaniesListByTaxFilter(newCompany.getTaxNumber()).isEmpty()) {
             return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
         if(null != addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber())) {
@@ -53,8 +52,8 @@ public class CompanyController extends PageableEntityController<Company> {
     }
     
     //user method
-    public Response getCompanyById(@QueryParam("companyId") Long id) {
-        Company company = companyService.getCompany(id);
+    public Response getCompanyById(@QueryParam("companyId") Long companyId) {
+        Company company = companyService.getCompany(companyId);
         if (null != company) {
             CompanyDTO dto = new CompanyDTO(company);
             return Response.status(Response.Status.FOUND).entity(dto).type(MediaType.APPLICATION_JSON).build();
@@ -165,4 +164,5 @@ public class CompanyController extends PageableEntityController<Company> {
         addressService.editAddress(oldAddress);
         return oldAddress;
     }
+    
 }

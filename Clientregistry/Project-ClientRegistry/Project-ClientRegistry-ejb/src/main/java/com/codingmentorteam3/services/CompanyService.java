@@ -36,8 +36,7 @@ public class CompanyService {
         return companyDao.getCompaniesList(limit, offset);
     }
     
-    public List<Company> getCompaniesListByNameFilter(String companyName) {
-        return companyDao.getCompaniesListByNameFilter(companyName);
+    public List<Company> getCompaniesListByTaxFilter(String taxNumber) {
+        return companyDao.getCompaniesListByTaxFilter(taxNumber);
     }
-    
 }

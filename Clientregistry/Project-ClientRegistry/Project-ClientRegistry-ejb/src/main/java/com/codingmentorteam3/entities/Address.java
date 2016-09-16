@@ -2,6 +2,8 @@ package com.codingmentorteam3.entities;
 
 import com.codingmentorteam3.beans.AddressBean;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -41,7 +44,10 @@ public class Address implements Serializable {
 
     @Column(name = "house_number", nullable = false)
     private String houseNumber;
-
+    
+    @OneToMany(mappedBy = "address", targetEntity = Address.class)
+    private List<Event> events = new ArrayList<>();
+    
     public Address() {
         //default contructor
     }
@@ -108,6 +114,14 @@ public class Address implements Serializable {
 
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     @Override
