@@ -2,6 +2,7 @@ package com.codingmentorteam3.services;
 
 import com.codingmentorteam3.daos.InvitationDaoImpl;
 import com.codingmentorteam3.entities.Invitation;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -30,4 +31,10 @@ public class InvitationService {
     public Invitation deleteInvitation(Invitation invitation) {
         return invitationDao.delete(invitation);
     }
+    
+    public List<Invitation> getInvitationsList(Integer limit, Integer offset) {
+        return invitationDao.getInvitationsList(limit, offset);
+    }
+    
+    
 }
