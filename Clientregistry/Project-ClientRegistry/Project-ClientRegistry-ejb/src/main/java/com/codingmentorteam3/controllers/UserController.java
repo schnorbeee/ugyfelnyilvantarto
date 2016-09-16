@@ -70,7 +70,7 @@ public class UserController {
         return "SUCCESS";
     }
     
-    public void update(UserBean user) {
+    public void update(UserBean user, Long id) {
         LOG.info("UserController.update()");
         // TODO
     }

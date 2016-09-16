@@ -3,7 +3,6 @@ package com.codingmentorteam3.beans;
 import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.constraints.Password;
 import com.codingmentorteam3.constraints.Username;
-import java.io.Serializable;
 import java.util.Objects;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
@@ -16,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Validate
 @SessionScoped
 @ManagedBean(name = "user")
-public class UserBean extends PersonBean implements Serializable {
+public class UserBean extends PersonBean {
     
     @NotNull
     @Username

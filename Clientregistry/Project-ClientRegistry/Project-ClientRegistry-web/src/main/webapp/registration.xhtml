@@ -32,7 +32,7 @@
                     <h:form>
                         <div class="form-group">
                             <h:outputLabel for="email" value="E-mail"/>
-                            <h:inputText id="email" value="#{connectionChannel.value}" class="form-control" required="true" label="example@email.com" requiredMessage="E-mail is required">
+                            <h:inputText id="email" value="#{connectionChannelBean.value}" class="form-control" required="true" label="example@email.com" requiredMessage="E-mail is required">
                                 <f:validator validatorId="EmailValidator"/>
                             </h:inputText>
                             <h:message id="emailMessage" for="email" style="color:red"/>
@@ -77,7 +77,7 @@
                                     <a href="login.xhtml" class="btn btn-primary center-block btn-color-register">Cancel</a>
                                 </div>
                                 <div class="col-sm-4 col-sm-offset-4">
-                                    <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Register" action="#{userController.registrate(user, connectionChannel)}"/>
+                                    <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Register" action="#{userController.registrate(user, connectionChannelBean)}"/>
                                 </div>
                             </div>
                         </div>
