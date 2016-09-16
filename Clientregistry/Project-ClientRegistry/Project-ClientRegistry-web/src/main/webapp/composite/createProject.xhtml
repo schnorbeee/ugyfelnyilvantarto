@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://omnifaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+        <style>
+        </style>
+
+        <script rel="script" type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+        <script rel="script" type="text/javascript" src="../js/script.js"></script>
+
+        <title>Create project</title>
+    </h:head>
+    <h:body>
+
+        <!--
+        MAIN CONTAINER
+        -->
+        <div class="container">
+
+            <!--
+            JUMBOTRON
+            -->
+            <div class="jumbotron">
+                <div class="visitors-box pull-right">
+                    Visitors today: <span id="visitors-today">123</span>
+                </div>
+                <h1>ClientRegistry</h1>
+            </div>
+            <!--
+            END OF JUMBOTRON
+            -->
+
+            <div class="row">
+
+                <!--
+                FIX LEFT-SIDE MENU
+                -->
+                <div class="col-sm-2 col-sm-offset-1">
+                    <img alt="profile-1" class="profile" src="../img/profile.png"/>
+                    <a href="events.html" class="btn btn-default btn-color-default center-block btn-space">Home</a>
+                    <a href="myinvitations.html" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
+                    <a href="myevents.html" class="btn btn-default btn-color-default center-block btn-space">My events</a>
+                    <a href="myprofile.html" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
+                    <hr/>
+                    <a href="manageevents.html" class="btn btn-default btn-color-default center-block btn-space active">Manage events</a>
+                    <a href="manageprojects.html" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                    <hr/>
+                    <a href="manageusers.html" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
+                    <a href="managecompanies.html" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                    <hr/>
+                    <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
+                </div>
+                <!--
+                END OF FIX LEFT-SIDE MENU
+                -->
+
+                <!--
+                MAIN CONTENT
+                -->
+                <div class="col-sm-8">
+                    <h2>Create project</h2>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <h:form class="form-horizontal">
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="projectName" value="Project name:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="projectName" value="#{project.name}" class="form-control" required="true" label="Project name" requiredMessage="Name required"/>
+                                        <h:message id="projectNameMessage" for="projectName" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="projectDescription" value="Project name:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputTextarea cols="40" rows="5" id="projectDescription" value="#{project.description}" class="form-control" required="true" label="Project description" requiredMessage="Description required"/>
+                                        <h:message id="projectDescriptionMessage" for="projectDescription" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="projectStartDate" value="Start date:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="projectStartDate" value="#{project.startDate}" class="form-control" required="true" label="Start date" requiredMessage="Start date required"/>
+                                        <h:message id="projectStartDateMessage" for="projectStartDate" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="projectDeadline" value="Deadline:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="projectDeadline" value="#{project.deadline}" class="form-control" required="true" label="Deadline" requiredMessage="Deadline required"/>
+                                        <h:message id="projectDeadlineMessage" for="projectDeadline" style="color:red"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="statusType" value="Status:"/>
+                                    <div class="col-sm-8">
+                                        <o:importConstants type="com.codingmentorteam3.enums.StatusType"/>
+                                        <h:selectOneMenu value="#{project.status}" >
+                                            <f:selectItems value="#{StatusType}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <div class="col-sm-4 col-sm-offset-8">
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Create project" action="#{projectController.saveEntity()}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <!--
+                END OF MAIN CONTENT
+                -->
+
+            </div>
+
+            <footer class="footer panel-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h1 id="cmt3outer">CodingMentorTeam<span id="cmt3inner">3</span></h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-group">
+                                <li class="list-unstyled cmt3list">Norbert Schmelhaus <span class="cmt3email"> <a href="mailto:sch.norbeee@gmail.com">&lt;sch.norbeee@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Zsolt Nagy <span class="cmt3email"> <a href="mailto:zsolt023.bme.vik@gmail.com">&lt;zsolt023.bme.vik@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Dániel Bicsák <span class="cmt3email"> <a href="mailto:bicsak.dani@gmail.com">&lt;bicsak.dani@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">István Mosonyi <span class="cmt3email"> <a href="mailto:mosonyi15p@yahoo.com">&lt;mosonyi15p@yahoo.com&gt;</a></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!--
+        END OF MAIN CONTAINER
+        -->
+
+    </h:body>
+</html>

@@ -1,5 +1,7 @@
 package com.codingmentorteam3.controllers;
 
+import com.codingmentorteam3.beans.AddressBean;
+import com.codingmentorteam3.beans.CompanyBean;
 import com.codingmentorteam3.controllers.general.PageableEntityController;
 import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.interceptors.BeanValidation;
@@ -16,6 +18,10 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "companyController")
 public class CompanyController extends PageableEntityController<Company> {
 
+    public void createCompany(CompanyBean company, AddressBean address) {
+        // TODO
+    }
+    
     @Override
     public List<Company> getEntities() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

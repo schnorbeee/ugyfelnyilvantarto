@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://omnifaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+        <style>
+        </style>
+
+        <script rel="script" type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+        <script rel="script" type="text/javascript" src="../js/script.js"></script>
+
+        <title>Create connection channel</title>
+    </h:head>
+    <h:body>
+
+        <!--
+        MAIN CONTAINER
+        -->
+        <div class="container">
+
+            <!--
+            JUMBOTRON
+            -->
+            <div class="jumbotron">
+                <div class="visitors-box pull-right">
+                    Visitors today: <span id="visitors-today">123</span>
+                </div>
+                <h1>ClientRegistry</h1>
+            </div>
+            <!--
+            END OF JUMBOTRON
+            -->
+
+            <div class="row">
+
+                <!--
+                FIX LEFT-SIDE MENU
+                -->
+                <div class="col-sm-2 col-sm-offset-1">
+                    <img alt="profile-1" class="profile" src="../img/profile.png"/>
+                    <a href="events.html" class="btn btn-default btn-color-default center-block btn-space">Home</a>
+                    <a href="myinvitations.html" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
+                    <a href="myevents.html" class="btn btn-default btn-color-default center-block btn-space">My events</a>
+                    <a href="myprofile.html" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
+                    <hr/>
+                    <a href="manageevents.html" class="btn btn-default btn-color-default center-block btn-space active">Manage events</a>
+                    <a href="manageprojects.html" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                    <hr/>
+                    <a href="manageusers.html" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
+                    <a href="managecompanies.html" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                    <hr/>
+                    <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
+                </div>
+                <!--
+                END OF FIX LEFT-SIDE MENU
+                -->
+
+                <!--
+                MAIN CONTENT
+                -->
+                <div class="col-sm-8">
+                    <h2>Create connection channel</h2>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <h:form class="form-horizontal">
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="connectionChannelType" value="Type: "/>
+                                    <div class="col-sm-8">
+                                        <o:importConstants type="com.codingmentorteam3.enums.ConnectionChannelType"/>
+                                        <h:selectOneMenu value="#{connectionChannelBean.type}" >
+                                            <f:selectItems value="#{ConnectionChannelType}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="connectionChannelValue" value="Value: "/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="connectionChannelValue" value="#{connectionChannelBean.value}" class="form-control" required="true" label="Connection channel value" requiredMessage="Connection channel value required"/>
+                                        <h:message id="connectionChannelValueMessage" for="connectionChannelValue" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <div class="col-sm-4 col-sm-offset-8">
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Save" action="#{connectionChannelController.saveEntity()}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <!--
+                END OF MAIN CONTENT
+                -->
+
+            </div>
+
+            <footer class="footer panel-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h1 id="cmt3outer">CodingMentorTeam<span id="cmt3inner">3</span></h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-group">
+                                <li class="list-unstyled cmt3list">Norbert Schmelhaus <span class="cmt3email"> <a href="mailto:sch.norbeee@gmail.com">&lt;sch.norbeee@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Zsolt Nagy <span class="cmt3email"> <a href="mailto:zsolt023.bme.vik@gmail.com">&lt;zsolt023.bme.vik@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Dániel Bicsák <span class="cmt3email"> <a href="mailto:bicsak.dani@gmail.com">&lt;bicsak.dani@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">István Mosonyi <span class="cmt3email"> <a href="mailto:mosonyi15p@yahoo.com">&lt;mosonyi15p@yahoo.com&gt;</a></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!--
+        END OF MAIN CONTAINER
+        -->
+
+    </h:body>
+</html>

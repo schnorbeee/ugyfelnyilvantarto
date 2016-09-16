@@ -17,7 +17,7 @@
         <script rel="script" type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
         <script rel="script" type="text/javascript" src="../js/script.js"></script>
 
-        <title>Create Event</title>
+        <title>Create company</title>
     </h:head>
     <h:body>
 
@@ -67,84 +67,71 @@
                 MAIN CONTENT
                 -->
                 <div class="col-sm-8">
-                    <div class="btn-group btn-group-full-size">
-                        <a href="#" class="btn btn-default btn-color-default btn-width-half active">Create event</a>
-                        <a href="#" class="btn btn-default btn-color-default btn-width-half">Edit events</a>
-                    </div>
+                    <h2>Create company</h2>
                     <hr/>
                     <div class="row">
                         <div class="col-sm-9">
                             <h:form class="form-horizontal">
                                 <div class="form-group">
-                                    <h:outputLabel class="control-label col-sm-4" for="eventType" value="Event type:"/>
+                                    <h:outputLabel class="control-label col-sm-4" for="comapanyName" value="Company name:"/>
                                     <div class="col-sm-8">
-                                        <o:importConstants type="com.codingmentorteam3.enums.EventType"/>
-                                        <h:selectOneMenu value="#{event.type}" >
-                                            <f:selectItems value="#{EventType}" />
-                                        </h:selectOneMenu>
+                                        <h:inputText id="companyName" value="#{company.name}" class="form-control" required="true" label="Company name" requiredMessage="Name required"/>
+                                        <h:message id="companyNameMessage" for="companyName" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h:outputLabel class="control-label col-sm-4" for="eventTitle" value="Event title:"/>
+                                    <h:outputLabel class="control-label col-sm-4" for="taxNumber" value="Tax number:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventTitle" value="#{event.title}" class="form-control" required="true" label="Event title" requiredMessage="Event title required"/>
-                                        <h:message id="eventTitleMessage" for="eventTitle" style="color:red"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <h:outputLabel class="control-label col-sm-4" for="eventDescription" value="Event description:"/>
-                                    <div class="col-sm-8">
-                                        <h:inputTextarea cols="40" rows="5" id="eventDescription" value="#{event.description}" class="form-control" required="true" label="Event description" requiredMessage="Event description required"/>
-                                        <h:message id="eventDescriptionMessage" for="eventDescription" style="color:red"/>
+                                        <h:inputText id="taxNumber" value="#{company.taxNumber}" class="form-control" required="true" label="Tax number" requiredMessage="Tax number required"/>
+                                        <h:message id="taxNumberMessage" for="taxNumber" style="color:red"/>
                                     </div>
                                 </div>
                                 <label>Place</label>
                                 <div class="form-group">
-                                    <h:outputLabel class="control-label col-sm-4" for="eventCountry" value="Country:"/>
+                                    <h:outputLabel class="control-label col-sm-4" for="companyCountry" value="Country:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventCountry" value="#{address.country}" class="form-control" required="true" label="Country" requiredMessage="Country required"/>
-                                        <h:message id="eventCountryMessage" for="eventCountry" style="color:red"/>
+                                        <h:inputText id="companyCountry" value="#{address.country}" class="form-control" required="true" label="Country" requiredMessage="Country required"/>
+                                        <h:message id="companyCountryMessage" for="companyCountry" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h:outputLabel class="control-label col-sm-4" for="eventCity" value="City:"/>
+                                    <h:outputLabel class="control-label col-sm-4" for="companyCity" value="City:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventCity" value="#{address.city}" class="form-control" required="true" label="City" requiredMessage="City required"/>
-                                        <h:message id="eventCityMessage" for="eventCity" style="color:red"/>
+                                        <h:inputText id="companyCity" value="#{address.city}" class="form-control" required="true" label="City" requiredMessage="City required"/>
+                                        <h:message id="companyCityMessage" for="companyCity" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h:outputLabel class="control-label col-sm-4" for="eventZipCode" value="Zip code:"/>
+                                    <h:outputLabel class="control-label col-sm-4" for="companyZipCode" value="Zip code:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventZipCode" value="#{address.zipCode}" class="form-control" required="true" label="Zip code" requiredMessage="Zip code required"/>
-                                        <h:message id="eventZipCodeMessage" for="eventZipCode" style="color:red"/>
+                                        <h:inputText id="companyZipCode" value="#{address.zipCode}" class="form-control" required="true" label="Zip code" requiredMessage="Zip code required"/>
+                                        <h:message id="companyZipCodeMessage" for="companyZipCode" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h:outputLabel class="control-label col-sm-4" for="eventStreet" value="Street:"/>
+                                    <h:outputLabel class="control-label col-sm-4" for="companyStreet" value="Street:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventStreet" value="#{address.street}" class="form-control" required="true" label="Street" requiredMessage="Street required"/>
-                                        <h:message id="eventStreetMessage" for="eventStreet" style="color:red"/>
+                                        <h:inputText id="companyStreet" value="#{address.street}" class="form-control" required="true" label="Street" requiredMessage="Street required"/>
+                                        <h:message id="companyStreetMessage" for="companyStreet" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h:outputLabel class="control-label col-sm-4" for="eventHouseNumber" value="House number:"/>
+                                    <h:outputLabel class="control-label col-sm-4" for="companyHouseNumber" value="House number:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventHouseNumber" value="#{address.houseNumber}" class="form-control" required="true" label="House number" requiredMessage="House number required"/>
-                                        <h:message id="eventHouseNumberMessage" for="eventHouseNumber" style="color:red"/>
+                                        <h:inputText id="companyHouseNumber" value="#{address.houseNumber}" class="form-control" required="true" label="House number" requiredMessage="House number required"/>
+                                        <h:message id="companyHouseNumberMessage" for="companyHouseNumber" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <div class="col-sm-4 col-sm-offset-8">
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Create company" action="#{companyController.createCompany(company, address)}"/>
+                                        </div>
                                     </div>
                                 </div>
                             </h:form>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-9">
-                            <div class="col-sm-4 col-sm-offset-8">
-                                <a href="myevents.html" class="btn btn-primary center-block btn-color-sign-in">Create</a>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <!--
                 END OF MAIN CONTENT
