@@ -1,6 +1,7 @@
 package com.codingmentorteam3.daos;
 
 import com.codingmentorteam3.entities.Address;
+import java.util.List;
 import javax.ejb.Stateless;
 
 /**
@@ -14,4 +15,8 @@ public class AddressDaoImpl extends AbstractDao<Address> {
         super(Address.class);
     }
 
+    public List<Address> getAddressList() {
+        return em.createNamedQuery("address.list", Address.class).getResultList();
+    }
+    
 }

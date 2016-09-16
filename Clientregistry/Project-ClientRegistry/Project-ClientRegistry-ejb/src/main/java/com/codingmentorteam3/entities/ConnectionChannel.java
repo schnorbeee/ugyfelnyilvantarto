@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.beans.ConnectionChannelBean;
 import com.codingmentorteam3.enums.ConnectionChannelType;
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,12 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "connectionchannel_table")
+@NamedQuery(name = "connection.channel.list.by.owner.id", query = "SELECT ch FROM connectionchannel_table ch WHERE ch.owner.id =:id")
 public class ConnectionChannel implements Serializable {
 
     @Id
@@ -33,13 +36,19 @@ public class ConnectionChannel implements Serializable {
     private String value;
 
     @ManyToOne(targetEntity = Person.class)
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", nullable = false)
     private Person owner;
 
     public ConnectionChannel() {
         //Default constuctor
     }
 
+    public ConnectionChannel(ConnectionChannelBean channel) {
+        this.type = channel.getType();
+        this.value = channel.getValue();
+        this.owner = channel.getOwner();
+    }
+    
     public ConnectionChannel(ConnectionChannelType type, String value, User owner) {
         this.type = type;
         this.value = value;

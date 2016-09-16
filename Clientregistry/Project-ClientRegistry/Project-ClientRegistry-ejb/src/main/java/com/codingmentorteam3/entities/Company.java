@@ -40,7 +40,7 @@ public class Company implements Serializable {
     @Column(name = "company_id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String name;
 
     @OneToOne

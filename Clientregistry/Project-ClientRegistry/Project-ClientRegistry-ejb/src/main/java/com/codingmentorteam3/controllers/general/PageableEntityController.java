@@ -9,11 +9,14 @@ import java.util.List;
  */
 public abstract class PageableEntityController<T> implements JSFController {
 
-    private final static Integer DEFAULT_LIMIT = 25;
+    private final static Integer DEFAULT_LIMIT = 10;
+    
     private Integer limit = DEFAULT_LIMIT;
+    
     private Integer offset = 0;
     
     private Long entityId;
+    
     private T entity;
     
     public Integer getLimit() {
@@ -71,9 +74,13 @@ public abstract class PageableEntityController<T> implements JSFController {
     }
     
     public abstract List<T> getEntities();
+    
     protected abstract T loadEntity(Long entityId);
+    
     protected abstract T doUpdateEntity();
+    
     protected abstract void doPersistEntity();
+    
     protected abstract String getNoEntityMessage();
     
 }

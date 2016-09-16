@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.beans.AddressBean;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -7,12 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "address_table")
+@NamedQuery(name = "address.list", query = "SELECT a FROM address_table a")
 public class Address implements Serializable {
 
     @Id
@@ -23,13 +26,13 @@ public class Address implements Serializable {
     @Column(name = "zip_code", nullable = false)
     private String zipCode;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String country;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String city;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String street;
 
     @Column(name = "house_number", nullable = false)
@@ -39,6 +42,14 @@ public class Address implements Serializable {
         //default contructor
     }
 
+    public Address(AddressBean newAddress) {
+        this.zipCode = newAddress.getZipCode();
+        this.country = newAddress.getCountry();
+        this.city = newAddress.getCity();
+        this.street = newAddress.getStreet();
+        this.houseNumber = newAddress.getHouseNumber();
+    }
+    
     public Address(String zipCode, String country, String city, String street, String houseNumber) {
         this.zipCode = zipCode;
         this.country = country;

@@ -24,11 +24,11 @@ public class VisitorCount implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "visitors_per_day", nullable = false)
+    @Column(nullable = false)
     private int count;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "actual_day", nullable = false, unique = true)
+    @Column(nullable = false)
     private Date day;
 
     public VisitorCount() {

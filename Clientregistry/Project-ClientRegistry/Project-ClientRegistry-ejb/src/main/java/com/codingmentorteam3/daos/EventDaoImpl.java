@@ -8,6 +8,7 @@ import com.codingmentorteam3.exceptions.query.EmptyListException;
 import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -42,12 +43,11 @@ public class EventDaoImpl extends AbstractDao<Event> {
         return em.createNamedQuery("event.list", Event.class).getResultList();
     }
 
-    public List<Event> getEventsList() {
-        List<Event> query = em.createNamedQuery("event.list", Event.class).getResultList();
-        if (query.isEmpty()) {
-            throw new EmptyListException("There are no events. List is empty now.");
-        }
-        return query;
+    public List<Event> getEventsList(int limit, int offset) {
+        TypedQuery<Event> query = em.createNamedQuery("event.list", Event.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
     public List<User> getUsersListByEventId(Long eventId) {

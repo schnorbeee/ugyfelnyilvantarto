@@ -4,10 +4,9 @@ import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.FeedbackType;
-import java.io.Serializable;
 import java.util.Objects;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -18,7 +17,7 @@ import javax.validation.constraints.Size;
 @Validate
 @SessionScoped
 @ManagedBean(name = "invitation")
-public class InvitationBean implements Serializable {
+public class InvitationBean {
     
     private static final FeedbackType DEFAULT_FEEDBACK = FeedbackType.UNANSWERED;
     

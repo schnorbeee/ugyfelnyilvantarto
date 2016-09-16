@@ -2,10 +2,9 @@ package com.codingmentorteam3.beans;
 
 import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.enums.RankType;
-import java.io.Serializable;
 import java.util.Objects;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -16,7 +15,7 @@ import javax.validation.constraints.Size;
 @Validate
 @SessionScoped
 @ManagedBean(name = "person")
-public class PersonBean implements Serializable {
+public class PersonBean {
     
     private static final RankType DEFAULT_RANK = RankType.VISITOR;
     
@@ -38,6 +37,11 @@ public class PersonBean implements Serializable {
     
     public PersonBean() {
         // Default constructor
+    }
+
+    public PersonBean(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public PersonBean(String firstName, String lastName, RankType rank, String avatar) {
@@ -120,5 +124,5 @@ public class PersonBean implements Serializable {
     public String toString() {
         return "PersonBean{" + "firstName=" + firstName + ", lastName=" + lastName + ", rank=" + rank + ", avatar=" + avatar + '}';
     }
-    
+
 }

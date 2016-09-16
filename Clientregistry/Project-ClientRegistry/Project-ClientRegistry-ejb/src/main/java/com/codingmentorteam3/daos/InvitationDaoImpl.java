@@ -9,6 +9,7 @@ import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -35,12 +36,11 @@ public class InvitationDaoImpl extends AbstractDao<Invitation> {
         return em.createNamedQuery("invitation.list", Invitation.class).getResultList();
     }
 
-    public List<Invitation> getInvitationsList() {
-        List<Invitation> query = em.createNamedQuery("invitation.list", Invitation.class).getResultList();
-        if (query.isEmpty()) {
-            throw new EmptyListException("There are no invitations to show.");
-        }
-        return query;
+    public List<Invitation> getInvitationsList(int limit, int offset) {
+        TypedQuery<Invitation> query = em.createNamedQuery("invitation.list", Invitation.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
     public List<Invitation> getInvitationsListByEventId(Long eventId) {
