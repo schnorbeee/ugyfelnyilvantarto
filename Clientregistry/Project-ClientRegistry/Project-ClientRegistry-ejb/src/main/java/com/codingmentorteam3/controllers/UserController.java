@@ -114,6 +114,21 @@ public class UserController extends PageableEntityController<User> {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
     
+    //user method
+    public Response changeAvatar(String newAvatar, @QueryParam("user_id") Long id) {
+        if(null != newAvatar) {
+            User currentUser = userService.getUser(id);
+            if(null != currentUser) {
+                currentUser.setAvatar(newAvatar);
+                userService.editUser(currentUser);
+                UserDTO dto = new UserDTO(currentUser);
+                return Response.status(Response.Status.ACCEPTED).entity(dto).type(MediaType.APPLICATION_JSON).build();
+            }
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+    
     //admin method
     public Response deleteUserById(@QueryParam("user_id") Long id) {
         User deleteUser = userService.getUser(id);
@@ -161,12 +176,12 @@ public class UserController extends PageableEntityController<User> {
     //atnezni a stringek helyesek-e az alabbi 3 override-nal
     @Override
     public String getListPage() {
-        return "user-list";
+        return "users";
     }
 
     @Override
     public String getNewItemOutcome() {
-        return "composite/user.xhtml";
+        return "edit/editProfile.xhtml";
     }
 
     @Override

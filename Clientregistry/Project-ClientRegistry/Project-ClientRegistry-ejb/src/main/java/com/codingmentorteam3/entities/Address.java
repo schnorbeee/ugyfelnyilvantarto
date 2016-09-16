@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
@@ -15,7 +16,10 @@ import javax.persistence.NamedQuery;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "address_table")
-@NamedQuery(name = "address.list", query = "SELECT a FROM address_table a")
+@NamedQueries ({
+    @NamedQuery(name = "address.list", query = "SELECT a FROM address_table a"),
+    @NamedQuery(name = "address.by.all.parameters", query = "SELECT a FROM address_table a WHERE a.city =:city AND a.country =:country AND a.zipCode =:zip AND a.street =:street AND a.houseNumber =:houseNumber")
+})
 public class Address implements Serializable {
 
     @Id
