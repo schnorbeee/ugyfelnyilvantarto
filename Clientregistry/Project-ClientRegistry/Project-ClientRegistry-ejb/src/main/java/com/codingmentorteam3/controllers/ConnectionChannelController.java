@@ -1,10 +1,13 @@
 package com.codingmentorteam3.controllers;
 
 import com.codingmentorteam3.beans.ConnectionChannelBean;
+import com.codingmentorteam3.controllers.general.PageableEntityController;
 import com.codingmentorteam3.dtos.ConnectionChannelDTO;
 import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.ConnectionChannelService;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -19,7 +22,7 @@ import javax.ws.rs.core.Response;
 @BeanValidation
 @RequestScoped
 @ManagedBean(name = "connectionChannelController")
-public class ConnectionChannelController {
+public class ConnectionChannelController extends PageableEntityController<ConnectionChannel> {
 
     @Inject
     private ConnectionChannelService connectionChannelService;
@@ -72,6 +75,48 @@ public class ConnectionChannelController {
             return Response.ok(dto, MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+    }
+
+    public void newItemOutcome() {
+        //dsafds
+    }
+    
+    @Override
+    public List<ConnectionChannel> getEntities() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ArrayList<>();
+    }
+
+    @Override
+    protected ConnectionChannel loadEntity(Long entityId) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ConnectionChannel();
+    }
+
+    @Override
+    protected ConnectionChannel doUpdateEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void doPersistEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getNoEntityMessage() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "0";
+    }
+
+    @Override
+    public String getListPage() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getNewItemOutcome() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -11,7 +11,6 @@ import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Role;
 import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.ConnectionChannelType;
-import com.codingmentorteam3.enums.RoleType;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.ConnectionChannelService;
 import com.codingmentorteam3.services.RoleService;
@@ -20,6 +19,7 @@ import com.codingmentorteam3.util.UtilBean;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -36,6 +36,9 @@ import javax.ws.rs.core.Response;
 @ManagedBean(name = "userController")
 public class UserController extends PageableEntityController<User> {
 
+    private static final Logger LOG = Logger.getLogger(UserController.class.getName());
+
+    
     @Inject
     private UserService userService;
 
