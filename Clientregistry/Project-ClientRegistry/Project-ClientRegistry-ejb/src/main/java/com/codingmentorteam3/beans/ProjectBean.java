@@ -3,11 +3,10 @@ package com.codingmentorteam3.beans;
 import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.constraints.ValidDeadline;
 import com.codingmentorteam3.enums.StatusType;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,7 +18,7 @@ import javax.validation.constraints.Size;
 @ValidDeadline
 @SessionScoped
 @ManagedBean(name = "project")
-public class ProjectBean implements Serializable {
+public class ProjectBean {
     
     private static final StatusType DEFAULT_TYPE = StatusType.INACTIVE;
     

@@ -1,7 +1,6 @@
 package com.codingmentorteam3.daos;
 
 import com.codingmentorteam3.entities.ConnectionChannel;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 
@@ -16,9 +15,8 @@ public class ConnectionChannelDaoImpl extends AbstractDao<ConnectionChannel> {
         super(ConnectionChannel.class);
     }
     
-    public List<ConnectionChannel> getConnectionChannelsList() {
-        // DELETE AT MERGE
-        return new ArrayList<>();
+    public List<ConnectionChannel> getConnectionChannelListByOwnerId(Long ownerId) {
+        return em.createNamedQuery("connection.channel.list.by.owner.id", ConnectionChannel.class).setParameter("id", ownerId).getResultList();
     }
 
 }

@@ -20,7 +20,7 @@ public class ContactPerson extends Person implements Serializable {
     private Company company;
 
     public ContactPerson() {
-        // Default constructor
+        //Default constructor
     }
     
     public ContactPerson(Company company) {

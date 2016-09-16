@@ -9,6 +9,9 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -29,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "user_table")
+@AttributeOverride(name = "user_id", column = @Column(name = "person_id"))
 @NamedQueries({
     @NamedQuery(name = "user.by.username.filter", query = "SELECT u FROM user_table u WHERE u.username LIKE :name"),
     @NamedQuery(name = "user.by.firstname.filter", query = "SELECT u FROM user_table u WHERE u.firstName LIKE :first"),
@@ -59,7 +63,7 @@ public class User extends Person implements Serializable {
     @Column(name = "num_enum")
     private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap<>(PageableTablesType.class);
 
-    @OneToMany(mappedBy = "user", targetEntity = Role.class)
+    @OneToMany(mappedBy = "user", targetEntity = Role.class, cascade = CascadeType.REMOVE)
     private List<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "sender", targetEntity = Invitation.class)
@@ -81,15 +85,16 @@ public class User extends Person implements Serializable {
         //Default constructor
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
     public User(UserBean user) {
         super(user.getFirstName(), user.getLastName(), user.getRank(), user.getAvatar());
         this.username = user.getUsername();
         this.password = user.getPassword();
+    }
+
+    
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -100,6 +105,7 @@ public class User extends Person implements Serializable {
         this.username = username;
     }
 
+    @XmlTransient
     public String getPassword() {
         return password;
     }

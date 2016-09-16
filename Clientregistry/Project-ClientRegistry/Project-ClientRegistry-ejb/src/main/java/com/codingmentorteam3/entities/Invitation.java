@@ -33,6 +33,7 @@ public class Invitation implements Serializable {
     @Column(name = "invitation_id")
     private Long id;
 
+    @Column(length = 1500)
     private String message;
 
     @Enumerated(EnumType.STRING)
@@ -55,12 +56,9 @@ public class Invitation implements Serializable {
         //Default constructor
     }
 
-    public Invitation(String message, FeedbackType feedback, Event event, User sender, User receiver) {
+    public Invitation(String message, FeedbackType feedback) {
         this.message = message;
         this.feedback = feedback;
-        this.event = event;
-        this.sender = sender;
-        this.receiver = receiver;
     }
 
     public Long getId() {
