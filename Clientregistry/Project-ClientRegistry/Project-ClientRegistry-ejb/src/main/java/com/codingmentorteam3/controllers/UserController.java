@@ -56,7 +56,7 @@ public class UserController extends PageableEntityController<User> {
         }
         ConnectionChannelBean newConnectionChannelBean = new ConnectionChannelBean(ConnectionChannelType.EMAIL, regChannal.getValue(), newUser);
         ConnectionChannel newConnectionChannal = new ConnectionChannel(newConnectionChannelBean);
-        RoleBean newRoleBean = new RoleBean(RoleType.VISITOR, newUser);
+        RoleBean newRoleBean = new RoleBean(newUser);
         Role newRole = new Role(newRoleBean);
         newUser.setPassword(utilBean.sha256coding(newUser.getPassword()));
         userService.createUser(newUser);

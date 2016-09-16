@@ -47,7 +47,7 @@ public class Role implements Serializable {
 
     public Role(RoleBean role) {
         this.roleType = role.getType();
-        this.user = role.getUsername();
+        this.user = role.getUser();
     }
 
     
