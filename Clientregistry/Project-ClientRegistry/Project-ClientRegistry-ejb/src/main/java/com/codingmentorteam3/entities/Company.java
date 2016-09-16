@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.beans.CompanyBean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,12 @@ public class Company implements Serializable {
         //Default constructor
     }
 
+    public Company(CompanyBean companyBean) {
+        this.name = companyBean.getName();
+        this.address = companyBean.getAddress();
+        this.taxNumber = companyBean.getTaxNumber();
+    }
+    
     public Company(String name, Address address, String taxNumber, String logo) {
         this.name = name;
         this.address = address;

@@ -28,9 +28,6 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
     public List<Company> getCompaniesListByNameFilter(String name) {
         if (null != name) {
             List<Company> query = em.createNamedQuery("company.by.name.filter", Company.class).setParameter("name", "%" + name + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("The results can not be found with this parameter: " + name);
-            }
             return query;
         }
         return em.createNamedQuery("company.list", Company.class).getResultList();
