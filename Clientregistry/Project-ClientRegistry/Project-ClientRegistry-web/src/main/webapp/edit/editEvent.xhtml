@@ -1,11 +1,192 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+        <style>
+        </style>
+
+        <script rel="script" type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+        <script rel="script" type="text/javascript" src="../js/script.js"></script>
+
+        <title>Edit event</title>
+    </h:head>
+    <h:body>
+
+        <!--
+        MAIN CONTAINER
+        -->
+        <div class="container">
+
+            <!--
+            JUMBOTRON
+            -->
+            <div class="jumbotron">
+                <div class="visitors-box pull-right">
+                    Visitors today: <span id="visitors-today">123</span>
+                </div>
+                <h1>ClientRegistry</h1>
+            </div>
+            <!--
+            END OF JUMBOTRON
+            -->
+
+            <div class="row">
+
+                <!--
+                FIX LEFT-SIDE MENU
+                -->
+                <div class="col-sm-2 col-sm-offset-1">
+                    <img alt="profile-1" class="profile" src="../img/profile.png">
+                        <a href="events.html" class="btn btn-default btn-color-default center-block btn-space">Home</a>
+                        <a href="myinvitations.html" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
+                        <a href="myevents.html" class="btn btn-default btn-color-default center-block btn-space">My events</a>
+                        <a href="myprofile.html" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
+                        <hr/>
+                        <a href="manageevents.html" class="btn btn-default btn-color-default center-block btn-space active">Manage events</a>
+                        <a href="manageprojects.html" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                        <hr/>
+                        <a href="manageusers.html" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
+                        <a href="managecompanies.html" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                        <hr/>
+                        <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
+                </div>
+                <!--
+                END OF FIX LEFT-SIDE MENU
+                -->
+
+                <!--
+                MAIN CONTENT
+                -->
+                <div class="col-sm-8">
+
+                    <h2>Manage events</h2>
+                    <h4>Events</h4>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Event title</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="company.html">Company No.1</a></td>
+                                <td><a href="event.html">Event title</a></td>
+                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                                <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="company.html">Company No.1</a></td>
+                                <td><a href="event.html">Event title</a></td>
+                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                                <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="company.html">Company No.1</a></td>
+                                <td><a href="event.html">Event title</a></td>
+                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                                <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="company.html">Company No.1</a></td>
+                                <td><a href="event.html">Event title</a></td>
+                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                                <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4>Create new event</h4>
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-11">
+                            <label>Event type:</label>
+                            <span id="eventtype">
+                                <select>
+                                    <option value="Meeting">Meeting</option>
+                                    <option value="Conference">Conference</option>
+                                    <option value="Party">Party</option>
+                                </select>
+                            </span>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Event title:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="eventtitle" placeholder="Title">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Event description:</label>
+                                    <div class="col-sm-8">
+                                        <textarea cols="40" rows="5" type="text" class="form-control" id="eventdescription" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <label>Place</label>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Country:</label>
+                                    <div class="col-sm-8">
+                                        <input type="email" class="form-control" id="country" placeholder="Hungary">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">City:</label>
+                                    <div class="col-sm-8">
+                                        <input type="email" class="form-control" id="city" placeholder="Budapest">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Zip code:</label>
+                                    <div class="col-sm-8">
+                                        <input type="email" class="form-control" id="zipcode" placeholder="1234">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Street:</label>
+                                    <div class="col-sm-8">
+                                        <input type="email" class="form-control" id="street" placeholder="Andrássy út">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">House number:</label>
+                                    <div class="col-sm-8">
+                                        <input type="email" class="form-control" id="housenumber" placeholder="123">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <div class="col-sm-4 col-sm-offset-8">
+                                <a href="myevents.html" class="btn btn-primary center-block btn-color-sign-in">Create</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--
+                END OF MAIN CONTENT
+                -->
+
+            </div>
+        </div>
+        <!--
+        END OF MAIN CONTAINER
+        -->
+    </h:body>
 </html>
