@@ -38,11 +38,11 @@ public class EventController extends PageableEntityController<Event> {
     @Inject
     private AddressService addressService;
     
-    public Response createEvent(EventBean regEvent, AddressBean regAddress, @QueryParam("companyId") Long companyId) {
+    public Response createEvent(EventBean regEvent, AddressBean regAddress, Long companyId) {
         Event newEvent = new Event(regEvent);
         Address newAddress = new Address(regAddress);
-        Company oldCompany = companyService.getCompany(companyId);
-        if(!eventService.getEventsListByTitleFilter(newEvent.getTitle()).isEmpty()) {
+        Company oldCompany = companyService.getCompany(1L);
+        if(!eventService.getEventsListByTitleFilter(newEvent.getTitle(), getLimit(), getOffset()).isEmpty()) {
             return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
         if(null != addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber())) {

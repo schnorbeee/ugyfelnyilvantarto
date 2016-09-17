@@ -45,7 +45,7 @@ public class Address implements Serializable {
     @Column(name = "house_number", nullable = false)
     private String houseNumber;
     
-    @OneToMany(mappedBy = "address", targetEntity = Address.class)
+    @OneToMany(mappedBy = "address", targetEntity = Event.class)
     private List<Event> events = new ArrayList<>();
     
     public Address() {

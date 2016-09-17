@@ -45,6 +45,4 @@ public class UserService {
         return userDao.getRolesListByUserId(id);
     }
     
-    
-    
 }

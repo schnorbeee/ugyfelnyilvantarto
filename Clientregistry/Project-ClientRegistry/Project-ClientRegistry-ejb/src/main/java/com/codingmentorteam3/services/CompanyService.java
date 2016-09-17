@@ -2,9 +2,11 @@ package com.codingmentorteam3.services;
 
 import com.codingmentorteam3.daos.CompanyDaoImpl;
 import com.codingmentorteam3.entities.Company;
+import com.codingmentorteam3.entities.ContactPerson;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.QueryParam;
 
 /**
  *
@@ -36,7 +38,12 @@ public class CompanyService {
         return companyDao.getCompaniesList(limit, offset);
     }
     
-    public List<Company> getCompaniesListByTaxFilter(String taxNumber) {
-        return companyDao.getCompaniesListByTaxFilter(taxNumber);
+    public List<Company> getCompaniesListByTaxFilter(String taxNumber, Integer limit, Integer offset) {
+        return companyDao.getCompaniesListByTaxFilter(taxNumber, limit, offset);
     }
+    
+    public List<ContactPerson> getContactersListByCompanyId(@QueryParam("companyId") Long companyId) {
+        return companyDao.getContactersListByCompanyId(companyId);
+    }
+    
 }

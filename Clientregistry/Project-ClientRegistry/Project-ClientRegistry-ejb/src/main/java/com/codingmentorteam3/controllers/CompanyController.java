@@ -5,11 +5,14 @@ import com.codingmentorteam3.beans.CompanyBean;
 import com.codingmentorteam3.controllers.general.PageableEntityController;
 import com.codingmentorteam3.dtos.AddressDTO;
 import com.codingmentorteam3.dtos.CompanyDTO;
+import com.codingmentorteam3.dtos.ContactPersonDTO;
 import com.codingmentorteam3.entities.Address;
 import com.codingmentorteam3.entities.Company;
+import com.codingmentorteam3.entities.ContactPerson;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.AddressService;
 import com.codingmentorteam3.services.CompanyService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -34,10 +37,10 @@ public class CompanyController extends PageableEntityController<Company> {
     private AddressService addressService;
     
     //user method/admin accepted
-    public Response registrateCompany(CompanyBean regCompany, AddressBean regAddress) {
+    public Response createCompany(CompanyBean regCompany, AddressBean regAddress) {
         Company newCompany = new Company(regCompany);
         Address newAddress = new Address(regAddress);
-        if(!companyService.getCompaniesListByTaxFilter(newCompany.getTaxNumber()).isEmpty()) {
+        if(!companyService.getCompaniesListByTaxFilter(newCompany.getTaxNumber(), getLimit(), getOffset()).isEmpty()) {
             return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
         if(null != addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber())) {
@@ -77,16 +80,30 @@ public class CompanyController extends PageableEntityController<Company> {
             }
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.status(Response.Status.BAD_REQUEST).build();
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
     
     //admin method
-    public Response deleteCompanyById(@QueryParam("companyId") Long id) {
-        Company deleteCompany = companyService.getCompany(id);
+    public Response deleteCompanyById(@QueryParam("companyId") Long companyId) {
+        Company deleteCompany = companyService.getCompany(companyId);
         if (null != deleteCompany) {
             companyService.deleteCompany(deleteCompany);
             CompanyDTO dto = new CompanyDTO(deleteCompany);
             return Response.status(Response.Status.ACCEPTED).entity(dto).type(MediaType.APPLICATION_JSON).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+    
+    public Response getContactersListByCompanyId(@QueryParam("companyId") Long companyId) {
+        Company currentCompany = companyService.getCompany(companyId);
+        if (null != currentCompany) {
+            List<ContactPersonDTO> contactPersonDtos = new ArrayList<>();
+            List<ContactPerson> contactPersons = companyService.getContactersListByCompanyId(companyId);
+            for (ContactPerson cp : contactPersons) {
+                ContactPersonDTO contactPersonDto = new ContactPersonDTO(cp);
+                contactPersonDtos.add(contactPersonDto);
+            }
+            return Response.status(Response.Status.OK).entity(contactPersonDtos).type(MediaType.APPLICATION_JSON).build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }

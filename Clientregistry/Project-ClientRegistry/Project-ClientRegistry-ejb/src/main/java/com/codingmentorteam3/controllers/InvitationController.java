@@ -2,14 +2,20 @@ package com.codingmentorteam3.controllers;
 
 import com.codingmentorteam3.controllers.general.PageableEntityController;
 import com.codingmentorteam3.entities.Invitation;
+import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.InvitationService;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 
 /**
  *
  * @author norbeee sch.norbeee@gmail.com
  */
+@BeanValidation
+@RequestScoped
+@ManagedBean(name = "invitationController")
 public class InvitationController extends PageableEntityController<Invitation> {
 
     @Inject

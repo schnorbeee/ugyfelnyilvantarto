@@ -30,7 +30,6 @@ public class CompanyBean {
     @Pattern(regexp = "\\d{8}-\\d{1}-\\d{2}")
     private String taxNumber;
     
-    @NotNull
     private String logo = DEFAULT_LOGO;
 
     public CompanyBean() {

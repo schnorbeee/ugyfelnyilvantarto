@@ -1,5 +1,6 @@
 package com.codingmentorteam3.daos;
 
+import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.User;
@@ -21,13 +22,12 @@ public class EventDaoImpl extends AbstractDao<Event> {
         super(Event.class);
     }
 
-    public List<Event> getEventsListByTitleFilter(String title) {
+    public List<Event> getEventsListByTitleFilter(String title, int limit, int offset) {
         if (null != title) {
-            List<Event> query = em.createNamedQuery("event.by.title.filter", Event.class).setParameter("title", "%" + title + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("The results can not be found with this parameter: " + title);
-            }
-            return query;
+            TypedQuery<Event> query = em.createNamedQuery("event.by.title.filter", Event.class).setParameter("title", "%" + title + "%");
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+            return query.getResultList();
         }
         return em.createNamedQuery("event.list", Event.class).getResultList();
     }

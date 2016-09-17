@@ -35,4 +35,5 @@ public class ProjectService {
     public List<Project> getProjectsList(Integer limit, Integer offset) {
         return projectDao.getProjectsList(limit, offset);
     }
+    
 }

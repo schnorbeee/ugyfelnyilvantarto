@@ -36,8 +36,8 @@ public class EventService {
         return eventDao.getEventsList(limit, offset);
     }
     
-    public List<Event> getEventsListByTitleFilter(String title) {
-        return eventDao.getEventsListByTitleFilter(title);
+    public List<Event> getEventsListByTitleFilter(String title, Integer limit, Integer offset) {
+        return eventDao.getEventsListByTitleFilter(title, limit, offset);
     }
     
 }

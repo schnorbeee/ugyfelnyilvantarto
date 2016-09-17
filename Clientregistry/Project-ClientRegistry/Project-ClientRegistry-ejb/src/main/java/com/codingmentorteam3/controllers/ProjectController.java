@@ -53,7 +53,7 @@ public class ProjectController extends PageableEntityController<Project> {
 
     @Override
     public String getNewItemOutcome() {
-        return "composite/user.xhtml";
+        return "composite/createProject.xhtml";
     }
 
     @Override

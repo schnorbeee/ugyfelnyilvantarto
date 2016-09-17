@@ -51,7 +51,6 @@ public class Company implements Serializable {
     @Column(name = "tax_number", nullable = false, unique = true)
     private String taxNumber;
 
-    @Column(nullable = false)
     private String logo;
 
     @OneToMany(mappedBy = "company", targetEntity = Event.class)

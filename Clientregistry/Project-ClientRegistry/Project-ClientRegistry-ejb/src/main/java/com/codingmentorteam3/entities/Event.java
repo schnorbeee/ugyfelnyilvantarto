@@ -42,7 +42,7 @@ public class Event implements Serializable {
     @Column(name = "event_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Address.class)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
@@ -64,7 +64,7 @@ public class Event implements Serializable {
     private EventType type;
 
     @ManyToOne(targetEntity = Company.class)
-    @JoinColumn(name = "company_id")
+    @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
     @ManyToMany(mappedBy = "events", targetEntity = User.class)
@@ -78,13 +78,9 @@ public class Event implements Serializable {
     }
 
     public Event(EventBean eventBean) {
-        this.address = eventBean.getAddress();
         this.title = eventBean.getTitle();
-        this.startDate = eventBean.getStartDate();
-        this.endDate = eventBean.getEndDate();
         this.description = eventBean.getDescription();
         this.type = eventBean.getType();
-        this.company = eventBean.getCompany();
     }
     
     public Event(Address address, String title, Date startDate, Date endDate, String description, EventType type, Company company) {
