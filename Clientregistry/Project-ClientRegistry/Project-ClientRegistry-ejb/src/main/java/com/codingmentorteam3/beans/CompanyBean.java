@@ -27,9 +27,10 @@ public class CompanyBean {
     @NotNull
     private Address address;
 
-    @Pattern(regexp = "\\d{8}-\\d{1}-\\d{2}")
+    @Pattern(regexp = "\\d{8}-\\d{1}-\\d{2}", message = "Invalid tax-number format. Please enter a tax-number matching this pattern: xxxxxxxx-x-xx")
     private String taxNumber;
     
+    @NotNull
     private String logo = DEFAULT_LOGO;
 
     public CompanyBean() {

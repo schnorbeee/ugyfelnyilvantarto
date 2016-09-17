@@ -1,7 +1,7 @@
 package com.codingmentorteam3.dtos;
 
 import com.codingmentorteam3.entities.Person;
-import com.codingmentorteam3.enums.RankType;
+import com.codingmentorteam3.enums.PositionType;
 import java.util.Objects;
 
 /**
@@ -14,7 +14,7 @@ public class PersonDTO {
 
     protected String lastName;
 
-    protected RankType rank;
+    protected PositionType rank;
     
     protected String avatar;
 
@@ -25,7 +25,7 @@ public class PersonDTO {
     public PersonDTO(Person person) {
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
-        this.rank = person.getRank();
+        this.rank = person.getPosition();
         this.avatar = person.getAvatar();
     }
 
@@ -45,11 +45,11 @@ public class PersonDTO {
         this.lastName = lastName;
     }
 
-    public RankType getRank() {
+    public PositionType getRank() {
         return rank;
     }
 
-    public void setRank(RankType rank) {
+    public void setRank(PositionType rank) {
         this.rank = rank;
     }
 

@@ -38,18 +38,18 @@ public class EventController extends PageableEntityController<Event> {
     @Inject
     private AddressService addressService;
     
-    public Response createEvent(EventBean regEvent, AddressBean regAddress, Long companyId) {
+    public String createEvent(EventBean regEvent, AddressBean regAddress, Long companyId) {
         Event newEvent = new Event(regEvent);
         Address newAddress = new Address(regAddress);
         Company oldCompany = companyService.getCompany(1L);
         if(!eventService.getEventsListByTitleFilter(newEvent.getTitle(), getLimit(), getOffset()).isEmpty()) {
-            return Response.status(Response.Status.PRECONDITION_FAILED).build();
+           // return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
         if(null != addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber())) {
-            return Response.status(Response.Status.PRECONDITION_FAILED).build();
+           // return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
         if(null != oldCompany) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+           // return Response.status(Response.Status.BAD_REQUEST).build();
         }
         addressService.createAddress(newAddress);
         newEvent.setAddress(newAddress);
@@ -57,7 +57,7 @@ public class EventController extends PageableEntityController<Event> {
         eventService.createEvent(newEvent);
         AddressDTO addressDto = new AddressDTO(newAddress);
         EventDTO eventDto = new EventDTO(newEvent);
-        return Response.status(Response.Status.CREATED).entity(eventDto).entity(addressDto).type(MediaType.APPLICATION_JSON).build();
+        return "events";
     }
     
     public Response getEventById(@QueryParam("eventId") Long eventId) {

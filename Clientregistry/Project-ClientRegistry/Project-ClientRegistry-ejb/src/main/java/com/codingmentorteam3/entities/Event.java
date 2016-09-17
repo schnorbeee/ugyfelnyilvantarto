@@ -50,7 +50,7 @@ public class Event implements Serializable {
     private String title;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "start_date", nullable = false)
+    //@Column(name = "start_date", nullable = false)
     private Date startDate;
 
     @Temporal(TemporalType.DATE)

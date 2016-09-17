@@ -37,7 +37,7 @@ public class EventBean {
     
     private EventType type = DEFAULT_TYPE;
     
-    @NotNull @Future
+    //@NotNull @Future
     private Date startDate;
     
     private Date endDate;
