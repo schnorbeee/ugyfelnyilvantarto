@@ -28,23 +28,22 @@
             </div>
             <div class="row">
                 <div class="col-md-3 col-md-offset-2">
-                    <h:form>
+                    <form method="POST" action="events.xhtml">
                         <div class="form-group">
-                            <h:outputLabel for="username" value="Username"/>
-                            <h:inputText id="username" value="#{user.username}" class="form-control" required="true" label="Username" requiredMessage="Username is required"/>
-                            <h:message id="usernameMessage" for="username" style="color:red"/>
+                            <h:outputLabel for="j_username" value="Username"/>
+                            <input type="text" name="j_username" id="j_username" value="#{user.username}" class="form-control" required="true" label="Username" requiredMessage="Username is required" placeholder="Username"/>
+                            <h:message id="usernameMessage" for="j_username" style="color:red"/>
                         </div>
                         <div class="form-group">
-                            <h:outputLabel for="password" value="Password"/>
-                            <h:inputSecret id="password" value="#{user.password}" class="form-control" required="true" label="*******" requiredMessage="Password is required"/>
+                            <h:outputLabel for="j_password" value="Password"/>
+                            <input type="password" name="j_password" id="j_password" value="#{user.password}" class="form-control" required="true" label="*******" requiredMessage="Password is required" placeholder="*******"/>
                             <h:message id="passwordMessage" for="password" style="color:red"/>
                         </div>
-                        <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Sign in" action="#{authController.login(user)}"/>
+                        <!--<h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Login" action="#{authController.login(user)}"/>-->
+                        <input class="btn btn-primary center-block btn-color-sign-in" type="submit" name="submit" value="Login"/>
                         <hr/>
                         <h:commandButton class="btn btn-info center-block btn-color-register" value="Register" action="#{authController.login(user)}"/>
-                        <!--<a href="registration.xhtml"class="btn btn-info center-block btn-color-register" />Register</a>-->
-                        <!--<input type="submit" name="xxx" value="submit" />-->
-                    </h:form>
+                    </form>
                 </div>
             </div>
 
