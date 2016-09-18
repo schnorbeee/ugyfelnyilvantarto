@@ -46,4 +46,8 @@ public class CompanyService {
         return companyDao.getContactersListByCompanyId(companyId);
     }
     
+    public Company getCompanyByAddressId(Long addressId) {
+        return companyDao.getCompanyByAddressId(addressId);
+    }
+    
 }

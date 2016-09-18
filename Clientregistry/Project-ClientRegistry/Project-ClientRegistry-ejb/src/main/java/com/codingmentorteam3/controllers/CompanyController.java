@@ -3,12 +3,13 @@ package com.codingmentorteam3.controllers;
 import com.codingmentorteam3.beans.AddressBean;
 import com.codingmentorteam3.beans.CompanyBean;
 import com.codingmentorteam3.controllers.general.PageableEntityController;
-import com.codingmentorteam3.dtos.AddressDTO;
 import com.codingmentorteam3.dtos.CompanyDTO;
 import com.codingmentorteam3.dtos.ContactPersonDTO;
 import com.codingmentorteam3.entities.Address;
 import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.entities.ContactPerson;
+import com.codingmentorteam3.exceptions.query.BadRequestException;
+import com.codingmentorteam3.exceptions.query.EntityAlreadyExistsException;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.AddressService;
 import com.codingmentorteam3.services.CompanyService;
@@ -17,9 +18,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  *
@@ -32,84 +30,98 @@ public class CompanyController extends PageableEntityController<Company> {
 
     @Inject
     private CompanyService companyService;
-    
+
     @Inject
     private AddressService addressService;
-    
+
     //user method/admin accepted
-    public Response createCompany(CompanyBean regCompany, AddressBean regAddress) {
+    public String createCompany(CompanyBean regCompany, AddressBean regAddress) {
         Company newCompany = new Company(regCompany);
         Address newAddress = new Address(regAddress);
-        if(!companyService.getCompaniesListByTaxFilter(newCompany.getTaxNumber(), getLimit(), getOffset()).isEmpty()) {
-            return Response.status(Response.Status.PRECONDITION_FAILED).build();
+        if (!companyService.getCompaniesListByTaxFilter(newCompany.getTaxNumber(), getLimit(), getOffset()).isEmpty()) {
+            throw new EntityAlreadyExistsException("This company is already exist in our database.");
         }
-        if(null != addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber())) {
-            return Response.status(Response.Status.PRECONDITION_FAILED).build();
+        Address oldAddress = addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber());
+        if (null != oldAddress) {
+            if (null != companyService.getCompanyByAddressId(oldAddress.getId())) {
+                throw new EntityAlreadyExistsException("With this address we had other company definied.");
+            } else {
+                newCompany.setAddress(oldAddress);
+                companyService.createCompany(newCompany);
+                return "";
+            }
         }
         addressService.createAddress(newAddress);
         newCompany.setAddress(newAddress);
         companyService.createCompany(newCompany);
-        AddressDTO addressDto = new AddressDTO(newAddress);
-        CompanyDTO companyDto = new CompanyDTO(newCompany);
-        return Response.status(Response.Status.CREATED).entity(addressDto).entity(companyDto).type(MediaType.APPLICATION_JSON).build();       
+        return "";
     }
-    
+
     //user method
-    public Response getCompanyById(@QueryParam("companyId") Long companyId) {
+    public String getCompanyById(Long companyId) {
         Company company = companyService.getCompany(companyId);
         if (null != company) {
-            CompanyDTO dto = new CompanyDTO(company);
-            return Response.status(Response.Status.FOUND).entity(dto).type(MediaType.APPLICATION_JSON).build();
+            return "";
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        throw new BadRequestException(getNoEntityMessage());
     }
-    
+
     //user method
-    public Response updateCompany(CompanyBean updateCompany, AddressBean updateAddress, @QueryParam("companyId") Long id) {
-        if (null != updateCompany || null != updateAddress) {
+    public CompanyDTO updateCompany(CompanyBean updateCompany, AddressBean updateAddress, Long companyId) {
+        Company oldCompany = companyService.getCompany(companyId);
+        if(null != oldCompany) {
             Company currentCompany = new Company(updateCompany);
-            Company oldCompany = companyService.getCompany(id);
             Address currentAddress = new Address(updateAddress);
             Address oldAddress = oldCompany.getAddress();
-            if (null != companyService.getCompany(id)) {
-                oldCompany = modifiedCheckerCompany(oldCompany, currentCompany, oldAddress, currentAddress);
-                companyService.editCompany(oldCompany);
-                CompanyDTO companyDto = new CompanyDTO(oldCompany);
-                AddressDTO addressDto = new AddressDTO(oldCompany.getAddress());
-                return Response.status(Response.Status.ACCEPTED).entity(companyDto).entity(addressDto).type(MediaType.APPLICATION_JSON).build();
-            }
-            return Response.status(Response.Status.NOT_FOUND).build();
+            oldCompany = modifiedCheckerCompany(oldCompany, currentCompany, oldAddress, currentAddress);
+            companyService.editCompany(oldCompany);
+            return new CompanyDTO(oldCompany);
         }
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        throw new BadRequestException(getNoEntityMessage());
     }
-    
+
     //admin method
-    public Response deleteCompanyById(@QueryParam("companyId") Long companyId) {
+    public List<CompanyDTO> deleteCompanyById(Long companyId) {
         Company deleteCompany = companyService.getCompany(companyId);
         if (null != deleteCompany) {
             companyService.deleteCompany(deleteCompany);
-            CompanyDTO dto = new CompanyDTO(deleteCompany);
-            return Response.status(Response.Status.ACCEPTED).entity(dto).type(MediaType.APPLICATION_JSON).build();
+            List<CompanyDTO> companyDTOs = new ArrayList<>();
+            for(Company c : getEntities()) {
+                CompanyDTO companyDTO = new CompanyDTO(c);
+                companyDTOs.add(companyDTO);
+            }
+            return companyDTOs;
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        throw new BadRequestException(getNoEntityMessage());
+    }
+
+    //user method
+    public List<CompanyDTO> getCompaniesList() {
+        List<CompanyDTO> companyDTOs = new ArrayList();
+        for (Company c : getEntities()) {
+            CompanyDTO companyDTO = new CompanyDTO(c);
+            companyDTOs.add(companyDTO);
+        }
+        return companyDTOs;
     }
     
-    public Response getContactersListByCompanyId(@QueryParam("companyId") Long companyId) {
+    //user method
+    public List<ContactPersonDTO> getContactersListByCompanyId(Long companyId) {
         Company currentCompany = companyService.getCompany(companyId);
         if (null != currentCompany) {
-            List<ContactPersonDTO> contactPersonDtos = new ArrayList<>();
+            List<ContactPersonDTO> contactPersonDTOs = new ArrayList<>();
             List<ContactPerson> contactPersons = companyService.getContactersListByCompanyId(companyId);
             for (ContactPerson cp : contactPersons) {
-                ContactPersonDTO contactPersonDto = new ContactPersonDTO(cp);
-                contactPersonDtos.add(contactPersonDto);
+                ContactPersonDTO contactPersonDTO = new ContactPersonDTO(cp);
+                contactPersonDTOs.add(contactPersonDTO);
             }
-            return Response.status(Response.Status.OK).entity(contactPersonDtos).type(MediaType.APPLICATION_JSON).build();
+            return contactPersonDTOs;
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        throw new BadRequestException(getNoEntityMessage());
     }
-    
+
     @Override
-    public List<Company> getEntities() {       
+    public List<Company> getEntities() {
         return companyService.getCompaniesList(getLimit(), getOffset());
     }
 
@@ -147,7 +159,7 @@ public class CompanyController extends PageableEntityController<Company> {
     public String getNewItemOutcome() {
         return "edit/editCompany.xhtml";
     }
-    
+
     public Company modifiedCheckerCompany(Company oldCompany, Company currentCompany, Address oldAddress, Address currentAddress) {
         if (!currentCompany.getName().equals("")) {
             oldCompany.setName(currentCompany.getName());
@@ -161,7 +173,7 @@ public class CompanyController extends PageableEntityController<Company> {
         }
         return oldCompany;
     }
-    
+
     public Address modifiedCheckerAddress(Address oldAddress, Address currentAddress) {
         if (!currentAddress.getCity().equals("")) {
             oldAddress.setCity(currentAddress.getCity());
@@ -181,5 +193,5 @@ public class CompanyController extends PageableEntityController<Company> {
         addressService.editAddress(oldAddress);
         return oldAddress;
     }
-    
+
 }

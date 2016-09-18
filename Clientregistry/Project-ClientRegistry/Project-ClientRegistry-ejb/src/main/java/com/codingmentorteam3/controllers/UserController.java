@@ -4,13 +4,14 @@ import com.codingmentorteam3.beans.ConnectionChannelBean;
 import com.codingmentorteam3.beans.RoleBean;
 import com.codingmentorteam3.beans.UserBean;
 import com.codingmentorteam3.controllers.general.PageableEntityController;
-import com.codingmentorteam3.dtos.ConnectionChannelDTO;
-import com.codingmentorteam3.dtos.RoleDTO;
 import com.codingmentorteam3.dtos.UserDTO;
 import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Role;
 import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.ConnectionChannelType;
+import com.codingmentorteam3.exceptions.query.BadRequestException;
+import com.codingmentorteam3.exceptions.query.EntityAlreadyExistsException;
+import com.codingmentorteam3.exceptions.query.OldPasswordException;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.ConnectionChannelService;
 import com.codingmentorteam3.services.RoleService;
@@ -22,9 +23,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  *
@@ -48,10 +46,10 @@ public class UserController extends PageableEntityController<User> {
     private UtilBean utilBean;
 
     //user method
-    public Response registrate(UserBean regUser, ConnectionChannelBean regChannal) throws NoSuchAlgorithmException {
+    public String registrate(UserBean regUser, ConnectionChannelBean regChannal) throws NoSuchAlgorithmException {
         User newUser = new User(regUser);
         if (null != userService.getUserByUsername(newUser.getUsername())) {
-            return Response.status(Response.Status.PRECONDITION_FAILED).build();
+            throw new EntityAlreadyExistsException("This user is already exist in our database.");
         }
         ConnectionChannelBean newConnectionChannelBean = new ConnectionChannelBean(ConnectionChannelType.EMAIL, regChannal.getValue(), newUser);
         ConnectionChannel newConnectionChannal = new ConnectionChannel(newConnectionChannelBean);
@@ -61,101 +59,90 @@ public class UserController extends PageableEntityController<User> {
         userService.createUser(newUser);
         connectionChannelService.createConnectionChannel(newConnectionChannal);
         roleService.createRole(newRole);
-        UserDTO userDto = new UserDTO(newUser);
-        ConnectionChannelDTO connectionChannelDto = new ConnectionChannelDTO(newConnectionChannal);
-        RoleDTO roleDto = new RoleDTO(newRole);
-        return Response.status(Response.Status.CREATED).entity(userDto).entity(connectionChannelDto).entity(roleDto).type(MediaType.APPLICATION_JSON).build();
+        return "";
     }
 
     //user method
-    public Response getUserById(@QueryParam("userId") Long userId) {
+    public String getUserById(Long userId) {
         User user = userService.getUser(userId);
         if (null != user) {
-            UserDTO dto = new UserDTO(user);
-            return Response.status(Response.Status.FOUND).entity(dto).type(MediaType.APPLICATION_JSON).build();
+            return "";
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        throw new BadRequestException(getNoEntityMessage());
     }
 
     //user method
-    public Response updateUserPersonalInfos(UserBean updateUser, @QueryParam("user_id") Long id) throws NoSuchAlgorithmException {
-        if (null != updateUser) {
-            User currentUser = new User(updateUser);
-            User oldUser = userService.getUser(id);
-            if (null != oldUser) {
-                userService.editUser(modifiedChecker(oldUser, currentUser));
-                UserDTO dto = new UserDTO(oldUser);
-                return Response.status(Response.Status.ACCEPTED).entity(dto).type(MediaType.APPLICATION_JSON).build();
-            }
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        return Response.status(Response.Status.BAD_REQUEST).build();
-    }
-
-    //user method
-    public Response updateUserPassword(UserBean updateUser, String oldPassword, @QueryParam("user_id") Long id) throws NoSuchAlgorithmException {
+    public UserDTO updateUserPersonalInfos(UserBean updateUser, Long id) throws NoSuchAlgorithmException {
         User oldUser = userService.getUser(id);
-        if (null != oldUser && null != oldPassword) {
-            if (oldUser.getPassword().equals(utilBean.sha256coding(oldPassword))) {
-                if(null != updateUser) {
-                    oldUser.setPassword(utilBean.sha256coding(oldPassword));
-                    userService.editUser(oldUser);
-                    UserDTO dto = new UserDTO(oldUser);
-                    return Response.status(Response.Status.ACCEPTED).entity(dto).type(MediaType.APPLICATION_JSON).build();
-                }
-                return Response.status(Response.Status.BAD_REQUEST).build();
-            }
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        if (null != oldUser) {
+            User currentUser = new User(updateUser);
+            userService.editUser(modifiedChecker(oldUser, currentUser));
+            return new UserDTO(oldUser);
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        throw new BadRequestException(getNoEntityMessage());
     }
-    
+
     //user method
-    public Response changeAvatar(String newAvatar, @QueryParam("user_id") Long id) {
-        if(null != newAvatar) {
-            User currentUser = userService.getUser(id);
-            if(null != currentUser) {
-                currentUser.setAvatar(newAvatar);
-                userService.editUser(currentUser);
-                UserDTO dto = new UserDTO(currentUser);
-                return Response.status(Response.Status.ACCEPTED).entity(dto).type(MediaType.APPLICATION_JSON).build();
+    public UserDTO updateUserPassword(UserBean updateUser, String oldPassword, Long id) throws NoSuchAlgorithmException {
+        User oldUser = userService.getUser(id);
+        if (null != oldUser) {
+            if (utilBean.sha256coding(oldPassword).equals(oldUser.getPassword())) {
+                oldUser.setPassword(utilBean.sha256coding(oldPassword));
+                userService.editUser(oldUser);
+                return new UserDTO(oldUser);
             }
-            return Response.status(Response.Status.NOT_FOUND).build();
+            throw new OldPasswordException("Old password doesn't equals what you wrote.");
         }
-        return Response.status(Response.Status.BAD_REQUEST).build();
+        throw new BadRequestException(getNoEntityMessage());
     }
-    
+
+    //user method
+    public UserDTO changeAvatar(String newAvatar, Long id) {
+        User currentUser = userService.getUser(id);
+        if (null != currentUser) {
+            currentUser.setAvatar(newAvatar);
+            userService.editUser(currentUser);
+            return new UserDTO(currentUser);
+        }
+        throw new BadRequestException(getNoEntityMessage());
+    }
+
     //admin method
-    public Response deleteUserById(@QueryParam("user_id") Long id) {
+    public List<UserDTO> deleteUserById(Long id) {
         User deleteUser = userService.getUser(id);
         if (null != deleteUser) {
             userService.deleteUser(deleteUser);
-            UserDTO dto = new UserDTO(deleteUser);
-            return Response.status(Response.Status.ACCEPTED).entity(dto).type(MediaType.APPLICATION_JSON).build();
+            List<UserDTO> userDTOs = new ArrayList<>();
+            for (User u : getEntities()) {
+                UserDTO userDTO = new UserDTO(u);
+                userDTOs.add(userDTO);
+            }
+            return userDTOs;
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        throw new BadRequestException(getNoEntityMessage());
     }
 
-    public Response getUsersList() {
-        List<UserDTO> users = new ArrayList();
+    //user method
+    public List<UserDTO> getUsersList() {
+        List<UserDTO> userDTOs = new ArrayList();
         for (User u : getEntities()) {
-            UserDTO user = new UserDTO(u);
-            users.add(user);
+            UserDTO userDTO = new UserDTO(u);
+            userDTOs.add(userDTO);
         }
-        return Response.ok(users).type(MediaType.APPLICATION_JSON).build();
+        return userDTOs;
     }
-    
+
     @Override
-    protected void doPersistEntity(){
+    protected void doPersistEntity() {
         userService.createUser(getEntity());
     }
-    
+
     @Override
-    protected User doUpdateEntity(){
+    protected User doUpdateEntity() {
         setEntity(userService.editUser(getEntity()));
         return getEntity();
     }
-    
+
     @Override
     public List<User> getEntities() {
         return userService.getUsersList(getLimit(), getOffset());
