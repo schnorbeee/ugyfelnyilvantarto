@@ -87,14 +87,18 @@
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="eventTitle" value="Event title:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventTitle" value="#{event.title}" class="form-control" required="true" label="Event title" requiredMessage="Event title required"/>
+                                        <h:inputText id="eventTitle" value="#{event.title}" class="form-control" required="true" label="Event title" requiredMessage="Event title required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
                                         <h:message id="eventTitleMessage" for="eventTitle" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="eventDescription" value="Event description:"/>
                                     <div class="col-sm-8">
-                                        <h:inputTextarea cols="40" rows="5" id="eventDescription" value="#{event.description}" class="form-control" required="true" label="Event description" requiredMessage="Event description required"/>
+                                        <h:inputTextarea cols="40" rows="5" id="eventDescription" value="#{event.description}" class="form-control" required="true" label="Event description" requiredMessage="Event description required">
+                                            <f:validateLength maximum="1500"/>
+                                        </h:inputText>
                                         <h:message id="eventDescriptionMessage" for="eventDescription" style="color:red"/>
                                     </div>
                                 </div>
@@ -102,35 +106,45 @@
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="eventCountry" value="Country:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventCountry" value="#{address.country}" class="form-control" required="true" label="Country" requiredMessage="Country required"/>
+                                        <h:inputText id="eventCountry" value="#{address.country}" class="form-control" required="true" label="Country" requiredMessage="Country required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
                                         <h:message id="eventCountryMessage" for="eventCountry" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="eventCity" value="City:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventCity" value="#{address.city}" class="form-control" required="true" label="City" requiredMessage="City required"/>
+                                        <h:inputText id="eventCity" value="#{address.city}" class="form-control" required="true" label="City" requiredMessage="City required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
                                         <h:message id="eventCityMessage" for="eventCity" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="eventZipCode" value="Zip code:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventZipCode" value="#{address.zipCode}" class="form-control" required="true" label="Zip code" requiredMessage="Zip code required"/>
+                                        <h:inputText id="eventZipCode" value="#{address.zipCode}" class="form-control" required="true" label="Zip code" requiredMessage="Zip code required">
+                                            <f:validateRegex pattern="\d{4,8}"/>
+                                        </h:inputText>
                                         <h:message id="eventZipCodeMessage" for="eventZipCode" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="eventStreet" value="Street:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventStreet" value="#{address.street}" class="form-control" required="true" label="Street" requiredMessage="Street required"/>
+                                        <h:inputText id="eventStreet" value="#{address.street}" class="form-control" required="true" label="Street" requiredMessage="Street required">
+                                            <f:validateLength maximum="30"/>
+                                        </h:inputText>
                                         <h:message id="eventStreetMessage" for="eventStreet" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="eventHouseNumber" value="House number:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="eventHouseNumber" value="#{address.houseNumber}" class="form-control" required="true" label="House number" requiredMessage="House number required"/>
+                                        <h:inputText id="eventHouseNumber" value="#{address.houseNumber}" class="form-control" required="true" label="House number" requiredMessage="House number required">
+                                            <f:validateLength maximum="20" />
+                                        </h:inputText>
                                         <h:message id="eventHouseNumberMessage" for="eventHouseNumber" style="color:red"/>
                                     </div>
                                 </div>
