@@ -58,11 +58,11 @@ public class UserDaoImpl extends AbstractDao<User> {
         return em.createNamedQuery("user.list", User.class).getResultList();
     }
 
-    public List<User> getUsersListByRankFilter(String rank) {
-        if (null != rank) {
-            List<User> query = em.createNamedQuery("user.by.rank.filter", User.class).setParameter("rank", "%" + rank + "%").getResultList();
+    public List<User> getUsersListByRankFilter(String position) {
+        if (null != position) {
+            List<User> query = em.createNamedQuery("user.by.rank.filter", User.class).setParameter("position", "%" + position + "%").getResultList();
             if (query.isEmpty()) {
-                throw new NoMatchForFilterException("Results can not be found with this parameter: " + rank);
+                throw new NoMatchForFilterException("Results can not be found with this parameter: " + position);
             }
             return query;
         }

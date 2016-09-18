@@ -3,7 +3,7 @@ package com.codingmentorteam3.beans;
 import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.constraints.Password;
 import com.codingmentorteam3.constraints.Username;
-import com.codingmentorteam3.enums.RankType;
+import com.codingmentorteam3.enums.PositionType;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -30,7 +30,7 @@ public class UserBean extends PersonBean {
         // Default constructor
     }
 
-    public UserBean(String username, String password, String firstName, String lastName, RankType rank, String avatar) {
+    public UserBean(String username, String password, String firstName, String lastName, PositionType rank, String avatar) {
         super(firstName, lastName, rank, avatar);
         this.username = username;
         this.password = password;

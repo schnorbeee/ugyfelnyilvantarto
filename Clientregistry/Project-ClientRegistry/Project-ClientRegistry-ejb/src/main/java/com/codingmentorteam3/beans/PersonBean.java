@@ -1,7 +1,7 @@
 package com.codingmentorteam3.beans;
 
 import com.codingmentorteam3.annotations.Validate;
-import com.codingmentorteam3.enums.RankType;
+import com.codingmentorteam3.enums.PositionType;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 @ManagedBean(name = "person")
 public class PersonBean {
     
-    private static final RankType DEFAULT_RANK = RankType.VISITOR;
+    private static final PositionType DEFAULT_RANK = PositionType.VISITOR;
     
     private static final String DEFAULT_AVATAR = "";
     
@@ -30,7 +30,7 @@ public class PersonBean {
     protected String lastName;
     
     @NotNull
-    protected RankType rank = DEFAULT_RANK;
+    protected PositionType rank = DEFAULT_RANK;
 
     @NotNull
     private String avatar = DEFAULT_AVATAR;
@@ -44,7 +44,7 @@ public class PersonBean {
         this.lastName = lastName;
     }
 
-    public PersonBean(String firstName, String lastName, RankType rank, String avatar) {
+    public PersonBean(String firstName, String lastName, PositionType rank, String avatar) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.rank = rank;
@@ -67,11 +67,11 @@ public class PersonBean {
         this.lastName = lastName;
     }
 
-    public RankType getRank() {
+    public PositionType getRank() {
         return rank;
     }
 
-    public void setRank(RankType rank) {
+    public void setRank(PositionType rank) {
         this.rank = rank;
     }
 
