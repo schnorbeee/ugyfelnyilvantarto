@@ -52,13 +52,13 @@ public class EventController extends PageableEntityController<Event> {
             newEvent.setAddress(oldAddress);
             newEvent.setCompany(oldCompany);
             eventService.createEvent(newEvent);
-            return "";
+            return "events.xhtml";
         }
         addressService.createAddress(newAddress);
         newEvent.setAddress(newAddress);
         newEvent.setCompany(oldCompany);
         eventService.createEvent(newEvent);
-        return "events";
+        return "events.xhtml";
     }
 
     public String getEventById(Long eventId) {

@@ -30,11 +30,11 @@ public class AddressBean {
     private String street;
     
     @NotNull 
-    @Pattern(regexp = "\\d{1,4}(\\/[A-Z]){0,1}") // e.g. 12, 123/A
+    @Pattern(regexp = "\\w{1,20}")
     private String houseNumber;
     
     @NotNull 
-    @Pattern(regexp = "[A-Z]{1,3}\\-\\d{4,8}") // e.g. HUN-1234, ES-123456
+    @Pattern(regexp = "\\d{4,8}")
     private String zipCode;
 
     public AddressBean() {

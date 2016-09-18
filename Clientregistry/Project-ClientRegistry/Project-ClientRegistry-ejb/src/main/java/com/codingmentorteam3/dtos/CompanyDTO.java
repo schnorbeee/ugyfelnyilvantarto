@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author istvan.mosonyi
  */
 public class CompanyDTO {
-    
+
     private String name;
 
     private Address address;

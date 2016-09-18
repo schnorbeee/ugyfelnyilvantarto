@@ -48,7 +48,7 @@ public class PasswordValidator implements Validator {
     }
     
     private FacesMessage getWrongPasswordFacesMessage() {
-        FacesMessage msg = new FacesMessage("Password validation failed. Invalid password format.");
+        FacesMessage msg = new FacesMessage("Invalid password format. Please enter a password with a minimum length of 6 containing small and large letters and a number or a secific character (=, +, <, >).");
         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
         return msg;
     }

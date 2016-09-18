@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @ManagedBean(name = "role")
 public class RoleBean {
     
-    private static final RoleType DEFAULT_ROLE = RoleType.VISITOR;
+    private static final RoleType DEFAULT_ROLE = RoleType.USER;
     
     @NotNull
     private RoleType type = DEFAULT_ROLE;

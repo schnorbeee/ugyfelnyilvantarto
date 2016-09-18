@@ -29,7 +29,7 @@ public class EmailValidator implements Validator {
     }
     
     private FacesMessage getWrongEmailFacesMessage() {
-        FacesMessage msg = new FacesMessage("E-mail validation failed. Invalid E-mail format.");
+        FacesMessage msg = new FacesMessage("Invalid E-mail format, please enter a valid e-mail address.");
         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
         return msg;
     }

@@ -18,7 +18,6 @@ import javax.validation.constraints.Size;
  *
  * @author istvan.mosonyi
  */
-@Size(min = 6)
 @Pattern(regexp = "\\w{6,}")
 @Constraint(validatedBy = {})
 @ReportAsSingleViolation

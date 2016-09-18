@@ -21,7 +21,7 @@ public class ValidDeadlineValidator
         if(projectDTO.getStartDate() != null && projectDTO.getDeadline() != null) {
             return projectDTO.getStartDate().before(projectDTO.getDeadline());
         }
-        return false;
+        return true;
     }
     
 }
