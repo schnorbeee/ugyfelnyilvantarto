@@ -45,17 +45,17 @@
                 FIX LEFT-SIDE MENU
                 -->
                 <div class="col-sm-2 col-sm-offset-1">
-                    <img alt="profile-1" class="profile" src="img/profile.png"/>
-                    <a href="events.html" class="btn btn-default btn-color-default center-block btn-space">Home</a>
-                    <a href="myinvitations.html" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
-                    <a href="myevents.html" class="btn btn-default btn-color-default center-block btn-space">My events</a>
-                    <a href="myprofile.html" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
+                    <img alt="profile-1" class="profile" src="../img/profile.png"/>
+                    <a href="events.xhtml" class="btn btn-default btn-color-default center-block btn-space">Home</a>
+                    <a href="myinvitations.xhtml" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
+                    <a href="myevents.xhtml" class="btn btn-default btn-color-default center-block btn-space">My events</a>
+                    <a href="profile.xhtml" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
                     <hr/>
-                    <a href="manageevents.html" class="btn btn-default btn-color-default center-block btn-space active">Manage events</a>
-                    <a href="manageprojects.html" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                    <a href="composite/createEvent.xhtml" class="btn btn-default btn-color-default center-block btn-space active">Manage events</a>
+                    <a href="composite/createProject.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
                     <hr/>
-                    <a href="manageusers.html" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
-                    <a href="managecompanies.html" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                    <a href="manageusers.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
+                    <a href="composite/createCompany.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
                     <hr/>
                     <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
                 </div>
@@ -66,142 +66,85 @@
                 <!--
                 MAIN CONTENT
                 -->
-                <div class="col-xs-12 event-box">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div class="row">
-                                <img alt="company-logo-1" class="company-logo center-block" src="../img/company-logo.png">
-                            </div>
-                            <div class="row">
-                                <a class="text-center" href="company.html">Company No.1</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <label><a href="event.html">Event title</a></label>
-                            </div>
-                            <div class="row">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Assumenda quas quibusdam tempora! Ab accusamus consectetur
-                                dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
-                                Accusantium error esse facilis harum molestias?
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <label>2016.09.01.</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <label>VII. Erzsébet körút 24.</label>
-                        </div>
-                    </div>
-                    <div class="row event-comment">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <div class="input-group">
-                                <input type="text" class="form-control" aria-label="...">
-                                    <div class="input-group-btn">
-                                        <a href="#" class="btn btn-color-comment">Comment</a>
+                <div class="col-xs-8">
+                    <div class="col-xs-12 event-box">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <img alt="company-logo-1" class="company-logo center-block" src="img/company-logo.png"/>
                                     </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row event-accept-or-decline">
-                        <div class="col-sm-3 col-sm-offset-9">
-                            <a href="#" class="btn btn-primary center-block btn-color-sign-in">Subscribe</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 event-box">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div class="row">
-                                <img alt="company-logo-1" class="company-logo center-block" src="../img/company-logo.png">
-                            </div>
-                            <div class="row">
-                                <a class="text-center" href="company.html">Company No.1</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <label><a href="event.html">Event title</a></label>
-                            </div>
-                            <div class="row">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Assumenda quas quibusdam tempora! Ab accusamus consectetur
-                                dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
-                                Accusantium error esse facilis harum molestias?
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <label>2016.09.01.</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <label>VII. Erzsébet körút 24.</label>
-                        </div>
-                    </div>
-                    <div class="row event-comment">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <div class="input-group">
-                                <input type="text" class="form-control" aria-label="...">
-                                    <div class="input-group-btn">
-                                        <a href="#" class="btn btn-color-comment">Comment</a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <a class="text-center" href="company.html">Company No.1</a>
                                     </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row event-accept-or-decline">
-                        <div class="col-sm-3 col-sm-offset-9">
-                            <a href="#" class="btn btn-primary center-block btn-color-sign-in">Subscribe</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 event-box">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div class="row">
-                                <img alt="company-logo-1" class="company-logo center-block" src="../img/company-logo.png">
-                            </div>
-                            <div class="row">
-                                <a class="text-center" href="company.html">Company No.1</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <label><a href="event.html">Event title</a></label>
-                            </div>
-                            <div class="row">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Assumenda quas quibusdam tempora! Ab accusamus consectetur
-                                dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
-                                Accusantium error esse facilis harum molestias?
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <label>2016.09.01.</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <label>VII. Erzsébet körút 24.</label>
-                        </div>
-                    </div>
-                    <div class="row event-comment">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <div class="input-group">
-                                <input type="text" class="form-control" aria-label="...">
-                                    <div class="input-group-btn">
-                                        <a href="#" class="btn btn-color-comment">Comment</a>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label><a href="event.html">Event title</a></label>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Assumenda quas quibusdam tempora! Ab accusamus consectetur
+                                        dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
+                                        Accusantium error esse facilis harum molestias?
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2016.09.01.</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>VII. Erzsébet körút 24.</label>
                             </div>
                         </div>
                     </div>
-                    <div class="row event-accept-or-decline">
-                        <div class="col-sm-3 col-sm-offset-9">
-                            <a href="#" class="btn btn-primary center-block btn-color-sign-in">Subscribe</a>
+                    <div class="col-xs-12 event-box">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <img alt="company-logo-1" class="company-logo center-block" src="img/company-logo.png"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <a class="text-center" href="company.html">Company No.1</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label><a href="event.html">Event title</a></label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Assumenda quas quibusdam tempora! Ab accusamus consectetur
+                                        dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
+                                        Accusantium error esse facilis harum molestias?
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>2016.09.01.</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>VII. Erzsébet körút 24.</label>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!--
                 END OF MAIN CONTENT
                 -->
-
             </div>
 
             <footer class="footer panel-footer">

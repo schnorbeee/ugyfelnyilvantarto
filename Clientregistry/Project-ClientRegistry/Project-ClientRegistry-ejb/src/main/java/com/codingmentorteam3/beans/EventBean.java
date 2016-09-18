@@ -26,7 +26,7 @@ public class EventBean {
     private static final EventType DEFAULT_TYPE = EventType.MEETING;
     
     @NotNull
-    @Size(max = 30)
+    @Size(min = 2, max = 30)
     private String title;
     
     @Size(max = 1500)

@@ -6,6 +6,6 @@ package com.codingmentorteam3.enums;
  */
 public enum RoleType {
 
-    ADMIN, USER, VISITOR
+    ADMIN, USER, MANAGER
     
 }

@@ -46,16 +46,16 @@
                 -->
                 <div class="col-sm-2 col-sm-offset-1">
                     <img alt="profile-1" class="profile" src="../img/profile.png"/>
-                    <a href="events.html" class="btn btn-default btn-color-default center-block btn-space">Home</a>
-                    <a href="myinvitations.html" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
-                    <a href="myevents.html" class="btn btn-default btn-color-default center-block btn-space">My events</a>
-                    <a href="myprofile.html" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
+                    <a href="../events.xhtml" class="btn btn-default btn-color-default center-block btn-space">Home</a>
+                    <a href="../myinvitations.xhtml" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
+                    <a href="../myevents.xhtml" class="btn btn-default btn-color-default center-block btn-space">My events</a>
+                    <a href="../profile.xhtml" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
                     <hr/>
-                    <a href="manageevents.html" class="btn btn-default btn-color-default center-block btn-space active">Manage events</a>
-                    <a href="manageprojects.html" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                    <a href="createEvent.xhtml" class="btn btn-default btn-color-default center-block btn-space active">Manage events</a>
+                    <a href="createProject.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
                     <hr/>
-                    <a href="manageusers.html" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
-                    <a href="managecompanies.html" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                    <a href="manageusers.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
+                    <a href="createCompany.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
                     <hr/>
                     <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
                 </div>
@@ -75,50 +75,64 @@
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="comapanyName" value="Company name:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="companyName" value="#{company.name}" class="form-control" required="true" label="Company name" requiredMessage="Name required"/>
+                                        <h:inputText id="companyName" value="#{company.name}" class="form-control" required="true" label="Company name" requiredMessage="Name required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
                                         <h:message id="companyNameMessage" for="companyName" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="taxNumber" value="Tax number:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="taxNumber" value="#{company.taxNumber}" class="form-control" required="true" label="Tax number" requiredMessage="Tax number required"/>
+                                        <h:inputText id="taxNumber" value="#{company.taxNumber}" class="form-control" required="true" label="Tax number" requiredMessage="Tax number required">
+                                            <f:validator validatorId="TaxNumberValidator"/>
+                                        </h:inputText>
                                         <h:message id="taxNumberMessage" for="taxNumber" style="color:red"/>
                                     </div>
                                 </div>
-                                <label>Place</label>
+                                <label>Site</label>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="companyCountry" value="Country:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="companyCountry" value="#{address.country}" class="form-control" required="true" label="Country" requiredMessage="Country required"/>
+                                        <h:inputText id="companyCountry" value="#{address.country}" class="form-control" required="true" label="Country" requiredMessage="Country required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
                                         <h:message id="companyCountryMessage" for="companyCountry" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="companyCity" value="City:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="companyCity" value="#{address.city}" class="form-control" required="true" label="City" requiredMessage="City required"/>
+                                        <h:inputText id="companyCity" value="#{address.city}" class="form-control" required="true" label="City" requiredMessage="City required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
                                         <h:message id="companyCityMessage" for="companyCity" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="companyZipCode" value="Zip code:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="companyZipCode" value="#{address.zipCode}" class="form-control" required="true" label="Zip code" requiredMessage="Zip code required"/>
+                                        <h:inputText id="companyZipCode" value="#{address.zipCode}" class="form-control" required="true" label="Zip code" requiredMessage="Zip code required">
+                                            <f:validateRegex pattern="\d{4,8}"/>
+                                        </h:inputText>
                                         <h:message id="companyZipCodeMessage" for="companyZipCode" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="companyStreet" value="Street:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="companyStreet" value="#{address.street}" class="form-control" required="true" label="Street" requiredMessage="Street required"/>
+                                        <h:inputText id="companyStreet" value="#{address.street}" class="form-control" required="true" label="Street" requiredMessage="Street required">
+                                            <f:validateLength maximum="30"/>
+                                        </h:inputText>
                                         <h:message id="companyStreetMessage" for="companyStreet" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="companyHouseNumber" value="House number:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="companyHouseNumber" value="#{address.houseNumber}" class="form-control" required="true" label="House number" requiredMessage="House number required"/>
+                                        <h:inputText id="companyHouseNumber" value="#{address.houseNumber}" class="form-control" required="true" label="House number" requiredMessage="House number required">
+                                            <f:validateLength maximum="20"/>
+                                        </h:inputText>
                                         <h:message id="companyHouseNumberMessage" for="companyHouseNumber" style="color:red"/>
                                     </div>
                                 </div>

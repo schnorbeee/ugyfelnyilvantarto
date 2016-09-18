@@ -1,7 +1,6 @@
 package com.codingmentorteam3.dtos;
 
 import com.codingmentorteam3.entities.Role;
-import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.RoleType;
 import java.util.Objects;
 
@@ -10,10 +9,8 @@ import java.util.Objects;
  * @author istvan.mosonyi
  */
 public class RoleDTO {
-    
-    private static final RoleType DEFAULT_ROLE = RoleType.VISITOR;
 
-    private RoleType type = DEFAULT_ROLE;
+    private RoleType type;
 
     private String username;
 
