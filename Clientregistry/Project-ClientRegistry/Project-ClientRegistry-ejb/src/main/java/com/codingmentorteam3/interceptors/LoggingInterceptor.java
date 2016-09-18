@@ -12,6 +12,7 @@ import javax.interceptor.InvocationContext;
  * @author Zsolt
  */
 @Interceptor
+@Logging
 public class LoggingInterceptor {
     
     @Inject

@@ -1,6 +1,6 @@
 package com.codingmentorteam3.entities;
 
-import com.codingmentorteam3.enums.RankType;
+import com.codingmentorteam3.enums.PositionType;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Person implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    protected RankType rank;
+    protected PositionType position;
     
     @Column(nullable = false)
     protected String avatar;
@@ -50,10 +50,10 @@ public class Person implements Serializable {
         //Default constructor
     }
 
-    public Person(String firstName, String lastName, RankType rank, String avatar) {
+    public Person(String firstName, String lastName, PositionType position, String avatar) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.rank = rank;
+        this.position = position;
         this.avatar = avatar;
     }
     
@@ -81,12 +81,12 @@ public class Person implements Serializable {
         this.lastName = lastName;
     }
 
-    public RankType getRank() {
-        return rank;
+    public PositionType getPosition() {
+        return position;
     }
 
-    public void setRank(RankType rank) {
-        this.rank = rank;
+    public void setPosition(PositionType position) {
+        this.position = position;
     }
 
     public String getAvatar() {
@@ -111,7 +111,7 @@ public class Person implements Serializable {
         hash = 19 * hash + Objects.hashCode(this.id);
         hash = 19 * hash + Objects.hashCode(this.firstName);
         hash = 19 * hash + Objects.hashCode(this.lastName);
-        hash = 19 * hash + Objects.hashCode(this.rank);
+        hash = 19 * hash + Objects.hashCode(this.position);
         hash = 19 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
@@ -140,7 +140,7 @@ public class Person implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (this.rank != other.rank) {
+        if (this.position != other.position) {
             return false;
         }
         return true;

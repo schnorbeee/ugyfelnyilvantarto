@@ -15,11 +15,12 @@ import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Role;
 import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.ConnectionChannelType;
-import com.codingmentorteam3.enums.RankType;
+import com.codingmentorteam3.enums.PositionType;
 import com.codingmentorteam3.enums.RoleType;
 import com.codingmentorteam3.util.UtilBean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -38,7 +39,8 @@ import org.junit.Test;
  */
 public class UserControllerTest {
 
-    UserController userController = new UserController();
+    @Inject
+    UserController userController;
     
     UtilBean utilBean = new UtilBean();
 
@@ -122,7 +124,7 @@ public class UserControllerTest {
         ConnectionChannel regChannel = new ConnectionChannel(newChannel);
         ConnectionChannelDTO connectionChannelDto = new ConnectionChannelDTO(regChannel);
         
-        RoleBean newRoleBean = new RoleBean(RoleType.VISITOR, regUser);
+        RoleBean newRoleBean = new RoleBean(regUser);
         Role newRole = new Role(newRoleBean);
         RoleDTO roleDto = new RoleDTO(newRole);
         

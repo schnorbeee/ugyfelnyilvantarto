@@ -31,4 +31,8 @@ public class AddressService {
         return addressDaoImpl.delete(address);
     }
     
+    public Address getAddressByAllParameters(String city, String country, String zip, String street, String houseNumber) {
+        return addressDaoImpl.getAddressByAllParameters(city, country, zip, street, houseNumber);
+    }
+    
 }

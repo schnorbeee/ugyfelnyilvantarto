@@ -3,9 +3,11 @@ package com.codingmentorteam3.controllers;
 import com.codingmentorteam3.controllers.general.PageableEntityController;
 import com.codingmentorteam3.entities.Project;
 import com.codingmentorteam3.interceptors.BeanValidation;
+import com.codingmentorteam3.services.ProjectService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -16,40 +18,47 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "projectController")
 public class ProjectController extends PageableEntityController<Project> {
 
-    @Override
-    public List<Project> getEntities() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    @Inject
+    private ProjectService projectService;
 
     @Override
-    protected Project loadEntity(Long entityId) {
-        return new Project();
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void doPersistEntity() {
+        projectService.createProject(getEntity());
     }
 
     @Override
     protected Project doUpdateEntity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setEntity(projectService.editProject(getEntity()));
+        return getEntity();
     }
 
     @Override
-    protected void doPersistEntity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Project> getEntities() {
+        return projectService.getProjectsList(getLimit(), getOffset());
     }
 
     @Override
-    protected String getNoEntityMessage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected Project loadEntity(Long entityId) {
+        if (entityId != null) {
+            return projectService.getProject(entityId);
+        }
+        return new Project();
     }
 
+    //atnezni a stringek helyesek-e az alabbi 3 override-nal
     @Override
     public String getListPage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "project-list";
     }
 
     @Override
     public String getNewItemOutcome() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "composite/createProject.xhtml";
+    }
+
+    @Override
+    public String getNoEntityMessage() {
+        return "No project found in database!";
     }
     
 }

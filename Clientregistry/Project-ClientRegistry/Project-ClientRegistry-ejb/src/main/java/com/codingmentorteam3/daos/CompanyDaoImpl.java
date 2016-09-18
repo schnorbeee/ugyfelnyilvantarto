@@ -28,21 +28,17 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
     public List<Company> getCompaniesListByNameFilter(String name) {
         if (null != name) {
             List<Company> query = em.createNamedQuery("company.by.name.filter", Company.class).setParameter("name", "%" + name + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("The results can not be found with this parameter: " + name);
-            }
             return query;
         }
         return em.createNamedQuery("company.list", Company.class).getResultList();
     }
 
-    public List<Company> getCompaniesListByTaxFilter(String tax) {
+    public List<Company> getCompaniesListByTaxFilter(String tax, int limit, int offset) {
         if (null != tax) {
-            List<Company> query = em.createNamedQuery("company.by.tax.number.filter", Company.class).setParameter("tax", "%" + tax + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("The results can not be found with this parameter: " + tax);
-            }
-            return query;
+            TypedQuery<Company> query = em.createNamedQuery("company.by.tax.number.filter", Company.class).setParameter("tax", "%" + tax + "%");
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+            return query.getResultList();
         }
         return em.createNamedQuery("company.list", Company.class).getResultList();
     }

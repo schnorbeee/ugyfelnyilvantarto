@@ -6,11 +6,13 @@ import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.RoleType;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
 import com.codingmentorteam3.exceptions.query.LastAdminException;
+import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.RoleService;
 import com.codingmentorteam3.services.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -20,6 +22,8 @@ import javax.ws.rs.core.Response;
  *
  * @author norbeee sch.norbeee@gmail.com
  */
+@BeanValidation
+@RequestScoped
 @ManagedBean(name = "roleController")
 public class RoleController {
 

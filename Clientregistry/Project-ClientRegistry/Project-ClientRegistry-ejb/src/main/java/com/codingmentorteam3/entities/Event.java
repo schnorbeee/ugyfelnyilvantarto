@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.beans.EventBean;
 import com.codingmentorteam3.enums.EventType;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -42,15 +42,15 @@ public class Event implements Serializable {
     @Column(name = "event_id")
     private Long id;
 
-    @OneToOne
+    @ManyToOne(targetEntity = Address.class)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 30, unique = true)
     private String title;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "start_date", nullable = false)
+    //@Column(name = "start_date", nullable = false)
     private Date startDate;
 
     @Temporal(TemporalType.DATE)
@@ -64,7 +64,7 @@ public class Event implements Serializable {
     private EventType type;
 
     @ManyToOne(targetEntity = Company.class)
-    @JoinColumn(name = "company_id")
+    @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
     @ManyToMany(mappedBy = "events", targetEntity = User.class)
@@ -77,6 +77,12 @@ public class Event implements Serializable {
         //Default constructor
     }
 
+    public Event(EventBean eventBean) {
+        this.title = eventBean.getTitle();
+        this.description = eventBean.getDescription();
+        this.type = eventBean.getType();
+    }
+    
     public Event(Address address, String title, Date startDate, Date endDate, String description, EventType type, Company company) {
         this.address = address;
         this.title = title;

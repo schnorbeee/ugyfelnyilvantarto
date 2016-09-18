@@ -19,7 +19,6 @@ import com.codingmentorteam3.util.UtilBean;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -36,9 +35,6 @@ import javax.ws.rs.core.Response;
 @ManagedBean(name = "userController")
 public class UserController extends PageableEntityController<User> {
 
-    private static final Logger LOG = Logger.getLogger(UserController.class.getName());
-
-    
     @Inject
     private UserService userService;
 
@@ -72,8 +68,8 @@ public class UserController extends PageableEntityController<User> {
     }
 
     //user method
-    public Response getUserById(@QueryParam("user_id") Long id) {
-        User user = userService.getUser(id);
+    public Response getUserById(@QueryParam("userId") Long userId) {
+        User user = userService.getUser(userId);
         if (null != user) {
             UserDTO dto = new UserDTO(user);
             return Response.status(Response.Status.FOUND).entity(dto).type(MediaType.APPLICATION_JSON).build();
@@ -112,6 +108,21 @@ public class UserController extends PageableEntityController<User> {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
+    }
+    
+    //user method
+    public Response changeAvatar(String newAvatar, @QueryParam("user_id") Long id) {
+        if(null != newAvatar) {
+            User currentUser = userService.getUser(id);
+            if(null != currentUser) {
+                currentUser.setAvatar(newAvatar);
+                userService.editUser(currentUser);
+                UserDTO dto = new UserDTO(currentUser);
+                return Response.status(Response.Status.ACCEPTED).entity(dto).type(MediaType.APPLICATION_JSON).build();
+            }
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
     
     //admin method
@@ -161,12 +172,12 @@ public class UserController extends PageableEntityController<User> {
     //atnezni a stringek helyesek-e az alabbi 3 override-nal
     @Override
     public String getListPage() {
-        return "user-list";
+        return "users";
     }
 
     @Override
     public String getNewItemOutcome() {
-        return "composite/user.xhtml";
+        return "edit/editProfile.xhtml";
     }
 
     @Override

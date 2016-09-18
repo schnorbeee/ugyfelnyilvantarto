@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.beans.CompanyBean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +48,9 @@ public class Company implements Serializable {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @Column(name = "tax_number", nullable = false)
+    @Column(name = "tax_number", nullable = false, unique = true)
     private String taxNumber;
 
-    @Column(nullable = false)
     private String logo;
 
     @OneToMany(mappedBy = "company", targetEntity = Event.class)
@@ -69,6 +69,12 @@ public class Company implements Serializable {
         //Default constructor
     }
 
+    public Company(CompanyBean companyBean) {
+        this.name = companyBean.getName();
+        this.address = companyBean.getAddress();
+        this.taxNumber = companyBean.getTaxNumber();
+    }
+    
     public Company(String name, Address address, String taxNumber, String logo) {
         this.name = name;
         this.address = address;
