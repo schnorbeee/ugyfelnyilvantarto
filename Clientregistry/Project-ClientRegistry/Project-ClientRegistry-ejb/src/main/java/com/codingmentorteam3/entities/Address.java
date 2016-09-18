@@ -45,6 +45,9 @@ public class Address implements Serializable {
     @Column(name = "house_number", nullable = false)
     private String houseNumber;
     
+    @OneToMany(mappedBy = "address", targetEntity = Company.class)
+    private List<Company> companies = new ArrayList<>();
+    
     @OneToMany(mappedBy = "address", targetEntity = Event.class)
     private List<Event> events = new ArrayList<>();
     
@@ -114,6 +117,14 @@ public class Address implements Serializable {
 
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
+    }
+
+    public List<Company> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<Company> companies) {
+        this.companies = companies;
     }
 
     public List<Event> getEvents() {

@@ -43,13 +43,9 @@ public class CompanyController extends PageableEntityController<Company> {
         }
         Address oldAddress = addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber());
         if (null != oldAddress) {
-            if (null != companyService.getCompanyByAddressId(oldAddress.getId())) {
-                throw new EntityAlreadyExistsException("With this address we had other company definied.");
-            } else {
-                newCompany.setAddress(oldAddress);
-                companyService.createCompany(newCompany);
-                return "";
-            }
+            newCompany.setAddress(oldAddress);
+            companyService.createCompany(newCompany);
+            return "";
         }
         addressService.createAddress(newAddress);
         newCompany.setAddress(newAddress);

@@ -13,11 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -45,7 +45,7 @@ public class Company implements Serializable {
     @Column(nullable = false, length = 30)
     private String name;
 
-    @OneToOne
+    @ManyToOne(targetEntity = Address.class)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 

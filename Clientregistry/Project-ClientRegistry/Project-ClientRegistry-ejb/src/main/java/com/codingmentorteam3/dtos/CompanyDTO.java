@@ -10,15 +10,13 @@ import java.util.Objects;
  */
 public class CompanyDTO {
     
-    private static final String DEFAULT_LOGO = "";
-
     private String name;
 
     private Address address;
 
     private String taxNumber;
 
-    private String logo = DEFAULT_LOGO;
+    private String logo;
 
     public CompanyDTO() {
         // Default constructor
