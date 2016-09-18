@@ -9,8 +9,6 @@ import java.util.Objects;
  * @author istvan.mosonyi
  */
 public class CompanyDTO {
-    
-    private static final String DEFAULT_LOGO = "";
 
     private String name;
 
@@ -18,7 +16,7 @@ public class CompanyDTO {
 
     private String taxNumber;
 
-    private String logo = DEFAULT_LOGO;
+    private String logo;
 
     public CompanyDTO() {
         // Default constructor
