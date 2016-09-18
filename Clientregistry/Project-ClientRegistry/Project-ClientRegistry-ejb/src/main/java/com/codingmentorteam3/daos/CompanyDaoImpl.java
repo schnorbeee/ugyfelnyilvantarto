@@ -7,7 +7,6 @@ import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.Project;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
 import com.codingmentorteam3.exceptions.query.EmptyListException;
-import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
@@ -42,8 +41,13 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         }
         return em.createNamedQuery("company.list", Company.class).getResultList();
     }
+    
+    public Company getCompanyByAddressId(Long addressId) {
+        TypedQuery<Company> query = em.createNamedQuery("company.by.address.id", Company.class);
+        return query.getSingleResult();
+    }
 
-    public List<Company> getCompaniesList(int limit, int offset){
+    public List<Company> getCompaniesList(int limit, int offset) {
         TypedQuery<Company> query = em.createNamedQuery("company.list", Company.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);

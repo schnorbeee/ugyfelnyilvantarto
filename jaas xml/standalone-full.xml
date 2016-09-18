@@ -101,6 +101,21 @@
                 <suffix value=".yyyy-MM-dd"/>
                 <append value="true"/>
             </periodic-rotating-file-handler>
+            <periodic-rotating-file-handler name="AUDIT" autoflush="true">
+                <level name="TRACE"/>
+                <formatter>
+                    <named-formatter name="PATTERN"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="audit.log"/>
+                <suffix value=".yyyy-MM-dd"/>
+                <append value="true"/>
+            </periodic-rotating-file-handler>
+            <logger category="org.jboss.security">
+                <level name="TRACE"/>
+                <handlers>
+                    <handler name="AUDIT"/>
+                </handlers>
+            </logger>
             <logger category="com.arjuna">
                 <level name="WARN"/>
             </logger>
@@ -388,8 +403,10 @@
                             <module-option name="dsJndiName" value="java:jboss/jdbc/clientregistry"/>
                             <module-option name="principalsQuery" value="select password from user_table where username=?"/>
                             <module-option name="rolesQuery" value="select role_type, 'Roles' from role_table where username=?"/>
-							<module-option name="hashAlgorithm" value="SHA-256"/>
-						</login-module>
+                            <module-option name="hashAlgorithm" value="SHA-256"/>
+                            <module-option name="hashEncoding" value="hex"/>
+                            <module-option name="hashUserPassword" value="true"/>
+                        </login-module>
                     </authentication>
                 </security-domain>
                 <security-domain name="jaas-training-realm" cache-type="default">

@@ -3,15 +3,17 @@ package com.codingmentorteam3.controllers;
 import com.codingmentorteam3.beans.AddressBean;
 import com.codingmentorteam3.beans.EventBean;
 import com.codingmentorteam3.controllers.general.PageableEntityController;
-import com.codingmentorteam3.dtos.AddressDTO;
 import com.codingmentorteam3.dtos.EventDTO;
 import com.codingmentorteam3.entities.Address;
 import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.entities.Event;
+import com.codingmentorteam3.exceptions.query.BadRequestException;
+import com.codingmentorteam3.exceptions.query.EntityAlreadyExistsException;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.AddressService;
 import com.codingmentorteam3.services.CompanyService;
 import com.codingmentorteam3.services.EventService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -31,61 +33,63 @@ public class EventController extends PageableEntityController<Event> {
 
     @Inject
     private EventService eventService;
-    
+
     @Inject
     private CompanyService companyService;
-    
+
     @Inject
     private AddressService addressService;
-    
+
     public String createEvent(EventBean regEvent, AddressBean regAddress, Long companyId) {
         Event newEvent = new Event(regEvent);
         Address newAddress = new Address(regAddress);
         Company oldCompany = companyService.getCompany(1L);
-        if(!eventService.getEventsListByTitleFilter(newEvent.getTitle(), getLimit(), getOffset()).isEmpty()) {
-           // return Response.status(Response.Status.PRECONDITION_FAILED).build();
+        if (!eventService.getEventsListByTitleFilter(newEvent.getTitle(), getLimit(), getOffset()).isEmpty()) {
+            throw new EntityAlreadyExistsException("This event already exists in our database.");
         }
-        if(null != addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber())) {
-           // return Response.status(Response.Status.PRECONDITION_FAILED).build();
-        }
-        if(null != oldCompany) {
-           // return Response.status(Response.Status.BAD_REQUEST).build();
+        Address oldAddress = addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber());
+        if (null != oldAddress) {
+            newEvent.setAddress(oldAddress);
+            newEvent.setCompany(oldCompany);
+            eventService.createEvent(newEvent);
+            return "";
         }
         addressService.createAddress(newAddress);
         newEvent.setAddress(newAddress);
         newEvent.setCompany(oldCompany);
         eventService.createEvent(newEvent);
-        AddressDTO addressDto = new AddressDTO(newAddress);
-        EventDTO eventDto = new EventDTO(newEvent);
         return "events";
     }
-    
-    public Response getEventById(@QueryParam("eventId") Long eventId) {
+
+    public String getEventById(Long eventId) {
         Event event = eventService.getEvent(eventId);
         if (null != event) {
-            EventDTO dto = new EventDTO(event);
-            return Response.status(Response.Status.FOUND).entity(dto).type(MediaType.APPLICATION_JSON).build();
+            return "";
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        throw new BadRequestException(getNoEntityMessage());
     }
-    
-    public Response updateEvent(@QueryParam("eventId") Long eventId) {
-        return Response.accepted().build();
+
+    public EventDTO updateEvent(Long eventId) {
+        return new EventDTO();
         //TODO
     }
-    
-    public Response deleteEventById(@QueryParam("eventId") Long eventId) {
+
+    public List<EventDTO> deleteEventById(Long eventId) {
         Event deleteEvent = eventService.getEvent(eventId);
-        if(null != deleteEvent) {
+        if (null != deleteEvent) {
             eventService.deleteEvent(deleteEvent);
-            EventDTO dto = new EventDTO(deleteEvent);
-            return Response.status(Response.Status.ACCEPTED).entity(dto).type(MediaType.APPLICATION_JSON).build();
+            List<EventDTO> eventDTOs = new ArrayList<>();
+            for(Event e : getEntities()) {
+                EventDTO eventDTO = new EventDTO(e);
+                eventDTOs.add(eventDTO);
+            }
+            return eventDTOs;
         }
-        return Response.status(Response.Status.BAD_REQUEST).build();
+        throw new BadRequestException(getNoEntityMessage());
     }
-    
+
     @Override
-    public List<Event> getEntities() {       
+    public List<Event> getEntities() {
         return eventService.getEventsList(getLimit(), getOffset());
     }
 

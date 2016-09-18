@@ -13,11 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -28,6 +28,7 @@ import javax.persistence.OneToOne;
 @NamedQueries({
     @NamedQuery(name = "company.by.name.filter", query = "SELECT c FROM company_table c WHERE c.name LIKE :name"),
     @NamedQuery(name = "company.by.tax.number.filter", query = "SELECT c FROM company_table c WHERE c.taxNumber LIKE :tax"),
+    @NamedQuery(name = "company.by.address.id", query = "SELECT c FROM company_table c INNER JOIN c.address a WHERE c.address.id =:address"),
     @NamedQuery(name = "company.list", query = "SELECT c FROM company_table c ORDER BY c.name"),
     @NamedQuery(name = "company.list.events.by.id", query = "SELECT e FROM company_table c INNER JOIN c.events e WHERE c.id =:id"),
     @NamedQuery(name = "company.list.projects.by.id", query = "SELECT p FROM company_table c INNER JOIN c.projects p WHERE c.id =:id"),
@@ -44,13 +45,14 @@ public class Company implements Serializable {
     @Column(nullable = false, length = 30)
     private String name;
 
-    @OneToOne
+    @ManyToOne(targetEntity = Address.class)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
     @Column(name = "tax_number", nullable = false, unique = true)
     private String taxNumber;
 
+    @Column(nullable = false)
     private String logo;
 
     @OneToMany(mappedBy = "company", targetEntity = Event.class)
@@ -73,6 +75,7 @@ public class Company implements Serializable {
         this.name = companyBean.getName();
         this.address = companyBean.getAddress();
         this.taxNumber = companyBean.getTaxNumber();
+        this.logo = companyBean.getLogo();
     }
     
     public Company(String name, Address address, String taxNumber, String logo) {
