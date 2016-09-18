@@ -49,7 +49,7 @@ public class UserController extends PageableEntityController<User> {
     public String registrate(UserBean regUser, ConnectionChannelBean regChannal) throws NoSuchAlgorithmException {
         User newUser = new User(regUser);
         if (null != userService.getUserByUsername(newUser.getUsername())) {
-            throw new EntityAlreadyExistsException("This user is already exist in our database.");
+            throw new EntityAlreadyExistsException("This user already exists in our database.");
         }
         ConnectionChannelBean newConnectionChannelBean = new ConnectionChannelBean(ConnectionChannelType.EMAIL, regChannal.getValue(), newUser);
         ConnectionChannel newConnectionChannal = new ConnectionChannel(newConnectionChannelBean);

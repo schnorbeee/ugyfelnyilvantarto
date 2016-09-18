@@ -39,7 +39,7 @@ public class CompanyController extends PageableEntityController<Company> {
         Company newCompany = new Company(regCompany);
         Address newAddress = new Address(regAddress);
         if (!companyService.getCompaniesListByTaxFilter(newCompany.getTaxNumber(), getLimit(), getOffset()).isEmpty()) {
-            throw new EntityAlreadyExistsException("This company is already exist in our database.");
+            throw new EntityAlreadyExistsException("This company already exists in our database.");
         }
         Address oldAddress = addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber());
         if (null != oldAddress) {

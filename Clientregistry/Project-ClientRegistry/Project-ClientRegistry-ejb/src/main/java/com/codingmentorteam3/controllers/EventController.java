@@ -45,7 +45,7 @@ public class EventController extends PageableEntityController<Event> {
         Address newAddress = new Address(regAddress);
         Company oldCompany = companyService.getCompany(1L);
         if (!eventService.getEventsListByTitleFilter(newEvent.getTitle(), getLimit(), getOffset()).isEmpty()) {
-            throw new EntityAlreadyExistsException("This event is already exist in our database.");
+            throw new EntityAlreadyExistsException("This event already exists in our database.");
         }
         Address oldAddress = addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber());
         if (null != oldAddress) {

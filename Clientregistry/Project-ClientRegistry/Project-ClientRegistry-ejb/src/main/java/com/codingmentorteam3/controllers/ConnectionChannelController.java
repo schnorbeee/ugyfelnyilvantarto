@@ -34,7 +34,7 @@ public class ConnectionChannelController {
         for (ConnectionChannel cc : connectionChannelService.getConnectionChannelListByOwnerId(ownerId)) {
             ConnectionChannelBean connectionChannelBean = new ConnectionChannelBean(cc.getType(), cc.getValue(), cc.getOwner());
             if (newConnectionChannel.equals(connectionChannelBean)) {
-                throw new EntityAlreadyExistsException("This connection channel already exist in database.");
+                throw new EntityAlreadyExistsException("This connection channel already exists in database.");
             }
         }
         regConnectionChannel.setOwner(userService.getUser(1L));
