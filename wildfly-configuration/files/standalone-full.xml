@@ -161,36 +161,12 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-                <datasource jta="true" jndi-name="java:jboss/jdbc/vidampark" pool-name="vidampark_pool" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:postgresql://localhost:5432/vidampark</connection-url>
-                    <driver>postgresql</driver>
-                    <security>
-                        <user-name>postgres</user-name>
-                        <password>laszlo</password>
-                    </security>
-                </datasource>
                 <datasource jta="true" jndi-name="java:jboss/jdbc/clientregistry" pool-name="clientregistry_pool" enabled="true" use-java-context="true">
                     <connection-url>jdbc:postgresql://localhost:5432/clientregistry</connection-url>
                     <driver>postgresql</driver>
                     <security>
                         <user-name>postgres</user-name>
-                        <password>laszlo</password>
-                    </security>
-                </datasource>
-                <datasource jta="true" jndi-name="java:jboss/jdbc/security" pool-name="security_pool" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:postgresql://localhost:5432/security</connection-url>
-                    <driver>postgresql</driver>
-                    <security>
-                        <user-name>postgres</user-name>
-                        <password>laszlo</password>
-                    </security>
-                </datasource>
-                <datasource jta="true" jndi-name="java:jboss/jdbc/test" pool-name="test_pool" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:postgresql://localhost:5432/test</connection-url>
-                    <driver>postgresql</driver>
-                    <security>
-                        <user-name>postgres</user-name>
-                        <password>laszlo</password>
+                        <password>sajatjelszo</password>
                     </security>
                 </datasource>
                 <drivers>
@@ -406,15 +382,6 @@
                             <module-option name="hashAlgorithm" value="SHA-256"/>
                             <module-option name="hashEncoding" value="hex"/>
                             <module-option name="hashUserPassword" value="true"/>
-                        </login-module>
-                    </authentication>
-                </security-domain>
-                <security-domain name="jaas-training-realm" cache-type="default">
-                    <authentication>
-                        <login-module code="Database" flag="required">
-                            <module-option name="dsJndiName" value="java:jboss/jdbc/test"/>
-                            <module-option name="principalsQuery" value="select password from sec_user where email=?"/>
-                            <module-option name="rolesQuery" value="select name, 'Roles' from sec_group where email=?"/>
                         </login-module>
                     </authentication>
                 </security-domain>
