@@ -76,7 +76,7 @@ public class UserController extends PageableEntityController<User> {
         User oldUser = userService.getUser(id);
         if (null != oldUser) {
             User currentUser = new User(updateUser);
-            userService.editUser(modifiedChecker(oldUser, currentUser));
+            userService.editUser(modifiedCheckerUser(oldUser, currentUser));
             return new UserDTO(oldUser);
         }
         throw new BadRequestException(getNoEntityMessage());
@@ -172,7 +172,7 @@ public class UserController extends PageableEntityController<User> {
         return "No user found in database!";
     }
 
-    public User modifiedChecker(User oldUser, User currentUser) {
+    public User modifiedCheckerUser(User oldUser, User currentUser) {
         if (!currentUser.getUsername().equals("")) {
             oldUser.setUsername(currentUser.getUsername());
         }

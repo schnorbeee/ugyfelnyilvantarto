@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -23,6 +24,7 @@ import javax.persistence.OneToMany;
  */
 @Entity(name = "person_table")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQuery(name = "person.list.channels.by.id", query = "SELECT ch FROM person_table p INNER JOIN p.channels ch WHERE p.id =:id")
 public class Person implements Serializable {
 
     @Id

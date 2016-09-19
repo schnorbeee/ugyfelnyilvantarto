@@ -1,7 +1,9 @@
 package com.codingmentorteam3.services;
 
 import com.codingmentorteam3.daos.PersonDaoImpl;
+import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Person;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -29,6 +31,10 @@ public class PersonService {
 
     public Person deletePerson(Person person) {
         return personDao.delete(person);
+    }
+    
+    public List<ConnectionChannel> getChannelsListByUserId(Long userId) {
+        return personDao.getChannelsListByUserId(userId);
     }
     
 }

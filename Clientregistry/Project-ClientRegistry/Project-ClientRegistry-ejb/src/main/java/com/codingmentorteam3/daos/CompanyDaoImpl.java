@@ -41,11 +41,6 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         }
         return em.createNamedQuery("company.list", Company.class).getResultList();
     }
-    
-    public Company getCompanyByAddressId(Long addressId) {
-        TypedQuery<Company> query = em.createNamedQuery("company.by.address.id", Company.class);
-        return query.getSingleResult();
-    }
 
     public List<Company> getCompaniesList(int limit, int offset) {
         TypedQuery<Company> query = em.createNamedQuery("company.list", Company.class);
@@ -55,39 +50,18 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
     }
 
     public List<Event> getEventsListByCompanyId(Long companyId) {
-        Company current = read(companyId);
-        if (null != current) {
-            List<Event> query = em.createNamedQuery("company.list.events.by.id", Event.class).setParameter("id", companyId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("This company has not got any events right now.");
-            }
-            return query;
-        }
-        throw new BadRequestException(BAD_REQUEST_MESSAGE);
+        TypedQuery<Event> query = em.createNamedQuery("company.list.events.by.id", Event.class).setParameter("id", companyId);
+        return query.getResultList();
     }
 
     public List<Project> getProjectsListByCompanyId(Long companyId) {
-        Company current = read(companyId);
-        if (null != current) {
-            List<Project> query = em.createNamedQuery("company.list.projects.by.id", Project.class).setParameter("id", companyId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("This company has not got any projects right now.");
-            }
-            return query;
-        }
-        throw new BadRequestException(BAD_REQUEST_MESSAGE);
+        TypedQuery<Project> query = em.createNamedQuery("company.list.projects.by.id", Project.class).setParameter("id", companyId);
+        return query.getResultList();
     }
 
     public List<ContactPerson> getContactersListByCompanyId(Long companyId) {
-        Company current = read(companyId);
-        if (null != current) {
-            List<ContactPerson> query = em.createNamedQuery("company.list.contacters.by.id", ContactPerson.class).setParameter("id", companyId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("This company has not got any contact persons right now.");
-            }
-            return query;
-        }
-        throw new BadRequestException(BAD_REQUEST_MESSAGE);
+        TypedQuery<ContactPerson> query = em.createNamedQuery("company.list.contacters.by.id", ContactPerson.class).setParameter("id", companyId);
+        return query.getResultList();
     }
 
     public List<Note> getNotesListByAllEventsByCompanyId(Long companyId) {

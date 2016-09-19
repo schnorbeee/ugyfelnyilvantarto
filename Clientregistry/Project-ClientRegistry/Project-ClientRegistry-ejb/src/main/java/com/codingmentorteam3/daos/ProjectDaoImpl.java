@@ -51,15 +51,8 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
     }
 
     public List<Company> getCompaniesListByProjectId(Long projectId) {
-        Project current = read(projectId);
-        if (null != current) {
-            List<Company> query = em.createNamedQuery("project.list.companies.by.id", Company.class).setParameter("id", projectId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("There are no projects connected to company: " + current.getName());
-            }
-            return query;
-        }
-        throw new BadRequestException("We haven't got this project in database.");
+        TypedQuery<Company> query = em.createNamedQuery("project.list.companies.by.id", Company.class).setParameter("id", projectId);
+        return query.getResultList();
     }
 
     public List<ConnectionChannel> getChannelsOfContacterByProjectId(Long projectId) {

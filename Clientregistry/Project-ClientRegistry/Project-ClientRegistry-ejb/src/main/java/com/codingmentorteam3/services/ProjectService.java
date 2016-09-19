@@ -1,6 +1,7 @@
 package com.codingmentorteam3.services;
 
 import com.codingmentorteam3.daos.ProjectDaoImpl;
+import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.entities.Project;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -31,9 +32,13 @@ public class ProjectService {
     public Project deleteProject(Project project) {
         return projectDao.delete(project);
     }
-    
+
     public List<Project> getProjectsList(Integer limit, Integer offset) {
         return projectDao.getProjectsList(limit, offset);
     }
-    
+
+    public List<Company> getCompaniesListByProjectId(Long projectId) {
+        return projectDao.getCompaniesListByProjectId(projectId);
+    }
+
 }

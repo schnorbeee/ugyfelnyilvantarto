@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.beans.InvitationBean;
 import com.codingmentorteam3.enums.FeedbackType;
 import java.io.Serializable;
 import java.util.Objects;
@@ -24,7 +25,9 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "invitation.by.feedback.filter", query = "SELECT i FROM invitation_table i WHERE i.feedback LIKE :feedback"),
     @NamedQuery(name = "invitation.list", query = "SELECT i FROM invitation_table i"),
     @NamedQuery(name = "invitation.list.by.event.id", query = "SELECT i FROM invitation_table i INNER JOIN i.event e WHERE e.id =:id"),
-    @NamedQuery(name = "invitation.list.by.event.id.and.feedback", query = "SELECT i FROM invitation_table i INNER JOIN i.event e WHERE e.id =:id AND i.feedback =:feedback")
+    @NamedQuery(name = "invitation.list.by.event.id.and.feedback", query = "SELECT i FROM invitation_table i INNER JOIN i.event e WHERE e.id =:id AND i.feedback =:feedback"),
+    @NamedQuery(name = "invitation.list.by.receiver.id.and.feedback", query = "SELECT i FROM invitation_table i INNER JOIN i.receiver r WHERE r.id =:id AND i.feedback =:feedback"),
+    @NamedQuery(name = "invitation.list.by.sender.id", query = "SELECT i FROM invitation_table i INNER JOIN i.sender s WHERE s.id =:id")
 })
 public class Invitation implements Serializable {
 
@@ -56,6 +59,14 @@ public class Invitation implements Serializable {
         //Default constructor
     }
 
+    public Invitation(InvitationBean invitationBean) {
+        this.event = invitationBean.getEvent();
+        this.message = invitationBean.getMessage();
+        this.feedback = invitationBean.getFeedback();
+        this.sender = invitationBean.getSender();
+        this.receiver = invitationBean.getReceiver();
+    }
+            
     public Invitation(String message, FeedbackType feedback) {
         this.message = message;
         this.feedback = feedback;

@@ -14,9 +14,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  *
@@ -33,66 +30,65 @@ public class RoleController {
     @Inject
     private UserService userService;
 
-    public Response getRoleListByUserName(@QueryParam("user_id") String username) {
+    public List<RoleDTO> getRolesListByUserName(String username) {
         User currentUser = userService.getUserByUsername(username);
         if (null != currentUser) {
-            List<RoleDTO> roles = new ArrayList();
+            List<RoleDTO> roleDTOs = new ArrayList<>();
             for (Role r : roleService.getRolesListByUsername(username)) {
-                RoleDTO role = new RoleDTO(r);
-                roles.add(role);
+                RoleDTO roleDTO = new RoleDTO(r);
+                roleDTOs.add(roleDTO);
             }
-            return Response.ok(roles).type(MediaType.APPLICATION_JSON).build();
+            return roleDTOs;
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        throw new BadRequestException("No user found in database!");
     }
 
-    public Response getRoleListByRoleType(@QueryParam("role_type") RoleType type) {
-        if (null != type) {
-            List<RoleDTO> roles = new ArrayList();
-            for (Role r : roleService.getRolesListByRoleType(type)) {
-                RoleDTO role = new RoleDTO(r);
-                roles.add(role);
-            }
-            return Response.ok(roles).type(MediaType.APPLICATION_JSON).build();
+    public List<RoleDTO> getRolesListByRoleType(RoleType type) {
+        List<RoleDTO> roleDTOs = new ArrayList<>();
+        for (Role role : roleService.getRolesListByRoleType(type)) {
+            RoleDTO roleDTO = new RoleDTO(role);
+            roleDTOs.add(roleDTO);
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        return roleDTOs;
     }
 
-    public Response setUserAdminRoleToRoleTable(@QueryParam("user_id") Long id) {
-        User currentUser = userService.getUser(id);
+    public RoleDTO setUserAdminRoleToRoleTable(Long userId) {
+        User currentUser = userService.getUser(userId);
         RoleType adminRole = RoleType.ADMIN;
         if (null != currentUser) {
-            for (Role role : userService.getRolesListByUserId(currentUser.getId())) {
+            for (Role role : userService.getRolesListByUserId(userId)) {
                 if (adminRole.equals(role.getRoleType())) {
-                    RoleDTO dto = new RoleDTO(role);
-                    return Response.status(Response.Status.FOUND).entity(dto).type(MediaType.APPLICATION_JSON).build();
+                    RoleDTO roleDTO = new RoleDTO(role);
+                    return roleDTO;
                 }
             }
             Role newRole = new Role(adminRole, currentUser);
             roleService.createRole(newRole);
-            RoleDTO dto = new RoleDTO(newRole);
-            return Response.status(Response.Status.CREATED).entity(dto).type(MediaType.APPLICATION_JSON).build();
+            RoleDTO roleDTO = new RoleDTO(newRole);
+            return roleDTO;
         }
         throw new BadRequestException("This user not exist in the database.");
     }
 
-    public Response deleteAdminRoleForThisUser(@QueryParam("user_id") Long id) {
-        User current = userService.getUser(id);
+    public List<RoleDTO> deleteAdminRoleForThisUser(Long userId) {
+        User currentUser = userService.getUser(userId);
         RoleType adminRole = RoleType.ADMIN;
-        if (null != current) {
-            for (Role role : roleService.getRolesListByRoleType(adminRole)) {
-                if (roleService.getRolesListByRoleType(adminRole).size() == 1) {
-                    throw new LastAdminException("This admin is last admin in database. So you can't delete his role.");
-                }
-                if (current.equals(role.getUser())) {
+        if (roleService.getRolesListByRoleType(adminRole).size() == 1) {
+            throw new LastAdminException("This admin is last admin in database. So you can't delete his role.");
+        }
+        if (null != currentUser) {
+            List<RoleDTO> roleDTOs = new ArrayList<>();
+            for (Role role : roleService.getRolesListByUsername(currentUser.getUsername())) {
+                if(role.getRoleType().equals(adminRole)) {
                     roleService.deleteRole(role);
-                    RoleDTO dto = new RoleDTO(role);
-                    return Response.status(Response.Status.ACCEPTED).entity(dto).type(MediaType.APPLICATION_JSON).build();
+                } else {
+                    RoleDTO roleDTO = new RoleDTO(role);
+                    roleDTOs.add(roleDTO);
                 }
             }
-            throw new BadRequestException("This user haven't admin privilege.");
+            return roleDTOs;
         }
-        throw new BadRequestException("This user for this username don't exist in database.");
+        throw new BadRequestException("This user for username not found in database!");
     }
 
 }

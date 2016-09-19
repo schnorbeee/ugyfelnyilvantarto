@@ -3,6 +3,7 @@ package com.codingmentorteam3.controllers;
 import com.codingmentorteam3.beans.AddressBean;
 import com.codingmentorteam3.beans.EventBean;
 import com.codingmentorteam3.controllers.general.PageableEntityController;
+import com.codingmentorteam3.dtos.AddressDTO;
 import com.codingmentorteam3.dtos.EventDTO;
 import com.codingmentorteam3.entities.Address;
 import com.codingmentorteam3.entities.Company;
@@ -18,9 +19,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  *
@@ -69,9 +67,37 @@ public class EventController extends PageableEntityController<Event> {
         throw new BadRequestException(getNoEntityMessage());
     }
 
-    public EventDTO updateEvent(Long eventId) {
-        return new EventDTO();
-        //TODO
+    //user method
+    public EventDTO updateEvent(EventBean updateEvent, Long eventId) {
+        Event oldEvent = eventService.getEvent(eventId);
+        if(null != oldEvent) {
+            Event currentEvent = new Event(updateEvent);
+            oldEvent = modifiedCheckerEvent(oldEvent, currentEvent);
+            eventService.editEvent(oldEvent);
+            return new EventDTO(oldEvent);
+        }
+        throw new BadRequestException(getNoEntityMessage());
+    }
+    
+    //user method
+    public AddressDTO updateEventAddress(AddressBean updateAddress, Long eventId) {
+        Event currentEvent = eventService.getEvent(eventId);
+        if(null != currentEvent) {
+            Address currentAddress = addressService.getAddressByAllParameters(updateAddress.getCity(), updateAddress.getCountry(), updateAddress.getZipCode(), updateAddress.getStreet(), updateAddress.getHouseNumber());
+            Address oldAddress = currentEvent.getAddress();
+            if (!oldAddress.equals(currentAddress)) {
+                if (null != currentAddress) {
+                    currentEvent.setAddress(currentAddress);
+                    return new AddressDTO(currentAddress);
+                }
+                Address newAddress = new Address(updateAddress);
+                addressService.createAddress(newAddress);
+                currentEvent.setAddress(addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber()));
+                return new AddressDTO(newAddress);
+            }
+            return new AddressDTO(oldAddress);
+        }
+        throw new BadRequestException(getNoEntityMessage());
     }
 
     public List<EventDTO> deleteEventById(Long eventId) {
@@ -128,4 +154,22 @@ public class EventController extends PageableEntityController<Event> {
         return "edit/editEvent.xhtml";
     }
 
+    public Event modifiedCheckerEvent(Event oldEvent, Event currentEvent) {
+        if (!currentEvent.getTitle().equals("")) {
+            oldEvent.setTitle(currentEvent.getTitle());
+        }
+        if (!currentEvent.getDescription().equals("")) {
+            oldEvent.setDescription(currentEvent.getDescription());
+        }
+        if (!currentEvent.getType().equals(oldEvent.getType())) {
+            oldEvent.setType(currentEvent.getType());
+        }
+        if (!currentEvent.getStartDate().equals(oldEvent.getStartDate())) {
+            oldEvent.setStartDate(currentEvent.getStartDate());
+        }
+        if (!currentEvent.getEndDate().equals(oldEvent.getEndDate())) {
+            oldEvent.setEndDate(currentEvent.getEndDate());
+        }
+        return oldEvent;
+    }
 }

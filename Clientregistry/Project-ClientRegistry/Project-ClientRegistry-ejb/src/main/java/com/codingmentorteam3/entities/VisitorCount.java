@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "visitors_table")
-@NamedQuery(name = "visitors.of.day", query = "SELECT v.count FROM visitors_table v WHERE v.day =:day")
+@NamedQuery(name = "visitors.of.day", query = "SELECT v FROM visitors_table v WHERE v.day =:day")
 public class VisitorCount implements Serializable {
 
     @Id

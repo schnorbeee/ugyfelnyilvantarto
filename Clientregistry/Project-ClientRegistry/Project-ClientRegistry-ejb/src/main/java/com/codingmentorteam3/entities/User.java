@@ -43,8 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "user.list.invitation.sent.by.id", query = "SELECT i FROM user_table u INNER JOIN u.invitationsSent i WHERE u.id =:id"),
     @NamedQuery(name = "user.list.invitation.received.by.id", query = "SELECT i FROM user_table u INNER JOIN u.invitationsReceived i WHERE u.id =:id"),
     @NamedQuery(name = "user.list.notes.by.id", query = "SELECT n FROM user_table u INNER JOIN u.notes n WHERE u.id =:id"),
-    @NamedQuery(name = "user.list.events.by.id", query = "SELECT e FROM user_table u INNER JOIN u.events e WHERE u.id =:id"),
-    @NamedQuery(name = "user.list.channels.by.id", query = "SELECT ch FROM user_table u INNER JOIN u.channels ch WHERE u.id =:id")
+    @NamedQuery(name = "user.list.events.by.id", query = "SELECT e FROM user_table u INNER JOIN u.events e WHERE u.id =:id")    
 })
 public class User extends Person implements Serializable {
 

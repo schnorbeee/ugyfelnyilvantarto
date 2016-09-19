@@ -1,9 +1,14 @@
 package com.codingmentorteam3.controllers;
 
+import com.codingmentorteam3.beans.InvitationBean;
 import com.codingmentorteam3.controllers.general.PageableEntityController;
+import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.Invitation;
+import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.interceptors.BeanValidation;
+import com.codingmentorteam3.services.EventService;
 import com.codingmentorteam3.services.InvitationService;
+import com.codingmentorteam3.services.UserService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -20,7 +25,27 @@ public class InvitationController extends PageableEntityController<Invitation> {
 
     @Inject
     private InvitationService invitationService;
+    
+    @Inject
+    private EventService eventService;
 
+    @Inject
+    private UserService userService;
+    
+    public String createInvitation(InvitationBean createInvitation, Long eventId, Long senderId, List<Long> receiverList) {
+        Event event = eventService.getEvent(eventId);
+        User sender = userService.getUser(senderId);
+        Invitation invitation = new Invitation(createInvitation);
+        for(Long receiverId : receiverList) {
+            User receiver = userService.getUser(receiverId);
+            if (null != event && null != sender && null != receiver) {
+                
+            }
+        }
+        return "";
+    }
+    
+    
     @Override
     protected void doPersistEntity() {
         invitationService.createInvitation(getEntity());

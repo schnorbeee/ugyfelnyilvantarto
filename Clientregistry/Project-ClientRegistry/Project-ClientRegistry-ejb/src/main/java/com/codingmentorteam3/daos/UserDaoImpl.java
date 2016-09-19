@@ -1,6 +1,5 @@
 package com.codingmentorteam3.daos;
 
-import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.Invitation;
 import com.codingmentorteam3.entities.Note;
@@ -160,16 +159,4 @@ public class UserDaoImpl extends AbstractDao<User> {
         throw new BadRequestException(BAD_REQUEST_MESSAGE);
     }
 
-    public List<ConnectionChannel> getChannelsListByUserId(Long userId) {
-        User current = read(userId);
-        if (null != current) {
-            List<ConnectionChannel> query = em.createNamedQuery("user.list.channels.by.id", ConnectionChannel.class).setParameter("id", userId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("This user has not got any connection channels");
-            }
-            return query;
-        }
-        throw new BadRequestException(BAD_REQUEST_MESSAGE);
-    }
-    
 }
