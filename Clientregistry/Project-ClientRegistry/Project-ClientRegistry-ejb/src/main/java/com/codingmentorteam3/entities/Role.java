@@ -21,10 +21,9 @@ import javax.persistence.NamedQuery;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "role_table")
-@NamedQueries ({
-    @NamedQuery(name = "role.list", query = "SELECT r FROM role_table r"),
+@NamedQueries({
     @NamedQuery(name = "role.list.by.username", query = "SELECT r FROM role_table r WHERE r.user.username =:name"),
-    @NamedQuery(name = "role.list.by.role.type", query = "SELECT r FROM role_table r WHERE r.roleType =:rtype")
+    @NamedQuery(name = "role.list.users.by.role.type", query = "SELECT u FROM role_table r INNER JOIN r.user u WHERE r.roleType =:rtype")
 })
 public class Role implements Serializable {
 
@@ -48,12 +47,6 @@ public class Role implements Serializable {
     public Role(RoleBean role) {
         this.roleType = role.getType();
         this.user = role.getUser();
-    }
-
-    
-    public Role(RoleType roleType, User user) {
-        this.roleType = roleType;
-        this.user = user;
     }
 
     public Long getId() {

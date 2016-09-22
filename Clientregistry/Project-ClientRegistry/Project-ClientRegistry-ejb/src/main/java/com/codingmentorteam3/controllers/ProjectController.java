@@ -3,13 +3,14 @@ package com.codingmentorteam3.controllers;
 import com.codingmentorteam3.beans.ProjectBean;
 import com.codingmentorteam3.controllers.general.PageableEntityController;
 import com.codingmentorteam3.dtos.CompanyDTO;
+import com.codingmentorteam3.dtos.ConnectionChannelDTO;
 import com.codingmentorteam3.dtos.ProjectDTO;
 import com.codingmentorteam3.entities.Company;
+import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Project;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
-import com.codingmentorteam3.exceptions.query.EntityAlreadyExistsException;
+import com.codingmentorteam3.exceptions.query.EmptyListException;
 import com.codingmentorteam3.interceptors.BeanValidation;
-import com.codingmentorteam3.services.AddressService;
 import com.codingmentorteam3.services.CompanyService;
 import com.codingmentorteam3.services.ProjectService;
 import java.util.ArrayList;
@@ -29,37 +30,22 @@ public class ProjectController extends PageableEntityController<Project> {
 
     @Inject
     private ProjectService projectService;
-    
+
     @Inject
     private CompanyService companyService;
 
     //user method
-    public String createProject(ProjectBean regProject, Long companyId) {
-        Project newProject = new Project(regProject);
-        Company currentCompany = companyService.getCompany(1L);
-        for(Project p : currentCompany.getProjects()) {
-            if(newProject.getName().equals(p.getName()) && newProject.getDescription().equals(p.getDescription())) {
-                throw new EntityAlreadyExistsException("This project already exists in our database.");
-            }
-        }
-        newProject.getCompanies().add(currentCompany);
-        projectService.createProject(newProject);
-        return "";
-    }
-
+//    public String getProjectById(Long projectId) {
+//        Project project = projectService.getProject(projectId);
+//        if (null != project) {
+//            return "";
+//        }
+//        throw new BadRequestException(getNoEntityMessage());
+//    }
     //user method
-    public String getProjectById(Long projectId) {
-        Project project = projectService.getProject(projectId);
-        if (null != project) {
-            return "";
-        }
-        throw new BadRequestException(getNoEntityMessage());
-    }
-    
-    //user method
-    public ProjectDTO updateProject(ProjectBean updateProject, Long projectId) {
-        Project oldProject = projectService.getProject(projectId);
-        if(null != oldProject) {
+    public ProjectDTO updateProject(ProjectBean updateProject) {
+        Project oldProject = getEntity();
+        if (null != oldProject) {
             Project currentProject = new Project(updateProject);
             oldProject = modifiedCheckerProject(oldProject, currentProject);
             projectService.editProject(oldProject);
@@ -67,18 +53,18 @@ public class ProjectController extends PageableEntityController<Project> {
         }
         throw new BadRequestException(getNoEntityMessage());
     }
-    
+
     //admin method
-    public List<ProjectDTO> deleteCompanyById(Long projectId) {
-        Project deleteProject = projectService.getProject(projectId);
+    public List<ProjectDTO> deleteProjectById() {
+        Project deleteProject = getEntity();
         if (null != deleteProject) {
-            for(Company c : deleteProject.getCompanies()) {
+            for (Company c : deleteProject.getCompanies()) {
                 c.getProjects().remove(deleteProject);
                 companyService.editCompany(c);
             }
             projectService.deleteProject(deleteProject);
             List<ProjectDTO> projectDTOs = new ArrayList<>();
-            for(Project p : getEntities()) {
+            for (Project p : getEntities()) {
                 ProjectDTO projectDTO = new ProjectDTO(p);
                 projectDTOs.add(projectDTO);
             }
@@ -86,7 +72,7 @@ public class ProjectController extends PageableEntityController<Project> {
         }
         throw new BadRequestException(getNoEntityMessage());
     }
-    
+
     //user method
     public List<ProjectDTO> getProjectsList() {
         List<ProjectDTO> projectDTOs = new ArrayList<>();
@@ -96,13 +82,13 @@ public class ProjectController extends PageableEntityController<Project> {
         }
         return projectDTOs;
     }
-    
-    //user method
-    public List<CompanyDTO> getCompaniesListByProjectId(Long projectId) {
-        Project currentProject = projectService.getProject(projectId);
+
+    //user method id
+    public List<CompanyDTO> getCompaniesListByProjectId() {
+        Project currentProject = getEntity();
         if (null != currentProject) {
             List<CompanyDTO> companyDTOs = new ArrayList<>();
-            for (Company c : projectService.getCompaniesListByProjectId(projectId)) {
+            for (Company c : projectService.getCompaniesListByProjectId(getEntityId())) {
                 CompanyDTO companyDTO = new CompanyDTO(c);
                 companyDTOs.add(companyDTO);
             }
@@ -110,7 +96,32 @@ public class ProjectController extends PageableEntityController<Project> {
         }
         throw new BadRequestException(getNoEntityMessage());
     }
-    
+
+    public List<ConnectionChannelDTO> getChannelsOfContacterByProjectId() {
+        Project currentProject = getEntity();
+        if (null != currentProject) {
+            List<ConnectionChannelDTO> connectionChannelDTOs = new ArrayList<>();
+            for (ConnectionChannel ch : projectService.getChannelsOfContacterByProjectId(getEntityId())) {
+                ConnectionChannelDTO connectionChannelDTO = new ConnectionChannelDTO(ch);
+                connectionChannelDTOs.add(connectionChannelDTO);
+            }
+            return connectionChannelDTOs;
+        }
+        throw new BadRequestException(getNoEntityMessage());
+    }
+
+    public List<ProjectDTO> getProjectsListDeadlineIsInThisWeek() {
+        if (!projectService.getProjectsListDeadlineIsInThisWeek().isEmpty()) {
+            List<ProjectDTO> projectDTOs = new ArrayList<>();
+            for (Project p : projectService.getProjectsListDeadlineIsInThisWeek()) {
+                ProjectDTO projectDTO = new ProjectDTO(p);
+                projectDTOs.add(projectDTO);
+            }
+            return projectDTOs;
+        }
+        throw new EmptyListException("In this week we haven't got any project what is in deadline period.");
+    }
+
     @Override
     protected void doPersistEntity() {
         projectService.createProject(getEntity());
@@ -150,7 +161,7 @@ public class ProjectController extends PageableEntityController<Project> {
     public String getNoEntityMessage() {
         return "No project found in database!";
     }
-   
+
     public Project modifiedCheckerProject(Project oldProject, Project currentProject) {
         if (!currentProject.getName().equals("")) {
             oldProject.setName(currentProject.getName());
@@ -169,5 +180,5 @@ public class ProjectController extends PageableEntityController<Project> {
         }
         return oldProject;
     }
-    
+
 }

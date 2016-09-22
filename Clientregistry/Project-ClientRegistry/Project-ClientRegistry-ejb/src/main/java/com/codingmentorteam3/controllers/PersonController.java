@@ -1,11 +1,11 @@
 package com.codingmentorteam3.controllers;
 
+import com.codingmentorteam3.beans.ConnectionChannelBean;
 import com.codingmentorteam3.dtos.ConnectionChannelDTO;
 import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Person;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
 import com.codingmentorteam3.interceptors.BeanValidation;
-import com.codingmentorteam3.services.ConnectionChannelService;
 import com.codingmentorteam3.services.PersonService;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +25,13 @@ public class PersonController {
     @Inject
     private PersonService personService;
     
-    @Inject
-    private ConnectionChannelService connectionChannelService;
-    
-    //user method
-    public List<ConnectionChannelDTO> getConnectionChannelListByUserId(Long personId) {
+    //egyenlore marad pageable?
+    public List<ConnectionChannelDTO> getConnectionChannels(Long personId) {
         Person currentPerson = personService.getPerson(personId);
-        if (null != currentPerson) {
+        if(null!= currentPerson) {
             List<ConnectionChannelDTO> connectionChannelDTOs = new ArrayList<>();
-            for (ConnectionChannel connectionChannel : connectionChannelService.getConnectionChannelListByOwnerId(personId)) {
-                ConnectionChannelDTO connectionChannelDTO = new ConnectionChannelDTO(connectionChannel);
+            for(ConnectionChannel ch : personService.getConnectionChannelsListByPersonId(personId)) {
+                ConnectionChannelDTO connectionChannelDTO = new ConnectionChannelDTO(ch);
                 connectionChannelDTOs.add(connectionChannelDTO);
             }
             return connectionChannelDTOs;

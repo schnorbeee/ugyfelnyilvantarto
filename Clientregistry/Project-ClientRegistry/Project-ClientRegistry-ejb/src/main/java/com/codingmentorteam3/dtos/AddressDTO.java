@@ -9,6 +9,8 @@ import java.util.Objects;
  */
 public class AddressDTO {
 
+    private Long id;
+    
     private String country;
 
     private String city;
@@ -24,11 +26,20 @@ public class AddressDTO {
     }
 
     public AddressDTO(Address address) {
+        this.id = address.getId();
         this.country = address.getCountry();
         this.city = address.getCity();
         this.street = address.getStreet();
         this.houseNumber = address.getHouseNumber();
         this.zipCode = address.getZipCode();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCountry() {
@@ -73,12 +84,13 @@ public class AddressDTO {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.country);
-        hash = 97 * hash + Objects.hashCode(this.city);
-        hash = 97 * hash + Objects.hashCode(this.street);
-        hash = 97 * hash + Objects.hashCode(this.houseNumber);
-        hash = 97 * hash + Objects.hashCode(this.zipCode);
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        hash = 17 * hash + Objects.hashCode(this.country);
+        hash = 17 * hash + Objects.hashCode(this.city);
+        hash = 17 * hash + Objects.hashCode(this.street);
+        hash = 17 * hash + Objects.hashCode(this.houseNumber);
+        hash = 17 * hash + Objects.hashCode(this.zipCode);
         return hash;
     }
 
@@ -109,12 +121,15 @@ public class AddressDTO {
         if (!Objects.equals(this.zipCode, other.zipCode)) {
             return false;
         }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "AddressDTO{" + "country=" + country + ", city=" + city + ", street=" + street + ", houseNumber=" + houseNumber + ", zipCode=" + zipCode + '}';
+        return "AddressDTO{" + "id=" + id + ", country=" + country + ", city=" + city + ", street=" + street + ", houseNumber=" + houseNumber + ", zipCode=" + zipCode + '}';
     }
-    
+
 }

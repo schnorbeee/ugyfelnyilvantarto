@@ -16,6 +16,9 @@ public class PersonService {
 
     @Inject
     private PersonDaoImpl personDao;
+    
+    @Inject
+    private ConnectionChannelService connectionChannelService;
 
     public void createPerson(Person person) {
         personDao.create(person);
@@ -33,8 +36,8 @@ public class PersonService {
         return personDao.delete(person);
     }
     
-    public List<ConnectionChannel> getChannelsListByUserId(Long userId) {
-        return personDao.getChannelsListByUserId(userId);
+    public List<ConnectionChannel> getConnectionChannelsListByPersonId(Long personId) {
+        return personDao.getConnectionChannelsListByPersonId(personId);
     }
-    
+     
 }

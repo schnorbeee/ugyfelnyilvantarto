@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
  */
 @Validate
 @SessionScoped
-@ManagedBean(name = "visitorCount")
+@ManagedBean(name = "visitorCountBean")
 public class VisitorCountBean {
     
     private static final Integer DEFAULT_COUNT = 0;

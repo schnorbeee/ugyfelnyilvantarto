@@ -14,14 +14,14 @@ import javax.validation.constraints.NotNull;
  */
 @Validate
 @SessionScoped
-@ManagedBean(name = "role")
+@ManagedBean(name = "roleBean")
 public class RoleBean {
-    
+
     private static final RoleType DEFAULT_ROLE = RoleType.USER;
-    
+
     @NotNull
     private RoleType type = DEFAULT_ROLE;
-    
+
     @NotNull
     private User user;
 
@@ -82,5 +82,5 @@ public class RoleBean {
     public String toString() {
         return "RoleBean{" + "type=" + type + ", user=" + user + '}';
     }
-    
+
 }

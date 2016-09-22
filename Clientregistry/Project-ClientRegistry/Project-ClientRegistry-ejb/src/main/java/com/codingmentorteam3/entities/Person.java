@@ -41,7 +41,7 @@ public class Person implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     protected PositionType position;
-    
+
     @Column(nullable = false)
     protected String avatar;
 
@@ -58,7 +58,7 @@ public class Person implements Serializable {
         this.position = position;
         this.avatar = avatar;
     }
-    
+
     public Long getId() {
         return id;
     }

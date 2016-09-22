@@ -1,8 +1,10 @@
 package com.codingmentorteam3.daos;
 
 import com.codingmentorteam3.entities.VisitorCount;
+import com.codingmentorteam3.exceptions.query.BadRequestException;
 import java.util.Date;
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -15,9 +17,13 @@ public class VisitorCountDaoImpl extends AbstractDao<VisitorCount> {
         super(VisitorCount.class);
     }
 
-    public Integer getCountVisitorsPerDay(Date currentDay) {
-        VisitorCount query = em.createNamedQuery("visitors.of.day", VisitorCount.class).setParameter("day", currentDay).getSingleResult();
-        return query.getCount();
+    public Integer getCountVisitorsPerDay(Date day) {
+        if (null != day) {
+            TypedQuery query = em.createNamedQuery("visitors.of.day", VisitorCount.class);
+            query.setParameter("day", day);
+            return query.getMaxResults();
+        }
+        throw new BadRequestException("The requested date is incorrect");
     }
 
 }

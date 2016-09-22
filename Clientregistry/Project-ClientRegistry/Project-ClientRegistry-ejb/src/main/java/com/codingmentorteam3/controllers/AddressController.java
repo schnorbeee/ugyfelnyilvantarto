@@ -1,8 +1,10 @@
 package com.codingmentorteam3.controllers;
 
+import com.codingmentorteam3.daos.AddressDaoImpl;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -12,5 +14,17 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 @ManagedBean(name = "addressController")
 public class AddressController {
+
+    @Inject
+    private AddressDaoImpl addressDao;
+
+//    meg nem hasznaljuk
+//    public AddressDTO getAddressById(Long id) {
+//        Address address = addressDao.read(id);
+//        if (null != address) {
+//            return new AddressDTO(address);
+//        }
+//        throw new BadRequestException("No address found in database!");
+//    }
 
 }

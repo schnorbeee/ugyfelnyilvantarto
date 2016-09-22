@@ -63,14 +63,6 @@ public class Address implements Serializable {
         this.houseNumber = newAddress.getHouseNumber();
     }
     
-    public Address(String zipCode, String country, String city, String street, String houseNumber) {
-        this.zipCode = zipCode;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.houseNumber = houseNumber;
-    }
-
     public Long getId() {
         return id;
     }

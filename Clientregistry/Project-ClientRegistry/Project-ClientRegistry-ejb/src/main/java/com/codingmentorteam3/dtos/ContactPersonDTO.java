@@ -3,27 +3,32 @@ package com.codingmentorteam3.dtos;
 import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.entities.ContactPerson;
 import java.util.Objects;
- 
+
 /**
  *
  * @author istvan.mosonyi
  */
 public class ContactPersonDTO extends PersonDTO {
-    
+
     private Company company;
- 
+
     public ContactPersonDTO() {
         // Default constructor
     }
 
     public ContactPersonDTO(ContactPerson contactPerson) {
+        this.id = contactPerson.getId();
+        this.firstName = contactPerson.getFirstName();
+        this.lastName = contactPerson.getLastName();
+        this.position = contactPerson.getPosition();
+        this.avatar = contactPerson.getAvatar();
         this.company = contactPerson.getCompany();
     }
- 
+
     public Company getCompany() {
         return company;
     }
- 
+
     public void setCompany(Company company) {
         this.company = company;
     }
@@ -60,5 +65,5 @@ public class ContactPersonDTO extends PersonDTO {
     public String toString() {
         return "ContactPersonDTO{" + "company=" + company + '}';
     }
-    
+
 }

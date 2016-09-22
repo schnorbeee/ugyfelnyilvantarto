@@ -22,10 +22,7 @@ import javax.persistence.NamedQuery;
  */
 @Entity(name = "invitation_table")
 @NamedQueries({
-    @NamedQuery(name = "invitation.by.feedback.filter", query = "SELECT i FROM invitation_table i WHERE i.feedback LIKE :feedback"),
     @NamedQuery(name = "invitation.list", query = "SELECT i FROM invitation_table i"),
-    @NamedQuery(name = "invitation.list.by.event.id", query = "SELECT i FROM invitation_table i INNER JOIN i.event e WHERE e.id =:id"),
-    @NamedQuery(name = "invitation.list.by.event.id.and.feedback", query = "SELECT i FROM invitation_table i INNER JOIN i.event e WHERE e.id =:id AND i.feedback =:feedback"),
     @NamedQuery(name = "invitation.list.by.receiver.id.and.feedback", query = "SELECT i FROM invitation_table i INNER JOIN i.receiver r WHERE r.id =:id AND i.feedback =:feedback"),
     @NamedQuery(name = "invitation.list.by.sender.id", query = "SELECT i FROM invitation_table i INNER JOIN i.sender s WHERE s.id =:id")
 })
@@ -65,11 +62,6 @@ public class Invitation implements Serializable {
         this.feedback = invitationBean.getFeedback();
         this.sender = invitationBean.getSender();
         this.receiver = invitationBean.getReceiver();
-    }
-            
-    public Invitation(String message, FeedbackType feedback) {
-        this.message = message;
-        this.feedback = feedback;
     }
 
     public Long getId() {

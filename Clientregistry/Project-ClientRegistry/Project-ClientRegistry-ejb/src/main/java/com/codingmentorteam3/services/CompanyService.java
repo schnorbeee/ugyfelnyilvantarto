@@ -4,6 +4,7 @@ import com.codingmentorteam3.daos.CompanyDaoImpl;
 import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.entities.ContactPerson;
 import com.codingmentorteam3.entities.Event;
+import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.Project;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -53,6 +54,18 @@ public class CompanyService {
 
     public List<ContactPerson> getContactersListByCompanyId(Long companyId) {
         return companyDao.getContactersListByCompanyId(companyId);
+    }
+
+    public List<Company> getInactiveCompaniesList(Integer n, Integer limit, Integer offset) {
+        return companyDao.getInactiveCompaniesList(n, limit, offset);
+    }
+
+    public List<Note> getNotesListByAllEventsByCompanyId(Long companyId, Integer limit, Integer offset) {
+        return companyDao.getNotesListByAllEventsByCompanyId(companyId, limit, offset);
+    }
+
+    public List<Company> getCompaniesListWithoutLimit() {
+        return companyDao.getCompaniesListWithoutLimit();
     }
 
 }

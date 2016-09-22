@@ -15,21 +15,21 @@ import javax.validation.constraints.Size;
  */
 @Validate
 @SessionScoped
-@ManagedBean(name = "company")
+@ManagedBean(name = "companyBean")
 public class CompanyBean {
-    
+
     private static final String DEFAULT_LOGO = "";
-    
-    @NotNull 
+
+    @NotNull
     @Size(min = 2, max = 30)
     private String name;
-    
+
     @NotNull
     private Address address;
 
     @Pattern(regexp = "\\d{8}-\\d{1}-\\d{2}", message = "Invalid tax-number format. Please enter a tax-number matching this pattern: xxxxxxxx-x-xx")
     private String taxNumber;
-    
+
     @NotNull
     private String logo = DEFAULT_LOGO;
 
@@ -74,7 +74,7 @@ public class CompanyBean {
     public void setLogo(String logo) {
         this.logo = logo;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -116,5 +116,5 @@ public class CompanyBean {
     public String toString() {
         return "CompanyBean{" + "name=" + name + ", address=" + address + ", taxNumber=" + taxNumber + ", logo=" + logo + '}';
     }
-    
+
 }

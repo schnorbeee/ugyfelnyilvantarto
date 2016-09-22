@@ -11,6 +11,8 @@ import java.util.Objects;
  */
 public class ConnectionChannelDTO {
 
+    private Long id;
+
     private ConnectionChannelType type;
 
     private String value;
@@ -22,9 +24,18 @@ public class ConnectionChannelDTO {
     }
 
     public ConnectionChannelDTO(ConnectionChannel connectionChannel) {
+        this.id = connectionChannel.getId();
         this.type = connectionChannel.getType();
         this.value = connectionChannel.getValue();
         this.owner = connectionChannel.getOwner();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public ConnectionChannelType getType() {
@@ -54,9 +65,10 @@ public class ConnectionChannelDTO {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.type);
-        hash = 89 * hash + Objects.hashCode(this.value);
-        hash = 89 * hash + Objects.hashCode(this.owner);
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.type);
+        hash = 59 * hash + Objects.hashCode(this.value);
+        hash = 59 * hash + Objects.hashCode(this.owner);
         return hash;
     }
 
@@ -75,6 +87,9 @@ public class ConnectionChannelDTO {
         if (!Objects.equals(this.value, other.value)) {
             return false;
         }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
         if (this.type != other.type) {
             return false;
         }
@@ -86,7 +101,7 @@ public class ConnectionChannelDTO {
 
     @Override
     public String toString() {
-        return "ConnectionChannelDTO{" + "type=" + type + ", value=" + value + ", owner=" + owner + '}';
+        return "ConnectionChannelDTO{" + "id=" + id + ", type=" + type + ", value=" + value + ", owner=" + owner + '}';
     }
-    
+
 }

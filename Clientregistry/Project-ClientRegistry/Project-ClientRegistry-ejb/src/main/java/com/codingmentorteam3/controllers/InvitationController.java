@@ -1,10 +1,10 @@
 package com.codingmentorteam3.controllers;
 
-import com.codingmentorteam3.beans.InvitationBean;
 import com.codingmentorteam3.controllers.general.PageableEntityController;
 import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.Invitation;
 import com.codingmentorteam3.entities.User;
+import com.codingmentorteam3.enums.FeedbackType;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.EventService;
 import com.codingmentorteam3.services.InvitationService;
@@ -25,27 +25,29 @@ public class InvitationController extends PageableEntityController<Invitation> {
 
     @Inject
     private InvitationService invitationService;
-    
-    @Inject
-    private EventService eventService;
 
     @Inject
     private UserService userService;
-    
-    public String createInvitation(InvitationBean createInvitation, Long eventId, Long senderId, List<Long> receiverList) {
-        Event event = eventService.getEvent(eventId);
-        User sender = userService.getUser(senderId);
-        Invitation invitation = new Invitation(createInvitation);
-        for(Long receiverId : receiverList) {
-            User receiver = userService.getUser(receiverId);
-            if (null != event && null != sender && null != receiver) {
-                
+
+    @Inject
+    private EventService eventService;
+
+    public void setInvitationFeedback(FeedbackType type) {
+        Invitation currenInvitation = getEntity();
+        if (null != currenInvitation) {
+            if (type.equals(FeedbackType.ACCEPTED)) {
+                currenInvitation.setFeedback(type);
+                invitationService.editInvitation(currenInvitation);
+                User currentReceiver = currenInvitation.getReceiver();
+                Event currentEvent = currenInvitation.getEvent();
+                currentReceiver.getEvents().add(currentEvent);
+                currentEvent.getUsers().add(currentReceiver);
+                userService.editUser(currentReceiver);
+                eventService.editEvent(currentEvent);
             }
         }
-        return "";
     }
-    
-    
+
     @Override
     protected void doPersistEntity() {
         invitationService.createInvitation(getEntity());

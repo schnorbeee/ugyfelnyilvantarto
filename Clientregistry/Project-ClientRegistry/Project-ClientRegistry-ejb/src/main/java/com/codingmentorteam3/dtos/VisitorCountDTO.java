@@ -10,19 +10,28 @@ import java.util.Objects;
  */
 public class VisitorCountDTO {
     
-    private static final Integer DEFAULT_COUNT = 0;
+    private Long id;
 
     private Date day;
 
-    private Integer count = DEFAULT_COUNT;
+    private Integer count;
 
     public VisitorCountDTO() {
         // Default constructor
     }
 
     public VisitorCountDTO(VisitorCount visitorCount) {
+        this.id = visitorCount.getId();
         this.day = visitorCount.getDay();
         this.count = visitorCount.getCount();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getDay() {
@@ -43,9 +52,10 @@ public class VisitorCountDTO {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.day);
-        hash = 59 * hash + Objects.hashCode(this.count);
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.day);
+        hash = 29 * hash + Objects.hashCode(this.count);
         return hash;
     }
 
@@ -61,6 +71,9 @@ public class VisitorCountDTO {
             return false;
         }
         final VisitorCountDTO other = (VisitorCountDTO) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
         if (!Objects.equals(this.day, other.day)) {
             return false;
         }
@@ -72,7 +85,7 @@ public class VisitorCountDTO {
 
     @Override
     public String toString() {
-        return "VisitorCountDTO{" + "day=" + day + ", count=" + count + '}';
+        return "VisitorCountDTO{" + "id=" + id + ", day=" + day + ", count=" + count + '}';
     }
-    
+
 }

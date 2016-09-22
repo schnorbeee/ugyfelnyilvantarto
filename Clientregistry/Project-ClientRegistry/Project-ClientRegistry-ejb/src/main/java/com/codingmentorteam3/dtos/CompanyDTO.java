@@ -10,6 +10,8 @@ import java.util.Objects;
  */
 public class CompanyDTO {
 
+    public Long id;
+
     private String name;
 
     private Address address;
@@ -23,10 +25,19 @@ public class CompanyDTO {
     }
 
     public CompanyDTO(Company company) {
+        this.id = company.getId();
         this.name = company.getName();
         this.address = company.getAddress();
         this.taxNumber = company.getTaxNumber();
         this.logo = company.getLogo();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -60,14 +71,15 @@ public class CompanyDTO {
     public void setLogo(String logo) {
         this.logo = logo;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.name);
-        hash = 17 * hash + Objects.hashCode(this.address);
-        hash = 17 * hash + Objects.hashCode(this.taxNumber);
-        hash = 17 * hash + Objects.hashCode(this.logo);
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.address);
+        hash = 29 * hash + Objects.hashCode(this.taxNumber);
+        hash = 29 * hash + Objects.hashCode(this.logo);
         return hash;
     }
 
@@ -86,13 +98,16 @@ public class CompanyDTO {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
+        if (!Objects.equals(this.taxNumber, other.taxNumber)) {
+            return false;
+        }
         if (!Objects.equals(this.logo, other.logo)) {
             return false;
         }
-        if (!Objects.equals(this.address, other.address)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.taxNumber, other.taxNumber)) {
+        if (!Objects.equals(this.address, other.address)) {
             return false;
         }
         return true;
@@ -100,7 +115,7 @@ public class CompanyDTO {
 
     @Override
     public String toString() {
-        return "CompanyDTO{" + "name=" + name + ", address=" + address + ", taxNumber=" + taxNumber + ", logo=" + logo + '}';
+        return "CompanyDTO{" + "id=" + id + ", name=" + name + ", address=" + address + ", taxNumber=" + taxNumber + ", logo=" + logo + '}';
     }
-    
+
 }
