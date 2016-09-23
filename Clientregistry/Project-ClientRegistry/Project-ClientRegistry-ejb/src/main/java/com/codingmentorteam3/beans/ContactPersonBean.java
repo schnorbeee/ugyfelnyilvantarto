@@ -13,24 +13,25 @@ import javax.validation.constraints.NotNull;
  */
 @Validate
 @SessionScoped
-@ManagedBean(name = "contactPerson")
+@ManagedBean(name = "contactPersonBean")
 public class ContactPersonBean extends PersonBean {
-    
+
     @NotNull
     private Company company;
- 
+
     public ContactPersonBean() {
         // Default constructor
     }
 
-    public ContactPersonBean(Company company) {
+    public ContactPersonBean(String firstName, String lastName, Company company) {
+        super(firstName, lastName);
         this.company = company;
     }
- 
+
     public Company getCompany() {
         return company;
     }
- 
+
     public void setCompany(Company company) {
         this.company = company;
     }
@@ -67,5 +68,5 @@ public class ContactPersonBean extends PersonBean {
     public String toString() {
         return "ContactPersonBean{" + "company=" + company + '}';
     }
-    
+
 }

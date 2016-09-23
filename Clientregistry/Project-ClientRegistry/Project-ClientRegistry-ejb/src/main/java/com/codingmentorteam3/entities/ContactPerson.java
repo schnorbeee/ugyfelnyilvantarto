@@ -1,10 +1,12 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.beans.ContactPersonBean;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
@@ -12,7 +14,10 @@ import javax.persistence.NamedQuery;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "contactperson_table")
-@NamedQuery(name = "contact.person.channels.by.id", query = "SELECT ch FROM contactperson_table c INNER JOIN c.channels ch WHERE c.id =:id")
+@NamedQueries({
+    @NamedQuery(name = "contact.person.list", query = "SELECT cp FROM contactperson_table cp"),
+    @NamedQuery(name = "contact.person.channels.by.id", query = "SELECT ch FROM contactperson_table cp INNER JOIN cp.channels ch WHERE cp.id =:id")
+})
 public class ContactPerson extends Person implements Serializable {
 
     @ManyToOne(targetEntity = Company.class)
@@ -22,9 +27,10 @@ public class ContactPerson extends Person implements Serializable {
     public ContactPerson() {
         //Default constructor
     }
-    
-    public ContactPerson(Company company) {
-        this.company = company;
+
+    public ContactPerson(ContactPersonBean contactPersonBean) {
+        super(contactPersonBean.getFirstName(), contactPersonBean.getLastName(), contactPersonBean.getPosition(), contactPersonBean.getAvatar());
+        this.company = contactPersonBean.getCompany();
     }
 
     public Company getCompany() {
@@ -62,5 +68,5 @@ public class ContactPerson extends Person implements Serializable {
         }
         return true;
     }
-    
+
 }

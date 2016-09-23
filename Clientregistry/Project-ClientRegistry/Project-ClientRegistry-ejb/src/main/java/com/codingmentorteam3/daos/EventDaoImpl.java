@@ -1,12 +1,9 @@
 package com.codingmentorteam3.daos;
 
-import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.User;
-import com.codingmentorteam3.exceptions.query.BadRequestException;
-import com.codingmentorteam3.exceptions.query.EmptyListException;
-import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
+import com.codingmentorteam3.enums.FeedbackType;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
@@ -29,18 +26,25 @@ public class EventDaoImpl extends AbstractDao<Event> {
             query.setMaxResults(limit);
             return query.getResultList();
         }
-        return em.createNamedQuery("event.list", Event.class).getResultList();
+        TypedQuery<Event> query = em.createNamedQuery("event.list", Event.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
-    public List<Event> getEventsListByTypeFilter(String type) {
+    //kerdeses kell-e
+    public List<Event> getEventsListByTypeFilter(String type, int limit, int offset) {
         if (null != type) {
-            List<Event> query = em.createNamedQuery("event.by.type.filter", Event.class).setParameter("type", "%" + type + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("The results can not be found with this parameter: " + type);
-            }
-            return query;
+            TypedQuery<Event> query = em.createNamedQuery("event.by.type.filter", Event.class);
+            query.setParameter("type", "%" + type + "%");
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+            return query.getResultList();
         }
-        return em.createNamedQuery("event.list", Event.class).getResultList();
+        TypedQuery<Event> query = em.createNamedQuery("event.list", Event.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
     public List<Event> getEventsList(int limit, int offset) {
@@ -50,28 +54,24 @@ public class EventDaoImpl extends AbstractDao<Event> {
         return query.getResultList();
     }
 
-    public List<User> getUsersListByEventId(Long eventId) {
-        Event current = read(eventId);
-        if (null != current) {
-            List<User> query = em.createNamedQuery("event.list.users.by.id", User.class).setParameter("id", eventId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("There are no users connected to this event : " + current.getTitle());
-            }
-            return query;
-        }
-        throw new BadRequestException("We haven't got this event in database.");
+    public List<Event> getEventsListWithoutLimit() {
+        TypedQuery<Event> query = em.createNamedQuery("event.list", Event.class);
+        return query.getResultList();
     }
 
     public List<Note> getNotesListByEventId(Long eventId) {
-        Event current = read(eventId);
-        if (null != current) {
-            List<Note> query = em.createNamedQuery("event.list.notes.by.id", Note.class).setParameter("id", eventId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("There are no notes connected to this event : " + current.getTitle());
-            }
-            return query;
-        }
-        throw new BadRequestException("We haven't got this event in database.");
+        TypedQuery<Note> query = em.createNamedQuery("event.list.notes.by.id", Note.class);
+        query.setParameter("id", eventId);
+        return query.getResultList();
+    }
+
+    public List<User> getUsersListByEventIdAndFeedbackIsAccepted(Long eventId, FeedbackType feedback, int limit, int offset) {
+        TypedQuery<User> query = em.createNamedQuery("event.list.users.by.id.and.feedback.accepted", User.class);
+        query.setParameter("id", eventId);
+        query.setParameter("feedback", feedback);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
 }

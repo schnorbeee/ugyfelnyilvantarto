@@ -11,6 +11,8 @@ import java.util.Objects;
  */
 public class NoteDTO {
 
+    private Long id;
+
     private String label;
 
     private String content;
@@ -24,10 +26,19 @@ public class NoteDTO {
     }
 
     public NoteDTO(Note note) {
+        this.id = note.getId();
         this.label = note.getLabel();
         this.content = note.getContent();
         this.user = note.getUser();
         this.event = note.getEvent();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLabel() {
@@ -65,10 +76,11 @@ public class NoteDTO {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.label);
-        hash = 97 * hash + Objects.hashCode(this.content);
-        hash = 97 * hash + Objects.hashCode(this.user);
-        hash = 97 * hash + Objects.hashCode(this.event);
+        hash = 89 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.label);
+        hash = 89 * hash + Objects.hashCode(this.content);
+        hash = 89 * hash + Objects.hashCode(this.user);
+        hash = 89 * hash + Objects.hashCode(this.event);
         return hash;
     }
 
@@ -90,6 +102,9 @@ public class NoteDTO {
         if (!Objects.equals(this.content, other.content)) {
             return false;
         }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
         if (!Objects.equals(this.user, other.user)) {
             return false;
         }
@@ -101,7 +116,7 @@ public class NoteDTO {
 
     @Override
     public String toString() {
-        return "NoteDTO{" + "label=" + label + ", content=" + content + ", user=" + user + ", event=" + event + '}';
+        return "NoteDTO{" + "id=" + id + ", label=" + label + ", content=" + content + ", user=" + user + ", event=" + event + '}';
     }
-    
+
 }

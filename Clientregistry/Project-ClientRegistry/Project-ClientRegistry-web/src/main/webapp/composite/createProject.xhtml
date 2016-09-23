@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h:outputLabel class="control-label col-sm-4" for="projectDescription" value="Project name:"/>
+                                    <h:outputLabel class="control-label col-sm-4" for="projectDescription" value="Description:"/>
                                     <div class="col-sm-8">
                                         <h:inputTextarea cols="40" rows="5" id="projectDescription" value="#{project.description}" class="form-control" required="true" label="Project description" requiredMessage="Description required"/>
                                         <h:message id="projectDescriptionMessage" for="projectDescription" style="color:red"/>
@@ -113,7 +113,7 @@
                                 <div class="row">
                                     <div class="col-sm-9">
                                         <div class="col-sm-4 col-sm-offset-8">
-                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Create project" action="#{projectController.saveEntity()}"/>
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Create project" action="#{projectController.createProject(project, companyId)}"/>
                                         </div>
                                     </div>
                                 </div>

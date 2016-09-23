@@ -11,8 +11,8 @@ import java.util.Objects;
  * @author istvan.mosonyi
  */
 public class InvitationDTO {
-    
-    private static final FeedbackType DEFAULT_FEEDBACK = FeedbackType.UNANSWERED;
+
+    private Long id;
 
     private User sender;
 
@@ -22,18 +22,27 @@ public class InvitationDTO {
 
     private String message;
 
-    private FeedbackType feedback = DEFAULT_FEEDBACK;
+    private FeedbackType feedback;
 
     public InvitationDTO() {
         // Default constructor
     }
 
     public InvitationDTO(Invitation invitation) {
+        this.id = invitation.getId();
         this.sender = invitation.getSender();
         this.receiver = invitation.getReceiver();
         this.event = invitation.getEvent();
         this.message = invitation.getMessage();
         this.feedback = invitation.getFeedback();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public User getSender() {
@@ -78,12 +87,13 @@ public class InvitationDTO {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + Objects.hashCode(this.sender);
-        hash = 23 * hash + Objects.hashCode(this.receiver);
-        hash = 23 * hash + Objects.hashCode(this.event);
-        hash = 23 * hash + Objects.hashCode(this.message);
-        hash = 23 * hash + Objects.hashCode(this.feedback);
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.id);
+        hash = 47 * hash + Objects.hashCode(this.sender);
+        hash = 47 * hash + Objects.hashCode(this.receiver);
+        hash = 47 * hash + Objects.hashCode(this.event);
+        hash = 47 * hash + Objects.hashCode(this.message);
+        hash = 47 * hash + Objects.hashCode(this.feedback);
         return hash;
     }
 
@@ -100,6 +110,9 @@ public class InvitationDTO {
         }
         final InvitationDTO other = (InvitationDTO) obj;
         if (!Objects.equals(this.message, other.message)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.sender, other.sender)) {
@@ -119,7 +132,7 @@ public class InvitationDTO {
 
     @Override
     public String toString() {
-        return "InvitationDTO{" + "sender=" + sender + ", receiver=" + receiver + ", event=" + event + ", message=" + message + ", feedback=" + feedback + '}';
+        return "InvitationDTO{" + "id=" + id + ", sender=" + sender + ", receiver=" + receiver + ", event=" + event + ", message=" + message + ", feedback=" + feedback + '}';
     }
-    
+
 }

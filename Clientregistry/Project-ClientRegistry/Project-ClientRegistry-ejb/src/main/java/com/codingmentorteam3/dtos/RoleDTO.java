@@ -10,6 +10,8 @@ import java.util.Objects;
  */
 public class RoleDTO {
 
+    private Long id;
+
     private RoleType type;
 
     private String username;
@@ -19,8 +21,17 @@ public class RoleDTO {
     }
 
     public RoleDTO(Role role) {
+        this.id = role.getId();
         this.type = role.getRoleType();
         this.username = role.getUser().getUsername();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public RoleType getType() {
@@ -41,9 +52,10 @@ public class RoleDTO {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.type);
-        hash = 47 * hash + Objects.hashCode(this.username);
+        int hash = 3;
+        hash = 71 * hash + Objects.hashCode(this.id);
+        hash = 71 * hash + Objects.hashCode(this.type);
+        hash = 71 * hash + Objects.hashCode(this.username);
         return hash;
     }
 
@@ -62,6 +74,9 @@ public class RoleDTO {
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
         if (this.type != other.type) {
             return false;
         }
@@ -70,7 +85,7 @@ public class RoleDTO {
 
     @Override
     public String toString() {
-        return "RoleDTO{" + "type=" + type + ", username=" + username + '}';
+        return "RoleDTO{" + "id=" + id + ", type=" + type + ", username=" + username + '}';
     }
-    
+
 }

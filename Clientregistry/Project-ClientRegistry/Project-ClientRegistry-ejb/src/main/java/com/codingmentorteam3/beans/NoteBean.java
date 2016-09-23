@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
  */
 @Validate
 @SessionScoped
-@ManagedBean(name = "note")
+@ManagedBean(name = "noteBean")
 public class NoteBean {
     
     @Size(max = 30)

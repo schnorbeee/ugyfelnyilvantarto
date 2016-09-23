@@ -9,13 +9,15 @@ import java.util.Objects;
  * @author istvan.mosonyi
  */
 public class PersonDTO {
-    
+
+    protected Long id;
+
     protected String firstName;
 
     protected String lastName;
 
-    protected PositionType rank;
-    
+    protected PositionType position;
+
     protected String avatar;
 
     public PersonDTO() {
@@ -23,10 +25,19 @@ public class PersonDTO {
     }
 
     public PersonDTO(Person person) {
+        this.id = person.getId();
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
-        this.rank = person.getPosition();
+        this.position = person.getPosition();
         this.avatar = person.getAvatar();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -45,12 +56,12 @@ public class PersonDTO {
         this.lastName = lastName;
     }
 
-    public PositionType getRank() {
-        return rank;
+    public PositionType getPosition() {
+        return position;
     }
 
-    public void setRank(PositionType rank) {
-        this.rank = rank;
+    public void setPosition(PositionType position) {
+        this.position = position;
     }
 
     public String getAvatar() {
@@ -63,11 +74,12 @@ public class PersonDTO {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.firstName);
-        hash = 29 * hash + Objects.hashCode(this.lastName);
-        hash = 29 * hash + Objects.hashCode(this.rank);
-        hash = 29 * hash + Objects.hashCode(this.avatar);
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.firstName);
+        hash = 53 * hash + Objects.hashCode(this.lastName);
+        hash = 53 * hash + Objects.hashCode(this.position);
+        hash = 53 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
 
@@ -92,7 +104,10 @@ public class PersonDTO {
         if (!Objects.equals(this.avatar, other.avatar)) {
             return false;
         }
-        if (this.rank != other.rank) {
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (this.position != other.position) {
             return false;
         }
         return true;
@@ -100,7 +115,7 @@ public class PersonDTO {
 
     @Override
     public String toString() {
-        return "PersonDTO{" + "firstName=" + firstName + ", lastName=" + lastName + ", rank=" + rank + ", avatar=" + avatar + '}';
+        return "PersonDTO{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", position=" + position + ", avatar=" + avatar + '}';
     }
-    
+
 }

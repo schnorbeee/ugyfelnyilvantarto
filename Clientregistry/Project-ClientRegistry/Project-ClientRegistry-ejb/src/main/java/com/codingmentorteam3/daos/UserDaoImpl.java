@@ -1,15 +1,10 @@
 package com.codingmentorteam3.daos;
 
-import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Event;
-import com.codingmentorteam3.entities.Invitation;
 import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.Role;
 import com.codingmentorteam3.entities.User;
-import com.codingmentorteam3.enums.NumItemsPerPageType;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
-import com.codingmentorteam3.exceptions.query.EmptyListException;
-import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.List;
 import javax.persistence.TypedQuery;
 
@@ -19,54 +14,37 @@ import javax.persistence.TypedQuery;
  */
 public class UserDaoImpl extends AbstractDao<User> {
 
-    private static final String BAD_REQUEST_MESSAGE = "User is not in the database.";
-
     public UserDaoImpl() {
         super(User.class);
     }
 
-    public List<User> getUsersListByUsernameFilter(String username) {
-        if (null != username) {
-            List<User> query = em.createNamedQuery("user.by.username.filter", User.class).setParameter("name", "%" + username + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("There are no users mathing the filter: " + username);
-            }
-            return query;
+    public List<User> getUsersListByNameFilter(String name, int limit, int offset) {
+        if (null != name) {
+            TypedQuery<User> query = em.createNamedQuery("user.by.name.filter", User.class);
+            query.setParameter("name", "%" + name + "%");
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+            return query.getResultList();
         }
-        return em.createNamedQuery("user.list", User.class).getResultList();
+        TypedQuery<User> query = em.createNamedQuery("user.list", User.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
-    public List<User> getUsersListByFirstNameFilter(String firstName) {
-        if (null != firstName) {
-            List<User> query = em.createNamedQuery("user.by.firstname.filter", User.class).setParameter("first", "%" + firstName + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("Results can not be found with this parameter: " + firstName);
-            }
-            return query;
-        }
-        return em.createNamedQuery("user.list", User.class).getResultList();
-    }
-
-    public List<User> getUsersListByLastNameFilter(String lastName) {
-        if (null != lastName) {
-            List<User> query = em.createNamedQuery("user.by.lastname.filter", User.class).setParameter("last", "%" + lastName + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("Results can not be found with this parameter: " + lastName);
-            }
-            return query;
-        }
-        return em.createNamedQuery("user.list", User.class).getResultList();
-    }
-
-    public List<User> getUsersListByRankFilter(String position) {
+    //kerdeses hogy kell-e?
+    public List<User> getUsersListByRankFilter(String position, int limit, int offset) {
         if (null != position) {
-            List<User> query = em.createNamedQuery("user.by.rank.filter", User.class).setParameter("position", "%" + position + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("Results can not be found with this parameter: " + position);
-            }
-            return query;
+            TypedQuery<User> query = em.createNamedQuery("user.by.rank.filter", User.class);
+            query.setParameter("position", "%" + position + "%");
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+            return query.getResultList();
         }
-        return em.createNamedQuery("user.list", User.class).getResultList();
+        TypedQuery<User> query = em.createNamedQuery("user.list", User.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
     public List<User> getUsersList(int limit, int offset) {
@@ -76,10 +54,11 @@ public class UserDaoImpl extends AbstractDao<User> {
         return query.getResultList();
     }
 
+    //ezt meg at kell gondolni, jo-e igy
     public User getUserByUsername(String username) {
         if (null != username) {
             try {
-                TypedQuery<User> query = em.createNamedQuery("user.by.username", User.class).setParameter("name", username);                
+                TypedQuery<User> query = em.createNamedQuery("user.by.username", User.class).setParameter("name", username);
                 return query.getSingleResult();
             } catch (Exception ex) {
                 return null;
@@ -88,88 +67,25 @@ public class UserDaoImpl extends AbstractDao<User> {
         throw new BadRequestException("Username has not been defined correctly.");
     }
 
-    public List<NumItemsPerPageType> getNumItemPerPageToPageableTablesByUserId(Long userId) {
-        User current = read(userId);
-        if (null != current) {
-            List<NumItemsPerPageType> query = em.createNamedQuery("user.num.item.per.page.by.id", NumItemsPerPageType.class).setParameter("id", userId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("Number of pages was not defined for this user: " + current.getUsername());
-            }
-            return query;
-        }
-        throw new BadRequestException(BAD_REQUEST_MESSAGE);
-    }
-
     public List<Role> getRolesListByUserId(Long userId) {
-        User current = read(userId);
-        if (null != current) {
-            List<Role> query = em.createNamedQuery("user.list.roles.by.id", Role.class).setParameter("id", userId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("This user has not got any roles.");
-            }
-            return query;
-        }
-        throw new BadRequestException(BAD_REQUEST_MESSAGE);
+        TypedQuery<Role> query = em.createNamedQuery("user.list.roles.by.id", Role.class);
+        query.setParameter("id", userId);
+        return query.getResultList();
     }
 
-    public List<Invitation> getSentInvitationsListByUserId(Long userId) {
-        User current = read(userId);
-        if (null != current) {
-            List<Invitation> query = em.createNamedQuery("user.list.invitation.sent.by.id", Invitation.class).setParameter("id", userId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("This user did not send any invitations yet.");
-            }
-            return query;
-        }
-        throw new BadRequestException(BAD_REQUEST_MESSAGE);
-    }
-
-    public List<Invitation> getReceivedInvitationsListByUserId(Long userId) {
-        User current = read(userId);
-        if (null != current) {
-            List<Invitation> query = em.createNamedQuery("user.list.invitation.received.by.id", Invitation.class).setParameter("id", userId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("This user did not receive any invitations yet.");
-            }
-            return query;
-        }
-        throw new BadRequestException(BAD_REQUEST_MESSAGE);
-    }
-
+    //szerintem kellene... egy kulon jobb oldalso gombbal
     public List<Note> getNotesListByUserId(Long userId) {
-        User current = read(userId);
-        if (null != current) {
-            List<Note> query = em.createNamedQuery("user.list.notes.by.id", Note.class).setParameter("id", userId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("This user has not got any notes yet.");
-            }
-            return query;
-        }
-        throw new BadRequestException(BAD_REQUEST_MESSAGE);
+        TypedQuery<Note> query = em.createNamedQuery("user.list.notes.by.id", Note.class);
+        query.setParameter("id", userId);
+        return query.getResultList();
     }
 
-    public List<Event> getEventsListByUserId(Long userId) {
-        User current = read(userId);
-        if (null != current) {
-            List<Event> query = em.createNamedQuery("user.list.events.by.id", Event.class).setParameter("id", userId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("This user has not got any events yet.");
-            }
-            return query;
-        }
-        throw new BadRequestException(BAD_REQUEST_MESSAGE);
+    public List<Event> getEventsListByUserId(Long userId, int limit, int offset) {
+        TypedQuery<Event> query = em.createNamedQuery("user.list.events.by.id", Event.class);
+        query.setParameter("id", userId);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
-    public List<ConnectionChannel> getChannelsListByUserId(Long userId) {
-        User current = read(userId);
-        if (null != current) {
-            List<ConnectionChannel> query = em.createNamedQuery("user.list.channels.by.id", ConnectionChannel.class).setParameter("id", userId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("This user has not got any connection channels");
-            }
-            return query;
-        }
-        throw new BadRequestException(BAD_REQUEST_MESSAGE);
-    }
-    
 }

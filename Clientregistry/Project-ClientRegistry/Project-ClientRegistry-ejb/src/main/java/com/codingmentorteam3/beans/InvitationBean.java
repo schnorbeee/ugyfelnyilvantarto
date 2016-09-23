@@ -16,23 +16,23 @@ import javax.validation.constraints.Size;
  */
 @Validate
 @SessionScoped
-@ManagedBean(name = "invitation")
+@ManagedBean(name = "invitationBean")
 public class InvitationBean {
-    
+
     private static final FeedbackType DEFAULT_FEEDBACK = FeedbackType.UNANSWERED;
-    
+
     @NotNull
     private User sender;
-    
+
     @NotNull
     private User receiver;
-    
+
     @NotNull
     private Event event;
-    
+
     @Size(max = 1500)
     private String message;
-    
+
     @NotNull
     private FeedbackType feedback = DEFAULT_FEEDBACK;
 
@@ -40,11 +40,12 @@ public class InvitationBean {
         // Default constructor
     }
 
-    public InvitationBean(User sender, User receiver, Event event, String message) {
+    public InvitationBean(User sender, User receiver, Event event, String message, FeedbackType feedback) {
         this.sender = sender;
         this.receiver = receiver;
         this.event = event;
         this.message = message;
+        this.feedback = feedback;
     }
 
     public User getSender() {
@@ -132,5 +133,5 @@ public class InvitationBean {
     public String toString() {
         return "InvitationBean{" + "sender=" + sender + ", receiver=" + receiver + ", event=" + event + ", message=" + message + ", feedback=" + feedback + '}';
     }
-    
+
 }

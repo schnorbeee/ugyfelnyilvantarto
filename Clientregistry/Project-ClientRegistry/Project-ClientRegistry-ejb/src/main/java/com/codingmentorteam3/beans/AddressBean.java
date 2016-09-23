@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
  */
 @Validate
 @SessionScoped
-@ManagedBean(name = "address")
+@ManagedBean(name = "addressBean")
 public class AddressBean {
     
     @NotNull 

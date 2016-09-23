@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.beans.ProjectBean;
 import com.codingmentorteam3.enums.StatusType;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import javax.persistence.TemporalType;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "project_table")
-@NamedNativeQuery(name = "project.list.in.this.week",query = "SELECT p FROM project_table p WHERE EXTRACT(WEEK FROM CURRENT_DATE) = EXTRACT(WEEK FROM p.deadline)")
+@NamedNativeQuery(name = "project.list.in.this.week", query = "SELECT p FROM project_table p WHERE EXTRACT(WEEK FROM CURRENT_DATE) = EXTRACT(WEEK FROM p.deadline)")
 @NamedQueries({
     @NamedQuery(name = "project.by.name.filter", query = "SELECT p FROM project_table p WHERE p.name LIKE :name"),
     @NamedQuery(name = "project.by.status.filter", query = "SELECT p FROM project_table p WHERE p.status LIKE :status"),
@@ -70,6 +71,14 @@ public class Project implements Serializable {
         this.status = status;
         this.description = description;
         this.deadline = deadline;
+    }
+
+    public Project(ProjectBean regProject) {
+        this.name = regProject.getName();
+        this.startDate = regProject.getStartDate();
+        this.status = regProject.getStatus();
+        this.description = regProject.getDescription();
+        this.deadline = regProject.getDeadline();
     }
 
     public Long getId() {
