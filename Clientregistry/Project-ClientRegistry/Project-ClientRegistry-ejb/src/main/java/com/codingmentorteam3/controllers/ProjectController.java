@@ -48,7 +48,7 @@ public class ProjectController extends PageableEntityController<Project> {
         if (null != oldProject) {
             Project currentProject = new Project(updateProject);
             oldProject = modifiedCheckerProject(oldProject, currentProject);
-            projectService.editProject(oldProject);
+            saveEntity();
             return new ProjectDTO(oldProject);
         }
         throw new BadRequestException(getNoEntityMessage());

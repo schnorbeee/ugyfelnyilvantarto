@@ -1,6 +1,7 @@
 package com.codingmentorteam3.daos;
 
 import com.codingmentorteam3.entities.Address;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
@@ -22,7 +23,11 @@ public class AddressDaoImpl extends AbstractDao<Address> {
         query.setParameter("zip", zip);
         query.setParameter("street", street);
         query.setParameter("houseNumber", houseNumber);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (Exception ex) {
+            return null;
+        }
     }
     
 }

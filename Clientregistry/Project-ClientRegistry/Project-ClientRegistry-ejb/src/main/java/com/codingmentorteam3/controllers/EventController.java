@@ -58,27 +58,6 @@ public class EventController extends PageableEntityController<Event> {
     @Inject
     private InvitationService invitationService;
 
-    public String createEvent(EventBean regEvent, AddressBean regAddress, Long companyId) {
-        Event newEvent = new Event(regEvent);
-        Address newAddress = new Address(regAddress);
-        Company oldCompany = companyService.getCompany(1L);
-        if (!eventService.getEventsListByTitleFilter(newEvent.getTitle(), getLimit(), getOffset()).isEmpty()) {
-            throw new EntityAlreadyExistsException("This event already exists in our database.");
-        }
-        Address oldAddress = addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber());
-        if (null != oldAddress) {
-            newEvent.setAddress(oldAddress);
-            newEvent.setCompany(oldCompany);
-            eventService.createEvent(newEvent);
-            return getListPage();
-        }
-        addressService.createAddress(newAddress);
-        newEvent.setAddress(newAddress);
-        newEvent.setCompany(oldCompany);
-        eventService.createEvent(newEvent);
-        return getListPage();
-    }
-
 //    public String getEventById(Long eventId) {
 //        Event event = eventService.getEvent(eventId);
 //        if (null != event) {
@@ -92,7 +71,7 @@ public class EventController extends PageableEntityController<Event> {
         if (null != oldEvent) {
             Event currentEvent = new Event(updateEvent);
             oldEvent = modifiedCheckerEvent(oldEvent, currentEvent);
-            eventService.editEvent(oldEvent);
+            saveEntity();
             return new EventDTO(oldEvent);
         }
         throw new BadRequestException(getNoEntityMessage());
@@ -111,19 +90,19 @@ public class EventController extends PageableEntityController<Event> {
                 Address newAddress = new Address(updateAddress);
                 addressService.createAddress(newAddress);
                 currentEvent.setAddress(newAddress);
-                setEntity(currentEvent);
+                saveEntity();
                 return new AddressDTO(newAddress);
             } else {
                 currentEvent.setAddress(currentAddress);
-                setEntity(currentEvent);
+                saveEntity();
                 return new AddressDTO(currentAddress);
             }
         }
         throw new BadRequestException(getNoEntityMessage());
     }
 
-    public List<EventDTO> deleteEventById(Long eventId) {
-        Event deleteEvent = eventService.getEvent(eventId);
+    public List<EventDTO> deleteEventById() {
+        Event deleteEvent = getEntity();
         if (null != deleteEvent) {
             eventService.deleteEvent(deleteEvent);
             if (!isAnyCompanyAndEventUseThisAddress(deleteEvent.getAddress())) {
@@ -196,8 +175,8 @@ public class EventController extends PageableEntityController<Event> {
     }
 
     public List<UserDTO> getUsersListByEventIdAndFeedbackIsAccepted(FeedbackType feedback) {
-        Event currEvent = getEntity();
-        if (null != currEvent) {
+        Event currentEvent = getEntity();
+        if (null != currentEvent) {
             List<UserDTO> userDTOs = new ArrayList<>();
             for (User u : eventService.getUsersListByEventIdAndFeedbackIsAccepted(getEntityId(), feedback, getLimit(), getOffset())) {
                 UserDTO userDTO = new UserDTO(u);

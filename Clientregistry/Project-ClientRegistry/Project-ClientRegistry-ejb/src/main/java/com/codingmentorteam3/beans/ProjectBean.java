@@ -41,9 +41,10 @@ public class ProjectBean {
         // Default constructor
     }
 
-    public ProjectBean(String name, String description, Date startDate, Date deadline) {
+    public ProjectBean(String name, String description, StatusType status, Date startDate, Date deadline) {
         this.name = name;
         this.description = description;
+        this.status = status;
         this.startDate = startDate;
         this.deadline = deadline;
     }

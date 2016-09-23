@@ -57,8 +57,9 @@ public class UserDaoImpl extends AbstractDao<User> {
     //ezt meg at kell gondolni, jo-e igy
     public User getUserByUsername(String username) {
         if (null != username) {
+            TypedQuery<User> query = em.createNamedQuery("user.by.username", User.class);
+            query.setParameter("name", username);
             try {
-                TypedQuery<User> query = em.createNamedQuery("user.by.username", User.class).setParameter("name", username);
                 return query.getSingleResult();
             } catch (Exception ex) {
                 return null;

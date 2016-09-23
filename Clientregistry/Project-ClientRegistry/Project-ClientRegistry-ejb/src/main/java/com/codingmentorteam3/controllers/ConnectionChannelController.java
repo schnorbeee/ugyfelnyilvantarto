@@ -29,12 +29,12 @@ public class ConnectionChannelController extends PageableEntityController<Connec
     @Inject
     private PersonService personService;
 
-    public ConnectionChannelDTO updateConnectionChannel(ConnectionChannelBean newConnectionChannelBean, Long connectionChannelId) {
+    public ConnectionChannelDTO updateConnectionChannel(ConnectionChannelBean newConnectionChannelBean) {
         ConnectionChannel newConnectionChannel = new ConnectionChannel(newConnectionChannelBean);
         ConnectionChannel currentConnectionChannel = getEntity();
         if (null != currentConnectionChannel) {
             currentConnectionChannel.setValue(newConnectionChannel.getValue());
-            connectionChannelService.editConnectionChannel(currentConnectionChannel);
+            saveEntity();
             return new ConnectionChannelDTO(currentConnectionChannel);
         }
         throw new BadRequestException("No connection channel found in database!");
@@ -53,19 +53,6 @@ public class ConnectionChannelController extends PageableEntityController<Connec
         }
         throw new BadRequestException("No connection channel found in database!");
     }
-    //eleg a person
-//    public List<ConnectionChannelDTO> getConnectionChannelListByOwnerId(Long ownerID) {
-//        User currentUser = userService.getUser(ownerID);
-//        if(null != currentUser) {
-//            List<ConnectionChannelDTO> connectionChannelDTOs = new ArrayList<>();
-//            for(ConnectionChannel ch : connectionChannelService.getConnectionChannelListByOwnerId(ownerID)) {
-//                ConnectionChannelDTO connectionChannelDTO = new ConnectionChannelDTO(ch);
-//                connectionChannelDTOs.add(connectionChannelDTO);
-//            }
-//            return connectionChannelDTOs;
-//        }
-//        throw new BadRequestException("No user found in database!");
-//    }
 
     @Override
     public List<ConnectionChannel> getEntities() {

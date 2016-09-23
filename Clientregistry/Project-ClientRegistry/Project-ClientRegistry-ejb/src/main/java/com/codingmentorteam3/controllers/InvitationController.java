@@ -37,7 +37,7 @@ public class InvitationController extends PageableEntityController<Invitation> {
         if (null != currenInvitation) {
             if (type.equals(FeedbackType.ACCEPTED)) {
                 currenInvitation.setFeedback(type);
-                invitationService.editInvitation(currenInvitation);
+                saveEntity();
                 User currentReceiver = currenInvitation.getReceiver();
                 Event currentEvent = currenInvitation.getEvent();
                 currentReceiver.getEvents().add(currentEvent);

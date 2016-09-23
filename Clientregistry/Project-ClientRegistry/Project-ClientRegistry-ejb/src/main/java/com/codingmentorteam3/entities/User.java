@@ -16,6 +16,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -53,6 +54,7 @@ public class User extends Person implements Serializable {
     @ElementCollection
     @CollectionTable(name = "num_item_per_page_table")
     @MapKeyColumn(name = "table_enum")
+    @Enumerated(EnumType.STRING)
     @Column(name = "num_enum")
     private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap<>(PageableTablesType.class);
 

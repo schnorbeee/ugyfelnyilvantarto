@@ -74,13 +74,10 @@ public class UserController extends PageableEntityController<User> {
         ConnectionChannel newConnectionChannal = new ConnectionChannel(newConnectionChannelBean);
         RoleBean newRoleBean = new RoleBean(newUser);
         Role newRole = new Role(newRoleBean);
-        Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap<>(PageableTablesType.class);
-        for (Map.Entry<PageableTablesType, NumItemsPerPageType> n : numItemPerPage.entrySet()) {
-            n.setValue(NumItemsPerPageType.TEN);
-        }
         newUser.setPassword(utilBean.sha256coding(newUser.getPassword()));
-        newUser.setNumItemPerPage(numItemPerPage);
-        userService.createUser(newUser);
+        newUser.setNumItemPerPage(preSetTableLimitsToNewUser());
+        setEntity(newUser);
+        saveEntity();
         connectionChannelService.createConnectionChannel(newConnectionChannal);
         roleService.createRole(newRole);
         return getListPage();
@@ -350,7 +347,7 @@ public class UserController extends PageableEntityController<User> {
         return "No user found in database!";
     }
 
-    public User modifiedCheckerUser(User oldUser, User currentUser) {
+    private User modifiedCheckerUser(User oldUser, User currentUser) {
         if (!currentUser.getUsername().equals("")) {
             oldUser.setUsername(currentUser.getUsername());
         }
@@ -362,5 +359,20 @@ public class UserController extends PageableEntityController<User> {
         }
         return oldUser;
     }
+    
+    private Map<PageableTablesType, NumItemsPerPageType> preSetTableLimitsToNewUser() {
+        NumItemsPerPageType tenItemPerPage = NumItemsPerPageType.TEN;
+        Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap<>(PageableTablesType.class);
+        numItemPerPage.put(PageableTablesType.FULL_USER_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.FULL_EVENT_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.FULL_COMPANY_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.FULL_PROJECT_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.MANAGED_USER_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.MANAGED_EVENT_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.MANAGED_COMPANY_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.MANAGED_PROJECT_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.INVITATION_TABLE, tenItemPerPage);
+        return numItemPerPage;
+    } 
 
 }
