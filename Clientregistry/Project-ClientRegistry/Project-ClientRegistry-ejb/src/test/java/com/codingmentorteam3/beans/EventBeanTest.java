@@ -2,6 +2,7 @@ package com.codingmentorteam3.beans;
 
 import com.codingmentorteam3.entities.Address;
 import com.codingmentorteam3.entities.Company;
+import com.codingmentorteam3.enums.EventType;
 import java.util.Date;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -46,7 +47,7 @@ public class EventBeanTest {
         Date endDate = new Date();
         endDate.setTime(startDate.getTime() + 100000);
 
-        event = new EventBean("Example event", "Desc", Mockito.mock(Address.class), startDate, endDate, Mockito.mock(Company.class));
+        event = new EventBean("Example event", "Desc", Mockito.mock(Address.class),EventType.MEETING, startDate, endDate, Mockito.mock(Company.class));
     }
 
     @After
@@ -92,12 +93,21 @@ public class EventBeanTest {
 
     @Test
     public void shouldViolateDescriptionLengthValidation() {
-        String newDesc = createLongDescription(1510);
+        String newDesc = "ssssssssssssssssssssssssssssssssssssssssssssss"
+                + "sssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                + "sssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                + "sssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                + "ssssssssssssssssssssssssssssssssssssssssssssss" 
+                + "ssssssssssssssssssssssssssssssssssssssssssssss"
+                + "sssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                + "sssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                + "sssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                + "ssssssssssssssssssssssssssssssssssssssssssssss";
         event.setDescription(newDesc);
         Set<ConstraintViolation<EventBean>> violations
                 = validator.validate(event);
         assertEquals(1, violations.size());
-        assertEquals("{javax.validation.constraints.NotNull.message}", violations.iterator().next().getMessageTemplate()
+        assertEquals("{javax.validation.constraints.Size.message}", violations.iterator().next().getMessageTemplate()
         );
     }
 
@@ -111,16 +121,6 @@ public class EventBeanTest {
         assertEquals(1, violations.size());
         assertEquals("{InvalidStartAndEndDate.message}", violations.iterator().next().getMessageTemplate()
         );
-    }
-
-    private String createLongDescription(int n) {
-        String s = "s";
-
-        for (int i = 0; i < n; i++) {
-            s+=s;
-        }
-
-        return s;
     }
 
 }

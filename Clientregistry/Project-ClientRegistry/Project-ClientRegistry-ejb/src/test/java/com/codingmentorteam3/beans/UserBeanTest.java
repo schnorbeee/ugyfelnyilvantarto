@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.codingmentorteam3.beans;
 
-import com.codingmentorteam3.enums.PositionType;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -17,7 +11,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 /**
  *
@@ -44,7 +37,7 @@ public class UserBeanTest {
 
     @Before
     public void setUp() {
-        user = new UserBean("Username", "Pass+word1", "Firstname", "Lastname", PositionType.EMPLOYEE, "default");
+        user = new UserBean("Username", "Pass+word1", "Firstname", "Lastname");
     }
 
     @After

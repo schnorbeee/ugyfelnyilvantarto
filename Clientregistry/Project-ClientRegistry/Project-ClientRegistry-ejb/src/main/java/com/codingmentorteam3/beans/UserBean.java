@@ -3,11 +3,9 @@ package com.codingmentorteam3.beans;
 import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.constraints.Password;
 import com.codingmentorteam3.constraints.Username;
-import com.codingmentorteam3.enums.PositionType;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.validation.constraints.NotNull;
 
 /**
  *

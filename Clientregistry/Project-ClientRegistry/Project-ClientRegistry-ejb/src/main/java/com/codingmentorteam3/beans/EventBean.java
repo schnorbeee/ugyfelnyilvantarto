@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -28,7 +29,7 @@ public class EventBean {
     @Size(min = 2, max = 30)
     private String title;
 
-    @Size(max = 1500)
+    @Size(max = 500)
     private String description;
 
     @NotNull
@@ -37,9 +38,9 @@ public class EventBean {
     private EventType type = DEFAULT_TYPE;
 
     @NotNull
-    @Future
     private Date startDate;
 
+    @Future
     private Date endDate;
 
     private Company company;

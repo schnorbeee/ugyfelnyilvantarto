@@ -40,7 +40,7 @@ public class ContactPersonBeanTest {
     
     @Before
     public void setUp() {
-        contactPerson = new ContactPersonBean(Mockito.mock(Company.class));
+        contactPerson = new ContactPersonBean("Firstname","Lastname",Mockito.mock(Company.class));
     }
     
     @After

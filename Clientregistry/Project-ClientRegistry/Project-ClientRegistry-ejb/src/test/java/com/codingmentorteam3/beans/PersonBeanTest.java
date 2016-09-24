@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.codingmentorteam3.beans;
 
-import com.codingmentorteam3.enums.PositionType;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -43,7 +37,7 @@ public class PersonBeanTest {
     
     @Before
     public void setUp() {
-        person = new PersonBean("Example","Person",PositionType.EMPLOYEE,"");
+        person = new PersonBean("Example","Person");
     }
     
     @After
@@ -71,17 +65,6 @@ public class PersonBeanTest {
     @Test
     public void shouldViolateLastNameIsNotNullValidation(){
         person.setLastName(null);
-        Set<ConstraintViolation<PersonBean>> violations =
-                validator.validate(person);
-        assertEquals(1, violations.size());
-        assertEquals("{javax.validation.constraints.NotNull.message}" 
-                     ,violations.iterator().next().getMessageTemplate()
-                    );
-    }
-    
-    @Test
-    public void shouldViolateRankIsNotNullValidation(){
-        person.setRank(null);
         Set<ConstraintViolation<PersonBean>> violations =
                 validator.validate(person);
         assertEquals(1, violations.size());
