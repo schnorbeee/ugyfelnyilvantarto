@@ -222,7 +222,7 @@ public class EventController extends PageableEntityController<Event> {
 
     //at kell nezni hogy helyesen legyen beirva
     @Override
-    protected String getNoEntityMessage() {
+    public String getNoEntityMessage() {
         return "No event found in database!";
     }
 

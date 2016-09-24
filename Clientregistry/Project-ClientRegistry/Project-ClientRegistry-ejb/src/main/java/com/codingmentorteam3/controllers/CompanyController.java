@@ -246,16 +246,6 @@ public class CompanyController extends PageableEntityController<Company> {
                 haveProject = true;
             }
         }
-        for (Project p : projectService.getProjectsList(getLimit(), getOffset())) {
-            if (newProject.getName().equals(p.getName()) && newProject.getStartDate().equals(p.getStartDate()) && newProject.getDeadline().equals(p.getDeadline())) {
-                newProject.getCompanies().add(currentCompany);
-                projectService.editProject(newProject);
-                currentCompany.getProjects().add(newProject);
-                setEntity(currentCompany);
-                saveEntity();
-                haveProject = true;
-            }
-        }
         if (!haveProject) {
             newProject.getCompanies().add(currentCompany);
             projectService.createProject(newProject);
