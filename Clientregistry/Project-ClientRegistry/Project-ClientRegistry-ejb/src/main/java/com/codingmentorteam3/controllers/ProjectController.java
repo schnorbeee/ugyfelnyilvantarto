@@ -123,6 +123,24 @@ public class ProjectController extends PageableEntityController<Project> {
         throw new EmptyListException("In this week we haven't got any project what is in deadline period.");
     }
 
+    public List<ProjectDTO> getProjectsListByStringFilter(String name) {
+        List<ProjectDTO> projectDTOs = new ArrayList<>();
+        for (Project p : projectService.getProjectsListByStringFilter(name, getLimit(), getOffset())) {
+            ProjectDTO projectDTO = new ProjectDTO(p);
+            projectDTOs.add(projectDTO);
+        }
+        return projectDTOs;
+    }
+
+    public List<ProjectDTO> getProjectsListByStatusFilter(String status) {
+        List<ProjectDTO> projectDTOs = new ArrayList<>();
+        for (Project p : projectService.getProjectsListByStatusFilter(status, getLimit(), getOffset())) {
+            ProjectDTO projectDTO = new ProjectDTO(p);
+            projectDTOs.add(projectDTO);
+        }
+        return projectDTOs;
+    }
+
     @Override
     protected void doPersistEntity() {
         projectService.createProject(getEntity());

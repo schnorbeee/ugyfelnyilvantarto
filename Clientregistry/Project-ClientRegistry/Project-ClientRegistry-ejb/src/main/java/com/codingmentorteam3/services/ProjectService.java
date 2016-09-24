@@ -50,4 +50,12 @@ public class ProjectService {
         return projectDao.getProjectsListDeadlineIsInThisWeek();
     }
 
+    public List<Project> getProjectsListByStringFilter(String name, Integer limit, Integer offset) {
+        return projectDao.getProjectsListByStringFilter(name, limit, offset);
+    }
+
+    public List<Project> getProjectsListByStatusFilter(String status, Integer limit, Integer offset) {
+        return projectDao.getProjectsListByStatusFilter(status, limit, offset);
+    }
+
 }

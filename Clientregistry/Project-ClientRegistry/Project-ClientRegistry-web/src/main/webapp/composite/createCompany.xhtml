@@ -63,7 +63,7 @@
                     <h:link outcome="manageusers.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage users"/>
                     <h:link outcome="manage/manageCompanies.xhtml" class="btn btn-default btn-color-default center-block btn-space active" value="Manage companies"/>
                     <hr/>
-                    <h:link outcome="login.xhtml" class="btn btn-info center-block btn-color-register" value="Logout"/>
+                    <h:commandButton class="btn btn-info center-block btn-color-register" type="submit" value="Logout" action="#{visitorCountBean.logout()}"/>
                 </div>
                 <!--
                 END OF FIX LEFT-SIDE MENU

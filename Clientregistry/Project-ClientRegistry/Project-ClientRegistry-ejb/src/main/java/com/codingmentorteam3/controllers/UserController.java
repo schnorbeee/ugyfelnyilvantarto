@@ -310,6 +310,24 @@ public class UserController extends PageableEntityController<User> {
         throw new BadRequestException(getNoEntityMessage());
     }
 
+    public List<UserDTO> getUsersListByNameFilter(String name) {
+        List<UserDTO> userDTOs = new ArrayList<>();
+        for (User u : userService.getUsersListByNameFilter(name, getLimit(), getOffset())) {
+            UserDTO userDTO = new UserDTO(u);
+            userDTOs.add(userDTO);
+        }
+        return userDTOs;
+    }
+
+    public List<UserDTO> getUsersListByPositionFilter(String position) {
+        List<UserDTO> userDTOs = new ArrayList<>();
+        for (User u : userService.getUsersListByPositionFilter(position, getLimit(), getOffset())) {
+            UserDTO userDTO = new UserDTO(u);
+            userDTOs.add(userDTO);
+        }
+        return userDTOs;
+    }
+
     @Override
     protected void doPersistEntity() {
         userService.createUser(getEntity());
