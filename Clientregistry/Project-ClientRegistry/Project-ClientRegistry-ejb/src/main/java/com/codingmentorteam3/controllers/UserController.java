@@ -74,13 +74,10 @@ public class UserController extends PageableEntityController<User> {
         ConnectionChannel newConnectionChannal = new ConnectionChannel(newConnectionChannelBean);
         RoleBean newRoleBean = new RoleBean(newUser);
         Role newRole = new Role(newRoleBean);
-        Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap<>(PageableTablesType.class);
-        for (Map.Entry<PageableTablesType, NumItemsPerPageType> n : numItemPerPage.entrySet()) {
-            n.setValue(NumItemsPerPageType.TEN);
-        }
         newUser.setPassword(utilBean.sha256coding(newUser.getPassword()));
-        newUser.setNumItemPerPage(numItemPerPage);
-        userService.createUser(newUser);
+        newUser.setNumItemPerPage(preSetTableLimitsToNewUser());
+        setEntity(newUser);
+        saveEntity();
         connectionChannelService.createConnectionChannel(newConnectionChannal);
         roleService.createRole(newRole);
         return getListPage();
@@ -96,7 +93,7 @@ public class UserController extends PageableEntityController<User> {
         }
         regConnectionChannel.setOwner(userService.getUser(getEntityId()));
         connectionChannelService.createConnectionChannel(regConnectionChannel);
-        return "";
+        return "profile.xhtml";
     }
 
 //    //user method
@@ -108,23 +105,25 @@ public class UserController extends PageableEntityController<User> {
 //        throw new BadRequestException(getNoEntityMessage());
 //    }
     //user method
-    public UserDTO updateUserPersonalInfos(UserBean updateUser, Long id) throws NoSuchAlgorithmException {
-        User oldUser = userService.getUser(id);
+    public UserDTO updateUserPersonalInfos(UserBean updateUser, Long userId) throws NoSuchAlgorithmException {
+        User oldUser = loadEntity(userId);
         if (null != oldUser) {
             User currentUser = new User(updateUser);
-            userService.editUser(modifiedCheckerUser(oldUser, currentUser));
+            setEntity(modifiedCheckerUser(oldUser, currentUser));
+            saveEntity();
             return new UserDTO(oldUser);
         }
         throw new BadRequestException(getNoEntityMessage());
     }
 
     //user method
-    public UserDTO updateUserPassword(UserBean updateUser, String oldPassword, Long id) throws NoSuchAlgorithmException {
-        User oldUser = userService.getUser(id);
+    public UserDTO updateUserPassword(UserBean updateUser, String oldPassword, Long userId) throws NoSuchAlgorithmException {
+        User oldUser = loadEntity(userId);
         if (null != oldUser) {
             if (utilBean.sha256coding(oldPassword).equals(oldUser.getPassword())) {
                 oldUser.setPassword(utilBean.sha256coding(oldPassword));
-                userService.editUser(oldUser);
+                setEntity(oldUser);
+                saveEntity();
                 return new UserDTO(oldUser);
             }
             throw new OldPasswordException("Old password doesn't equals what you wrote.");
@@ -133,19 +132,20 @@ public class UserController extends PageableEntityController<User> {
     }
 
     //user method
-    public UserDTO changeAvatar(String newAvatar, Long id) {
-        User currentUser = userService.getUser(id);
+    public UserDTO changeAvatar(String newAvatar, Long userId) {
+        User currentUser = loadEntity(userId);
         if (null != currentUser) {
             currentUser.setAvatar(newAvatar);
-            userService.editUser(currentUser);
+            setEntity(currentUser);
+            saveEntity();
             return new UserDTO(currentUser);
         }
         throw new BadRequestException(getNoEntityMessage());
     }
 
     //admin method
-    public List<UserDTO> deleteUserById(Long id) {
-        User deleteUser = userService.getUser(id);
+    public List<UserDTO> deleteUserById(Long userId) {
+        User deleteUser = loadEntity(userId);
         if (null != deleteUser) {
             userService.deleteUser(deleteUser);
             List<UserDTO> userDTOs = new ArrayList<>();
@@ -180,8 +180,8 @@ public class UserController extends PageableEntityController<User> {
         throw new BadRequestException("This role type is not definied in database.");
     }
 
-    public List<InvitationDTO> getInvitationsListByReceiverIdAndAcceptedFeedback() {
-        User currentReceiver = getEntity();
+    public List<InvitationDTO> getInvitationsListByReceiverIdAndAcceptedFeedback(Long userId) {
+        User currentReceiver = loadEntity(userId);
         if (null != currentReceiver) {
             FeedbackType type = FeedbackType.ACCEPTED;
             List<InvitationDTO> invitationDTOs = new ArrayList<>();
@@ -194,8 +194,8 @@ public class UserController extends PageableEntityController<User> {
         throw new BadRequestException(getNoEntityMessage());
     }
 
-    public List<InvitationDTO> getInvitationsListBySenderId() {
-        User currentSender = getEntity();
+    public List<InvitationDTO> getInvitationsListBySenderId(Long userId) {
+        User currentSender = loadEntity(userId);
         if (null != currentSender) {
             List<InvitationDTO> invitationDTOs = new ArrayList<>();
             for (Invitation i : invitationService.getInvitationsListBySenderId(getEntityId(), getLimit(), getOffset())) {
@@ -208,8 +208,8 @@ public class UserController extends PageableEntityController<User> {
     }
 
     //ADMIN METHOD
-    public List<UserDTO> setUserAdminRoleToRoleTable() {
-        User currentUser = getEntity();
+    public List<UserDTO> setUserAdminRoleToRoleTable(Long userId) {
+        User currentUser = loadEntity(userId);
         RoleType adminRole = RoleType.ADMIN;
         if (null != currentUser) {
             for (Role role : userService.getRolesListByUserId(getEntityId())) {
@@ -231,8 +231,8 @@ public class UserController extends PageableEntityController<User> {
         throw new BadRequestException(getNoEntityMessage());
     }
 
-    public List<UserDTO> setUserManagerRoleToRoleTable() {
-        User currentUser = getEntity();
+    public List<UserDTO> setUserManagerRoleToRoleTable(Long userId) {
+        User currentUser = loadEntity(userId);
         RoleType managerRole = RoleType.MANAGER;
         if (null != currentUser) {
             for (Role role : userService.getRolesListByUserId(getEntityId())) {
@@ -255,8 +255,8 @@ public class UserController extends PageableEntityController<User> {
     }
 
     //ADMIN METHOD
-    public List<UserDTO> deleteAdminRoleForThisUser() {
-        User current = getEntity();
+    public List<UserDTO> deleteAdminRoleForThisUser(Long userId) {
+        User current = loadEntity(userId);
         RoleType adminRole = RoleType.ADMIN;
         if (null != current) {
             if (roleService.getUsersListByRoleType(adminRole, getLimit(), getOffset()).size() == 1) {
@@ -278,8 +278,8 @@ public class UserController extends PageableEntityController<User> {
     }
 
     //ADMIN METHOD
-    public List<UserDTO> deleteManagerRoleForThisUser() {
-        User current = getEntity();
+    public List<UserDTO> deleteManagerRoleForThisUser(Long userId) {
+        User current = loadEntity(userId);
         RoleType managerRole = RoleType.MANAGER;
         if (null != current) {
             for (Role r : roleService.getRolesListByUsername(current.getUsername())) {
@@ -297,8 +297,8 @@ public class UserController extends PageableEntityController<User> {
         throw new BadRequestException(getNoEntityMessage());
     }
 
-    public List<EventDTO> getEventsListByUserId() {
-        User currentUser = getEntity();
+    public List<EventDTO> getEventsListByUserId(Long userId) {
+        User currentUser = loadEntity(userId);
         if (null != currentUser) {
             List<EventDTO> eventDTOs = new ArrayList<>();
             for (Event e : userService.getEventsListByUserId(getEntityId(), getLimit(), getOffset())) {
@@ -331,7 +331,7 @@ public class UserController extends PageableEntityController<User> {
         if (entityId != null) {
             return userService.getUser(entityId);
         }
-        return new User();
+        return null;
     }
 
     //atnezni a stringek helyesek-e az alabbi 3 override-nal
@@ -350,17 +350,32 @@ public class UserController extends PageableEntityController<User> {
         return "No user found in database!";
     }
 
-    public User modifiedCheckerUser(User oldUser, User currentUser) {
-        if (!currentUser.getUsername().equals("")) {
+    private User modifiedCheckerUser(User oldUser, User currentUser) {
+        if (!currentUser.getUsername().equals("") || !currentUser.getUsername().equals(oldUser.getUsername())) {
             oldUser.setUsername(currentUser.getUsername());
         }
-        if (!currentUser.getFirstName().equals("")) {
+        if (!currentUser.getFirstName().equals("") || !currentUser.getFirstName().equals(oldUser.getFirstName())) {
             oldUser.setFirstName(currentUser.getFirstName());
         }
-        if (!currentUser.getLastName().equals("")) {
+        if (!currentUser.getLastName().equals("") || !currentUser.getLastName().equals(oldUser.getLastName())) {
             oldUser.setLastName(currentUser.getLastName());
         }
         return oldUser;
+    }
+
+    private Map<PageableTablesType, NumItemsPerPageType> preSetTableLimitsToNewUser() {
+        NumItemsPerPageType tenItemPerPage = NumItemsPerPageType.TEN;
+        Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap<>(PageableTablesType.class);
+        numItemPerPage.put(PageableTablesType.FULL_USER_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.FULL_EVENT_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.FULL_COMPANY_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.FULL_PROJECT_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.MANAGED_USER_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.MANAGED_EVENT_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.MANAGED_COMPANY_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.MANAGED_PROJECT_TABLE, tenItemPerPage);
+        numItemPerPage.put(PageableTablesType.INVITATION_TABLE, tenItemPerPage);
+        return numItemPerPage;
     }
 
 }

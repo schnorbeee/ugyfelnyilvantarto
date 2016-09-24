@@ -204,12 +204,12 @@ public class CompanyController extends PageableEntityController<Company> {
         }
         return eventDTOs;
     }
-    
+
     public List<ContactPersonDTO> addContactPerson(ContactPersonBean regContactPerson, Long companyId) {
         ContactPerson newContactPerson = new ContactPerson(regContactPerson);
         Company currentCompany = loadEntity(companyId);
         for (ContactPerson cp : currentCompany.getContacters()) {
-            if(newContactPerson.getFirstName().equals(cp.getFirstName()) && newContactPerson.getLastName().equals(cp.getLastName())) {
+            if (newContactPerson.getFirstName().equals(cp.getFirstName()) && newContactPerson.getLastName().equals(cp.getLastName())) {
                 throw new EntityAlreadyExistsException("This contact person is already added to this company.");
             }
         }
@@ -225,7 +225,7 @@ public class CompanyController extends PageableEntityController<Company> {
         }
         return contactPersonDTOs;
     }
-    
+
     //user method
     public List<ProjectDTO> createProject(ProjectBean regProject, Long companyId) {
         Project newProject = new Project(regProject);
@@ -246,7 +246,17 @@ public class CompanyController extends PageableEntityController<Company> {
                 haveProject = true;
             }
         }
-        if(!haveProject) {
+        for (Project p : projectService.getProjectsList(getLimit(), getOffset())) {
+            if (newProject.getName().equals(p.getName()) && newProject.getStartDate().equals(p.getStartDate()) && newProject.getDeadline().equals(p.getDeadline())) {
+                newProject.getCompanies().add(currentCompany);
+                projectService.editProject(newProject);
+                currentCompany.getProjects().add(newProject);
+                setEntity(currentCompany);
+                saveEntity();
+                haveProject = true;
+            }
+        }
+        if (!haveProject) {
             newProject.getCompanies().add(currentCompany);
             projectService.createProject(newProject);
             currentCompany.getProjects().add(newProject);
@@ -338,7 +348,7 @@ public class CompanyController extends PageableEntityController<Company> {
         if (entityId != null) {
             return companyService.getCompany(entityId);
         }
-        return new Company();
+        return null;
     }
 
     @Override
@@ -369,10 +379,10 @@ public class CompanyController extends PageableEntityController<Company> {
     }
 
     private Company modifiedCheckerCompany(Company oldCompany, Company currentCompany) {
-        if (!currentCompany.getName().equals("")) {
+        if (!currentCompany.getName().equals("") || !currentCompany.getName().equals(oldCompany.getName())) {
             oldCompany.setName(currentCompany.getName());
         }
-        if (!currentCompany.getTaxNumber().equals("")) {
+        if (!currentCompany.getTaxNumber().equals("") || !currentCompany.getTaxNumber().equals(oldCompany.getTaxNumber())) {
             oldCompany.setTaxNumber(currentCompany.getTaxNumber());
         }
         return oldCompany;

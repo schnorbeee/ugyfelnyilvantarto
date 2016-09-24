@@ -24,12 +24,12 @@ public class ContactPersonController extends PageableEntityController<ContactPer
 
     @Inject
     private ContactPersonService contactPersonService;
-    
-    public List<ConnectionChannelDTO> getChannelsByContacterId() {
-        ContactPerson currentContactPerson = getEntity();
-        if(null!= currentContactPerson) {
+
+    public List<ConnectionChannelDTO> getChannelsByContacterId(Long contactPersonId) {
+        ContactPerson currentContactPerson = loadEntity(contactPersonId);
+        if (null != currentContactPerson) {
             List<ConnectionChannelDTO> connectionChannelDTOs = new ArrayList<>();
-            for(ConnectionChannel ch : contactPersonService.getChannelsByContacterId(getEntityId())) {
+            for (ConnectionChannel ch : contactPersonService.getChannelsByContacterId(getEntityId())) {
                 ConnectionChannelDTO connectionChannelDTO = new ConnectionChannelDTO(ch);
                 connectionChannelDTOs.add(connectionChannelDTO);
             }
@@ -37,7 +37,7 @@ public class ContactPersonController extends PageableEntityController<ContactPer
         }
         throw new BadRequestException(getNoEntityMessage());
     }
-    
+
     @Override
     public List<ContactPerson> getEntities() {
         return contactPersonService.getContactPersonList(getLimit(), getOffset());
@@ -48,7 +48,7 @@ public class ContactPersonController extends PageableEntityController<ContactPer
         if (entityId != null) {
             return contactPersonService.getContactPerson(entityId);
         }
-        return new ContactPerson();
+        return null;
     }
 
     @Override
@@ -77,5 +77,5 @@ public class ContactPersonController extends PageableEntityController<ContactPer
     public String getNewItemOutcome() {
         return "edit/editContactPerson.xhtml";
     }
-    
+
 }

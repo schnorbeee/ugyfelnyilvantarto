@@ -31,17 +31,18 @@ public class ConnectionChannelController extends PageableEntityController<Connec
 
     public ConnectionChannelDTO updateConnectionChannel(ConnectionChannelBean newConnectionChannelBean, Long connectionChannelId) {
         ConnectionChannel newConnectionChannel = new ConnectionChannel(newConnectionChannelBean);
-        ConnectionChannel currentConnectionChannel = getEntity();
+        ConnectionChannel currentConnectionChannel = loadEntity(connectionChannelId);
         if (null != currentConnectionChannel) {
             currentConnectionChannel.setValue(newConnectionChannel.getValue());
-            connectionChannelService.editConnectionChannel(currentConnectionChannel);
+            setEntity(newConnectionChannel);
+            saveEntity();
             return new ConnectionChannelDTO(currentConnectionChannel);
         }
         throw new BadRequestException("No connection channel found in database!");
     }
 
-    public List<ConnectionChannelDTO> deleteConnectionChannelById() {
-        ConnectionChannel deleteConnectionChannel = getEntity();
+    public List<ConnectionChannelDTO> deleteConnectionChannelById(Long connectionChannelId) {
+        ConnectionChannel deleteConnectionChannel = loadEntity(connectionChannelId);
         if (null != deleteConnectionChannel) {
             connectionChannelService.deleteConnectionChannel(deleteConnectionChannel);
             List<ConnectionChannelDTO> connectionChannelDTOs = new ArrayList<>();
@@ -53,19 +54,6 @@ public class ConnectionChannelController extends PageableEntityController<Connec
         }
         throw new BadRequestException("No connection channel found in database!");
     }
-    //eleg a person
-//    public List<ConnectionChannelDTO> getConnectionChannelListByOwnerId(Long ownerID) {
-//        User currentUser = userService.getUser(ownerID);
-//        if(null != currentUser) {
-//            List<ConnectionChannelDTO> connectionChannelDTOs = new ArrayList<>();
-//            for(ConnectionChannel ch : connectionChannelService.getConnectionChannelListByOwnerId(ownerID)) {
-//                ConnectionChannelDTO connectionChannelDTO = new ConnectionChannelDTO(ch);
-//                connectionChannelDTOs.add(connectionChannelDTO);
-//            }
-//            return connectionChannelDTOs;
-//        }
-//        throw new BadRequestException("No user found in database!");
-//    }
 
     @Override
     public List<ConnectionChannel> getEntities() {
@@ -77,7 +65,7 @@ public class ConnectionChannelController extends PageableEntityController<Connec
         if (entityId != null) {
             return connectionChannelService.getConnectionChannel(entityId);
         }
-        return new ConnectionChannel();
+        return null;
     }
 
     @Override

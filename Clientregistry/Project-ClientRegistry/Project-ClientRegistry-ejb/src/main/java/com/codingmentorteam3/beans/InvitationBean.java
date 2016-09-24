@@ -40,12 +40,11 @@ public class InvitationBean {
         // Default constructor
     }
 
-    public InvitationBean(User sender, User receiver, Event event, String message, FeedbackType feedback) {
+    public InvitationBean(User sender, User receiver, Event event, String message) {
         this.sender = sender;
         this.receiver = receiver;
         this.event = event;
         this.message = message;
-        this.feedback = feedback;
     }
 
     public User getSender() {

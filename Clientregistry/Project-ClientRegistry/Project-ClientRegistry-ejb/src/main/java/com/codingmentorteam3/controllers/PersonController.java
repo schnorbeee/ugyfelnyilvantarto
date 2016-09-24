@@ -1,6 +1,5 @@
 package com.codingmentorteam3.controllers;
 
-import com.codingmentorteam3.beans.ConnectionChannelBean;
 import com.codingmentorteam3.dtos.ConnectionChannelDTO;
 import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Person;
@@ -21,16 +20,16 @@ import javax.inject.Inject;
 @SessionScoped
 @ManagedBean(name = "personController")
 public class PersonController {
-    
+
     @Inject
     private PersonService personService;
-    
+
     //egyenlore marad pageable?
     public List<ConnectionChannelDTO> getConnectionChannels(Long personId) {
         Person currentPerson = personService.getPerson(personId);
-        if(null!= currentPerson) {
+        if (null != currentPerson) {
             List<ConnectionChannelDTO> connectionChannelDTOs = new ArrayList<>();
-            for(ConnectionChannel ch : personService.getConnectionChannelsListByPersonId(personId)) {
+            for (ConnectionChannel ch : personService.getConnectionChannelsListByPersonId(personId)) {
                 ConnectionChannelDTO connectionChannelDTO = new ConnectionChannelDTO(ch);
                 connectionChannelDTOs.add(connectionChannelDTO);
             }
@@ -38,5 +37,5 @@ public class PersonController {
         }
         throw new BadRequestException("No person found in database!");
     }
-    
+
 }
