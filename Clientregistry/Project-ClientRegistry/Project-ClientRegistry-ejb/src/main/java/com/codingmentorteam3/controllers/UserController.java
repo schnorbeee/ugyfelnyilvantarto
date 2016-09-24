@@ -351,13 +351,13 @@ public class UserController extends PageableEntityController<User> {
     }
 
     private User modifiedCheckerUser(User oldUser, User currentUser) {
-        if (!currentUser.getUsername().equals("") && currentUser.getUsername().equals(oldUser.getUsername())) {
+        if (!currentUser.getUsername().equals("") || !currentUser.getUsername().equals(oldUser.getUsername())) {
             oldUser.setUsername(currentUser.getUsername());
         }
-        if (!currentUser.getFirstName().equals("") && currentUser.getFirstName().equals(oldUser.getFirstName())) {
+        if (!currentUser.getFirstName().equals("") || !currentUser.getFirstName().equals(oldUser.getFirstName())) {
             oldUser.setFirstName(currentUser.getFirstName());
         }
-        if (!currentUser.getLastName().equals("") && currentUser.getLastName().equals(oldUser.getLastName())) {
+        if (!currentUser.getLastName().equals("") || !currentUser.getLastName().equals(oldUser.getLastName())) {
             oldUser.setLastName(currentUser.getLastName());
         }
         return oldUser;

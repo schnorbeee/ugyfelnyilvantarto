@@ -19,7 +19,6 @@ import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.Project;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
-import com.codingmentorteam3.exceptions.query.EmptyListException;
 import com.codingmentorteam3.exceptions.query.EntityAlreadyExistsException;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.AddressService;
@@ -147,11 +146,12 @@ public class CompanyController extends PageableEntityController<Company> {
         Company deleteCompany = loadEntity(companyId);
         if (null != deleteCompany) {
             Address deleteAddress = deleteCompany.getAddress();
+            deleteAddress.getCompanies().remove(deleteCompany);
+            addressService.editAddress(deleteAddress);
             companyService.deleteCompany(deleteCompany);
             if (!isAnyCompanyAndEventUseThisAddress(deleteAddress)) {
                 addressService.deleteAddress(deleteAddress);
             }
-
             List<CompanyDTO> companyDTOs = new ArrayList<>();
             for (Company c : getEntities()) {
                 CompanyDTO companyDTO = new CompanyDTO(c);
@@ -165,9 +165,6 @@ public class CompanyController extends PageableEntityController<Company> {
     //user method
     public List<CompanyDTO> getCompaniesList() {
         List<CompanyDTO> companyDTOs = new ArrayList<>();
-        if (getEntities().isEmpty()) {
-            throw new EmptyListException("We have not any company in our database.");
-        }
         for (Company c : getEntities()) {
             CompanyDTO companyDTO = new CompanyDTO(c);
             companyDTOs.add(companyDTO);
@@ -371,10 +368,10 @@ public class CompanyController extends PageableEntityController<Company> {
     }
 
     private Company modifiedCheckerCompany(Company oldCompany, Company currentCompany) {
-        if (!currentCompany.getName().equals("") && currentCompany.getName().equals(oldCompany.getName())) {
+        if (!currentCompany.getName().equals("") || !currentCompany.getName().equals(oldCompany.getName())) {
             oldCompany.setName(currentCompany.getName());
         }
-        if (!currentCompany.getTaxNumber().equals("") && currentCompany.getTaxNumber().equals(oldCompany.getTaxNumber())) {
+        if (!currentCompany.getTaxNumber().equals("") || !currentCompany.getTaxNumber().equals(oldCompany.getTaxNumber())) {
             oldCompany.setTaxNumber(currentCompany.getTaxNumber());
         }
         return oldCompany;

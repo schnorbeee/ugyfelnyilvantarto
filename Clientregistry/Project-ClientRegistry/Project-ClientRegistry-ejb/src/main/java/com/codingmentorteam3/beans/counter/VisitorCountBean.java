@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 
 @SessionScoped
 @ManagedBean(name = "visitorCountBean")
-public class VisitorCountBean implements Serializable {
+public class VisitorCountBean {
 
     public void logout() {
         System.out.println("logout action invoked");

@@ -237,10 +237,10 @@ public class EventController extends PageableEntityController<Event> {
     }
 
     public Event modifiedCheckerEvent(Event oldEvent, Event currentEvent) {
-        if (!currentEvent.getTitle().equals("") && currentEvent.getTitle().equals(oldEvent.getTitle())) {
+        if (!currentEvent.getTitle().equals("") || !currentEvent.getTitle().equals(oldEvent.getTitle())) {
             oldEvent.setTitle(currentEvent.getTitle());
         }
-        if (!currentEvent.getDescription().equals("") && currentEvent.getDescription().equals(oldEvent.getDescription())) {
+        if (!currentEvent.getDescription().equals("") || !currentEvent.getDescription().equals(oldEvent.getDescription())) {
             oldEvent.setDescription(currentEvent.getDescription());
         }
         if (!currentEvent.getType().equals(oldEvent.getType())) {
