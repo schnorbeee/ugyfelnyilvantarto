@@ -20,7 +20,6 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         super(Company.class);
     }
 
-    //ez meg nincs levezetve kell-e?
     public List<Company> getCompaniesListByNameFilter(String name, int limit, int offset) {
         if (null != name) {
             TypedQuery<Company> query = em.createNamedQuery("company.by.name.filter", Company.class);

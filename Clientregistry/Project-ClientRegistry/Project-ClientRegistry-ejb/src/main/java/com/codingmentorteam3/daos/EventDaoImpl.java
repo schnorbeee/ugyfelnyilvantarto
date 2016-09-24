@@ -19,9 +19,9 @@ public class EventDaoImpl extends AbstractDao<Event> {
         super(Event.class);
     }
 
-    public List<Event> getEventsListByTitleFilter(String title, int limit, int offset) {
+    public List<Event> getEventsListByStringFilter(String title, int limit, int offset) {
         if (null != title) {
-            TypedQuery<Event> query = em.createNamedQuery("event.by.title.filter", Event.class).setParameter("title", "%" + title + "%");
+            TypedQuery<Event> query = em.createNamedQuery("event.by.string.filter", Event.class).setParameter("title", "%" + title + "%");
             query.setFirstResult(offset);
             query.setMaxResults(limit);
             return query.getResultList();
@@ -32,7 +32,6 @@ public class EventDaoImpl extends AbstractDao<Event> {
         return query.getResultList();
     }
 
-    //kerdeses kell-e
     public List<Event> getEventsListByTypeFilter(String type, int limit, int offset) {
         if (null != type) {
             TypedQuery<Event> query = em.createNamedQuery("event.by.type.filter", Event.class);

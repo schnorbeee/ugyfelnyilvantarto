@@ -32,8 +32,7 @@ public class UserDaoImpl extends AbstractDao<User> {
         return query.getResultList();
     }
 
-    //kerdeses hogy kell-e?
-    public List<User> getUsersListByRankFilter(String position, int limit, int offset) {
+    public List<User> getUsersListByPositionFilter(String position, int limit, int offset) {
         if (null != position) {
             TypedQuery<User> query = em.createNamedQuery("user.by.rank.filter", User.class);
             query.setParameter("position", "%" + position + "%");

@@ -46,18 +46,18 @@
                 -->
                 <div class="col-sm-2 col-sm-offset-1">
                     <img alt="profile-1" class="profile" src="../img/profile.png"/>
-                    <a href="../events.xhtml" class="btn btn-default btn-color-default center-block btn-space">Home</a>
-                    <a href="../myinvitations.xhtml" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
-                    <a href="../myevents.xhtml" class="btn btn-default btn-color-default center-block btn-space">My events</a>
-                    <a href="../profile.xhtml" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
+                    <h:link outcome="events" class="btn btn-default btn-color-default center-block btn-space" value="Home"/>
+                    <h:link outcome="myinvitations.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="My invitations"/>
+                    <h:link outcome="myevents.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="My events"/>
+                    <h:link outcome="profile.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="My profile"/>
                     <hr/>
-                    <a href="createEvent.xhtml" class="btn btn-default btn-color-default center-block btn-space active">Manage events</a>
-                    <a href="createProject.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                    <h:link outcome="composite/createEvent.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage events"/>
+                    <h:link outcome="composite/createProject.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage projects"/>
                     <hr/>
-                    <a href="manageusers.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
-                    <a href="createCompany.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                    <h:link outcome="manageusers.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage users"/>
+                    <h:link outcome="manage-companies" class="btn btn-default btn-color-default center-block btn-space active" value="Manage companies"/>
                     <hr/>
-                    <a href="login.xhtml" class="btn btn-info center-block btn-color-register">Logout</a>
+                    <h:commandButton class="btn btn-info center-block btn-color-register" type="submit" value="Logout" action="#{visitorCountBean.logout()}"/>
                 </div>
                 <!--
                 END OF FIX LEFT-SIDE MENU

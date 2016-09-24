@@ -50,4 +50,12 @@ public class UserService {
         return userDao.getEventsListByUserId(userId, limit, offset);
     }
 
+    public List<User> getUsersListByNameFilter(String name, Integer limit, Integer offset) {
+        return userDao.getUsersListByNameFilter(name, limit, offset);
+    }
+
+    public List<User> getUsersListByPositionFilter(String position, Integer limit, Integer offset) {
+        return userDao.getUsersListByPositionFilter(position, limit, offset);
+    }
+    
 }

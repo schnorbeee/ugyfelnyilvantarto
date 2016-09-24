@@ -28,7 +28,7 @@ import javax.persistence.TemporalType;
 @Entity(name = "project_table")
 @NamedNativeQuery(name = "project.list.in.this.week", query = "SELECT p FROM project_table p WHERE EXTRACT(WEEK FROM CURRENT_DATE) = EXTRACT(WEEK FROM p.deadline)")
 @NamedQueries({
-    @NamedQuery(name = "project.by.name.filter", query = "SELECT p FROM project_table p WHERE p.name LIKE :name"),
+    @NamedQuery(name = "project.by.string.filter", query = "SELECT p FROM project_table p WHERE p.name LIKE :name OR p.description LIKE :name"),
     @NamedQuery(name = "project.by.status.filter", query = "SELECT p FROM project_table p WHERE p.status LIKE :status"),
     @NamedQuery(name = "project.list", query = "SELECT p FROM project_table p"),
     @NamedQuery(name = "project.list.companies.by.id", query = "SELECT c FROM project_table p INNER JOIN p.companies c WHERE p.id =:id"),

@@ -3,8 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:o="http://omnifaces.org/ui"
       xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry/list">
+    
+    <f:metadata>
+        <f:viewParam name="offset" value="#{companyController.offset}" />
+    </f:metadata>
+
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -32,7 +36,7 @@
             -->
             <div class="jumbotron">
                 <div class="visitors-box pull-right">
-                    Visitors today: <span id="visitors-today">#{visitorCountController.countVisitorsPerDay}</span>
+                    Visitors today: <span id="visitors-today">#{visitorCountBean.sessionCount}</span>
                 </div>
                 <h1>ClientRegistry</h1>
             </div>
@@ -58,7 +62,7 @@
                     <h:link outcome="manageusers.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage users"/>
                     <h:link outcome="manage/manageCompanies.xhtml" class="btn btn-default btn-color-default center-block btn-space active" value="Manage companies"/>
                     <hr/>
-                    <h:link outcome="login.xhtml" class="btn btn-info center-block btn-color-register" value="Logout"/>
+                    <h:commandButton class="btn btn-info center-block btn-color-register" type="submit" value="Logout" action="#{visitorCountBean.logout()}"/>
                 </div>
                 <!--
                 END OF FIX LEFT-SIDE MENU
