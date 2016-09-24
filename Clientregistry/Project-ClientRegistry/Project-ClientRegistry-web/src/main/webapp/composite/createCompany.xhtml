@@ -57,13 +57,13 @@
                     <h:link outcome="myevents.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="My events"/>
                     <h:link outcome="profile.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="My profile"/>
                     <hr/>
-                    <h:link outcome="composite/createEvent.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage events"/>
+                    <h:link outcome="manage/manageEvents.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage events"/>
                     <h:link outcome="composite/createProject.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage projects"/>
                     <hr/>
                     <h:link outcome="manageusers.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage users"/>
                     <h:link outcome="manage/manageCompanies.xhtml" class="btn btn-default btn-color-default center-block btn-space active" value="Manage companies"/>
                     <hr/>
-                    <h:link outcome="login.html" class="btn btn-info center-block btn-color-register" value="Logout"/>
+                    <h:link outcome="login.xhtml" class="btn btn-info center-block btn-color-register" value="Logout"/>
                 </div>
                 <!--
                 END OF FIX LEFT-SIDE MENU
@@ -85,11 +85,11 @@
                         <div class="col-sm-9">
                             <h:form class="form-horizontal">
                                 <div class="form-group">
-                                    <clientregistry:company-detail company="#{companyBean}"/>
+                                    <clientregistry:company-detail companyBean="#{companyBean}"/>
                                 </div>
                                 <hr/>
                                 <div class="form-group">
-                                    <clientregistry:address-detail address="#{addressBean}"/>
+                                    <clientregistry:address-detail addressBean="#{addressBean}"/>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-4 col-sm-offset-8">

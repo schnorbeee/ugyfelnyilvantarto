@@ -7,10 +7,15 @@
     <navigation-rule>
         <from-view-id>/composite/createEvent.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>events</from-outcome>
-            <to-view-id>events.xhtml</to-view-id>
+            <from-outcome>manage-events</from-outcome>
+            <to-view-id>/manage/manageEvents.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>create-event</from-outcome>
+            <to-view-id>/composite/createEvent.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
     <navigation-rule>
         <from-view-id>/composite/createCompany.xhtml</from-view-id>
         <navigation-case>
@@ -18,6 +23,7 @@
             <to-view-id>events.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
     <navigation-rule>
         <from-view-id>/edit/editCompany.xhtml</from-view-id>
         <navigation-case>
@@ -29,6 +35,7 @@
             <to-view-id>/manage/manageCompanies.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
     <navigation-rule>
         <from-view-id>login.xhtml</from-view-id>
         <navigation-case>
@@ -36,6 +43,7 @@
             <to-view-id>registration.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
     <navigation-rule>
         <from-view-id>registration.xhtml</from-view-id>
         <navigation-case>
@@ -43,6 +51,7 @@
             <to-view-id>login.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
     <navigation-rule>
         <from-view-id>/composite/createCompany.xhtml</from-view-id>
         <navigation-case>
@@ -50,6 +59,7 @@
             <to-view-id>/manage/manageCompanies.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
     <navigation-rule>
         <from-view-id>/manage/manageCompanies.xhtml</from-view-id>
         <navigation-case>

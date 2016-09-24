@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <composite:interface>
-        <composite:attribute name="company" required="true"/>
+        <composite:attribute name="companyBean" required="true"/>
         <composite:attribute name="style" required="false"/>
     </composite:interface>
 
@@ -14,7 +14,7 @@
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="comapanyLogo" value="Logo: "/>
             <div class="col-sm-8">
-                <h:inputText id="companyLogo" value="#{cc.attrs.company.logo}" class="form-control col-sm-8" required="false" label="Company logo">
+                <h:inputText id="companyLogo" value="#{cc.attrs.companyBean.logo}" class="form-control col-sm-8" required="false" label="Company logo">
                     <f:validateLength minimum="2" maximum="30"/>
                 </h:inputText>
                 <h:message id="companyLogoMessage" for="companyLogo" style="color:red"/>
@@ -23,7 +23,7 @@
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="comapanyName" value="Name:"/>
             <div class="col-sm-8">
-                <h:inputText id="companyName" value="#{cc.attrs.company.name}" class="form-control" label="Company name">
+                <h:inputText id="companyName" value="#{cc.attrs.companyBean.name}" class="form-control" label="Company name">
                     <f:validateLength minimum="2" maximum="30"/>
                 </h:inputText>
                 <h:message id="companyNameMessage" for="companyName" style="color:red"/>
@@ -32,7 +32,7 @@
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="comapanyTaxNumber" value="Tax number: "/>
             <div class="col-sm-8">
-                <h:inputText id="companyTaxNumber" value="#{cc.attrs.company.taxNumber}" class="form-control" label="Tax number">
+                <h:inputText id="companyTaxNumber" value="#{cc.attrs.companyBean.taxNumber}" class="form-control" label="Tax number">
                     <f:validateLength minimum="2" maximum="30"/>
                 </h:inputText>
                 <h:message id="companyTaxNumberMessage" for="companyTaxNumber" style="color:red"/>

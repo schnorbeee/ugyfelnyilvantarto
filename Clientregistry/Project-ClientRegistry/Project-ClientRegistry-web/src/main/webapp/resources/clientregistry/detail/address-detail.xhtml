@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <composite:interface>
-        <composite:attribute name="address" required="true"/>
+        <composite:attribute name="addressBean" required="true"/>
         <composite:attribute name="style" required="false"/>
     </composite:interface>
 
@@ -14,7 +14,7 @@
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="companyCountry" value="Country:"/>
             <div class="col-sm-8">
-                <h:inputText id="companyCountry" value="#{cc.attrs.address.country}" class="form-control" required="true" label="Country" requiredMessage="Country required">
+                <h:inputText id="companyCountry" value="#{cc.attrs.addressBean.country}" class="form-control" required="true" label="Country" requiredMessage="Country required">
                     <f:validateLength minimum="2" maximum="30"/>
                 </h:inputText>
                 <h:message id="companyCountryMessage" for="companyCountry" style="color:red"/>
@@ -23,7 +23,7 @@
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="companyCity" value="City:"/>
             <div class="col-sm-8">
-                <h:inputText id="companyCity" value="#{cc.attrs.address.city}" class="form-control" required="true" label="City" requiredMessage="City required">
+                <h:inputText id="companyCity" value="#{cc.attrs.addressBean.city}" class="form-control" required="true" label="City" requiredMessage="City required">
                     <f:validateLength minimum="2" maximum="30"/>
                 </h:inputText>
                 <h:message id="companyCityMessage" for="companyCity" style="color:red"/>
@@ -32,7 +32,7 @@
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="companyZipCode" value="Zip code:"/>
             <div class="col-sm-8">
-                <h:inputText id="companyZipCode" value="#{cc.attrs.address.zipCode}" class="form-control" required="true" label="Zip code" requiredMessage="Zip code required">
+                <h:inputText id="companyZipCode" value="#{cc.attrs.addressBean.zipCode}" class="form-control" required="true" label="Zip code" requiredMessage="Zip code required">
                     <f:validateRegex pattern="\d{4,8}"/>
                 </h:inputText>
                 <h:message id="companyZipCodeMessage" for="companyZipCode" style="color:red"/>
@@ -41,7 +41,7 @@
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="companyStreet" value="Street:"/>
             <div class="col-sm-8">
-                <h:inputText id="companyStreet" value="#{cc.attrs.address.street}" class="form-control" required="true" label="Street" requiredMessage="Street required">
+                <h:inputText id="companyStreet" value="#{cc.attrs.addressBean.street}" class="form-control" required="true" label="Street" requiredMessage="Street required">
                     <f:validateLength maximum="30"/>
                 </h:inputText>
                 <h:message id="companyStreetMessage" for="companyStreet" style="color:red"/>
@@ -50,7 +50,7 @@
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="companyHouseNumber" value="House number:"/>
             <div class="col-sm-8">
-                <h:inputText id="companyHouseNumber" value="#{cc.attrs.address.houseNumber}" class="form-control" required="true" label="House number" requiredMessage="House number required">
+                <h:inputText id="companyHouseNumber" value="#{cc.attrs.addressBean.houseNumber}" class="form-control" required="true" label="House number" requiredMessage="House number required">
                     <f:validateLength maximum="20"/>
                 </h:inputText>
                 <h:message id="companyHouseNumberMessage" for="companyHouseNumber" style="color:red"/>
