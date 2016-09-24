@@ -40,10 +40,6 @@ public class CompanyService {
         return companyDao.getCompaniesList(limit, offset);
     }
 
-    public List<Company> getCompaniesListByTaxFilter(String taxNumber, Integer limit, Integer offset) {
-        return companyDao.getCompaniesListByTaxFilter(taxNumber, limit, offset);
-    }
-
     public List<Project> getProjectsListByCompanyId(Long companyId) {
         return companyDao.getProjectsListByCompanyId(companyId);
     }
@@ -68,4 +64,12 @@ public class CompanyService {
         return companyDao.getCompaniesListWithoutLimit();
     }
 
+    public List<Company> getCompaniesListByNameFilter(String name, Integer limit, Integer offset) {
+        return companyDao.getCompaniesListByNameFilter(name, limit, offset);
+    }
+
+    public List<Company> getCompaniesListByTaxFilter(String taxNumber, Integer limit, Integer offset) {
+        return companyDao.getCompaniesListByTaxFilter(taxNumber, limit, offset);
+    }
+    
 }

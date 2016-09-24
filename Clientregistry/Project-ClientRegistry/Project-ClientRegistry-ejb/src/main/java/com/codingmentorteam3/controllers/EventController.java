@@ -195,6 +195,24 @@ public class EventController extends PageableEntityController<Event> {
         }
         throw new BadRequestException(getNoEntityMessage());
     }
+    
+    public List<EventDTO> getEventsListByStringFilter(String name) {
+        List<EventDTO> eventDTOs = new ArrayList<>();
+        for (Event e : eventService.getEventsListByStringFilter(name, getLimit(), getOffset())) {
+            EventDTO eventDTO = new EventDTO(e);
+            eventDTOs.add(eventDTO);
+        }
+        return eventDTOs;
+    }
+
+    public List<EventDTO> getEventsListByTypeFilter(String type) {
+        List<EventDTO> eventDTOs = new ArrayList<>();
+        for (Event e : eventService.getEventsListByTypeFilter(type, getLimit(), getOffset())) {
+            EventDTO eventDTO = new EventDTO(e);
+            eventDTOs.add(eventDTO);
+        }
+        return eventDTOs;
+    }
 
     @Override
     public List<Event> getEntities() {

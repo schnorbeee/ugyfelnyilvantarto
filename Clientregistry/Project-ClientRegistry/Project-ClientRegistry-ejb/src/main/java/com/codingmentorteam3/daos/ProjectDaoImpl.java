@@ -3,7 +3,6 @@ package com.codingmentorteam3.daos;
 import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Project;
-import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
@@ -19,28 +18,32 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
         super(Project.class);
     }
 
-    //kerdeses kell-e?
-    public List<Project> getProjectsListByNameFilter(String name) {
+    public List<Project> getProjectsListByStringFilter(String name, int limit, int offset) {
         if (null != name) {
-            List<Project> query = em.createNamedQuery("project.by.name.filter", Project.class).setParameter("name", "%" + name + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("Results can not be found with this parameter: " + name);
-            }
-            return query;
+            TypedQuery<Project> query = em.createNamedQuery("project.by.string.filter", Project.class);
+            query.setParameter("name", "%" + name + "%");
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+            return query.getResultList();
         }
-        return em.createNamedQuery("project.list", Project.class).getResultList();
+        TypedQuery<Project> query = em.createNamedQuery("project.list", Project.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
-    //kerdeses kell-e?
-    public List<Project> getProjectsListByStatusFilter(String status) {
+    public List<Project> getProjectsListByStatusFilter(String status, int limit, int offset) {
         if (null != status) {
-            List<Project> query = em.createNamedQuery("project.by.status.filter", Project.class).setParameter("status", "%" + status + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("Results can not be found with this parameter: " + status);
-            }
-            return query;
+            TypedQuery<Project> query = em.createNamedQuery("project.by.status.filter", Project.class);
+            query.setParameter("status", "%" + status + "%");
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+            return query.getResultList();
         }
-        return em.createNamedQuery("project.list", Project.class).getResultList();
+        TypedQuery<Project> query = em.createNamedQuery("project.list", Project.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
     public List<Project> getProjectsList(int limit, int offset) {

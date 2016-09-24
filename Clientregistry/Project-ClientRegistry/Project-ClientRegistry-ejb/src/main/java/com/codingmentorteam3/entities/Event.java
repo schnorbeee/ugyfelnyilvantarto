@@ -29,7 +29,7 @@ import javax.persistence.TemporalType;
  */
 @Entity(name = "event_table")
 @NamedQueries({
-    @NamedQuery(name = "event.by.title.filter", query = "SELECT e FROM event_table e WHERE e.title LIKE :title"),
+    @NamedQuery(name = "event.by.string.filter", query = "SELECT e FROM event_table e WHERE e.title LIKE :title OR e.description LIKE :title"),
     @NamedQuery(name = "event.by.type.filter", query = "SELECT e FROM event_table e WHERE e.type LIKE :type"),
     @NamedQuery(name = "event.list", query = "SELECT e FROM event_table e ORDER BY e.startDate"),
     @NamedQuery(name = "event.list.users.by.id.and.feedback", query = "SELECT r FROM event_table e INNER JOIN e.invitations i INNER JOIN i.receiver r WHERE e.id =:id AND i.feedback =:feedback"),

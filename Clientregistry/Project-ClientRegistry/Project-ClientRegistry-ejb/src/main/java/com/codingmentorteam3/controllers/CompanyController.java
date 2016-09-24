@@ -19,7 +19,6 @@ import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.Project;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
-import com.codingmentorteam3.exceptions.query.EmptyListException;
 import com.codingmentorteam3.exceptions.query.EntityAlreadyExistsException;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.AddressService;
@@ -53,7 +52,7 @@ public class CompanyController extends PageableEntityController<Company> {
 
     @Inject
     private ProjectService projectService;
-    
+
     @Inject
     private ContactPersonService contactPersonService;
 
@@ -198,7 +197,7 @@ public class CompanyController extends PageableEntityController<Company> {
             saveEntity();
         }
         List<EventDTO> eventDTOs = new ArrayList<>();
-        for (Event e : oldCompany.getEvents()){
+        for (Event e : oldCompany.getEvents()) {
             EventDTO eventDTO = new EventDTO(e);
             eventDTOs.add(eventDTO);
         }
@@ -326,6 +325,24 @@ public class CompanyController extends PageableEntityController<Company> {
             return companyDTOs;
         }
         throw new BadRequestException(getNoEntityMessage());
+    }
+
+    public List<CompanyDTO> getCompaniesListByNameFilter(String name) {
+        List<CompanyDTO> companyDTOs = new ArrayList<>();
+        for (Company c : companyService.getCompaniesListByNameFilter(name, getLimit(), getOffset())) {
+            CompanyDTO companyDTO = new CompanyDTO(c);
+            companyDTOs.add(companyDTO);
+        }
+        return companyDTOs;
+    }
+
+    public List<CompanyDTO> getCompaniesListByTaxFilter(String taxNumber) {
+        List<CompanyDTO> companyDTOs = new ArrayList<>();
+        for (Company c : companyService.getCompaniesListByNameFilter(taxNumber, getLimit(), getOffset())) {
+            CompanyDTO companyDTO = new CompanyDTO(c);
+            companyDTOs.add(companyDTO);
+        }
+        return companyDTOs;
     }
 
     @Override
