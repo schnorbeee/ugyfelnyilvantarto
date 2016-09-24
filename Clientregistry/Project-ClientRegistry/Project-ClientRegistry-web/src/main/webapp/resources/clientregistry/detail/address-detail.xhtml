@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <composite:interface>
+        <composite:attribute name="address" required="true"/>
+        <composite:attribute name="style" required="false"/>
+    </composite:interface>
+
+    <composite:implementation>
+        <div class="form-group">
+            <h:outputLabel class="control-label col-sm-4" for="companyCountry" value="Country:"/>
+            <div class="col-sm-8">
+                <h:inputText id="companyCountry" value="#{cc.attrs.address.country}" class="form-control" required="true" label="Country" requiredMessage="Country required">
+                    <f:validateLength minimum="2" maximum="30"/>
+                </h:inputText>
+                <h:message id="companyCountryMessage" for="companyCountry" style="color:red"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <h:outputLabel class="control-label col-sm-4" for="companyCity" value="City:"/>
+            <div class="col-sm-8">
+                <h:inputText id="companyCity" value="#{cc.attrs.address.city}" class="form-control" required="true" label="City" requiredMessage="City required">
+                    <f:validateLength minimum="2" maximum="30"/>
+                </h:inputText>
+                <h:message id="companyCityMessage" for="companyCity" style="color:red"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <h:outputLabel class="control-label col-sm-4" for="companyZipCode" value="Zip code:"/>
+            <div class="col-sm-8">
+                <h:inputText id="companyZipCode" value="#{cc.attrs.address.zipCode}" class="form-control" required="true" label="Zip code" requiredMessage="Zip code required">
+                    <f:validateRegex pattern="\d{4,8}"/>
+                </h:inputText>
+                <h:message id="companyZipCodeMessage" for="companyZipCode" style="color:red"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <h:outputLabel class="control-label col-sm-4" for="companyStreet" value="Street:"/>
+            <div class="col-sm-8">
+                <h:inputText id="companyStreet" value="#{cc.attrs.address.street}" class="form-control" required="true" label="Street" requiredMessage="Street required">
+                    <f:validateLength maximum="30"/>
+                </h:inputText>
+                <h:message id="companyStreetMessage" for="companyStreet" style="color:red"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <h:outputLabel class="control-label col-sm-4" for="companyHouseNumber" value="House number:"/>
+            <div class="col-sm-8">
+                <h:inputText id="companyHouseNumber" value="#{cc.attrs.address.houseNumber}" class="form-control" required="true" label="House number" requiredMessage="House number required">
+                    <f:validateLength maximum="20"/>
+                </h:inputText>
+                <h:message id="companyHouseNumberMessage" for="companyHouseNumber" style="color:red"/>
+            </div>
+        </div>
+    </composite:implementation>
+
+</html>
+

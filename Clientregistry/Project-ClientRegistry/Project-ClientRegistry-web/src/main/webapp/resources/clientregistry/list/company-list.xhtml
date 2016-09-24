@@ -18,8 +18,6 @@
 
     <composite:implementation>
 
-        <h:link value="Homepage" outcome="index.xhtml"></h:link> <br/>
-        <h:link value="Create new #{cc.attrs.entityType}" outcome="#{cc.attrs.newItemOutcome}"></h:link>
         <c:choose>
             <c:when test="#{cc.attrs.isEmpty}">
                 <br/>

@@ -1,11 +1,199 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry/detail">
+
+    <f:metadata>
+        <f:viewParam name="entityId" value="#{companyController.entityId}" />
+        <f:event type="preRenderView" listener="#{companyController.onPreRender}" />
+    </f:metadata>
+    
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+        <style>
+        </style>
+
+        <script rel="script" type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+        <script rel="script" type="text/javascript" src="../js/script.js"></script>
+
+        <title>Create company</title>
+    </h:head>
+    <h:body>
+
+        <!--
+        MAIN CONTAINER
+        -->
+        <div class="container">
+
+            <!--
+            JUMBOTRON
+            -->
+            <div class="jumbotron">
+                <div class="visitors-box pull-right">
+                    Visitors today: <span id="visitors-today">123</span>
+                </div>
+                <h1>ClientRegistry</h1>
+            </div>
+            <!--
+            END OF JUMBOTRON
+            -->
+
+            <div class="row">
+
+                <!--
+                FIX LEFT-SIDE MENU
+                -->
+                <div class="col-sm-2 col-sm-offset-1">
+                    <img alt="profile-1" class="profile" src="../img/profile.png"/>
+                    <h:link outcome="events" class="btn btn-default btn-color-default center-block btn-space" value="Home"/>
+                    <h:link outcome="myinvitations.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="My invitations"/>
+                    <h:link outcome="myevents.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="My events"/>
+                    <h:link outcome="profile.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="My profile"/>
+                    <hr/>
+                    <h:link outcome="composite/createEvent.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage events"/>
+                    <h:link outcome="composite/createProject.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage projects"/>
+                    <hr/>
+                    <h:link outcome="manageusers.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage users"/>
+                    <h:link outcome="manage-companies" class="btn btn-default btn-color-default center-block btn-space active" value="Manage companies"/>
+                    <hr/>
+                    <h:link outcome="login.html" class="btn btn-info center-block btn-color-register" value="Logout"/>
+                </div>
+                <!--
+                END OF FIX LEFT-SIDE MENU
+                -->
+
+                <!--
+                MAIN CONTENT
+                -->
+                <div class="col-sm-8">
+                    <h2>Edit company</h2>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <h:form class="form-horizontal">
+                                <div class="form-group">
+                                    <clientregistry:company-detail company="#{companyBean}"/>
+                                </div>
+<!--                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="comapanyName" value="Company name:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="companyName" value="#{companyBean.name}" class="form-control" required="true" label="Company name" requiredMessage="Name required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
+                                        <h:message id="companyNameMessage" for="companyName" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="taxNumber" value="Tax number:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="taxNumber" value="#{companyBean.taxNumber}" class="form-control" required="true" label="Tax number" requiredMessage="Tax number required">
+                                            <f:validator validatorId="TaxNumberValidator"/>
+                                        </h:inputText>
+                                        <h:message id="taxNumberMessage" for="taxNumber" style="color:red"/>
+                                    </div>
+                                </div>-->
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-4 col-sm-offset-8">
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Save personal info" action="#{companyController.updateCompanyPersonalInfos(companyBean, companyController.entityId)}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/><hr/>
+                                <div class="form-group">
+                                    <clientregistry:address-detail address="#{addressBean}"/>
+                                </div>
+<!--                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="companyCountry" value="Country:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="companyCountry" value="#{addressBean.country}" class="form-control" required="true" label="Country" requiredMessage="Country required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
+                                        <h:message id="companyCountryMessage" for="companyCountry" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="companyCity" value="City:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="companyCity" value="#{addressBean.city}" class="form-control" required="true" label="City" requiredMessage="City required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
+                                        <h:message id="companyCityMessage" for="companyCity" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="companyZipCode" value="Zip code:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="companyZipCode" value="#{addressBean.zipCode}" class="form-control" required="true" label="Zip code" requiredMessage="Zip code required">
+                                            <f:validateRegex pattern="\d{4,8}"/>
+                                        </h:inputText>
+                                        <h:message id="companyZipCodeMessage" for="companyZipCode" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="companyStreet" value="Street:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="companyStreet" value="#{addressBean.street}" class="form-control" required="true" label="Street" requiredMessage="Street required">
+                                            <f:validateLength maximum="30"/>
+                                        </h:inputText>
+                                        <h:message id="companyStreetMessage" for="companyStreet" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="companyHouseNumber" value="House number:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="companyHouseNumber" value="#{addressBean.houseNumber}" class="form-control" required="true" label="House number" requiredMessage="House number required">
+                                            <f:validateLength maximum="20"/>
+                                        </h:inputText>
+                                        <h:message id="companyHouseNumberMessage" for="companyHouseNumber" style="color:red"/>
+                                    </div>
+                                </div>-->
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-4 col-sm-offset-8">
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Save new address" action="#{companyController.updateCompanyAddress(addressBean, companyController.entityId)}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <!--
+                END OF MAIN CONTENT
+                -->
+
+            </div>
+
+            <footer class="footer panel-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h1 id="cmt3outer">CodingMentorTeam<span id="cmt3inner">3</span></h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-group">
+                                <li class="list-unstyled cmt3list">Norbert Schmelhaus <span class="cmt3email"> <a href="mailto:sch.norbeee@gmail.com">&lt;sch.norbeee@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Zsolt Nagy <span class="cmt3email"> <a href="mailto:zsolt023.bme.vik@gmail.com">&lt;zsolt023.bme.vik@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Dániel Bicsák <span class="cmt3email"> <a href="mailto:bicsak.dani@gmail.com">&lt;bicsak.dani@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">István Mosonyi <span class="cmt3email"> <a href="mailto:mosonyi15p@yahoo.com">&lt;mosonyi15p@yahoo.com&gt;</a></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!--
+        END OF MAIN CONTAINER
+        -->
+
+    </h:body>
 </html>

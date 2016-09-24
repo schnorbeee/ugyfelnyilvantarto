@@ -22,7 +22,11 @@ public class AddressDaoImpl extends AbstractDao<Address> {
         query.setParameter("zip", zip);
         query.setParameter("street", street);
         query.setParameter("houseNumber", houseNumber);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (Exception ex) {
+            return null;
+        }
     }
     
 }

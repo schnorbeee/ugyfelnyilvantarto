@@ -3,22 +3,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:o="http://omnifaces.org/ui"
-      xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry">
+      xmlns:o="http://omnifaces.org/ui">
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css"/>
         <link rel="stylesheet" type="text/css" href="../css/style.css"/>
-        <style>
-        </style>
 
         <script rel="script" type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+        <script rel="script" type="text/javascript" src="../js/jquery-ui.min.js"></script>
         <script rel="script" type="text/javascript" src="../js/script.js"></script>
 
-        <title>Edit event</title>
+        <title>Create Event</title>
     </h:head>
     <h:body>
 
@@ -46,19 +45,19 @@
                 FIX LEFT-SIDE MENU
                 -->
                 <div class="col-sm-2 col-sm-offset-1">
-                    <img alt="profile-1" class="profile" src="../img/profile.png">
-                        <a href="events.html" class="btn btn-default btn-color-default center-block btn-space">Home</a>
-                        <a href="myinvitations.html" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
-                        <a href="myevents.html" class="btn btn-default btn-color-default center-block btn-space">My events</a>
-                        <a href="myprofile.html" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
-                        <hr/>
-                        <a href="manageevents.html" class="btn btn-default btn-color-default center-block btn-space active">Manage events</a>
-                        <a href="manageprojects.html" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
-                        <hr/>
-                        <a href="manageusers.html" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
-                        <a href="managecompanies.html" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
-                        <hr/>
-                        <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
+                    <img alt="profile-1" class="profile" src="../img/profile.png"/>
+                    <a href="../events.xhtml" class="btn btn-default btn-color-default center-block btn-space">Home</a>
+                    <a href="../myinvitations.xhtml" class="btn btn-default btn-color-default center-block btn-space">Invitations</a>
+                    <a href="../myevents.xhtml" class="btn btn-default btn-color-default center-block btn-space">My events</a>
+                    <a href="../profile.xhtml" class="btn btn-default btn-color-default center-block btn-space">My profile</a>
+                    <hr/>
+                    <a href="createEvent.xhtml" class="btn btn-default btn-color-default center-block btn-space active">Manage events</a>
+                    <a href="createProject.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage projects</a>
+                    <hr/>
+                    <a href="manageusers.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage users</a>
+                    <a href="createCompany.xhtml" class="btn btn-default btn-color-default center-block btn-space">Manage companies</a>
+                    <hr/>
+                    <a href="login.html" class="btn btn-info center-block btn-color-register">Log out</a>
                 </div>
                 <!--
                 END OF FIX LEFT-SIDE MENU
@@ -68,125 +67,138 @@
                 MAIN CONTENT
                 -->
                 <div class="col-sm-8">
-
-                    <h2>Manage events</h2>
-                    <h4>Events</h4>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Company</th>
-                                <th>Event title</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="company.html">Company No.1</a></td>
-                                <td><a href="event.html">Event title</a></td>
-                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="company.html">Company No.1</a></td>
-                                <td><a href="event.html">Event title</a></td>
-                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="company.html">Company No.1</a></td>
-                                <td><a href="event.html">Event title</a></td>
-                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="company.html">Company No.1</a></td>
-                                <td><a href="event.html">Event title</a></td>
-                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <h4>Create new event</h4>
-                    <div class="row">
-                        <div class="col-sm-offset-1 col-sm-11">
-                            <label>Event type:</label>
-                            <span id="eventtype">
-                                <select>
-                                    <option value="Meeting">Meeting</option>
-                                    <option value="Conference">Conference</option>
-                                    <option value="Party">Party</option>
-                                </select>
-                            </span>
-                            <br>
-                        </div>
+                    <div class="btn-group btn-group-full-size">
+                        <a href="#" class="btn btn-default btn-color-default btn-width-half active">Create event</a>
+                        <a href="#" class="btn btn-default btn-color-default btn-width-half">Edit events</a>
                     </div>
+                    <hr/>
                     <div class="row">
-                        <div class="col-sm-7">
-                            <form class="form-horizontal">
+                        <div class="col-sm-9">
+                            <h:form class="form-horizontal">
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Event title:</label>
+                                    <h:outputLabel class="control-label col-sm-4" for="eventType" value="Event type:"/>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="eventtitle" placeholder="Title">
+                                        <o:importConstants type="com.codingmentorteam3.enums.EventType"/>
+                                        <h:selectOneMenu value="#{event.type}" >
+                                            <f:selectItems value="#{EventType}" />
+                                        </h:selectOneMenu>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Event description:</label>
+                                    <h:outputLabel class="control-label col-sm-4" for="eventTitle" value="Event title:"/>
                                     <div class="col-sm-8">
-                                        <textarea cols="40" rows="5" type="text" class="form-control" id="eventdescription" placeholder="Description"></textarea>
+                                        <h:inputText id="eventTitle" value="#{event.title}" class="form-control" required="true" label="Event title" requiredMessage="Event title required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
+                                        <h:message id="eventTitleMessage" for="eventTitle" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="eventDescription" value="Event description:"/>
+                                    <div class="col-sm-8">
+                                        <h:inputTextarea cols="40" rows="5" id="eventDescription" value="#{event.description}" class="form-control" required="true" label="Event description" requiredMessage="Event description required">
+                                            <f:validateLength maximum="1500"/>
+                                        </h:inputTextarea>
+                                        <h:message id="eventDescriptionMessage" for="eventDescription" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="eventStartDate" value="Start date: "/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="eventStartDate" value="#{event.endDate}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="eventEndDate" value="End date: "/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="eventEndDate" value="#{event.endDate}"/>
                                     </div>
                                 </div>
                                 <label>Place</label>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Country:</label>
+                                    <h:outputLabel class="control-label col-sm-4" for="eventCountry" value="Country:"/>
                                     <div class="col-sm-8">
-                                        <input type="email" class="form-control" id="country" placeholder="Hungary">
+                                        <h:inputText id="eventCountry" value="#{address.country}" class="form-control" required="true" label="Country" requiredMessage="Country required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
+                                        <h:message id="eventCountryMessage" for="eventCountry" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">City:</label>
+                                    <h:outputLabel class="control-label col-sm-4" for="eventCity" value="City:"/>
                                     <div class="col-sm-8">
-                                        <input type="email" class="form-control" id="city" placeholder="Budapest">
+                                        <h:inputText id="eventCity" value="#{address.city}" class="form-control" required="true" label="City" requiredMessage="City required">
+                                            <f:validateLength minimum="2" maximum="30"/>
+                                        </h:inputText>
+                                        <h:message id="eventCityMessage" for="eventCity" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Zip code:</label>
+                                    <h:outputLabel class="control-label col-sm-4" for="eventZipCode" value="Zip code:"/>
                                     <div class="col-sm-8">
-                                        <input type="email" class="form-control" id="zipcode" placeholder="1234">
+                                        <h:inputText id="eventZipCode" value="#{address.zipCode}" class="form-control" required="true" label="Zip code" requiredMessage="Zip code required">
+                                            <f:validateRegex pattern="\d{4,8}"/>
+                                        </h:inputText>
+                                        <h:message id="eventZipCodeMessage" for="eventZipCode" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Street:</label>
+                                    <h:outputLabel class="control-label col-sm-4" for="eventStreet" value="Street:"/>
                                     <div class="col-sm-8">
-                                        <input type="email" class="form-control" id="street" placeholder="Andrássy út">
+                                        <h:inputText id="eventStreet" value="#{address.street}" class="form-control" required="true" label="Street" requiredMessage="Street required">
+                                            <f:validateLength maximum="30"/>
+                                        </h:inputText>
+                                        <h:message id="eventStreetMessage" for="eventStreet" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">House number:</label>
+                                    <h:outputLabel class="control-label col-sm-4" for="eventHouseNumber" value="House number:"/>
                                     <div class="col-sm-8">
-                                        <input type="email" class="form-control" id="housenumber" placeholder="123">
+                                        <h:inputText id="eventHouseNumber" value="#{address.houseNumber}" class="form-control" required="true" label="House number" requiredMessage="House number required">
+                                            <f:validateLength maximum="20" />
+                                        </h:inputText>
+                                        <h:message id="eventHouseNumberMessage" for="eventHouseNumber" style="color:red"/>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <div class="col-sm-4 col-sm-offset-8">
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Create event" action="#{eventController.createEvent(event, address, companyId)}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <div class="col-sm-4 col-sm-offset-8">
-                                <a href="myevents.html" class="btn btn-primary center-block btn-color-sign-in">Create</a>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <!--
                 END OF MAIN CONTENT
                 -->
 
             </div>
+
+            <footer class="footer panel-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h1 id="cmt3outer">CodingMentorTeam<span id="cmt3inner">3</span></h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-group">
+                                <li class="list-unstyled cmt3list">Norbert Schmelhaus <span class="cmt3email"> <a href="mailto:sch.norbeee@gmail.com">&lt;sch.norbeee@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Zsolt Nagy <span class="cmt3email"> <a href="mailto:zsolt023.bme.vik@gmail.com">&lt;zsolt023.bme.vik@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">Dániel Bicsák <span class="cmt3email"> <a href="mailto:bicsak.dani@gmail.com">&lt;bicsak.dani@gmail.com&gt;</a></span></li>
+                                <li class="list-unstyled cmt3list">István Mosonyi <span class="cmt3email"> <a href="mailto:mosonyi15p@yahoo.com">&lt;mosonyi15p@yahoo.com&gt;</a></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
         </div>
         <!--
         END OF MAIN CONTAINER
         -->
+
     </h:body>
 </html>
