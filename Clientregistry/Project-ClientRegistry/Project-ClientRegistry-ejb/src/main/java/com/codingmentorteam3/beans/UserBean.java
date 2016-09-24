@@ -18,11 +18,9 @@ import javax.validation.constraints.NotNull;
 @ManagedBean(name = "user")
 public class UserBean extends PersonBean {
     
-    @NotNull
     @Username
     private String username;
     
-    @NotNull
     @Password
     private String password;
 

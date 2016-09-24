@@ -14,17 +14,17 @@ import javax.validation.constraints.NotNull;
  * @author istvan.mosonyi
  */
 @Validate
-@ValidConnectionChannelValue
 @SessionScoped
-@ManagedBean(name="connectionChannelBean")
+@ValidConnectionChannelValue
+@ManagedBean(name = "connectionChannelBean")
 public class ConnectionChannelBean {
-    
+
     @NotNull
     private ConnectionChannelType type;
-    
+
     @NotNull
     private String value;
-    
+
     @NotNull
     private Person owner;
 
@@ -99,5 +99,5 @@ public class ConnectionChannelBean {
     public String toString() {
         return "ConnectionChannelBean{" + "type=" + type + ", value=" + value + ", owner=" + owner + '}';
     }
-    
+
 }
