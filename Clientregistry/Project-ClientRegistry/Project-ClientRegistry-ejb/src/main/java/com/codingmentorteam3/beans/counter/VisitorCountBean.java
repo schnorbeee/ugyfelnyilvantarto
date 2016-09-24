@@ -1,10 +1,13 @@
-package com.codingmentorteam3.beans;
+package com.codingmentorteam3.beans.counter;
 
+import com.codingmentorteam3.beans.counter.SessionCounter;
 import com.codingmentorteam3.annotations.Validate;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -12,6 +15,23 @@ import javax.validation.constraints.NotNull;
  *
  * @author istvan.mosonyi
  */
+
+@SessionScoped
+@ManagedBean(name = "visitorCountBean")
+public class VisitorCountBean implements Serializable {
+
+    public void logout() {
+        System.out.println("logout action invoked");
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    }
+
+    public int getSessionCount() {
+        System.out.println("session count getter invoked");
+        return SessionCounter.getCount();
+    }
+
+}
+/*
 @Validate
 @SessionScoped
 @ManagedBean(name = "visitorCountBean")
@@ -85,3 +105,4 @@ public class VisitorCountBean {
     }
     
 }
+*/

@@ -43,11 +43,12 @@ public class ProjectController extends PageableEntityController<Project> {
 //        throw new BadRequestException(getNoEntityMessage());
 //    }
     //user method
-    public ProjectDTO updateProject(ProjectBean updateProject) {
-        Project oldProject = getEntity();
+    public ProjectDTO updateProject(ProjectBean updateProject, Long projectId) {
+        Project oldProject = loadEntity(projectId);
         if (null != oldProject) {
             Project currentProject = new Project(updateProject);
             oldProject = modifiedCheckerProject(oldProject, currentProject);
+            setEntity(oldProject);
             saveEntity();
             return new ProjectDTO(oldProject);
         }
@@ -55,8 +56,8 @@ public class ProjectController extends PageableEntityController<Project> {
     }
 
     //admin method
-    public List<ProjectDTO> deleteProjectById() {
-        Project deleteProject = getEntity();
+    public List<ProjectDTO> deleteProjectById(Long projectId) {
+        Project deleteProject = loadEntity(projectId);
         if (null != deleteProject) {
             for (Company c : deleteProject.getCompanies()) {
                 c.getProjects().remove(deleteProject);
@@ -84,8 +85,8 @@ public class ProjectController extends PageableEntityController<Project> {
     }
 
     //user method id
-    public List<CompanyDTO> getCompaniesListByProjectId() {
-        Project currentProject = getEntity();
+    public List<CompanyDTO> getCompaniesListByProjectId(Long projectId) {
+        Project currentProject = loadEntity(projectId);
         if (null != currentProject) {
             List<CompanyDTO> companyDTOs = new ArrayList<>();
             for (Company c : projectService.getCompaniesListByProjectId(getEntityId())) {
@@ -97,8 +98,8 @@ public class ProjectController extends PageableEntityController<Project> {
         throw new BadRequestException(getNoEntityMessage());
     }
 
-    public List<ConnectionChannelDTO> getChannelsOfContacterByProjectId() {
-        Project currentProject = getEntity();
+    public List<ConnectionChannelDTO> getChannelsOfContacterByProjectId(Long projectId) {
+        Project currentProject = loadEntity(projectId);
         if (null != currentProject) {
             List<ConnectionChannelDTO> connectionChannelDTOs = new ArrayList<>();
             for (ConnectionChannel ch : projectService.getChannelsOfContacterByProjectId(getEntityId())) {
@@ -143,7 +144,7 @@ public class ProjectController extends PageableEntityController<Project> {
         if (entityId != null) {
             return projectService.getProject(entityId);
         }
-        return new Project();
+        return null;
     }
 
     //atnezni a stringek helyesek-e az alabbi 3 override-nal
@@ -163,10 +164,10 @@ public class ProjectController extends PageableEntityController<Project> {
     }
 
     public Project modifiedCheckerProject(Project oldProject, Project currentProject) {
-        if (!currentProject.getName().equals("")) {
+        if (!currentProject.getName().equals("") && currentProject.getName().equals(oldProject.getName())) {
             oldProject.setName(currentProject.getName());
         }
-        if (!currentProject.getDescription().equals("")) {
+        if (!currentProject.getDescription().equals("") && currentProject.getDescription().equals(oldProject.getDescription())) {
             oldProject.setDescription(currentProject.getDescription());
         }
         if (!currentProject.getStatus().equals(oldProject.getStatus())) {

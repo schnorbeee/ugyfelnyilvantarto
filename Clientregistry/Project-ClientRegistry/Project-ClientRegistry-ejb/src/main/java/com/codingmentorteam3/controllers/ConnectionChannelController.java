@@ -29,19 +29,20 @@ public class ConnectionChannelController extends PageableEntityController<Connec
     @Inject
     private PersonService personService;
 
-    public ConnectionChannelDTO updateConnectionChannel(ConnectionChannelBean newConnectionChannelBean) {
+    public ConnectionChannelDTO updateConnectionChannel(ConnectionChannelBean newConnectionChannelBean, Long connectionChannelId) {
         ConnectionChannel newConnectionChannel = new ConnectionChannel(newConnectionChannelBean);
-        ConnectionChannel currentConnectionChannel = getEntity();
+        ConnectionChannel currentConnectionChannel = loadEntity(connectionChannelId);
         if (null != currentConnectionChannel) {
             currentConnectionChannel.setValue(newConnectionChannel.getValue());
+            setEntity(newConnectionChannel);
             saveEntity();
             return new ConnectionChannelDTO(currentConnectionChannel);
         }
         throw new BadRequestException("No connection channel found in database!");
     }
 
-    public List<ConnectionChannelDTO> deleteConnectionChannelById() {
-        ConnectionChannel deleteConnectionChannel = getEntity();
+    public List<ConnectionChannelDTO> deleteConnectionChannelById(Long connectionChannelId) {
+        ConnectionChannel deleteConnectionChannel = loadEntity(connectionChannelId);
         if (null != deleteConnectionChannel) {
             connectionChannelService.deleteConnectionChannel(deleteConnectionChannel);
             List<ConnectionChannelDTO> connectionChannelDTOs = new ArrayList<>();
@@ -64,7 +65,7 @@ public class ConnectionChannelController extends PageableEntityController<Connec
         if (entityId != null) {
             return connectionChannelService.getConnectionChannel(entityId);
         }
-        return new ConnectionChannel();
+        return null;
     }
 
     @Override
