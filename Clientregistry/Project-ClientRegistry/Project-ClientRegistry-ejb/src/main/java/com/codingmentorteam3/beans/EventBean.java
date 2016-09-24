@@ -19,38 +19,40 @@ import javax.validation.constraints.Size;
 @Validate
 @ValidStartAndEndDate
 @SessionScoped
-@ManagedBean(name = "event")
+@ManagedBean(name = "eventBean")
 public class EventBean {
-    
+
     private static final EventType DEFAULT_TYPE = EventType.MEETING;
-    
+
     @NotNull
     @Size(min = 2, max = 30)
     private String title;
-    
+
     @Size(max = 1500)
     private String description;
-    
+
     @NotNull
     private Address address;
-    
+
     private EventType type = DEFAULT_TYPE;
-    
-    //@NotNull @Future
+
+    @NotNull
+    @Future
     private Date startDate;
-    
+
     private Date endDate;
-    
+
     private Company company;
 
     public EventBean() {
         // Default constructor
     }
 
-    public EventBean(String title, String description, Address address, Date startDate, Date endDate, Company company) {
+    public EventBean(String title, String description, Address address, EventType type, Date startDate, Date endDate, Company company) {
         this.title = title;
         this.description = description;
         this.address = address;
+        this.type = type;
         this.startDate = startDate;
         this.endDate = endDate;
         this.company = company;
@@ -165,5 +167,5 @@ public class EventBean {
     public String toString() {
         return "EventBean{" + "title=" + title + ", description=" + description + ", address=" + address + ", type=" + type + ", startDate=" + startDate + ", endDate=" + endDate + ", company=" + company + '}';
     }
-    
+
 }

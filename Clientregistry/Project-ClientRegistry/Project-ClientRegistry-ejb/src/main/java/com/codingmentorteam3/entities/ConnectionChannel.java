@@ -20,7 +20,8 @@ import javax.persistence.NamedQuery;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "connectionchannel_table")
-@NamedQuery(name = "connection.channel.list.by.owner.id", query = "SELECT ch FROM connectionchannel_table ch WHERE ch.owner.id =:id")
+@NamedQuery(name = "connection.channel.list", query = "SELECT ch FROM connectionchannel_table ch")
+//@NamedQuery(name = "connection.channel.list.by.owner.id", query = "SELECT ch FROM user_table u INNER JOIN u.channels ch WHERE u.id =:id")
 public class ConnectionChannel implements Serializable {
 
     @Id
@@ -47,12 +48,6 @@ public class ConnectionChannel implements Serializable {
         this.type = channel.getType();
         this.value = channel.getValue();
         this.owner = channel.getOwner();
-    }
-    
-    public ConnectionChannel(ConnectionChannelType type, String value, User owner) {
-        this.type = type;
-        this.value = value;
-        this.owner = owner;
     }
 
     public Long getId() {

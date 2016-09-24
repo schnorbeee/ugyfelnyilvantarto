@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://omnifaces.org/ui">
+
+    <composite:interface>
+        <composite:attribute name="eventBean" required="true"/>
+        <composite:attribute name="style" required="false"/>
+    </composite:interface>
+
+    <composite:implementation>
+        <div class="form-group">
+            <h:outputLabel class="control-label col-sm-4" for="eventType" value="Event type:"/>
+            <div class="col-sm-8">
+                <o:importConstants type="com.codingmentorteam3.enums.EventType"/>
+                <h:selectOneMenu value="#{cc.attrs.eventBean.type}" >
+                    <f:selectItems value="#{EventType}" />
+                </h:selectOneMenu>
+            </div>
+        </div>
+        <div class="form-group">
+            <h:outputLabel class="control-label col-sm-4" for="eventTitle" value="Event title:"/>
+            <div class="col-sm-8">
+                <h:inputText id="eventTitle" value="#{cc.attrs.eventBean.title}" class="form-control" required="true" label="Event title" requiredMessage="Event title required">
+                    <f:validateLength minimum="2" maximum="30"/>
+                </h:inputText>
+                <h:message id="eventTitleMessage" for="eventTitle" style="color:red"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <h:outputLabel class="control-label col-sm-4" for="eventDescription" value="Event description:"/>
+            <div class="col-sm-8">
+                <h:inputTextarea cols="40" rows="5" id="eventDescription" value="#{cc.attrs.eventBean.description}" class="form-control" required="true" label="Event description" requiredMessage="Event description required">
+                    <f:validateLength maximum="1500"/>
+                </h:inputTextarea>
+                <h:message id="eventDescriptionMessage" for="eventDescription" style="color:red"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <h:outputLabel class="control-label col-sm-4" for="eventStartDate" value="Start date: "/>
+            <div class="col-sm-8">
+                <h:inputText id="eventStartDate" value="#{cc.attrs.eventBean.endDate}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <h:outputLabel class="control-label col-sm-4" for="eventEndDate" value="End date: "/>
+            <div class="col-sm-8">
+                <h:inputText id="eventEndDate" value="#{cc.attrs.eventBean.endDate}"/>
+            </div>
+        </div>
+    </composite:implementation>
+
+</html>
+

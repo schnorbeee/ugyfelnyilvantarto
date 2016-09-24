@@ -22,7 +22,7 @@
         <div class="container">
             <div class="jumbotron">
                 <div class="visitors-box pull-right">
-                    Visitors today: <span id="visitors-today">123</span>
+                    Visitors today: <span id="visitors-today">#{visitorCountBean.sessionCount}</span>
                 </div>
                 <h1>ClientRegistry</h1>
             </div>
@@ -39,10 +39,10 @@
                             <input type="password" name="j_password" id="j_password" value="#{user.password}" class="form-control" required="true" label="*******" requiredMessage="Password is required" placeholder="*******"/>
                             <h:message id="passwordMessage" for="password" style="color:red"/>
                         </div>
-                        <!--<h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Login" action="#{authController.login(user)}"/>-->
-                        <input class="btn btn-primary center-block btn-color-sign-in" type="submit" name="submit" value="Login"/>
+                        <h:commandButton class="btn btn-primary center-block btn-color-sign-in" type="submit" value="Login" action="#{authController.login(user)}"/>
+                        <!--<input class="btn btn-primary center-block btn-color-sign-in" type="submit" name="submit" value="Login"/>-->
                         <hr/>
-                        <h:commandButton class="btn btn-info center-block btn-color-register" value="Register" action="#{authController.login(user)}"/>
+                        <h:button class="btn btn-info center-block btn-color-register" value="Register" outcome="registration"/>
                     </form>
                 </div>
             </div>

@@ -10,17 +10,17 @@ import java.util.Objects;
  * @author istvan.mosonyi
  */
 public class ProjectDTO {
-    
-    private static final StatusType DEFAULT_TYPE = StatusType.INACTIVE;
+
+    private Long id;
 
     private String name;
 
     private String description;
 
-    private StatusType status = DEFAULT_TYPE;
-    
+    private StatusType status;
+
     private Date startDate;
-    
+
     private Date deadline;
 
     public ProjectDTO() {
@@ -28,11 +28,20 @@ public class ProjectDTO {
     }
 
     public ProjectDTO(Project project) {
+        this.id = project.getId();
         this.name = project.getName();
         this.description = project.getDescription();
         this.startDate = project.getStartDate();
         this.deadline = project.getDeadline();
         this.status = project.getStatus();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -78,11 +87,12 @@ public class ProjectDTO {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.name);
-        hash = 89 * hash + Objects.hashCode(this.description);
-        hash = 89 * hash + Objects.hashCode(this.status);
-        hash = 89 * hash + Objects.hashCode(this.startDate);
-        hash = 89 * hash + Objects.hashCode(this.deadline);
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Objects.hashCode(this.description);
+        hash = 97 * hash + Objects.hashCode(this.status);
+        hash = 97 * hash + Objects.hashCode(this.startDate);
+        hash = 97 * hash + Objects.hashCode(this.deadline);
         return hash;
     }
 
@@ -104,6 +114,9 @@ public class ProjectDTO {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
         if (this.status != other.status) {
             return false;
         }
@@ -118,7 +131,7 @@ public class ProjectDTO {
 
     @Override
     public String toString() {
-        return "ProjectDTO{" + "name=" + name + ", description=" + description + ", type=" + status + ", startDate=" + startDate + ", deadline=" + deadline + '}';
+        return "ProjectDTO{" + "id=" + id + ", name=" + name + ", description=" + description + ", status=" + status + ", startDate=" + startDate + ", deadline=" + deadline + '}';
     }
-    
+
 }

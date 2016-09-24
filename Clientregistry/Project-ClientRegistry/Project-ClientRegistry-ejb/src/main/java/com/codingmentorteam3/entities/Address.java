@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,10 +46,10 @@ public class Address implements Serializable {
     @Column(name = "house_number", nullable = false)
     private String houseNumber;
     
-    @OneToMany(mappedBy = "address", targetEntity = Company.class)
+    @OneToMany(mappedBy = "address", targetEntity = Company.class, fetch = FetchType.EAGER)
     private List<Company> companies = new ArrayList<>();
     
-    @OneToMany(mappedBy = "address", targetEntity = Event.class)
+    @OneToMany(mappedBy = "address", targetEntity = Event.class, fetch = FetchType.EAGER)
     private List<Event> events = new ArrayList<>();
     
     public Address() {
@@ -63,14 +64,6 @@ public class Address implements Serializable {
         this.houseNumber = newAddress.getHouseNumber();
     }
     
-    public Address(String zipCode, String country, String city, String street, String houseNumber) {
-        this.zipCode = zipCode;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.houseNumber = houseNumber;
-    }
-
     public Long getId() {
         return id;
     }

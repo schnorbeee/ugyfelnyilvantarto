@@ -3,9 +3,6 @@ package com.codingmentorteam3.daos;
 import com.codingmentorteam3.entities.Company;
 import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Project;
-import com.codingmentorteam3.exceptions.query.BadRequestException;
-import com.codingmentorteam3.exceptions.query.EmptyListException;
-import com.codingmentorteam3.exceptions.query.NoMatchForFilterException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
@@ -21,26 +18,32 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
         super(Project.class);
     }
 
-    public List<Project> getProjectsListByNameFilter(String name) {
+    public List<Project> getProjectsListByStringFilter(String name, int limit, int offset) {
         if (null != name) {
-            List<Project> query = em.createNamedQuery("project.by.name.filter", Project.class).setParameter("name", "%" + name + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("Results can not be found with this parameter: " + name);
-            }
-            return query;
+            TypedQuery<Project> query = em.createNamedQuery("project.by.string.filter", Project.class);
+            query.setParameter("name", "%" + name + "%");
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+            return query.getResultList();
         }
-        return em.createNamedQuery("project.list", Project.class).getResultList();
+        TypedQuery<Project> query = em.createNamedQuery("project.list", Project.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
-    public List<Project> getProjectsListByStatusFilter(String status) {
+    public List<Project> getProjectsListByStatusFilter(String status, int limit, int offset) {
         if (null != status) {
-            List<Project> query = em.createNamedQuery("project.by.status.filter", Project.class).setParameter("status", "%" + status + "%").getResultList();
-            if (query.isEmpty()) {
-                throw new NoMatchForFilterException("Results can not be found with this parameter: " + status);
-            }
-            return query;
+            TypedQuery<Project> query = em.createNamedQuery("project.by.status.filter", Project.class);
+            query.setParameter("status", "%" + status + "%");
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+            return query.getResultList();
         }
-        return em.createNamedQuery("project.list", Project.class).getResultList();
+        TypedQuery<Project> query = em.createNamedQuery("project.list", Project.class);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
     public List<Project> getProjectsList(int limit, int offset) {
@@ -51,35 +54,20 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
     }
 
     public List<Company> getCompaniesListByProjectId(Long projectId) {
-        Project current = read(projectId);
-        if (null != current) {
-            List<Company> query = em.createNamedQuery("project.list.companies.by.id", Company.class).setParameter("id", projectId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("There are no projects connected to company: " + current.getName());
-            }
-            return query;
-        }
-        throw new BadRequestException("We haven't got this project in database.");
+        TypedQuery<Company> query = em.createNamedQuery("project.list.companies.by.id", Company.class);
+        query.setParameter("id", projectId);
+        return query.getResultList();
     }
 
     public List<ConnectionChannel> getChannelsOfContacterByProjectId(Long projectId) {
-        Project current = read(projectId);
-        if (null != current) {
-            List<ConnectionChannel> query = em.createNamedQuery("project.list.contacter.connection.channel.by.id", ConnectionChannel.class).setParameter("id", projectId).getResultList();
-            if (query.isEmpty()) {
-                throw new EmptyListException("There are no connection channels added to the contact person of this project: " + current.getName());
-            }
-            return query;
-        }
-        throw new BadRequestException("We haven't got this project in database.");
+        TypedQuery<ConnectionChannel> query = em.createNamedQuery("project.list.contacter.connection.channel.by.id", ConnectionChannel.class);
+        query.setParameter("id", projectId);
+        return query.getResultList();
     }
 
     public List<Project> getProjectsListDeadlineIsInThisWeek() {
-        List<Project> query = em.createNamedQuery("project.list.in.this.week", Project.class).getResultList();
-        if (query.isEmpty()) {
-            throw new EmptyListException("There are no projects ending in this week.");
-        }
-        return query;
+        TypedQuery<Project> query = em.createNamedQuery("project.list.in.this.week", Project.class);
+        return query.getResultList();
     }
 
 }

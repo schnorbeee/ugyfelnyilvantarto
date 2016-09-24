@@ -12,21 +12,21 @@ import java.util.Objects;
  * @author istvan.mosonyi
  */
 public class EventDTO {
-    
-    private static final EventType DEFAULT_TYPE = EventType.MEETING;
+
+    private Long id;
 
     private String title;
 
     private String description;
 
     private Address address;
-    
-    private EventType type = DEFAULT_TYPE;
-    
+
+    private EventType type;
+
     private Date startDate;
-    
+
     private Date endDate;
-    
+
     private Company company;
 
     public EventDTO() {
@@ -34,6 +34,7 @@ public class EventDTO {
     }
 
     public EventDTO(Event event) {
+        this.id = event.getId();
         this.title = event.getTitle();
         this.description = event.getDescription();
         this.address = event.getAddress();
@@ -41,6 +42,14 @@ public class EventDTO {
         this.startDate = event.getStartDate();
         this.endDate = event.getEndDate();
         this.company = event.getCompany();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -101,14 +110,15 @@ public class EventDTO {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 41 * hash + Objects.hashCode(this.title);
-        hash = 41 * hash + Objects.hashCode(this.description);
-        hash = 41 * hash + Objects.hashCode(this.address);
-        hash = 41 * hash + Objects.hashCode(this.type);
-        hash = 41 * hash + Objects.hashCode(this.startDate);
-        hash = 41 * hash + Objects.hashCode(this.endDate);
-        hash = 41 * hash + Objects.hashCode(this.company);
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.title);
+        hash = 97 * hash + Objects.hashCode(this.description);
+        hash = 97 * hash + Objects.hashCode(this.address);
+        hash = 97 * hash + Objects.hashCode(this.type);
+        hash = 97 * hash + Objects.hashCode(this.startDate);
+        hash = 97 * hash + Objects.hashCode(this.endDate);
+        hash = 97 * hash + Objects.hashCode(this.company);
         return hash;
     }
 
@@ -128,6 +138,9 @@ public class EventDTO {
             return false;
         }
         if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.address, other.address)) {
@@ -150,7 +163,7 @@ public class EventDTO {
 
     @Override
     public String toString() {
-        return "EventDTO{" + "title=" + title + ", description=" + description + ", address=" + address + ", type=" + type + ", startDate=" + startDate + ", endDate=" + endDate + ", company=" + company + '}';
+        return "EventDTO{" + "id=" + id + ", title=" + title + ", description=" + description + ", address=" + address + ", type=" + type + ", startDate=" + startDate + ", endDate=" + endDate + ", company=" + company + '}';
     }
-    
+
 }

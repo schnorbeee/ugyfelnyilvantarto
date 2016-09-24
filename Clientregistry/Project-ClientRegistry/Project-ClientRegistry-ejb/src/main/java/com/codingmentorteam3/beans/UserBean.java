@@ -15,12 +15,12 @@ import javax.validation.constraints.NotNull;
  */
 @Validate
 @SessionScoped
-@ManagedBean(name = "user")
+@ManagedBean(name = "userBean")
 public class UserBean extends PersonBean {
-    
+
     @Username
     private String username;
-    
+
     @Password
     private String password;
 
@@ -28,19 +28,8 @@ public class UserBean extends PersonBean {
         // Default constructor
     }
 
-    public UserBean(String username, String password, String firstName, String lastName, PositionType rank, String avatar) {
-        super(firstName, lastName, rank, avatar);
-        this.username = username;
-        this.password = password;
-    }
-
     public UserBean(String username, String password, String firstName, String lastName) {
         super(firstName, lastName);
-        this.username = username;
-        this.password = password;
-    }
-
-    public UserBean(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -94,5 +83,5 @@ public class UserBean extends PersonBean {
     public String toString() {
         return "UserBean{" + "username=" + username + ", password=" + password + '}';
     }
-    
+
 }

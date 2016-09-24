@@ -17,33 +17,34 @@ import javax.validation.constraints.Size;
 @Validate
 @ValidDeadline
 @SessionScoped
-@ManagedBean(name = "project")
+@ManagedBean(name = "projectBean")
 public class ProjectBean {
-    
+
     private static final StatusType DEFAULT_TYPE = StatusType.INACTIVE;
-    
+
     @NotNull
     @Size(max = 30)
     private String name;
-    
+
     @NotNull
     @Size(max = 1500)
     private String description;
-    
+
     @NotNull
     private StatusType status = DEFAULT_TYPE;
 
     private Date startDate;
-    
+
     private Date deadline;
 
     public ProjectBean() {
         // Default constructor
     }
 
-    public ProjectBean(String name, String description, Date startDate, Date deadline) {
+    public ProjectBean(String name, String description, StatusType status, Date startDate, Date deadline) {
         this.name = name;
         this.description = description;
+        this.status = status;
         this.startDate = startDate;
         this.deadline = deadline;
     }
@@ -133,5 +134,5 @@ public class ProjectBean {
     public String toString() {
         return "ProjectBean{" + "name=" + name + ", description=" + description + ", type=" + status + ", startDate=" + startDate + ", deadline=" + deadline + '}';
     }
-    
+
 }

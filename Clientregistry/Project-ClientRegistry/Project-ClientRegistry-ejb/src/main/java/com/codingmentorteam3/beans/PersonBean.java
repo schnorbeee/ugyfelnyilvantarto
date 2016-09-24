@@ -14,27 +14,27 @@ import javax.validation.constraints.Size;
  */
 @Validate
 @SessionScoped
-@ManagedBean(name = "person")
+@ManagedBean(name = "personBean")
 public class PersonBean {
-    
-    private static final PositionType DEFAULT_RANK = PositionType.VISITOR;
-    
+
+    private static final PositionType DEFAULT_POSITION = PositionType.VISITOR;
+
     private static final String DEFAULT_AVATAR = "";
-    
-    @NotNull 
+
+    @NotNull
     @Size(min = 2, max = 30)
     protected String firstName;
-    
-    @NotNull 
+
+    @NotNull
     @Size(min = 2, max = 30)
     protected String lastName;
-    
+
     @NotNull
-    protected PositionType rank = DEFAULT_RANK;
+    protected PositionType position = DEFAULT_POSITION;
 
     @NotNull
     private String avatar = DEFAULT_AVATAR;
-    
+
     public PersonBean() {
         // Default constructor
     }
@@ -42,13 +42,6 @@ public class PersonBean {
     public PersonBean(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public PersonBean(String firstName, String lastName, PositionType rank, String avatar) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.rank = rank;
-        this.avatar = avatar;
     }
 
     public String getFirstName() {
@@ -67,12 +60,12 @@ public class PersonBean {
         this.lastName = lastName;
     }
 
-    public PositionType getRank() {
-        return rank;
+    public PositionType getPosition() {
+        return position;
     }
 
-    public void setRank(PositionType rank) {
-        this.rank = rank;
+    public void setPosition(PositionType position) {
+        this.position = position;
     }
 
     public String getAvatar() {
@@ -88,7 +81,7 @@ public class PersonBean {
         int hash = 7;
         hash = 29 * hash + Objects.hashCode(this.firstName);
         hash = 29 * hash + Objects.hashCode(this.lastName);
-        hash = 29 * hash + Objects.hashCode(this.rank);
+        hash = 29 * hash + Objects.hashCode(this.position);
         hash = 29 * hash + Objects.hashCode(this.avatar);
         return hash;
     }
@@ -114,7 +107,7 @@ public class PersonBean {
         if (!Objects.equals(this.avatar, other.avatar)) {
             return false;
         }
-        if (this.rank != other.rank) {
+        if (this.position != other.position) {
             return false;
         }
         return true;
@@ -122,7 +115,7 @@ public class PersonBean {
 
     @Override
     public String toString() {
-        return "PersonBean{" + "firstName=" + firstName + ", lastName=" + lastName + ", rank=" + rank + ", avatar=" + avatar + '}';
+        return "PersonBean{" + "firstName=" + firstName + ", lastName=" + lastName + ", position=" + position + ", avatar=" + avatar + '}';
     }
 
 }

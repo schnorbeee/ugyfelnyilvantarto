@@ -2,6 +2,7 @@ package com.codingmentorteam3.services;
 
 import com.codingmentorteam3.daos.RoleDaoImpl;
 import com.codingmentorteam3.entities.Role;
+import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.enums.RoleType;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -33,16 +34,12 @@ public class RoleService {
         return roleDao.delete(role);
     }
 
-    public List<Role> getRolesList(Integer limit, Integer offset) {
-        return roleDao.getRolesList(limit, offset);
-    }
-
     public List<Role> getRolesListByUsername(String username) {
         return roleDao.getRolesListByUsername(username);
     }
 
-    public List<Role> getRolesListByRoleType(RoleType roleType) {
-        return roleDao.getRolesListByRoleType(roleType);
+    public List<User> getUsersListByRoleType(RoleType roleType, Integer limit, Integer offset) {
+        return roleDao.getUsersListByRoleType(roleType, limit, offset);
     }
 
 }

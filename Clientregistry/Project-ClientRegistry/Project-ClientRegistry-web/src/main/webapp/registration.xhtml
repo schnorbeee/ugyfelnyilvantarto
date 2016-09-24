@@ -23,68 +23,74 @@
         <div class="container">
             <div class="jumbotron">
                 <div class="visitors-box pull-right">
-                    Visitors today: <span id="visitors-today">123</span>
+                    Visitors today: <span id="visitors-today">#{visitorCountBean.sessionCount}</span>
                 </div>
                 <h1>ClientRegistry</h1>
             </div>
             <div class="row">
-                <div class="col-md-3 col-md-offset-3">
+                <div class="col-md-6 col-md-offset-3">
                     <h:form>
-                        <div class="form-group">
-                            <h:outputLabel for="email" value="E-mail"/>
-                            <h:inputText id="email" value="#{connectionChannelBean.value}" class="form-control" required="true" label="example@email.com" requiredMessage="E-mail is required">
-                                <f:validator validatorId="EmailValidator"/>
-                            </h:inputText>
-                            <h:message id="emailMessage" for="email" style="color:red"/>
-                        </div>
-                        <div class="form-group">
-                            <h:outputLabel value="First name"/>
-                            <h:inputText id="firstName" value="#{user.firstName}" class="form-control" required="true" label="John" requiredMessage="First name is required">
-                                <f:validateLength minimum="2" maximum="30"/>
-                            </h:inputText>
-                            <h:message id="firstNameMessage" for="firstName" style="color:red"/>
-                        </div>
-                        <div class="form-group">
-                            <h:outputLabel value="Last name"/>
-                            <h:inputText id="lastName" value="#{user.lastName}" class="form-control" required="true" label="Smith" requiredMessage="Last name is required">
-                                <f:validateLength minimum="2" maximum="30"/>
-                            </h:inputText>
-                            <h:message id="lastNameMessage" for="lastName" style="color:red"/>
-                        </div>
-                        <div class="form-group">
-                            <h:outputLabel value="Username"/>
-                            <h:inputText id="username" value="#{user.username}" class="form-control" required="true" label="Username" requiredMessage="Username is required">
-                                <f:validator validatorId="UsernameValidator"/>
-                            </h:inputText>
-                            <h:message id="usernameMessage" for="username" style="color:red"/>
-                        </div>
-                        <div class="form-group">
-                            <h:outputLabel value="Password"/>
-                            <h:inputSecret id="password" value="#{user.password}" class="form-control" required="true" label="*******" requiredMessage="Password is required">
-                                <f:validator validatorId="PasswordValidator"/>
-                                <f:attribute name="confirmPassword" value="#{confirmPassword}"/>
-                            </h:inputSecret>
-                            <h:message id="passwordMessage" for="password" style="color:red"/>
-                        </div>
-                        <div class="form-group">
-                            <h:outputLabel value="Confirm password"/>
-                            <h:inputSecret id="confirmPassword" value="#{user.password}" class="form-control" required="true" label="*******" requiredMessage="Confirm password is required" binding="#{confirmPassword}"/>
-                            <h:message id="confirmPasswordMessage" for="confirmPassword" style="color:red"/>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <h:outputLabel for="email" value="E-mail"/>
+                                    <h:inputText id="email" value="#{connectionChannelBean.value}" class="form-control" required="true" label="example@email.com" requiredMessage="E-mail is required">
+                                        <f:validator validatorId="EmailValidator"/>
+                                    </h:inputText>
+                                    <h:message id="emailMessage" for="email" style="color:red"/>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="First name"/>
+                                    <h:inputText id="firstName" value="#{userBean.firstName}" class="form-control" required="true" label="John" requiredMessage="First name is required">
+                                        <f:validateLength minimum="2" maximum="30"/>
+                                    </h:inputText>
+                                    <h:message id="firstNameMessage" for="firstName" style="color:red"/>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Last name"/>
+                                    <h:inputText id="lastName" value="#{userBean.lastName}" class="form-control" required="true" label="Smith" requiredMessage="Last name is required">
+                                        <f:validateLength minimum="2" maximum="30"/>
+                                    </h:inputText>
+                                    <h:message id="lastNameMessage" for="lastName" style="color:red"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <h:outputLabel value="Username"/>
+                                    <h:inputText id="username" value="#{userBean.username}" class="form-control" required="true" label="Username" requiredMessage="Username is required">
+                                        <f:validator validatorId="UsernameValidator"/>
+                                    </h:inputText>
+                                    <h:message id="usernameMessage" for="username" style="color:red"/>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Password"/>
+                                    <h:inputSecret id="password" value="#{userBean.password}" class="form-control" required="true" label="*******" requiredMessage="Password is required">
+                                        <f:validator validatorId="PasswordValidator"/>
+                                        <f:attribute name="confirmPassword" value="#{confirmPassword}"/>
+                                    </h:inputSecret>
+                                    <h:message id="passwordMessage" for="password" style="color:red"/>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Confirm password"/>
+                                    <h:inputSecret id="confirmPassword" value="#{userBean.password}" class="form-control" required="true" label="*******" requiredMessage="Confirm password is required" binding="#{confirmPassword}"/>
+                                    <h:message id="confirmPasswordMessage" for="confirmPassword" style="color:red"/>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-md-offset-3">
+                            <div class="col-sm-12">
                                 <div class="col-sm-4">
-                                    <a href="login.xhtml" class="btn btn-primary center-block btn-color-register">Cancel</a>
+                                    <h:button value="Cancel" outcome="login" class="btn btn-primary center-block btn-color-register"/>
                                 </div>
                                 <div class="col-sm-4 col-sm-offset-4">
-                                    <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Register" action="#{userController.registrate(user, connectionChannelBean)}"/>
+                                    <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Register" action="#{userController.registrate(userBean, connectionChannelBean)}"/>
                                 </div>
                             </div>
                         </div>
                     </h:form>
                 </div>
             </div>
-            
+
             <footer class="footer panel-footer">
                 <div class="container">
                     <div class="row">
@@ -102,7 +108,7 @@
                     </div>
                 </div>
             </footer>
-            
+
         </div>
     </h:body>
 </html>

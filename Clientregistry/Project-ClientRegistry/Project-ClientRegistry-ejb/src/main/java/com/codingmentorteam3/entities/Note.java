@@ -1,5 +1,6 @@
 package com.codingmentorteam3.entities;
 
+import com.codingmentorteam3.beans.NoteBean;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -40,11 +41,11 @@ public class Note implements Serializable {
         //Default constructor
     }
 
-    public Note(String label, String content, User user, Event event) {
-        this.label = label;
-        this.content = content;
-        this.user = user;
-        this.event = event;
+    public Note(NoteBean noteBean) {
+        this.label = noteBean.getLabel();
+        this.content = noteBean.getContent();
+        this.user = noteBean.getUser();
+        this.event = noteBean.getEvent();
     }
 
     public Long getId() {

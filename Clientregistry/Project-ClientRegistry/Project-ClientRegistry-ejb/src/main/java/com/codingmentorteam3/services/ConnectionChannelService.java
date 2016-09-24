@@ -14,26 +14,30 @@ import javax.inject.Inject;
 public class ConnectionChannelService {
 
     @Inject
-    private ConnectionChannelDaoImpl channelDao;
-    
+    private ConnectionChannelDaoImpl connectionChannelDao;
+
     public void createConnectionChannel(ConnectionChannel connectionChannel) {
-        channelDao.create(connectionChannel);
+        connectionChannelDao.create(connectionChannel);
     }
-    
-    public ConnectionChannel getConnectionChannel(Long connectionChannelId){
-        return channelDao.read(connectionChannelId);
+
+    public ConnectionChannel getConnectionChannel(Long connectionChannelId) {
+        return connectionChannelDao.read(connectionChannelId);
     }
-    
-    public ConnectionChannel editConnectionChannel(ConnectionChannel connectionChannel){
-        return channelDao.update(connectionChannel);
+
+    public ConnectionChannel editConnectionChannel(ConnectionChannel connectionChannel) {
+        return connectionChannelDao.update(connectionChannel);
     }
-    
+
     public ConnectionChannel deleteConnectionChannel(ConnectionChannel connectionChannel) {
-        return channelDao.delete(connectionChannel);
+        return connectionChannelDao.delete(connectionChannel);
     }
     
-    public List<ConnectionChannel> getConnectionChannelListByOwnerId(Long ownerId) {
-        return channelDao.getConnectionChannelListByOwnerId(ownerId);
+    public  List<ConnectionChannel> getConnectionChannelList(Integer limit, Integer offset) {
+        return connectionChannelDao.getConnectionChannelList(limit, offset);
     }
-    
+    //personba eleg
+//    public List<ConnectionChannel> getConnectionChannelListByOwnerId(Long ownerId) {
+//        return channelDao.getConnectionChannelListByOwnerId(ownerId);
+//    }
+
 }

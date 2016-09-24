@@ -29,10 +29,10 @@ import javax.persistence.TemporalType;
  */
 @Entity(name = "event_table")
 @NamedQueries({
-    @NamedQuery(name = "event.by.title.filter", query = "SELECT e FROM event_table e WHERE e.title LIKE :title"),
+    @NamedQuery(name = "event.by.string.filter", query = "SELECT e FROM event_table e WHERE e.title LIKE :title OR e.description LIKE :title"),
     @NamedQuery(name = "event.by.type.filter", query = "SELECT e FROM event_table e WHERE e.type LIKE :type"),
     @NamedQuery(name = "event.list", query = "SELECT e FROM event_table e ORDER BY e.startDate"),
-    @NamedQuery(name = "event.list.users.by.id", query = "SELECT u FROM event_table e INNER JOIN e.users u WHERE e.id =:id"),
+    @NamedQuery(name = "event.list.users.by.id.and.feedback", query = "SELECT r FROM event_table e INNER JOIN e.invitations i INNER JOIN i.receiver r WHERE e.id =:id AND i.feedback =:feedback"),
     @NamedQuery(name = "event.list.notes.by.id", query = "SELECT n FROM event_table e INNER JOIN e.notes n WHERE e.id =:id")
 })
 public class Event implements Serializable {
@@ -50,7 +50,7 @@ public class Event implements Serializable {
     private String title;
 
     @Temporal(TemporalType.DATE)
-    //@Column(name = "start_date", nullable = false)
+    @Column(name = "start_date", nullable = false)
     private Date startDate;
 
     @Temporal(TemporalType.DATE)
@@ -70,6 +70,9 @@ public class Event implements Serializable {
     @ManyToMany(mappedBy = "events", targetEntity = User.class)
     private List<User> users = new ArrayList<>();
 
+    @OneToMany(mappedBy = "event", targetEntity = Invitation.class)
+    private List<Invitation> invitations = new ArrayList<>();
+
     @OneToMany(mappedBy = "event", targetEntity = Note.class)
     private List<Note> notes = new ArrayList<>();
 
@@ -80,17 +83,11 @@ public class Event implements Serializable {
     public Event(EventBean eventBean) {
         this.title = eventBean.getTitle();
         this.description = eventBean.getDescription();
+        this.address = eventBean.getAddress();
         this.type = eventBean.getType();
-    }
-    
-    public Event(Address address, String title, Date startDate, Date endDate, String description, EventType type, Company company) {
-        this.address = address;
-        this.title = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.description = description;
-        this.type = type;
-        this.company = company;
+        this.startDate = eventBean.getStartDate();
+        this.endDate = eventBean.getEndDate();
+        this.company = eventBean.getCompany();
     }
 
     public Long getId() {
@@ -163,6 +160,14 @@ public class Event implements Serializable {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public List<Invitation> getInvitations() {
+        return invitations;
+    }
+
+    public void setInvitations(List<Invitation> invitations) {
+        this.invitations = invitations;
     }
 
     public List<Note> getNotes() {

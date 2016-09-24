@@ -8,8 +8,6 @@ import java.util.Objects;
  * @author istvan.mosonyi
  */
 public class UserDTO extends PersonDTO {
-    
-    private static final String DEFAULT_AVATAR = "";
 
     private String username;
 
@@ -18,6 +16,11 @@ public class UserDTO extends PersonDTO {
     }
 
     public UserDTO(User user) {
+        this.id = user.getId();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.position = user.getPosition();
+        this.avatar = user.getAvatar();
         this.username = user.getUsername();
     }
 
@@ -48,7 +51,7 @@ public class UserDTO extends PersonDTO {
             return false;
         }
         final UserDTO other = (UserDTO) obj;
-        if(!super.equals(other)) {
+        if (!super.equals(other)) {
             return false;
         }
         if (!Objects.equals(this.username, other.username)) {
@@ -61,5 +64,5 @@ public class UserDTO extends PersonDTO {
     public String toString() {
         return "UserDTO{" + "username=" + username + '}';
     }
-    
+
 }

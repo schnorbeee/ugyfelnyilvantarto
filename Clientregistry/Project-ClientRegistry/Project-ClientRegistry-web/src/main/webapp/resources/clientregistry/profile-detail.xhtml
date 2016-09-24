@@ -13,9 +13,9 @@
 
     <composite:implementation>
         <h:panelGrid columns="2" style="#{cc.attrs.style}">
-            <h:outputLabel value="#{cc.attrs.person.fistName}"/>
+            <h:outputLabel value="#{cc.attrs.person.firstName}"/>
             <h:outputLabel value="#{cc.attrs.person.lastName}"/>
-            <h:outputLabel value="#{cc.attrs.person.rank}"/>
+            <h:outputLabel value="#{cc.attrs.person.position}"/>
             <clientregistry:connection-channel-list newItemOutcome="#{connectionChannelController.newItemOutcome}"
                                                     paginationOutcome="connectionChannels"
                                                     entityType="ConnectionChannel"

@@ -16,6 +16,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -33,18 +34,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity(name = "user_table")
 @AttributeOverride(name = "user_id", column = @Column(name = "person_id"))
 @NamedQueries({
-    @NamedQuery(name = "user.by.username.filter", query = "SELECT u FROM user_table u WHERE u.username LIKE :name"),
-    @NamedQuery(name = "user.by.firstname.filter", query = "SELECT u FROM user_table u WHERE u.firstName LIKE :first"),
-    @NamedQuery(name = "user.by.lastname.filter", query = "SELECT u FROM user_table u WHERE u.lastName LIKE :last"),
-    @NamedQuery(name = "user.by.rank.filter", query = "SELECT u FROM user_table u WHERE u.position LIKE :position"), 
+    @NamedQuery(name = "user.by.name.filter", query = "SELECT u FROM user_table u WHERE u.username LIKE :name OR u.firstName LIKE :name OR u.lastName LIKE :name"),
+    @NamedQuery(name = "user.by.rank.filter", query = "SELECT u FROM user_table u WHERE u.position LIKE :position"),
     @NamedQuery(name = "user.list", query = "SELECT u FROM user_table u ORDER BY u.username"),
     @NamedQuery(name = "user.by.username", query = "SELECT u FROM user_table u WHERE u.username =:name"),
     @NamedQuery(name = "user.list.roles.by.id", query = "SELECT r FROM user_table u INNER JOIN u.roles r WHERE u.id =:id"),
-    @NamedQuery(name = "user.list.invitation.sent.by.id", query = "SELECT i FROM user_table u INNER JOIN u.invitationsSent i WHERE u.id =:id"),
-    @NamedQuery(name = "user.list.invitation.received.by.id", query = "SELECT i FROM user_table u INNER JOIN u.invitationsReceived i WHERE u.id =:id"),
     @NamedQuery(name = "user.list.notes.by.id", query = "SELECT n FROM user_table u INNER JOIN u.notes n WHERE u.id =:id"),
-    @NamedQuery(name = "user.list.events.by.id", query = "SELECT e FROM user_table u INNER JOIN u.events e WHERE u.id =:id"),
-    @NamedQuery(name = "user.list.channels.by.id", query = "SELECT ch FROM user_table u INNER JOIN u.channels ch WHERE u.id =:id")
+    @NamedQuery(name = "user.list.events.by.id", query = "SELECT e FROM user_table u INNER JOIN u.events e WHERE u.id =:id")
 })
 public class User extends Person implements Serializable {
 
@@ -58,6 +54,7 @@ public class User extends Person implements Serializable {
     @ElementCollection
     @CollectionTable(name = "num_item_per_page_table")
     @MapKeyColumn(name = "table_enum")
+    @Enumerated(EnumType.STRING)
     @Column(name = "num_enum")
     private Map<PageableTablesType, NumItemsPerPageType> numItemPerPage = new EnumMap<>(PageableTablesType.class);
 
@@ -84,15 +81,9 @@ public class User extends Person implements Serializable {
     }
 
     public User(UserBean user) {
-        super(user.getFirstName(), user.getLastName(), user.getRank(), user.getAvatar());
+        super(user.getFirstName(), user.getLastName(), user.getPosition(), user.getAvatar());
         this.username = user.getUsername();
         this.password = user.getPassword();
-    }
-
-    
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
     }
 
     public String getUsername() {
