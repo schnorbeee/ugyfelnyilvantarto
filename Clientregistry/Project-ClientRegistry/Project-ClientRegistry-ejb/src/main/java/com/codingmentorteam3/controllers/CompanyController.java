@@ -55,6 +55,12 @@ public class CompanyController extends PageableEntityController<Company> {
 
     @Inject
     private ContactPersonService contactPersonService;
+    
+    private final List<CompanyDTO> companyDTOs = new ArrayList<>();
+
+    public List<CompanyDTO> getCompanyDTOs() {
+        return companyDTOs;
+    }
 
     //user method/admin accepted MUKODIK
     public String createCompany(CompanyBean regCompany, AddressBean regAddress) {
@@ -152,7 +158,6 @@ public class CompanyController extends PageableEntityController<Company> {
             if (!isAnyCompanyAndEventUseThisAddress(deleteAddress)) {
                 addressService.deleteAddress(deleteAddress);
             }
-            List<CompanyDTO> companyDTOs = new ArrayList<>();
             for (Company c : getEntities()) {
                 CompanyDTO companyDTO = new CompanyDTO(c);
                 companyDTOs.add(companyDTO);
@@ -164,7 +169,6 @@ public class CompanyController extends PageableEntityController<Company> {
 
     //user method
     public List<CompanyDTO> getCompaniesList() {
-        List<CompanyDTO> companyDTOs = new ArrayList<>();
         for (Company c : getEntities()) {
             CompanyDTO companyDTO = new CompanyDTO(c);
             companyDTOs.add(companyDTO);
@@ -176,7 +180,7 @@ public class CompanyController extends PageableEntityController<Company> {
         Event newEvent = new Event(regEvent);
         Address newAddress = new Address(regAddress);
         Company oldCompany = loadEntity(companyId);
-        if (!eventService.getEventsListByTitleFilter(newEvent.getTitle(), getLimit(), getOffset()).isEmpty()) {
+        if (!eventService.getEventsListByStringFilter(newEvent.getTitle(), getLimit(), getOffset()).isEmpty()) {
             throw new EntityAlreadyExistsException("This event already exists in our database.");
         }
         Address oldAddress = addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber());
@@ -317,7 +321,6 @@ public class CompanyController extends PageableEntityController<Company> {
 
     public List<CompanyDTO> getInactiveCompaniesList(Integer n) {
         if (null != n) {
-            List<CompanyDTO> companyDTOs = new ArrayList<>();
             for (Company c : companyService.getInactiveCompaniesList(n, getLimit(), getOffset())) {
                 CompanyDTO companyDTO = new CompanyDTO(c);
                 companyDTOs.add(companyDTO);
@@ -328,7 +331,6 @@ public class CompanyController extends PageableEntityController<Company> {
     }
 
     public List<CompanyDTO> getCompaniesListByNameFilter(String name) {
-        List<CompanyDTO> companyDTOs = new ArrayList<>();
         for (Company c : companyService.getCompaniesListByNameFilter(name, getLimit(), getOffset())) {
             CompanyDTO companyDTO = new CompanyDTO(c);
             companyDTOs.add(companyDTO);
@@ -337,7 +339,6 @@ public class CompanyController extends PageableEntityController<Company> {
     }
 
     public List<CompanyDTO> getCompaniesListByTaxFilter(String taxNumber) {
-        List<CompanyDTO> companyDTOs = new ArrayList<>();
         for (Company c : companyService.getCompaniesListByNameFilter(taxNumber, getLimit(), getOffset())) {
             CompanyDTO companyDTO = new CompanyDTO(c);
             companyDTOs.add(companyDTO);

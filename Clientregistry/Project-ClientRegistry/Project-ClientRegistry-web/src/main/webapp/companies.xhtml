@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-     xmlns:h="http://xmlns.jcp.org/jsf/html"
-     xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry/list"
-     xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry/list"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <f:metadata>
         <f:viewParam name="offset" value="#{companyController.offset}" />
     </f:metadata>
-   
-   <h:head>
+
+    <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -79,18 +79,24 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="input-group">
-                                <input type="text" class="form-control" aria-label="..."/>
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Everywhere <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Events</a></li>
-                                        <li><a href="#">Users</a></li>
-                                        <li><a href="#">Companies</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Everywhere</a></li>
-                                    </ul>
-                                    <button type="button" class="btn btn-color-sign-in">Search</button>
-                                </div><!-- /btn-group -->
+                                <h:form>
+                                    <h:inputText id="search" value="#{companyBean.searchString}" class="form-control"/>
+                                    <div class="input-group-btn">
+                                        <!--                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Everywhere <span class="caret"></span></button>
+                                                                                <ul class="dropdown-menu">
+                                                                                    <li><a href="#">Events</a></li>
+                                                                                    <li><a href="#">Users</a></li>
+                                                                                    <li><a href="#">Companies</a></li>
+                                                                                    <li role="separator" class="divider"></li>
+                                                                                    <li><a href="#">Everywhere</a></li>
+                                                                                </ul>-->
+                                        <!--<button type="button" class="btn btn-color-sign-in">Search</button>-->
+                                        <h:commandButton class="btn btn-color-sign-in" value="Search" action="#{companyController.getCompaniesListByNameFilter(companyBean.searchString)}">
+                                            <f:ajax execute="search" render="output"/>
+                                        </h:commandButton>
+                                        <h2><h:outputText id="output" value="#{companyController.companyDTOs}" /></h2>
+                                    </div><!-- /btn-group -->
+                                </h:form>
                             </div><!-- /input-group -->
                         </div><!-- /.col-lg-6 -->
                     </div><!-- /.row -->

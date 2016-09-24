@@ -32,6 +32,8 @@ public class CompanyBean {
 
     @NotNull
     private String logo = DEFAULT_LOGO;
+    
+    private String searchString;
 
     public CompanyBean() {
         // Default constructor
@@ -73,6 +75,14 @@ public class CompanyBean {
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = searchString;
     }
 
     @Override
