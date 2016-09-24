@@ -2,6 +2,8 @@ package com.codingmentorteam3.controllers;
 
 import com.codingmentorteam3.beans.AddressBean;
 import com.codingmentorteam3.beans.CompanyBean;
+import com.codingmentorteam3.beans.ContactPersonBean;
+import com.codingmentorteam3.beans.EventBean;
 import com.codingmentorteam3.beans.ProjectBean;
 import com.codingmentorteam3.controllers.general.PageableEntityController;
 import com.codingmentorteam3.dtos.AddressDTO;
@@ -17,10 +19,12 @@ import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.Project;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
+import com.codingmentorteam3.exceptions.query.EmptyListException;
 import com.codingmentorteam3.exceptions.query.EntityAlreadyExistsException;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.AddressService;
 import com.codingmentorteam3.services.CompanyService;
+import com.codingmentorteam3.services.ContactPersonService;
 import com.codingmentorteam3.services.EventService;
 import com.codingmentorteam3.services.ProjectService;
 import java.util.ArrayList;
@@ -49,6 +53,9 @@ public class CompanyController extends PageableEntityController<Company> {
 
     @Inject
     private ProjectService projectService;
+    
+    @Inject
+    private ContactPersonService contactPersonService;
 
     //user method/admin accepted MUKODIK
     public String createCompany(CompanyBean regCompany, AddressBean regAddress) {
@@ -60,13 +67,13 @@ public class CompanyController extends PageableEntityController<Company> {
         Address oldAddress = addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber());
         if (null != oldAddress) {
             newCompany.setAddress(oldAddress);
-            companyService.createCompany(newCompany);
-            return getListPage();
+            setEntity(newCompany);
+            return saveEntity();
         }
         addressService.createAddress(newAddress);
         newCompany.setAddress(newAddress);
-        companyService.createCompany(newCompany);
-        return getListPage();
+        setEntity(newCompany);
+        return saveEntity();
     }
 
 //    //user method EGYENLORE MARAD HATHA SZUKSEG LESZ RA DTOS
@@ -78,20 +85,21 @@ public class CompanyController extends PageableEntityController<Company> {
 //        throw new BadRequestException(getNoEntityMessage());
 //    }
     //user method FASZA
-    public CompanyDTO updateCompanyPersonalInfos(CompanyBean updateCompany) {
-        Company oldCompany = getEntity();
+    public CompanyDTO updateCompanyPersonalInfos(CompanyBean updateCompany, Long companyId) {
+        Company oldCompany = loadEntity(companyId);
         if (null != oldCompany) {
             Company currentCompany = new Company(updateCompany);
             oldCompany = modifiedCheckerCompany(oldCompany, currentCompany);
             setEntity(oldCompany);
+            saveEntity();
             return new CompanyDTO(oldCompany);
         }
         throw new BadRequestException(getNoEntityMessage());
     }
 
     //user method EGYENLORE FASZA
-    public AddressDTO updateCompanyAddress(AddressBean updateAddress) {
-        Company currentCompany = getEntity();
+    public AddressDTO updateCompanyAddress(AddressBean updateAddress, Long companyId) {
+        Company currentCompany = loadEntity(companyId);
         if (null != currentCompany) {
             Address currentAddress = addressService.getAddressByAllParameters(updateAddress.getCity(), updateAddress.getCountry(), updateAddress.getZipCode(), updateAddress.getStreet(), updateAddress.getHouseNumber());
             Address oldAddress = currentCompany.getAddress();
@@ -99,14 +107,23 @@ public class CompanyController extends PageableEntityController<Company> {
                 return new AddressDTO(oldAddress);
             }
             if (null == currentAddress) {
-                Address newAddress = new Address(updateAddress);
-                addressService.createAddress(newAddress);
-                currentCompany.setAddress(newAddress);
-                setEntity(currentCompany);
-                return new AddressDTO(newAddress);
+                if (oldAddress.getCompanies().size() == 1 && oldAddress.getEvents().isEmpty()) {
+                    Address newAddress = new Address(updateAddress);
+                    newAddress.setId(oldAddress.getId());
+                    addressService.editAddress(newAddress);
+                    return new AddressDTO(newAddress);
+                } else {
+                    Address newAddress = new Address(updateAddress);
+                    addressService.createAddress(newAddress);
+                    currentCompany.setAddress(newAddress);
+                    setEntity(currentCompany);
+                    saveEntity();
+                    return new AddressDTO(newAddress);
+                }
             } else {
                 currentCompany.setAddress(currentAddress);
                 setEntity(currentCompany);
+                saveEntity();
                 return new AddressDTO(currentAddress);
             }
         }
@@ -114,11 +131,12 @@ public class CompanyController extends PageableEntityController<Company> {
     }
 
     //user method
-    public CompanyDTO changeAvatar(String newLogo) {
-        Company currentCompany = getEntity();
+    public CompanyDTO changeLogo(String newLogo, Long companyId) {
+        Company currentCompany = loadEntity(companyId);
         if (null != currentCompany) {
             currentCompany.setLogo(newLogo);
-            companyService.editCompany(currentCompany);
+            setEntity(currentCompany);
+            saveEntity();
             return new CompanyDTO(currentCompany);
         }
         throw new BadRequestException(getNoEntityMessage());
@@ -126,11 +144,14 @@ public class CompanyController extends PageableEntityController<Company> {
 
     //admin method
     public List<CompanyDTO> deleteCompanyById(Long companyId) {
-        Company deleteCompany = companyService.getCompany(companyId);
+        Company deleteCompany = loadEntity(companyId);
         if (null != deleteCompany) {
+            Address deleteAddress = deleteCompany.getAddress();
+            deleteAddress.getCompanies().remove(deleteCompany);
+            addressService.editAddress(deleteAddress);
             companyService.deleteCompany(deleteCompany);
-            if (!isAnyCompanyAndEventUseThisAddress(deleteCompany.getAddress())) {
-                addressService.deleteAddress(deleteCompany.getAddress());
+            if (!isAnyCompanyAndEventUseThisAddress(deleteAddress)) {
+                addressService.deleteAddress(deleteAddress);
             }
             List<CompanyDTO> companyDTOs = new ArrayList<>();
             for (Company c : getEntities()) {
@@ -152,21 +173,88 @@ public class CompanyController extends PageableEntityController<Company> {
         return companyDTOs;
     }
 
-    //user method
-    public List<ProjectDTO> createProject(ProjectBean regProject) {
-        Project newProject = new Project(regProject);
-        Company currentCompany = getEntity();
-        for (Project p : currentCompany.getProjects()) {
-            if (newProject.getName().equals(p.getName()) && newProject.getDescription().equals(p.getDescription())) {
-                throw new EntityAlreadyExistsException("This project already exists in our database.");
+    public List<EventDTO> createEvent(EventBean regEvent, AddressBean regAddress, Long companyId) {
+        Event newEvent = new Event(regEvent);
+        Address newAddress = new Address(regAddress);
+        Company oldCompany = loadEntity(companyId);
+        if (!eventService.getEventsListByTitleFilter(newEvent.getTitle(), getLimit(), getOffset()).isEmpty()) {
+            throw new EntityAlreadyExistsException("This event already exists in our database.");
+        }
+        Address oldAddress = addressService.getAddressByAllParameters(newAddress.getCity(), newAddress.getCountry(), newAddress.getZipCode(), newAddress.getStreet(), newAddress.getHouseNumber());
+        if (null != oldAddress) {
+            newEvent.setAddress(oldAddress);
+            newEvent.setCompany(oldCompany);
+            eventService.createEvent(newEvent);
+            oldCompany.getEvents().add(newEvent);
+            setEntity(oldCompany);
+            saveEntity();
+        } else {
+            addressService.createAddress(newAddress);
+            newEvent.setAddress(newAddress);
+            newEvent.setCompany(oldCompany);
+            eventService.createEvent(newEvent);
+            oldCompany.getEvents().add(newEvent);
+            setEntity(oldCompany);
+            saveEntity();
+        }
+        List<EventDTO> eventDTOs = new ArrayList<>();
+        for (Event e : oldCompany.getEvents()){
+            EventDTO eventDTO = new EventDTO(e);
+            eventDTOs.add(eventDTO);
+        }
+        return eventDTOs;
+    }
+    
+    public List<ContactPersonDTO> addContactPerson(ContactPersonBean regContactPerson, Long companyId) {
+        ContactPerson newContactPerson = new ContactPerson(regContactPerson);
+        Company currentCompany = loadEntity(companyId);
+        for (ContactPerson cp : currentCompany.getContacters()) {
+            if(newContactPerson.getFirstName().equals(cp.getFirstName()) && newContactPerson.getLastName().equals(cp.getLastName())) {
+                throw new EntityAlreadyExistsException("This contact person is already added to this company.");
             }
         }
-        newProject.getCompanies().add(currentCompany);
-        projectService.createProject(newProject);
-        currentCompany.getProjects().add(newProject);
-        companyService.editCompany(currentCompany);
-        List<ProjectDTO> projectDTOs = new ArrayList<>();
+        newContactPerson.setCompany(currentCompany);
+        contactPersonService.createContactPerson(newContactPerson);
+        currentCompany.getContacters().add(newContactPerson);
+        setEntity(currentCompany);
+        saveEntity();
+        List<ContactPersonDTO> contactPersonDTOs = new ArrayList<>();
+        for (ContactPerson cp : currentCompany.getContacters()) {
+            ContactPersonDTO contactPersonDTO = new ContactPersonDTO(cp);
+            contactPersonDTOs.add(contactPersonDTO);
+        }
+        return contactPersonDTOs;
+    }
+    
+    //user method
+    public List<ProjectDTO> createProject(ProjectBean regProject, Long companyId) {
+        Project newProject = new Project(regProject);
+        Company currentCompany = loadEntity(companyId);
+        boolean haveProject = false;
+        for (Project p : currentCompany.getProjects()) {
+            if (newProject.getName().equals(p.getName()) && newProject.getDescription().equals(p.getDescription())) {
+                throw new EntityAlreadyExistsException("This project is already added to this company.");
+            }
+        }
         for (Project p : projectService.getProjectsList(getLimit(), getOffset())) {
+            if (newProject.getName().equals(p.getName()) && newProject.getStartDate().equals(p.getStartDate()) && newProject.getDeadline().equals(p.getDeadline())) {
+                newProject.getCompanies().add(currentCompany);
+                projectService.editProject(newProject);
+                currentCompany.getProjects().add(newProject);
+                setEntity(currentCompany);
+                saveEntity();
+                haveProject = true;
+            }
+        }
+        if(!haveProject) {
+            newProject.getCompanies().add(currentCompany);
+            projectService.createProject(newProject);
+            currentCompany.getProjects().add(newProject);
+            setEntity(currentCompany);
+            saveEntity();
+        }
+        List<ProjectDTO> projectDTOs = new ArrayList<>();
+        for (Project p : currentCompany.getProjects()) {
             ProjectDTO projectDTO = new ProjectDTO(p);
             projectDTOs.add(projectDTO);
         }
@@ -174,8 +262,8 @@ public class CompanyController extends PageableEntityController<Company> {
     }
 
     //user method
-    public List<ProjectDTO> getProjectsListByCompanyId() {
-        Company currentCompany = getEntity();
+    public List<ProjectDTO> getProjectsListByCompanyId(Long companyId) {
+        Company currentCompany = loadEntity(companyId);
         if (null != currentCompany) {
             List<ProjectDTO> projectDTOs = new ArrayList<>();
             for (Project p : companyService.getProjectsListByCompanyId(getEntityId())) {
@@ -188,8 +276,8 @@ public class CompanyController extends PageableEntityController<Company> {
     }
 
     //user method FASZA EDDIG
-    public List<EventDTO> getEventsListByCompanyId() {
-        Company currentCompany = getEntity();
+    public List<EventDTO> getEventsListByCompanyId(Long companyId) {
+        Company currentCompany = loadEntity(companyId);
         if (null != currentCompany) {
             List<EventDTO> eventDTOs = new ArrayList<>();
             for (Event e : companyService.getEventsListByCompanyId(getEntityId())) {
@@ -202,8 +290,8 @@ public class CompanyController extends PageableEntityController<Company> {
     }
 
     //user method
-    public List<ContactPersonDTO> getContactersListByCompanyId() {
-        Company currentCompany = getEntity();
+    public List<ContactPersonDTO> getContactersListByCompanyId(Long companyId) {
+        Company currentCompany = loadEntity(companyId);
         if (null != currentCompany) {
             List<ContactPersonDTO> contactPersonDTOs = new ArrayList<>();
             for (ContactPerson cp : companyService.getContactersListByCompanyId(getEntityId())) {
@@ -215,8 +303,8 @@ public class CompanyController extends PageableEntityController<Company> {
         throw new BadRequestException(getNoEntityMessage());
     }
 
-    public List<NoteDTO> getNotesListByAllEventsByCompanyId() {
-        Company currentCompany = getEntity();
+    public List<NoteDTO> getNotesListByAllEventsByCompanyId(Long companyId) {
+        Company currentCompany = loadEntity(companyId);
         if (null != currentCompany) {
             List<NoteDTO> noteDTOs = new ArrayList<>();
             for (Note n : companyService.getNotesListByAllEventsByCompanyId(getEntityId(), getLimit(), getOffset())) {
