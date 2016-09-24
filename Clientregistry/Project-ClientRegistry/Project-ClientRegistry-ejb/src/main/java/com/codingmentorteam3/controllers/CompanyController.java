@@ -19,6 +19,7 @@ import com.codingmentorteam3.entities.Event;
 import com.codingmentorteam3.entities.Note;
 import com.codingmentorteam3.entities.Project;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
+import com.codingmentorteam3.exceptions.query.EmptyListException;
 import com.codingmentorteam3.exceptions.query.EntityAlreadyExistsException;
 import com.codingmentorteam3.interceptors.BeanValidation;
 import com.codingmentorteam3.services.AddressService;
@@ -52,7 +53,7 @@ public class CompanyController extends PageableEntityController<Company> {
 
     @Inject
     private ProjectService projectService;
-
+    
     @Inject
     private ContactPersonService contactPersonService;
 
@@ -197,7 +198,7 @@ public class CompanyController extends PageableEntityController<Company> {
             saveEntity();
         }
         List<EventDTO> eventDTOs = new ArrayList<>();
-        for (Event e : oldCompany.getEvents()) {
+        for (Event e : oldCompany.getEvents()){
             EventDTO eventDTO = new EventDTO(e);
             eventDTOs.add(eventDTO);
         }
@@ -233,6 +234,16 @@ public class CompanyController extends PageableEntityController<Company> {
         for (Project p : currentCompany.getProjects()) {
             if (newProject.getName().equals(p.getName()) && newProject.getDescription().equals(p.getDescription())) {
                 throw new EntityAlreadyExistsException("This project is already added to this company.");
+            }
+        }
+        for (Project p : projectService.getProjectsList(getLimit(), getOffset())) {
+            if (newProject.getName().equals(p.getName()) && newProject.getStartDate().equals(p.getStartDate()) && newProject.getDeadline().equals(p.getDeadline())) {
+                newProject.getCompanies().add(currentCompany);
+                projectService.editProject(newProject);
+                currentCompany.getProjects().add(newProject);
+                setEntity(currentCompany);
+                saveEntity();
+                haveProject = true;
             }
         }
         for (Project p : projectService.getProjectsList(getLimit(), getOffset())) {

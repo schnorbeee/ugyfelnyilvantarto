@@ -250,3 +250,13 @@ a:active {
     display: inline-block;
     visibility: visible;
 }
+
+.col-sm-4 {
+    padding: 0;
+}
+
+.col-sm-4 input {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}

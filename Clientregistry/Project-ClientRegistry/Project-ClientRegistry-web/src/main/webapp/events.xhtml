@@ -31,7 +31,7 @@
             -->
             <div class="jumbotron">
                 <div class="visitors-box pull-right">
-                    Visitors today: <span id="visitors-today">#{visitorCountBean.sessionCount}</span>
+                    Visitors today: <span id="visitors-today">#{visitorCountController.countVisitorsPerDay}</span>
                 </div>
                 <h1>ClientRegistry</h1>
             </div>
@@ -55,7 +55,7 @@
                     <h:link outcome="composite/createProject.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage projects"/>
                     <hr/>
                     <h:link outcome="manageusers.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage users"/>
-                    <h:link outcome="composite/createCompany.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage companies"/>
+                    <h:link outcome="manage/manageCompanies.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage companies"/>
                     <hr/>
                     <h:link outcome="login.xhtml" class="btn btn-info center-block btn-color-register" value="Logout"/>
                 </div>

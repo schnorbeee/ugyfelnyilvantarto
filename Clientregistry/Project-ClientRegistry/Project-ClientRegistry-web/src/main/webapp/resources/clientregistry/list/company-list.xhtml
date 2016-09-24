@@ -18,8 +18,6 @@
 
     <composite:implementation>
 
-        <h:link value="Homepage" outcome="index.xhtml"></h:link> <br/>
-        <h:link value="Create new #{cc.attrs.entityType}" outcome="#{cc.attrs.newItemOutcome}"></h:link>
         <c:choose>
             <c:when test="#{cc.attrs.isEmpty}">
                 <br/>
@@ -35,9 +33,11 @@
                     </h:link>
                 </c:if>
 
-                <h:link value="Next #{cc.attrs.limit}" outcome="#{cc.attrs.paginationOutcome}">
-                    <f:param name="offset" value="#{cc.attrs.offset + cc.attrs.limit}" />
-                </h:link>
+                <c:if test="${!cc.attrs.isEmpty}">
+                    <h:link value="Next #{cc.attrs.limit}" outcome="#{cc.attrs.paginationOutcome}">
+                        <f:param name="offset" value="#{cc.attrs.offset + cc.attrs.limit}" />
+                    </h:link>
+                </c:if>
 
             </c:otherwise>
         </c:choose>
