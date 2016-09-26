@@ -149,6 +149,7 @@ public class CompanyController extends PageableEntityController<Company> {
 
     //admin method
     public List<CompanyDTO> deleteCompanyById(Long companyId) {
+        companyDTOs.clear();
         Company deleteCompany = loadEntity(companyId);
         if (null != deleteCompany) {
             Address deleteAddress = deleteCompany.getAddress();
@@ -169,6 +170,7 @@ public class CompanyController extends PageableEntityController<Company> {
 
     //user method
     public List<CompanyDTO> getCompaniesList() {
+        companyDTOs.clear();
         for (Company c : getEntities()) {
             CompanyDTO companyDTO = new CompanyDTO(c);
             companyDTOs.add(companyDTO);
@@ -320,6 +322,7 @@ public class CompanyController extends PageableEntityController<Company> {
     }
 
     public List<CompanyDTO> getInactiveCompaniesList(Integer n) {
+        companyDTOs.clear();
         if (null != n) {
             for (Company c : companyService.getInactiveCompaniesList(n, getLimit(), getOffset())) {
                 CompanyDTO companyDTO = new CompanyDTO(c);
@@ -331,6 +334,7 @@ public class CompanyController extends PageableEntityController<Company> {
     }
 
     public List<CompanyDTO> getCompaniesListByNameFilter(String name) {
+        companyDTOs.clear();
         for (Company c : companyService.getCompaniesListByNameFilter(name, getLimit(), getOffset())) {
             CompanyDTO companyDTO = new CompanyDTO(c);
             companyDTOs.add(companyDTO);
@@ -339,6 +343,7 @@ public class CompanyController extends PageableEntityController<Company> {
     }
 
     public List<CompanyDTO> getCompaniesListByTaxFilter(String taxNumber) {
+        companyDTOs.clear();
         for (Company c : companyService.getCompaniesListByNameFilter(taxNumber, getLimit(), getOffset())) {
             CompanyDTO companyDTO = new CompanyDTO(c);
             companyDTOs.add(companyDTO);

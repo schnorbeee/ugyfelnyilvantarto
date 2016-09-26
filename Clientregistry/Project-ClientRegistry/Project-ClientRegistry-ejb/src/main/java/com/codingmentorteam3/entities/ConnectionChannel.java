@@ -33,7 +33,7 @@ public class ConnectionChannel implements Serializable {
     @Column(nullable = false)
     private ConnectionChannelType type;
 
-    @Column(name = "connection_value", nullable = false)
+    @Column(name = "connection_value", nullable = false, unique = true)
     private String value;
 
     @ManyToOne(targetEntity = Person.class)

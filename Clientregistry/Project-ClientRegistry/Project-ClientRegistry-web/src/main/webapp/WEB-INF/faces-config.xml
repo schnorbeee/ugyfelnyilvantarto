@@ -5,7 +5,7 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     
     <navigation-rule>
-        <from-view-id>/view/company.xhtml</from-view-id>
+        <from-view-id>/single-view/company.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>projects</from-outcome>
             <to-view-id>/view/company.xhtml</to-view-id>
@@ -29,6 +29,18 @@
         <navigation-case>
             <from-outcome>view-contact-person</from-outcome>
             <to-view-id>/view/contact-person.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>create-project</from-outcome>
+            <to-view-id>/composite/createProject.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>create-event</from-outcome>
+            <to-view-id>/composite/createEvent.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>add-contact-person</from-outcome>
+            <to-view-id>/composite/addContactPerson.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
