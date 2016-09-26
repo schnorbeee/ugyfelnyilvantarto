@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:o="http://omnifaces.org/ui"
       xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry"
       xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
     
@@ -12,13 +11,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
-        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
         <style>
         </style>
 
-        <script rel="script" type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
-        <script rel="script" type="text/javascript" src="../js/script.js"></script>
+        <script rel="script" type="text/javascript" src="../../js/jquery-2.2.3.min.js"></script>
+        <script rel="script" type="text/javascript" src="../../js/script.js"></script>
 
         <title>Edit profile</title>
     </h:head>
@@ -125,7 +124,7 @@
                                             <a href="myprofile.html" class="btn btn-primary center-block btn-color-register">Cancel</a>
                                         </div>
                                         <div class="col-sm-4 col-sm-offset-4">
-                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Save" action="#{userController.changePassword(oldPassword, user)}"/>
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Save" action="#{userController.updateUserPassword(user, oldPassword, entityId)}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -151,7 +150,7 @@
                             offset="#{connectionChannelController.offset}" 
                             noEntityMessage="#{connectionChannelController.noEntityMessage}">
 
-                            <h:dataTable value="#{personController.connectionChannels}" var="cd">
+                            <h:dataTable value="#{personController.getConnectionChannels(entityId)}" var="cd">
                                 <h:column>    				
                                     <f:facet name="header">Type</f:facet>    				
                                     #{connectionChannel.type}
@@ -176,71 +175,6 @@
 
                         </clientregistry:connection-channel-list>
                     </div>
-
-
-
-                    <!--                <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Type</th>
-                                                <th>Link</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
-                                                <td>Email</td>
-                                                <td><a href="mailto:">email@email.com</a></td>
-                                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fa fa-phone-square" aria-hidden="true"></i></td>
-                                                <td>Telephone</td>
-                                                <td><a href="tel:">+36 20 123 4567</a></td>
-                                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                                <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fa fa-facebook-square" aria-hidden="true"></i></td>
-                                                <td>Facebook</td>
-                                                <td><a href="facebook.com/">/face.book.name</a></td>
-                                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                                <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fa fa-twitter" aria-hidden="true"></i></td>
-                                                <td>Twitter</td>
-                                                <td><a href="twitter.com/">/twitter.name</a></td>
-                                                <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                                <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="" aria-hidden="true"></i></td>
-                                                <td>
-                                                    <select>
-                                                        <option value="Email">Email</option>
-                                                        <option value="Telephone">Telephone</option>
-                                                        <option value="Facebook">Facebook</option>
-                                                        <option value="Twitter">Twitter</option>
-                                                        <option value="LinkedIn">LinkedIn</option>
-                                                        <option value="Youtube">Youtube</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <input type="url" class="form-control" id="new-ct" placeholder="connection link">
-                                                </td>
-                                                <td></td>
-                                                <td><a href="#"><i class="fa fa-check" aria-hidden="true"></i></a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    
-                                    END OF EDIT CONNECTION CHANNELS
-                    -->
 
                 </div>
             </div>

@@ -17,12 +17,12 @@
             <form-error-page>/error.html</form-error-page>
         </form-login-config>
     </login-config>
-    <security-role>
+<!--    <security-role>
         <role-name>USER</role-name>
     </security-role>
-<!--    <security-role>
+        <security-role>
         <role-name>MANAGER</role-name>
-    </security-role>-->
+    </security-role>
     <security-role>
         <role-name>ADMIN</role-name>
     </security-role>
@@ -50,7 +50,7 @@
             <role-name>USER</role-name>
         </auth-constraint>
     </security-constraint>
-<!--    <security-constraint>
+        <security-constraint>
         <web-resource-collection>
             <web-resource-name>Admin manager user</web-resource-name>
             <description/>

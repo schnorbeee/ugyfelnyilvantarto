@@ -44,7 +44,7 @@ public class CompanyBean {
         this.address = address;
         this.taxNumber = taxNumber;
     }
-
+    
     public String getName() {
         return name;
     }
