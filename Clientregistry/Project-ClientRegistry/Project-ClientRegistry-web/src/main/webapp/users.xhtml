@@ -2,8 +2,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
-    
+      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component"
+      xmlns:clientregistry-list="http://xmlns.jcp.org/jsf/composite/clientregistry/list"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -48,7 +50,48 @@
                 MAIN CONTENT
                 -->
                 <div class="col-xs-8">
-                    <h1>users.xhtml</h1>
+                    <div class="btn-group btn-group-full-size">
+                        <a href="home.xhtml" class="btn btn-default btn-color-default btn-width-fourth">Events</a>
+                        <a href="users.xhtml" class="btn btn-default btn-color-default btn-width-fourth active">Users</a>
+                        <a href="companies.xhtml" class="btn btn-default btn-color-default btn-width-fourth">Companies</a>
+                        <a href="projects.xhtml" class="btn btn-default btn-color-default btn-width-fourth">Projects</a>
+                    </div>
+
+                    <clientregistry-list:user-list newItemOutcome="#{userController.newItemOutcome}" 
+                                                   paginationOutcome="users"
+                                                   entityType="User" 
+                                                   isEmpty="#{empty userController.entities}"
+                                                   limit="#{userController.limit}" 
+                                                   offset="#{userController.offset}" 
+                                                   noEntityMessage="#{userController.noEntityMessage}">
+                        
+                        <div class="row">
+                            <h:dataTable value="#{userController.usersList}" var="userDTO" class="table table-bordered table-striped">
+                                <h:column>
+                                    <f:facet name="header">Avatar</f:facet>
+                                        #{userDTO.avatar}
+                                </h:column>
+                                <h:column>    				
+                                    <f:facet name="header">Username</f:facet>
+                                    <h:link value="#{userDTO.username}" outcome="company">
+                                        <f:param name="entityId" value="#{userDTO.id}"/>
+                                    </h:link>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Name</f:facet>
+                                    <h:link value="#{userDTO.firstName} #{userDTO.lastName}" outcome="user">
+                                        <f:param name="entityId" value="#{userDTO.id}"/>
+                                    </h:link>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Rank</f:facet>
+                                        #{userDTO.position}
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                        
+                    </clientregistry-list:user-list>
+
                 </div>
                 <!--
                 END OF MAIN CONTENT
@@ -62,7 +105,7 @@
             <!--
             END OF FOOTER
             -->
-            
+
         </div>
         <!--
         END OF MAIN CONTAINER
