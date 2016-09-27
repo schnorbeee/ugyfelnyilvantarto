@@ -58,28 +58,52 @@
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="projectName" value="Project name:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="projectName" value="#{project.name}" class="form-control" required="true" label="Project name" requiredMessage="Name required"/>
+                                        <h:inputText id="projectName" value="#{projectBean.name}" class="form-control" required="true" label="Project name" requiredMessage="Name required"/>
                                         <h:message id="projectNameMessage" for="projectName" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="projectDescription" value="Description:"/>
                                     <div class="col-sm-8">
-                                        <h:inputTextarea cols="40" rows="5" id="projectDescription" value="#{project.description}" class="form-control" required="true" label="Project description" requiredMessage="Description required"/>
+                                        <h:inputTextarea cols="40" rows="5" id="projectDescription" value="#{projectBean.description}" class="form-control" required="true" label="Project description" requiredMessage="Description required"/>
                                         <h:message id="projectDescriptionMessage" for="projectDescription" style="color:red"/>
                                     </div>
                                 </div>
+<!--                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="projectStartDate" value="Start date:"/>
+                                    <div class="col-sm-8">
+                                        <div class="input-group date" id='datetimepicker1'>
+                                            <h:inputText id="projectStartDate" class="form-control" value="#{projectBean.startDate}" styleClass="datepicker" required="true" label="Start date" requiredMessage="Start date required">
+                                                <f:convertDateTime pattern="yyyy-mm-dd"/>
+                                            </h:inputText>
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        $(".datepicker").datepicker({
+                                            showOn: "button",
+                                            buttonImage: "images/calendar.gif",
+                                            buttonImageOnly: true
+                                        });
+                                    </script>
+                                </div>-->
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="projectStartDate" value="Start date:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="projectStartDate" value="#{project.startDate}" class="form-control" required="true" label="Start date" requiredMessage="Start date required"/>
+                                        <h:inputText id="projectStartDate" value="#{projectBean.startDate}" class="form-control" required="true" label="Start date" requiredMessage="Start date required">
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                        </h:inputText>
                                         <h:message id="projectStartDateMessage" for="projectStartDate" style="color:red"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel class="control-label col-sm-4" for="projectDeadline" value="Deadline:"/>
                                     <div class="col-sm-8">
-                                        <h:inputText id="projectDeadline" value="#{project.deadline}" class="form-control" required="true" label="Deadline" requiredMessage="Deadline required"/>
+                                        <h:inputText id="projectDeadline" value="#{projectBean.deadline}" class="form-control" required="true" label="Deadline" requiredMessage="Deadline required">
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                        </h:inputText>
                                         <h:message id="projectDeadlineMessage" for="projectDeadline" style="color:red"/>
                                     </div>
                                 </div>
@@ -88,7 +112,7 @@
                                     <h:outputLabel class="control-label col-sm-4" for="statusType" value="Status:"/>
                                     <div class="col-sm-8">
                                         <o:importConstants type="com.codingmentorteam3.enums.StatusType"/>
-                                        <h:selectOneMenu value="#{project.status}" >
+                                        <h:selectOneMenu value="#{projectBean.status}" >
                                             <f:selectItems value="#{StatusType}" />
                                         </h:selectOneMenu>
                                     </div>
@@ -96,7 +120,7 @@
                                 <div class="row">
                                     <div class="col-sm-9">
                                         <div class="col-sm-4 col-sm-offset-8">
-                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Create project" action="#{projectController.createProject(project, companyId)}"/>
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Create project" action="#{companyController.createProject(projectBean, companyId)}"/>
                                         </div>
                                     </div>
                                 </div>

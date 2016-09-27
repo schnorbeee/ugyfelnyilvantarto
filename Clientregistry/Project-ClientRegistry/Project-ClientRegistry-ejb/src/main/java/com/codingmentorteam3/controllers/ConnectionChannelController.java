@@ -38,7 +38,7 @@ public class ConnectionChannelController extends PageableEntityController<Connec
             saveEntity();
             return new ConnectionChannelDTO(currentConnectionChannel);
         }
-        throw new BadRequestException("No connection channel found in database!");
+        throw new BadRequestException(getNoEntityMessage());
     }
 
     public List<ConnectionChannelDTO> deleteConnectionChannelById(Long connectionChannelId) {
@@ -52,7 +52,7 @@ public class ConnectionChannelController extends PageableEntityController<Connec
             }
             return connectionChannelDTOs;
         }
-        throw new BadRequestException("No connection channel found in database!");
+        throw new BadRequestException(getNoEntityMessage());
     }
 
     @Override

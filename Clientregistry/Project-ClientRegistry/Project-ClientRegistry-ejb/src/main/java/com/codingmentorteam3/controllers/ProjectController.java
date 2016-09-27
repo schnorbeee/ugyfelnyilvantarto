@@ -182,10 +182,10 @@ public class ProjectController extends PageableEntityController<Project> {
     }
 
     public Project modifiedCheckerProject(Project oldProject, Project currentProject) {
-        if (!currentProject.getName().equals("") || !currentProject.getName().equals(oldProject.getName())) {
+        if (!"".equals(currentProject.getName()) || !currentProject.getName().equals(oldProject.getName())) {
             oldProject.setName(currentProject.getName());
         }
-        if (!currentProject.getDescription().equals("") || !currentProject.getDescription().equals(oldProject.getDescription())) {
+        if (!"".equals(currentProject.getDescription()) || !currentProject.getDescription().equals(oldProject.getDescription())) {
             oldProject.setDescription(currentProject.getDescription());
         }
         if (!currentProject.getStatus().equals(oldProject.getStatus())) {

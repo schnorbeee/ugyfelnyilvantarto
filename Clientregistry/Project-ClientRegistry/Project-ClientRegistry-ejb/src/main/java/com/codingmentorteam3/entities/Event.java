@@ -49,11 +49,11 @@ public class Event implements Serializable {
     @Column(nullable = false, length = 30, unique = true)
     private String title;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "start_date", nullable = false)
     private Date startDate;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_date")
     private Date endDate;
 

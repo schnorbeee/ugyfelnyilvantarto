@@ -9,7 +9,7 @@ import java.util.List;
  */
 public abstract class PageableEntityController<T> implements JSFController {
 
-    private final static Integer DEFAULT_LIMIT = 10;
+    private static final Integer DEFAULT_LIMIT = 10;
     
     private Integer limit = DEFAULT_LIMIT;
     

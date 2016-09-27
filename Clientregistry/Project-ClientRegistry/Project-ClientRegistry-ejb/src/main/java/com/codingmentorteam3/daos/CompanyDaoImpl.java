@@ -16,6 +16,8 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class CompanyDaoImpl extends AbstractDao<Company> {
 
+    private static final String COMPANY_LIST = "company.list";
+    
     public CompanyDaoImpl() {
         super(Company.class);
     }
@@ -28,7 +30,7 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
             query.setMaxResults(limit);
             return query.getResultList();
         }
-        TypedQuery<Company> query = em.createNamedQuery("company.list", Company.class);
+        TypedQuery<Company> query = em.createNamedQuery(COMPANY_LIST, Company.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
@@ -42,21 +44,21 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
             query.setMaxResults(limit);
             return query.getResultList();
         }
-        TypedQuery<Company> query = em.createNamedQuery("company.list", Company.class);
+        TypedQuery<Company> query = em.createNamedQuery(COMPANY_LIST, Company.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
     }
 
     public List<Company> getCompaniesList(int limit, int offset) {
-        TypedQuery<Company> query = em.createNamedQuery("company.list", Company.class);
+        TypedQuery<Company> query = em.createNamedQuery(COMPANY_LIST, Company.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
     }
 
     public List<Company> getCompaniesListWithoutLimit() {
-        TypedQuery<Company> query = em.createNamedQuery("company.list", Company.class);
+        TypedQuery<Company> query = em.createNamedQuery(COMPANY_LIST, Company.class);
         return query.getResultList();
     }
 

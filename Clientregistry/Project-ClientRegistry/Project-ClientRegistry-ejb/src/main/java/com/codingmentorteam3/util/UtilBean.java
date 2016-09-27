@@ -11,6 +11,10 @@ import javax.ejb.Stateless;
 @Stateless
 public class UtilBean {
 
+    public UtilBean() {
+        //Default constructor
+    }
+    
     public String sha256coding(String str) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(str.getBytes());

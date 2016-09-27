@@ -15,6 +15,8 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class EventDaoImpl extends AbstractDao<Event> {
 
+    private static final String EVENT_LIST = "event.list";
+    
     public EventDaoImpl() {
         super(Event.class);
     }
@@ -26,7 +28,7 @@ public class EventDaoImpl extends AbstractDao<Event> {
             query.setMaxResults(limit);
             return query.getResultList();
         }
-        TypedQuery<Event> query = em.createNamedQuery("event.list", Event.class);
+        TypedQuery<Event> query = em.createNamedQuery(EVENT_LIST, Event.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
@@ -40,21 +42,21 @@ public class EventDaoImpl extends AbstractDao<Event> {
             query.setMaxResults(limit);
             return query.getResultList();
         }
-        TypedQuery<Event> query = em.createNamedQuery("event.list", Event.class);
+        TypedQuery<Event> query = em.createNamedQuery(EVENT_LIST, Event.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
     }
 
     public List<Event> getEventsList(int limit, int offset) {
-        TypedQuery<Event> query = em.createNamedQuery("event.list", Event.class);
+        TypedQuery<Event> query = em.createNamedQuery(EVENT_LIST, Event.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
     }
 
     public List<Event> getEventsListWithoutLimit() {
-        TypedQuery<Event> query = em.createNamedQuery("event.list", Event.class);
+        TypedQuery<Event> query = em.createNamedQuery(EVENT_LIST, Event.class);
         return query.getResultList();
     }
 

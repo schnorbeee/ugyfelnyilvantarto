@@ -19,7 +19,7 @@ public class VisitorCountController {
     private VisitorCountService visitorCountService;
 
     public void setCountVisitorsPerDay() {
-        
+        //meg nem kell
     }
     
     public Integer getCountVisitorsPerDay() {

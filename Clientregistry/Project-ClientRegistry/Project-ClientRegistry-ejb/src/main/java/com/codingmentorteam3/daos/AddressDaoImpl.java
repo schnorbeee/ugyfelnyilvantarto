@@ -1,8 +1,10 @@
 package com.codingmentorteam3.daos;
 
 import com.codingmentorteam3.entities.Address;
-import java.util.List;
+import java.util.function.Supplier;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
 /**
@@ -11,6 +13,9 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class AddressDaoImpl extends AbstractDao<Address> {
+
+    @Inject
+    private Logger logger;
 
     public AddressDaoImpl() {
         super(Address.class);
@@ -26,8 +31,9 @@ public class AddressDaoImpl extends AbstractDao<Address> {
         try {
             return query.getSingleResult();
         } catch (Exception ex) {
+            logger.info(ex.getMessage());
             return null;
         }
     }
-    
+
 }
