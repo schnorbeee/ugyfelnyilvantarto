@@ -29,7 +29,7 @@ public class EventBean {
     @Size(min = 2, max = 30)
     private String title;
 
-    @Size(max = 1500)
+    @Size(max = 500)
     private String description;
 
     @NotNull

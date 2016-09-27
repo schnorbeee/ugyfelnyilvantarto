@@ -1,6 +1,6 @@
 package com.codingmentorteam3.constraints;
 
-import com.codingmentorteam3.dtos.EventDTO;
+import com.codingmentorteam3.beans.EventBean;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
  * @author istvan.mosonyi
  */
 public class ValidStartAndEndDateValidator 
-        implements ConstraintValidator<ValidStartAndEndDate, EventDTO> {
+        implements ConstraintValidator<ValidStartAndEndDate, EventBean> {
 
     @Override
     public void initialize(ValidStartAndEndDate constraintAnnotation) {
@@ -17,9 +17,9 @@ public class ValidStartAndEndDateValidator
     }
 
     @Override
-    public boolean isValid(EventDTO eventDTO, ConstraintValidatorContext context) {
-       if(eventDTO.getEndDate() != null) {
-           return eventDTO.getStartDate().before(eventDTO.getEndDate());
+    public boolean isValid(EventBean eventBean, ConstraintValidatorContext context) {
+       if(eventBean.getEndDate() != null) {
+           return eventBean.getStartDate().before(eventBean.getEndDate());
        }
        return true;
     }

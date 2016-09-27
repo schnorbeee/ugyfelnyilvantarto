@@ -22,7 +22,7 @@ public class NoteBean {
     private String label;
     
     @NotNull
-    @Size(max = 1500)
+    @Size(max = 500)
     private String content;
     
     @NotNull
