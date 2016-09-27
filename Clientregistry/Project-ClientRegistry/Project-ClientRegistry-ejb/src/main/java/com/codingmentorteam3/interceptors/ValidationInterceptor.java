@@ -1,15 +1,15 @@
 package com.codingmentorteam3.interceptors;
 
 import com.codingmentorteam3.annotations.Validate;
+import com.codingmentorteam3.annotations.ValidatorQualifier;
 import java.util.Set;
+import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
 import javax.validation.ValidationException;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
 /**
  *
@@ -19,8 +19,8 @@ import javax.validation.ValidatorFactory;
 @BeanValidation
 public class ValidationInterceptor {
     
-    private static ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-    private static Validator validator = validatorFactory.getValidator();
+    @Inject @ValidatorQualifier
+    private Validator validator;
     
     @AroundInvoke
     public Object validateBeans(InvocationContext ic) throws Exception {

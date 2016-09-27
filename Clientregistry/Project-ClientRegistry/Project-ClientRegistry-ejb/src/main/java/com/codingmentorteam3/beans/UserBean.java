@@ -6,7 +6,6 @@ import com.codingmentorteam3.constraints.Username;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -17,11 +16,9 @@ import javax.validation.constraints.NotNull;
 @ManagedBean(name = "userBean")
 public class UserBean extends PersonBean {
 
-    @NotNull
     @Username
     private String username;
 
-    @NotNull
     @Password
     private String password;
 

@@ -27,7 +27,7 @@ public class ProjectBean {
     private String name;
 
     @NotNull
-    @Size(max = 1500)
+    @Size(max = 500)
     private String description;
 
     @NotNull

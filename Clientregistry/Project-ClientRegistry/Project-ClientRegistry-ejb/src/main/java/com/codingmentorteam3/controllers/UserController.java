@@ -65,20 +65,20 @@ public class UserController extends PageableEntityController<User> {
     private UtilBean utilBean;
 
     //user method
-    public String registrate(UserBean regUser, ConnectionChannelBean regChannal) throws NoSuchAlgorithmException {
+    public String registrate(UserBean regUser, ConnectionChannelBean regChannel) throws NoSuchAlgorithmException {
         User newUser = new User(regUser);
         if (null != userService.getUserByUsername(newUser.getUsername())) {
             throw new EntityAlreadyExistsException("This user already exists in our database.");
         }
-        ConnectionChannelBean newConnectionChannelBean = new ConnectionChannelBean(ConnectionChannelType.EMAIL, regChannal.getValue(), newUser);
-        ConnectionChannel newConnectionChannal = new ConnectionChannel(newConnectionChannelBean);
+        ConnectionChannelBean newConnectionChannelBean = new ConnectionChannelBean(ConnectionChannelType.EMAIL, regChannel.getValue(), newUser);
+        ConnectionChannel newConnectionChannel = new ConnectionChannel(newConnectionChannelBean);
         RoleBean newRoleBean = new RoleBean(newUser);
         Role newRole = new Role(newRoleBean);
         newUser.setPassword(utilBean.sha256coding(newUser.getPassword()));
         newUser.setNumItemPerPage(preSetTableLimitsToNewUser());
         setEntity(newUser);
         saveEntity();
-        connectionChannelService.createConnectionChannel(newConnectionChannal);
+        connectionChannelService.createConnectionChannel(newConnectionChannel);
         roleService.createRole(newRole);
         return getListPage();
     }

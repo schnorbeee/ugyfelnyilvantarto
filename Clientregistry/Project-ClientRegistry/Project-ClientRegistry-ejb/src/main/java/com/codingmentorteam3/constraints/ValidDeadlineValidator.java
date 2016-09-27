@@ -1,6 +1,6 @@
 package com.codingmentorteam3.constraints;
 
-import com.codingmentorteam3.dtos.ProjectDTO;
+import com.codingmentorteam3.beans.ProjectBean;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
  * @author istvan.mosonyi
  */
 public class ValidDeadlineValidator 
-        implements ConstraintValidator<ValidDeadline, ProjectDTO> {
+        implements ConstraintValidator<ValidDeadline, ProjectBean> {
 
     @Override
     public void initialize(ValidDeadline constraintAnnotation) {
@@ -17,9 +17,9 @@ public class ValidDeadlineValidator
     }
 
     @Override
-    public boolean isValid(ProjectDTO projectDTO, ConstraintValidatorContext context) {
-        if(projectDTO.getStartDate() != null && projectDTO.getDeadline() != null) {
-            return projectDTO.getStartDate().before(projectDTO.getDeadline());
+    public boolean isValid(ProjectBean projectBean, ConstraintValidatorContext context) {
+        if(projectBean.getStartDate() != null && projectBean.getDeadline() != null) {
+            return projectBean.getStartDate().before(projectBean.getDeadline());
         }
         return true;
     }
