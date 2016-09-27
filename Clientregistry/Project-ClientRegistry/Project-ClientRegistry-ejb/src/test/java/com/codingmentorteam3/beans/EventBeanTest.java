@@ -42,8 +42,8 @@ public class EventBeanTest {
 
     @Before
     public void setUp() {
-
         Date startDate = new Date();
+        startDate.setTime(startDate.getTime()+1000);
         Date endDate = new Date();
         endDate.setTime(startDate.getTime() + 100000);
 
