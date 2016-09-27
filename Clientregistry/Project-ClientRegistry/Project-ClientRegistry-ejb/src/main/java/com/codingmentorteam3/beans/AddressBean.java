@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 @SessionScoped
 @ManagedBean(name = "addressBean")
 public class AddressBean {
-    
+
     @NotNull 
     @Size(min = 3, max = 30)
     private String country;

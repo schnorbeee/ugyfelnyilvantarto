@@ -1,30 +1,72 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry" 
-      xmlns:f="http://java.sun.com/jsf/core">
-    <f:metadata>
-        <f:viewParam name="entityId" value="#{userController.entityId}" />
-        <f:event type="preRenderView" listener="#{userController.onPreRender}" />
-    </f:metadata>
+      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
+    
     <h:head>
-        <title>Profile</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <style>
+        </style>
+
+        <script rel="script" type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+        <script rel="script" type="text/javascript" src="js/script.js"></script>
+
+        <title>ClientRegistry - Events</title>
     </h:head>
     <h:body>
 
-        <h1>Profile</h1>
+        <!--
+        MAIN CONTAINER
+        -->
+        <div class="container">
 
-        <hr/>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="#{userController.entity.username}"/>
-            </h:panelGrid>
-            <clientregistry:profile-detail person="#{userController.entity}"/>
-        </h:form>
-        <h:link value="Back to List" outcome="user-list" /><br/>
-        <hr/>
-        
+            <!--
+            JUMBOTRON
+            -->
+            <clientregistry-component:header/>
+            <!--
+            END OF JUMBOTRON
+            -->
+
+            <div class="row">
+
+                <!--
+                FIX LEFT-SIDE MENU
+                -->
+                <clientregistry-component:left-side-menu profile="active"/>
+                <!--
+                END OF FIX LEFT-SIDE MENU
+                -->
+
+                <!--
+                MAIN CONTENT
+                -->
+                <div class="col-xs-8">
+                    <h1>profile.xhtml</h1>
+                </div>
+                <!--
+                END OF MAIN CONTENT
+                -->
+            </div>
+
+            <!--
+            FOOTER
+            -->
+            <clientregistry-component:footer/>
+            <!--
+            END OF FOOTER
+            -->
+            
+        </div>
+        <!--
+        END OF MAIN CONTAINER
+        -->
+
     </h:body>
 </html>
-

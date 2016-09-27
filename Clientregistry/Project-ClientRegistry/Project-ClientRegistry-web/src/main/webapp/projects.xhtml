@@ -1,11 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
+    
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <style>
+        </style>
+
+        <script rel="script" type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+        <script rel="script" type="text/javascript" src="js/script.js"></script>
+
+        <title>ClientRegistry - Events</title>
+    </h:head>
+    <h:body>
+
+        <!--
+        MAIN CONTAINER
+        -->
+        <div class="container">
+
+            <!--
+            JUMBOTRON
+            -->
+            <clientregistry-component:header/>
+            <!--
+            END OF JUMBOTRON
+            -->
+
+            <div class="row">
+
+                <!--
+                FIX LEFT-SIDE MENU
+                -->
+                <clientregistry-component:left-side-menu home="active"/>
+                <!--
+                END OF FIX LEFT-SIDE MENU
+                -->
+
+                <!--
+                MAIN CONTENT
+                -->
+                <div class="col-xs-8">
+                    <h1>projects.xhtml</h1>
+                </div>
+                <!--
+                END OF MAIN CONTENT
+                -->
+            </div>
+
+            <!--
+            FOOTER
+            -->
+            <clientregistry-component:footer/>
+            <!--
+            END OF FOOTER
+            -->
+            
+        </div>
+        <!--
+        END OF MAIN CONTAINER
+        -->
+
+    </h:body>
 </html>

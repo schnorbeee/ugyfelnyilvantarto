@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry/detail"
+      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
+
+    <f:metadata>
+        <f:viewParam name="entityId" value="#{companyController.entityId}" />
+        <f:event type="preRenderView" listener="#{companyController.onPreRender}" />
+    </f:metadata>
+    
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+        <style>
+        </style>
+
+        <script rel="script" type="text/javascript" src="../../js/jquery-2.2.3.min.js"></script>
+        <script rel="script" type="text/javascript" src="../../js/script.js"></script>
+
+        <title>Create company</title>
+    </h:head>
+    <h:body>
+
+        <!--
+        MAIN CONTAINER
+        -->
+        <div class="container">
+
+            <!--
+            JUMBOTRON
+            -->
+            <clientregistry-component:header/>
+            <!--
+            END OF JUMBOTRON
+            -->
+
+            <div class="row">
+
+                <!--
+                FIX LEFT-SIDE MENU
+                -->
+                <clientregistry-component:left-side-menu manageCompanies="active"/>
+                <!--
+                END OF FIX LEFT-SIDE MENU
+                -->
+
+                <!--
+                MAIN CONTENT
+                -->
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="btn-group btn-group-full-size">
+                            <h:link outcome="create-company" class="btn btn-default btn-color-default btn-width-half active" value="Create"/>
+                            <h:link outcome="manage-companies" class="btn btn-default btn-color-default btn-width-half" value="Manage"/>
+                        </div>
+                    </div>
+                    <h2>Create company</h2>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <h:form class="form-horizontal">
+                                <div class="form-group">
+                                    <clientregistry:company-detail companyBean="#{companyBean}"/>
+                                </div>
+                                <hr/>
+                                <div class="form-group">
+                                    <clientregistry:address-detail addressBean="#{addressBean}"/>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4 col-sm-offset-8">
+                                        <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Create company" action="#{companyController.createCompany(companyBean, addressBean)}"/>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <!--
+                END OF MAIN CONTENT
+                -->
+
+            </div>
+
+            <!--
+            FOOTER
+            -->
+            <clientregistry-component:footer/>
+            <!--
+            END OF FOOTER
+            -->
+
+        </div>
+        <!--
+        END OF MAIN CONTAINER
+        -->
+
+    </h:body>
+</html>

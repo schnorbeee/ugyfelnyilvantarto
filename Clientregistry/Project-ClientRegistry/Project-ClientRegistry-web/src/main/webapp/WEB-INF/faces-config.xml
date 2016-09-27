@@ -5,90 +5,108 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     
     <navigation-rule>
-        <from-view-id>/composite/createEvent.xhtml</from-view-id>
+        <from-view-id>profile.xhtml</from-view-id>
+        <from-view-id>home.xhtml</from-view-id>
+        <from-view-id>companies.xhtml</from-view-id>
+        <from-view-id>users.xhtml</from-view-id>
+        <from-view-id>projects.xhtml</from-view-id>
+        <from-view-id>myEvents.xhtml</from-view-id>
+        <from-view-id>myInvitations.xhtml</from-view-id>
+        <from-view-id>/single-view/company.xhtml</from-view-id>
+        <from-view-id>/single-view/contactPerson.xhtml</from-view-id>
+        <from-view-id>/single-view/event.xhtml</from-view-id>
+        <from-view-id>/single-view/project.xhtml</from-view-id>
+        <from-view-id>/USER/create/createConnectionChannel.xhtml</from-view-id>
+        <from-view-id>/USER/edit/editConnectionChannel.xhtml</from-view-id>
+        <from-view-id>/USER/edit/editProfile.xhtml</from-view-id>
+        <from-view-id>/MANAGER/create/createCompany.xhtml</from-view-id>
+        <from-view-id>/MANAGER/create/createContactPerson.xhtml</from-view-id>
+        <from-view-id>/MANAGER/create/createEvent.xhtml</from-view-id>
+        <from-view-id>/MANAGER/create/createProject.xhtml</from-view-id>
+        <from-view-id>/MANAGER/edit/editCompany.xhtml</from-view-id>
+        <from-view-id>/MANAGER/edit/editContactPerson.xhtml</from-view-id>
+        <from-view-id>/MANAGER/edit/editEvent.xhtml</from-view-id>
+        <from-view-id>/MANAGER/edit/editProject.xhtml</from-view-id>
+        <from-view-id>/MANAGER/manage/manageCompanies.xhtml</from-view-id>
+        <from-view-id>/MANAGER/manage/manageContactPersons.xhtml</from-view-id>
+        <from-view-id>/MANAGER/manage/manageEvents.xhtml</from-view-id>
+        <from-view-id>/MANAGER/manage/manageProjects.xhtml</from-view-id>
+        <from-view-id>/ADMIN/manage/manageUsers.xhtml</from-view-id>
+        
         <navigation-case>
-            <from-outcome>manage-events</from-outcome>
-            <to-view-id>/manage/manageEvents.xhtml</to-view-id>
+            <from-outcome>home</from-outcome>
+            <to-view-id>home.xhtml</to-view-id>
         </navigation-case>
-        <navigation-case>
-            <from-outcome>create-event</from-outcome>
-            <to-view-id>/composite/createEvent.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-<!--    <navigation-rule>
-        <from-view-id>/composite/createCompany.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>events</from-outcome>
-            <to-view-id>events.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>-->
-    
-<!--    <navigation-rule>
-        <from-view-id>/composite/createCompany.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>companies</from-outcome>
             <to-view-id>companies.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>-->
-    
-    <navigation-rule>
-        <from-view-id>/edit/editCompany.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>events</from-outcome>
-            <to-view-id>events.xhtml</to-view-id>
+            <from-outcome>myInvitations</from-outcome>
+            <to-view-id>myInvitations.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>manage-companies</from-outcome>
-            <to-view-id>/manage/manageCompanies.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>login.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>registration</from-outcome>
-            <to-view-id>registration.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>registration.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>login</from-outcome>
-            <to-view-id>login.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>/composite/createCompany.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>manage-companies</from-outcome>
-            <to-view-id>/manage/manageCompanies.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>/manage/manageCompanies.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>manage-companies</from-outcome>
-            <to-view-id>/manage/manageCompanies.xhtml</to-view-id>
+            <from-outcome>myEvents</from-outcome>
+            <to-view-id>myEvents.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>create-company</from-outcome>
-            <to-view-id>/composite/createCompany.xhtml</to-view-id>
+            <from-outcome>profile</from-outcome>
+            <to-view-id>profile.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>manageEvents</from-outcome>
+            <to-view-id>/MANAGER/manage/manageEvents.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>edit-company</from-outcome>
-            <to-view-id>/edit/editCompany.xhtml</to-view-id>
+            <from-outcome>manageProjects</from-outcome>
+            <to-view-id>/MANAGER/manage/manageProjects.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>events</from-outcome>
-            <to-view-id>events.xhtml</to-view-id>
+            <from-outcome>manageCompanies</from-outcome>
+            <to-view-id>/MANAGER/manage/manageCompanies.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>view-company</from-outcome>
-            <to-view-id>/view/company.xhtml</to-view-id>
+            <from-outcome>manageContactPersons</from-outcome>
+            <to-view-id>/MANAGER/manage/manageContactPersons.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manageUsers</from-outcome>
+            <to-view-id>/ADMIN/manage/manageUsers.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>editEvent</from-outcome>
+            <to-view-id>/MANAGER/edit/editEvent.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editProject</from-outcome>
+            <to-view-id>/MANAGER/edit/editProject.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editCompany</from-outcome>
+            <to-view-id>/MANAGER/edit/editCompany.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editContactPerson</from-outcome>
+            <to-view-id>/MANAGER/edit/editContactPerson.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>createEvent</from-outcome>
+            <to-view-id>/MANAGER/create/createEvent.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>createProject</from-outcome>
+            <to-view-id>/MANAGER/create/createProject.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>createCompany</from-outcome>
+            <to-view-id>/MANAGER/create/createCompany.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>createContactPerson</from-outcome>
+            <to-view-id>/MANAGER/create/createContactPerson.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     

@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:o="http://omnifaces.org/ui">
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
+    
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -29,12 +31,7 @@
             <!--
             JUMBOTRON
             -->
-            <div class="jumbotron">
-                <div class="visitors-box pull-right">
-                    Visitors today: <span id="visitors-today">#{visitorCountBean.sessionCount}</span>
-                </div>
-                <h1>ClientRegistry</h1>
-            </div>
+            <clientregistry-component:header/>
             <!--
             END OF JUMBOTRON
             -->
@@ -44,21 +41,7 @@
                 <!--
                 FIX LEFT-SIDE MENU
                 -->
-                <div class="col-sm-2 col-sm-offset-1">
-                    <img alt="profile-1" class="profile" src="../img/profile.png"/>
-                    <h:link outcome="events.xhtml" class="btn btn-default btn-color-default center-block btn-space active" value="Home"/>
-                    <h:link outcome="myinvitations.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="My invitations"/>
-                    <h:link outcome="myevents.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="My events"/>
-                    <h:link outcome="profile.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="My profile"/>
-                    <hr/>
-                    <h:link outcome="composite/createEvent.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage events"/>
-                    <h:link outcome="composite/createProject.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage projects"/>
-                    <hr/>
-                    <h:link outcome="manageusers.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage users"/>
-                    <h:link outcome="manage/manageCompanies.xhtml" class="btn btn-default btn-color-default center-block btn-space" value="Manage companies"/>
-                    <hr/>
-                    <h:commandButton class="btn btn-info center-block btn-color-register" type="submit" value="Logout" action="#{visitorCountBean.logout()}"/>
-                </div>
+                <clientregistry-component:left-side-menu home="active"/>
                 <!--
                 END OF FIX LEFT-SIDE MENU
                 -->
@@ -147,24 +130,14 @@
                 -->
             </div>
 
-            <footer class="footer panel-footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h1 id="cmt3outer">CodingMentorTeam<span id="cmt3inner">3</span></h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ul class="list-group">
-                                <li class="list-unstyled cmt3list">Norbert Schmelhaus <span class="cmt3email"> <a href="mailto:sch.norbeee@gmail.com">&lt;sch.norbeee@gmail.com&gt;</a></span></li>
-                                <li class="list-unstyled cmt3list">Zsolt Nagy <span class="cmt3email"> <a href="mailto:zsolt023.bme.vik@gmail.com">&lt;zsolt023.bme.vik@gmail.com&gt;</a></span></li>
-                                <li class="list-unstyled cmt3list">Dániel Bicsák <span class="cmt3email"> <a href="mailto:bicsak.dani@gmail.com">&lt;bicsak.dani@gmail.com&gt;</a></span></li>
-                                <li class="list-unstyled cmt3list">István Mosonyi <span class="cmt3email"> <a href="mailto:mosonyi15p@yahoo.com">&lt;mosonyi15p@yahoo.com&gt;</a></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-
+            <!--
+            FOOTER
+            -->
+            <clientregistry-component:footer/>
+            <!--
+            END OF FOOTER
+            -->
+            
         </div>
         <!--
         END OF MAIN CONTAINER

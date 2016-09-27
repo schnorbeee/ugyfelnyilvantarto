@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <composite:interface>
+        <composite:attribute name="home" required="false"/>
+        <composite:attribute name="companies" required="false"/>
+        <composite:attribute name="myInvitations" required="false"/>
+        <composite:attribute name="myEvents" required="false"/>
+        <composite:attribute name="profile" required="false"/>
+        <composite:attribute name="manageEvents" required="false"/>
+        <composite:attribute name="manageProjects" required="false"/>
+        <composite:attribute name="manageCompanies" required="false"/>
+        <composite:attribute name="manageUsers" required="false"/>
+    </composite:interface>
+
+    <composite:implementation>
+        <div class="col-sm-2 col-sm-offset-1">
+            <img alt="profile-1" class="profile" src="../img/profile.png"/>
+            <h:link outcome="home" class="btn btn-default btn-color-default center-block btn-space #{cc.attrs.home}" value="Home"/>
+            <h:link outcome="myInvitations" class="btn btn-default btn-color-default center-block btn-space #{cc.attrs.myInvitations}" value="My invitations"/>
+            <h:link outcome="myEvents" class="btn btn-default btn-color-default center-block btn-space #{cc.attrs.myEvents}" value="My events"/>
+            <h:link outcome="profile" class="btn btn-default btn-color-default center-block btn-space #{cc.attrs.profile}" value="My profile"/>
+            <hr/>
+            <h:link outcome="manageEvents" class="btn btn-default btn-color-default center-block btn-space #{cc.attrs.manageEvents}" value="Manage events"/>
+            <h:link outcome="manageProjects" class="btn btn-default btn-color-default center-block btn-space #{cc.attrs.manageProjects}" value="Manage projects"/>
+            <h:link outcome="manageCompanies" class="btn btn-default btn-color-default center-block btn-space #{cc.attrs.manageCompanies}" value="Manage companies"/>
+            <hr/>
+            <h:link outcome="manageUsers" class="btn btn-default btn-color-default center-block btn-space #{cc.attrs.manageUsers}" value="Manage users"/>
+            <hr/>
+            <h:commandButton class="btn btn-info center-block btn-color-register" type="submit" value="Logout" action="#{visitorCountBean.logout()}"/>
+        </div>
+    </composite:implementation>
+
+</html>
+

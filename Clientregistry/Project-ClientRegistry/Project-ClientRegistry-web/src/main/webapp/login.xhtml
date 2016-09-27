@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
+    
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -20,15 +22,18 @@
     <h:body>
 
         <div class="container">
-            <div class="jumbotron">
-                <div class="visitors-box pull-right">
-                    Visitors today: <span id="visitors-today">#{visitorCountBean.sessionCount}</span>
-                </div>
-                <h1>ClientRegistry</h1>
-            </div>
+            
+            <!--
+            JUMBOTRON
+            -->
+            <clientregistry-component:header/>
+            <!--
+            END OF JUMBOTRON
+            -->
+
             <div class="row">
                 <div class="col-md-3 col-md-offset-2">
-                    <form method="POST" action="events.xhtml">
+                    <form method="POST" action="home.xhtml">
                         <div class="form-group">
                             <h:outputLabel for="j_username" value="Username"/>
                             <input type="text" name="j_username" id="j_username" value="#{user.username}" class="form-control" required="true" label="Username" requiredMessage="Username is required" placeholder="Username"/>
@@ -47,23 +52,13 @@
                 </div>
             </div>
 
-            <footer class="footer panel-footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h1 id="cmt3outer">CodingMentorTeam<span id="cmt3inner">3</span></h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ul class="list-group">
-                                <li class="list-unstyled cmt3list">Norbert Schmelhaus <span class="cmt3email"> <a href="mailto:sch.norbeee@gmail.com">&lt;sch.norbeee@gmail.com&gt;</a></span></li>
-                                <li class="list-unstyled cmt3list">Zsolt Nagy <span class="cmt3email"> <a href="mailto:zsolt023.bme.vik@gmail.com">&lt;zsolt023.bme.vik@gmail.com&gt;</a></span></li>
-                                <li class="list-unstyled cmt3list">Dániel Bicsák <span class="cmt3email"> <a href="mailto:bicsak.dani@gmail.com">&lt;bicsak.dani@gmail.com&gt;</a></span></li>
-                                <li class="list-unstyled cmt3list">István Mosonyi <span class="cmt3email"> <a href="mailto:mosonyi15p@yahoo.com">&lt;mosonyi15p@yahoo.com&gt;</a></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <!--
+            FOOTER
+            -->
+            <clientregistry-component:footer/>
+            <!--
+            END OF FOOTER
+            -->
 
         </div>
 

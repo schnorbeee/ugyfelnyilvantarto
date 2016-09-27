@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
+    
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+        <style>
+        </style>
+
+        <script rel="script" type="text/javascript" src="../../js/jquery-2.2.3.min.js"></script>
+        <script rel="script" type="text/javascript" src="../../js/script.js"></script>
+
+        <title>Create connection channel</title>
+    </h:head>
+    <h:body>
+
+        <!--
+        MAIN CONTAINER
+        -->
+        <div class="container">
+
+            <!--
+            JUMBOTRON
+            -->
+            <clientregistry-component:header/>
+            <!--
+            END OF JUMBOTRON
+            -->
+
+            <div class="row">
+
+                <!--
+                FIX LEFT-SIDE MENU
+                -->
+                <clientregistry-component:left-side-menu profile="active"/>
+                <!--
+                END OF FIX LEFT-SIDE MENU
+                -->
+
+                <!--
+                MAIN CONTENT
+                -->
+                <div class="col-sm-8">
+                    <h2>Create connection channel</h2>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <h:form class="form-horizontal">
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="connectionChannelType" value="Type: "/>
+                                    <div class="col-sm-8">
+                                        <o:importConstants type="com.codingmentorteam3.enums.ConnectionChannelType"/>
+                                        <h:selectOneMenu value="#{connectionChannelBean.type}" >
+                                            <f:selectItems value="#{ConnectionChannelType}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label col-sm-4" for="connectionChannelValue" value="Value: "/>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="connectionChannelValue" value="#{connectionChannelBean.value}" class="form-control" required="true" label="Connection channel value" requiredMessage="Connection channel value required"/>
+                                        <h:message id="connectionChannelValueMessage" for="connectionChannelValue" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <div class="col-sm-4 col-sm-offset-8">
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Save" action="#{connectionChannelController.createNewConnectionChannel(connectionChannelBean, ownerId)}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <!--
+                END OF MAIN CONTENT
+                -->
+
+            </div>
+
+            <!--
+            FOOTER
+            -->
+            <clientregistry-component:footer/>
+            <!--
+            END OF FOOTER
+            -->
+
+        </div>
+        <!--
+        END OF MAIN CONTAINER
+        -->
+
+    </h:body>
+</html>
