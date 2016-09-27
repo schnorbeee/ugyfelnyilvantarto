@@ -14,12 +14,10 @@ import javax.faces.context.FacesContext;
 public class VisitorCountBean {
 
     public void logout() {
-        System.out.println("logout action invoked");
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     }
 
     public int getSessionCount() {
-        System.out.println("session count getter invoked");
         return SessionCounter.getCount();
     }
 

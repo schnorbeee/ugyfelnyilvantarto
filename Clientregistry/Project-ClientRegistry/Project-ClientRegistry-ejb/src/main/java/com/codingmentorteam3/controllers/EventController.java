@@ -77,7 +77,7 @@ public class EventController extends PageableEntityController<Event> {
         throw new BadRequestException(getNoEntityMessage());
     }
 
-    //user method
+    //user method SZEDJED SZEJJEL
     public AddressDTO updateEventAddress(AddressBean updateAddress, Long eventId) {
         Event currentEvent = loadEntity(eventId);
         if (null != currentEvent) {
@@ -195,7 +195,7 @@ public class EventController extends PageableEntityController<Event> {
         }
         throw new BadRequestException(getNoEntityMessage());
     }
-    
+
     public List<EventDTO> getEventsListByStringFilter(String name) {
         List<EventDTO> eventDTOs = new ArrayList<>();
         for (Event e : eventService.getEventsListByStringFilter(name, getLimit(), getOffset())) {
@@ -255,10 +255,10 @@ public class EventController extends PageableEntityController<Event> {
     }
 
     public Event modifiedCheckerEvent(Event oldEvent, Event currentEvent) {
-        if (!currentEvent.getTitle().equals("") || !currentEvent.getTitle().equals(oldEvent.getTitle())) {
+        if (!"".equals(currentEvent.getTitle()) || !currentEvent.getTitle().equals(oldEvent.getTitle())) {
             oldEvent.setTitle(currentEvent.getTitle());
         }
-        if (!currentEvent.getDescription().equals("") || !currentEvent.getDescription().equals(oldEvent.getDescription())) {
+        if (!"".equals(currentEvent.getDescription()) || !currentEvent.getDescription().equals(oldEvent.getDescription())) {
             oldEvent.setDescription(currentEvent.getDescription());
         }
         if (!currentEvent.getType().equals(oldEvent.getType())) {

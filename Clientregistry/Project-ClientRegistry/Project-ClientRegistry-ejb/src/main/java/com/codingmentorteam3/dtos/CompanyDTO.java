@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 public class CompanyDTO {
 
-    public Long id;
+    private Long id;
 
     private String name;
 

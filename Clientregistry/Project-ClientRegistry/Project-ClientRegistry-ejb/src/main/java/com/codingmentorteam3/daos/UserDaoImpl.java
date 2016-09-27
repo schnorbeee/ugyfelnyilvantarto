@@ -6,6 +6,9 @@ import com.codingmentorteam3.entities.Role;
 import com.codingmentorteam3.entities.User;
 import com.codingmentorteam3.exceptions.query.BadRequestException;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
 /**
@@ -13,6 +16,11 @@ import javax.persistence.TypedQuery;
  * @author norbeee sch.norbeee@gmail.com
  */
 public class UserDaoImpl extends AbstractDao<User> {
+
+    private static final String USER_LIST = "user.list";
+    
+    @Inject
+    private Logger logger;
 
     public UserDaoImpl() {
         super(User.class);
@@ -26,7 +34,7 @@ public class UserDaoImpl extends AbstractDao<User> {
             query.setMaxResults(limit);
             return query.getResultList();
         }
-        TypedQuery<User> query = em.createNamedQuery("user.list", User.class);
+        TypedQuery<User> query = em.createNamedQuery(USER_LIST, User.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
@@ -40,14 +48,14 @@ public class UserDaoImpl extends AbstractDao<User> {
             query.setMaxResults(limit);
             return query.getResultList();
         }
-        TypedQuery<User> query = em.createNamedQuery("user.list", User.class);
+        TypedQuery<User> query = em.createNamedQuery(USER_LIST, User.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
     }
 
     public List<User> getUsersList(int limit, int offset) {
-        TypedQuery<User> query = em.createNamedQuery("user.list", User.class);
+        TypedQuery<User> query = em.createNamedQuery(USER_LIST, User.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
@@ -61,6 +69,7 @@ public class UserDaoImpl extends AbstractDao<User> {
             try {
                 return query.getSingleResult();
             } catch (Exception ex) {
+                logger.info(ex.getMessage());
                 return null;
             }
         }

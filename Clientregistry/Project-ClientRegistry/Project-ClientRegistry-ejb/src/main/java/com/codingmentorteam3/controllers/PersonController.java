@@ -1,7 +1,6 @@
 package com.codingmentorteam3.controllers;
 
 import com.codingmentorteam3.dtos.ConnectionChannelDTO;
-import com.codingmentorteam3.dtos.ProjectDTO;
 import com.codingmentorteam3.entities.ConnectionChannel;
 import com.codingmentorteam3.entities.Person;
 import com.codingmentorteam3.exceptions.query.BadRequestException;

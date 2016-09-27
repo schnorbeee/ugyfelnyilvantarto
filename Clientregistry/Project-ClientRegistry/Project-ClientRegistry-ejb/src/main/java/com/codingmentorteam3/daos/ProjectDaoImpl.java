@@ -14,6 +14,8 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class ProjectDaoImpl extends AbstractDao<Project> {
 
+    private static final String PROJECT_LIST = "project.list";
+    
     public ProjectDaoImpl() {
         super(Project.class);
     }
@@ -26,7 +28,7 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
             query.setMaxResults(limit);
             return query.getResultList();
         }
-        TypedQuery<Project> query = em.createNamedQuery("project.list", Project.class);
+        TypedQuery<Project> query = em.createNamedQuery(PROJECT_LIST, Project.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
@@ -40,14 +42,14 @@ public class ProjectDaoImpl extends AbstractDao<Project> {
             query.setMaxResults(limit);
             return query.getResultList();
         }
-        TypedQuery<Project> query = em.createNamedQuery("project.list", Project.class);
+        TypedQuery<Project> query = em.createNamedQuery(PROJECT_LIST, Project.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
     }
 
     public List<Project> getProjectsList(int limit, int offset) {
-        TypedQuery<Project> query = em.createNamedQuery("project.list", Project.class);
+        TypedQuery<Project> query = em.createNamedQuery(PROJECT_LIST, Project.class);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.getResultList();
