@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:o="http://omnifaces.org/ui"
-      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
-    
+      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component"
+      xmlns:clientregistry-list="http://xmlns.jcp.org/jsf/composite/clientregistry/list"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -50,80 +50,48 @@
                 MAIN CONTENT
                 -->
                 <div class="col-xs-8">
-                    <div class="col-xs-12 event-box">
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <img alt="company-logo-1" class="company-logo center-block" src="img/company-logo.png"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <a class="text-center" href="company.html">Company No.1</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <label><a href="event.html">Event title</a></label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Assumenda quas quibusdam tempora! Ab accusamus consectetur
-                                        dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
-                                        Accusantium error esse facilis harum molestias?
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <label>2016.09.01.</label>
-                            </div>
-                            <div class="col-sm-2">
-                                <label>VII. Erzsébet körút 24.</label>
-                            </div>
-                        </div>
+                    <div class="btn-group btn-group-full-size">
+                        <a href="home.xhtml" class="btn btn-default btn-color-default btn-width-fourth active">Events</a>
+                        <a href="users.xhtml" class="btn btn-default btn-color-default btn-width-fourth">Users</a>
+                        <a href="companies.xhtml" class="btn btn-default btn-color-default btn-width-fourth">Companies</a>
+                        <a href="projects.xhtml" class="btn btn-default btn-color-default btn-width-fourth">Projects</a>
                     </div>
-                    <div class="col-xs-12 event-box">
+
+                    <clientregistry-list:event-list newItemOutcome="#{eventController.newItemOutcome}" 
+                                                    paginationOutcome="events"
+                                                    entityType="Event" 
+                                                    isEmpty="#{empty eventController.entities}"
+                                                    limit="#{eventController.limit}" 
+                                                    offset="#{eventController.offset}" 
+                                                    noEntityMessage="#{eventController.noEntityMessage}">
+
                         <div class="row">
-                            <div class="col-sm-2">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <img alt="company-logo-1" class="company-logo center-block" src="img/company-logo.png"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <a class="text-center" href="company.html">Company No.1</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <label><a href="event.html">Event title</a></label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Assumenda quas quibusdam tempora! Ab accusamus consectetur
-                                        dicta dolores eos maxime mollitia nam reiciendis suscipit vitae.
-                                        Accusantium error esse facilis harum molestias?
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <label>2016.09.01.</label>
-                            </div>
-                            <div class="col-sm-2">
-                                <label>VII. Erzsébet körút 24.</label>
-                            </div>
+                            <h:dataTable value="#{eventController.entities}" var="eventDTO" class="table table-bordered table-striped">
+                                <h:column>    				
+                                    <f:facet name="header">Organizer</f:facet>
+                                    <h:link value="#{eventDTO.company.name}" outcome="company">
+                                        <f:param name="entityId" value="#{eventDTO.company.id}"/>
+                                    </h:link>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Title</f:facet>
+                                    <h:link value="#{eventDTO.title}" outcome="event">
+                                        <f:param name="entityId" value="#{eventDTO.id}"/>
+                                    </h:link>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Starts at</f:facet>
+                                        #{eventDTO.startDate}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">City</f:facet>
+                                        #{eventDTO.address.city}
+                                </h:column>
+                            </h:dataTable>
                         </div>
-                    </div>
+                        
+                    </clientregistry-list:event-list>
+
                 </div>
                 <!--
                 END OF MAIN CONTENT
@@ -137,7 +105,7 @@
             <!--
             END OF FOOTER
             -->
-            
+
         </div>
         <!--
         END OF MAIN CONTAINER
