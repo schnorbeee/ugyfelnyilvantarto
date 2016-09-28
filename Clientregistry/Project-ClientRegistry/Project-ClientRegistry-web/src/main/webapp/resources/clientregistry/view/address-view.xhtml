@@ -5,7 +5,7 @@
       xmlns:composite="http://xmlns.jcp.org/jsf/composite">
 
     <composite:interface>
-        <composite:attribute name="addressBean" required="true"/>
+        <composite:attribute name="addressDTO" required="true"/>
         <composite:attribute name="style" required="false"/>
     </composite:interface>
 
@@ -13,31 +13,31 @@
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="companyCountry" value="Country:"/>
             <div class="col-sm-8">
-                <h:outputText id="companyCountry" value="#{cc.attrs.addressBean.country}"/>
+                <h:outputText id="companyCountry" value="#{cc.attrs.addressDTO.country}"/>
             </div>
         </div>
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="companyCity" value="City:"/>
             <div class="col-sm-8">
-                <h:outputText id="companyCity" value="#{cc.attrs.addressBean.city}"/>
+                <h:outputText id="companyCity" value="#{cc.attrs.addressDTO.city}"/>
             </div>
         </div>
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="companyZipCode" value="Zip code:"/>
             <div class="col-sm-8">
-                <h:outputText id="companyZipCode" value="#{cc.attrs.addressBean.zipCode}"/>
+                <h:outputText id="companyZipCode" value="#{cc.attrs.addressDTO.zipCode}"/>
             </div>
         </div>
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="companyStreet" value="Street:"/>
             <div class="col-sm-8">
-                <h:outputText id="companyStreet" value="#{cc.attrs.addressBean.street}"/>
+                <h:outputText id="companyStreet" value="#{cc.attrs.addressDTO.street}"/>
             </div>
         </div>
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="companyHouseNumber" value="House number:"/>
             <div class="col-sm-8">
-                <h:outputText id="companyHouseNumber" value="#{cc.attrs.addressBean.houseNumber}"/>
+                <h:outputText id="companyHouseNumber" value="#{cc.attrs.addressDTO.houseNumber}"/>
             </div>
         </div>
     </composite:implementation>

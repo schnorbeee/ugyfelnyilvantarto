@@ -5,6 +5,11 @@
       xmlns:composite="http://xmlns.jcp.org/jsf/composite"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <f:metadata>
+        <f:viewParam name="entityId" value="#{companyController.entityId}" />
+        <f:event type="preRenderView" listener="#{companyController.onPreRender}" />
+    </f:metadata>
+    
     <composite:interface>
         <composite:attribute name="companyBean" required="true"/>
         <composite:attribute name="style" required="false"/>

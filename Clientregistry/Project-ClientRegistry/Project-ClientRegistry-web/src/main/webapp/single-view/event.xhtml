@@ -61,11 +61,11 @@
                         <div class="col-sm-9">
                             <h:form class="form-horizontal">
                                 <div class="form-group">
-                                    <clientregistry-view:event-view eventBean="#{eventBean}"/>
+                                    <clientregistry-view:event-view eventDTO="#{eventController.eventById}"/>
                                 </div>
                                 <hr/>
                                 <div class="form-group">
-                                    <clientregistry-view:address-view addressBean="#{addressBean}"/>
+                                    <clientregistry-view:address-view addressDTO="#{eventController.addressByEventId}"/>
                                 </div>
                                 <hr/>
                                 <h2>Users</h2>

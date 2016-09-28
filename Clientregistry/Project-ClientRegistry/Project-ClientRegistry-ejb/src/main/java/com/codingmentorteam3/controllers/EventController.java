@@ -57,13 +57,22 @@ public class EventController extends PageableEntityController<Event> {
     @Inject
     private InvitationService invitationService;
 
-//    public String getEventById(Long eventId) {
-//        Event event = eventService.getEvent(eventId);
-//        if (null != event) {
-//            return "";
-//        }
-//        throw new BadRequestException(getNoEntityMessage());
-//    }
+    public EventDTO getEventById() {
+        Event event = loadEntity(getEntityId());
+        if (null != event) {
+            return new EventDTO(event);
+        }
+        throw new BadRequestException(getNoEntityMessage());
+    }
+    
+    public AddressDTO getAddressByEventId() {
+        Address address = addressService.getAddress(getEntity().getAddress().getId());
+        if (null != address) {
+            return new AddressDTO(address);
+        }
+        throw new BadRequestException("No address found in database!");
+    }
+    
     //user method
     public EventDTO updateEvent(EventBean updateEvent, Long eventId) {
         Event oldEvent = loadEntity(eventId);

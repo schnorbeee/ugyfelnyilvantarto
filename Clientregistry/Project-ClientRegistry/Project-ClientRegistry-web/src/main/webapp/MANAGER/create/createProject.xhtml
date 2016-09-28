@@ -6,6 +6,11 @@
       xmlns:o="http://omnifaces.org/ui"
       xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
     
+    <f:metadata>
+       <f:viewParam name="entityId" value="#{companyController.entityId}" />
+       <f:event type="preRenderView" listener="#{companyController.onPreRender}" />
+   </f:metadata>
+    
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -120,7 +125,7 @@
                                 <div class="row">
                                     <div class="col-sm-9">
                                         <div class="col-sm-4 col-sm-offset-8">
-                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Create project" action="#{companyController.createProject(projectBean, companyId)}"/>
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Create project" action="#{companyController.createProject(projectBean, companyController.entityId)}"/>
                                         </div>
                                     </div>
                                 </div>

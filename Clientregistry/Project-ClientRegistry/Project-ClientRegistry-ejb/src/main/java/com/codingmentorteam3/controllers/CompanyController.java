@@ -55,7 +55,7 @@ public class CompanyController extends PageableEntityController<Company> {
 
     @Inject
     private ContactPersonService contactPersonService;
-    
+
     private final List<CompanyDTO> companyDTOs = new ArrayList<>();
 
     public List<CompanyDTO> getCompanyDTOs() {
@@ -81,14 +81,22 @@ public class CompanyController extends PageableEntityController<Company> {
         return saveEntity();
     }
 
-//    //user method EGYENLORE MARAD HATHA SZUKSEG LESZ RA DTOS
-//    public String getCompanyById(Long companyId) {
-//        Company company = companyService.getCompany(companyId);
-//        if (null != company) {
-//            return getListPage();
-//        }
-//        throw new BadRequestException(getNoEntityMessage());
-//    }
+    public CompanyDTO getCompanyById() {
+        Company company = loadEntity(getEntityId());
+        if (null != company) {
+            return new CompanyDTO(company);
+        }
+        throw new BadRequestException(getNoEntityMessage());
+    }
+
+    public AddressDTO getAddressByCompanyId() {
+        Address address = addressService.getAddress(getEntity().getAddress().getId());
+        if (null != address) {
+            return new AddressDTO(address);
+        }
+        throw new BadRequestException("No address found in database!");
+    }
+
     //user method FASZA
     public CompanyDTO updateCompanyPersonalInfos(CompanyBean updateCompany, Long companyId) {
         Company oldCompany = loadEntity(companyId);
@@ -234,7 +242,6 @@ public class CompanyController extends PageableEntityController<Company> {
     public List<ProjectDTO> createProject(ProjectBean regProject, Long companyId) {
         Project newProject = new Project(regProject);
         Company currentCompany = loadEntity(companyId);
-        setEntity(currentCompany);
         boolean haveProject = false;
         for (Project p : companyService.getProjectsListByCompanyId(getEntityId())) {
             if (newProject.getName().equals(p.getName()) && newProject.getDescription().equals(p.getDescription())) {
@@ -246,14 +253,17 @@ public class CompanyController extends PageableEntityController<Company> {
                 projectService.getCompaniesListByProjectId(newProject.getId()).add(currentCompany);
                 projectService.editProject(newProject);
                 companyService.getProjectsListByCompanyId(getEntityId()).add(newProject);
+                setEntity(currentCompany);
                 saveEntity();
                 haveProject = true;
             }
         }
         if (!haveProject) {
-            projectService.getCompaniesListByProjectId(newProject.getId()).add(currentCompany);
             projectService.createProject(newProject);
+            newProject.getCompanies().add(currentCompany);
+            projectService.editProject(newProject);
             companyService.getProjectsListByCompanyId(getEntityId()).add(newProject);
+            setEntity(currentCompany);
             saveEntity();
         }
         List<ProjectDTO> projectDTOs = new ArrayList<>();

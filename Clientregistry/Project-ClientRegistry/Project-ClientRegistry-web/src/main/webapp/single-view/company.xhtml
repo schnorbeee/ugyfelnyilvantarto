@@ -60,17 +60,17 @@
                 MAIN CONTENT
                 -->
                 <div class="col-sm-8">
-                    <h2>#{companyBean.name}</h2>
+                    <h2>#{companyDTO.name}</h2>
                     <hr/>
                     <div class="row">
                         <div class="col-sm-9">
                             <h:form class="form-horizontal">
                                 <div class="form-group">
-                                    <clientregistry-view:company-view companyBean="#{companyBean}"/>
+                                    <clientregistry-view:company-view companyDTO="#{companyController.companyById}"/>
                                 </div>
                                 <hr/>
                                 <div class="form-group">
-                                    <clientregistry-view:address-view addressBean="#{addressBean}"/>
+                                    <clientregistry-view:address-view addressDTO="#{companyController.addressByCompanyId}"/>
                                 </div>
                                 <hr/>
 
@@ -79,8 +79,11 @@
                                         <h2>Projects</h2>
                                     </div>
                                     <div class="col-sm-4">
-                                        <h:button outcome="createProject" value="Create project" class="btn btn-color-comment center-block btn-space btn-create"/>
+                                        <h:link value="Create project" outcome="createProject" class="btn btn-color-comment center-block btn-space btn-create">
+                                            <f:param name="entityId" value="#{companyController.entityId}"/>
+                                        </h:link>
                                     </div>
+                                    
                                 </div>
                                 <div class="form-group">
                                     <clientregistry-list:project-list newItemOutcome="#{projectController.newItemOutcome}" 

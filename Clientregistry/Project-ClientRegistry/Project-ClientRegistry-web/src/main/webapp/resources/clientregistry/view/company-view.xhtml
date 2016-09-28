@@ -5,7 +5,7 @@
       xmlns:composite="http://xmlns.jcp.org/jsf/composite">
 
     <composite:interface>
-        <composite:attribute name="companyBean" required="true"/>
+        <composite:attribute name="companyDTO" required="true"/>
         <composite:attribute name="style" required="false"/>
     </composite:interface>
 
@@ -13,19 +13,19 @@
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="comapanyLogo" value="Logo: "/>
             <div class="col-sm-8">
-                <h:outputText id="companyLogo" value="#{cc.attrs.companyBean.logo}" class="control-label"/>
+                <h:outputText id="companyLogo" value="#{cc.attrs.companyDTO.logo}" class="control-label"/>
             </div>
         </div>
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="comapanyName" value="Name:"/>
             <div class="col-sm-8">
-                <h:outputText id="companyName" value="#{cc.attrs.companyBean.name}" class="control-label"/>
+                <h:outputText id="companyName" value="#{cc.attrs.companyDTO.name}" class="control-label"/>
             </div>
         </div>
         <div class="form-group">
             <h:outputLabel class="control-label col-sm-4" for="comapanyTaxNumber" value="Tax number: "/>
             <div class="col-sm-8">
-                <h:outputText id="companyTaxNumber" value="#{cc.attrs.companyBean.taxNumber}" class="control-label"/>
+                <h:outputText id="companyTaxNumber" value="#{cc.attrs.companyDTO.taxNumber}" class="control-label"/>
             </div>
         </div>
     </composite:implementation>

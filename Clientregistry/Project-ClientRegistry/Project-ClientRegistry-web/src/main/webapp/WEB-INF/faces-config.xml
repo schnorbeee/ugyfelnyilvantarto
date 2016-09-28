@@ -3,36 +3,9 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
-    
+
     <navigation-rule>
-        <from-view-id>profile.xhtml</from-view-id>
-        <from-view-id>home.xhtml</from-view-id>
-        <from-view-id>companies.xhtml</from-view-id>
-        <from-view-id>users.xhtml</from-view-id>
-        <from-view-id>projects.xhtml</from-view-id>
-        <from-view-id>myEvents.xhtml</from-view-id>
-        <from-view-id>myInvitations.xhtml</from-view-id>
-        <from-view-id>/single-view/company.xhtml</from-view-id>
-        <from-view-id>/single-view/contactPerson.xhtml</from-view-id>
-        <from-view-id>/single-view/event.xhtml</from-view-id>
-        <from-view-id>/single-view/project.xhtml</from-view-id>
-        <from-view-id>/USER/create/createConnectionChannel.xhtml</from-view-id>
-        <from-view-id>/USER/edit/editConnectionChannel.xhtml</from-view-id>
-        <from-view-id>/USER/edit/editProfile.xhtml</from-view-id>
-        <from-view-id>/MANAGER/create/createCompany.xhtml</from-view-id>
-        <from-view-id>/MANAGER/create/createContactPerson.xhtml</from-view-id>
-        <from-view-id>/MANAGER/create/createEvent.xhtml</from-view-id>
-        <from-view-id>/MANAGER/create/createProject.xhtml</from-view-id>
-        <from-view-id>/MANAGER/edit/editCompany.xhtml</from-view-id>
-        <from-view-id>/MANAGER/edit/editContactPerson.xhtml</from-view-id>
-        <from-view-id>/MANAGER/edit/editEvent.xhtml</from-view-id>
-        <from-view-id>/MANAGER/edit/editProject.xhtml</from-view-id>
-        <from-view-id>/MANAGER/manage/manageCompanies.xhtml</from-view-id>
-        <from-view-id>/MANAGER/manage/manageContactPersons.xhtml</from-view-id>
-        <from-view-id>/MANAGER/manage/manageEvents.xhtml</from-view-id>
-        <from-view-id>/MANAGER/manage/manageProjects.xhtml</from-view-id>
-        <from-view-id>/ADMIN/manage/manageUsers.xhtml</from-view-id>
-        
+
         <navigation-case>
             <from-outcome>home</from-outcome>
             <to-view-id>home.xhtml</to-view-id>
@@ -52,6 +25,27 @@
         <navigation-case>
             <from-outcome>profile</from-outcome>
             <to-view-id>profile.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>company</from-outcome>
+            <to-view-id>/single-view/company.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>contactPerson</from-outcome>
+            <to-view-id>/single-view/contactPerson.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>event</from-outcome>
+            <to-view-id>/single-view/event.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>project</from-outcome>
+            <to-view-id>/single-view/project.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>user</from-outcome>
+            <to-view-id>/single-view/user.xhtml</to-view-id>
         </navigation-case>
         
         <navigation-case>
@@ -76,6 +70,14 @@
         </navigation-case>
         
         <navigation-case>
+            <from-outcome>editProfile</from-outcome>
+            <to-view-id>/USER/edit/editProfile.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editConnectionChannel</from-outcome>
+            <to-view-id>/USER/edit/editConnectionChannel.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>editEvent</from-outcome>
             <to-view-id>/MANAGER/edit/editEvent.xhtml</to-view-id>
         </navigation-case>
@@ -93,6 +95,10 @@
         </navigation-case>
         
         <navigation-case>
+            <from-outcome>createConnectionChannel</from-outcome>
+            <to-view-id>/USER/create/createConnectionChannel.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>createEvent</from-outcome>
             <to-view-id>/MANAGER/create/createEvent.xhtml</to-view-id>
         </navigation-case>
@@ -108,6 +114,7 @@
             <from-outcome>createContactPerson</from-outcome>
             <to-view-id>/MANAGER/create/createContactPerson.xhtml</to-view-id>
         </navigation-case>
+        
     </navigation-rule>
     
 </faces-config>

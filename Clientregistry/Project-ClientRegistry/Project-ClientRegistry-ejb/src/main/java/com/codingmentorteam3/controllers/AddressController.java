@@ -18,8 +18,7 @@ public class AddressController {
     @Inject
     private AddressDaoImpl addressDao;
 
-//    meg nem hasznaljuk
-//    public AddressDTO getAddressById(Long id) {
+//    public AddressDTO getAddressById() {
 //        Address address = addressDao.read(id);
 //        if (null != address) {
 //            return new AddressDTO(address);

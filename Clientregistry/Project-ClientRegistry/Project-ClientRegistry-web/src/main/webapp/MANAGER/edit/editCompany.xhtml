@@ -10,7 +10,7 @@
         <f:viewParam name="entityId" value="#{companyController.entityId}" />
         <f:event type="preRenderView" listener="#{companyController.onPreRender}" />
     </f:metadata>
-    
+
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -61,7 +61,7 @@
                         <div class="col-sm-9">
                             <h:form class="form-horizontal">
                                 <div class="form-group">
-                                    <clientregistry:company-detail companyBean="#{companyBean}"/>
+                                    <clientregistry:company-detail companyBean="#{companyController.entity}"/>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -72,7 +72,7 @@
                                 </div>
                                 <br/><hr/>
                                 <div class="form-group">
-                                    <clientregistry:address-detail addressBean="#{addressBean}"/>
+                                    <clientregistry:address-detail addressBean="#{companyController.entity.address}"/>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
