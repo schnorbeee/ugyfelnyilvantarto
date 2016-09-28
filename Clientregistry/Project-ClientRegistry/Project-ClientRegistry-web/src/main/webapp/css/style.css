@@ -261,6 +261,6 @@ a:active {
     padding: 5px;
 }
 
-.btn-create {
+.btn-create, .btn-edit {
     margin: 20px 0 10px;
 }
