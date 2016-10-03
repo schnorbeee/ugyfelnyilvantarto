@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry/list"
-      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
+      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component"
+      xmlns:p="http://primefaces.org/ui">
 
     <f:metadata>
         <f:viewParam name="offset" value="#{companyController.offset}" />
@@ -71,41 +72,43 @@
                                                  noEntityMessage="#{companyController.noEntityMessage}">
 
                         <div class="row">
-                            <h:dataTable value="#{companyController.companiesList}" var="companyDTO" class="table table-bordered table-striped">
-                                <h:column>    				
-                                    <f:facet name="header">Logo</f:facet>    				
-                                        #{companyDTO.logo}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Name</f:facet>
-                                    <h:link value="#{companyDTO.name}" outcome="company">
-                                        <f:param name="entityId" value="#{companyDTO.id}"/>
-                                    </h:link>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Tax number</f:facet>
-                                        #{companyDTO.taxNumber}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Seat</f:facet>
-                                        #{companyDTO.address.city}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Edit</f:facet>
-                                    <h:link value="Edit" outcome="editCompany">
-                                        <f:param name="entityId" value="#{companyDTO.id}"/>
-                                    </h:link>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Delete</f:facet>
-                                    <h:form id="userForm">
-                                        <h:commandLink value="Delete" 
-                                                       onclick="if (!confirm('Are you sure you want to delete this company?'))
-                                                                   return false"
-                                                       action="#{companyController.deleteCompanyById(companyDTO.id)}"/>
-                                    </h:form>
-                                </h:column>
-                            </h:dataTable>
+                            
+                                <p:dataTable id="entitiesTable" value="#{companyController.companiesList}" var="companyDTO" class="table table-bordered table-striped">
+                                    <p:column>    				
+                                        <f:facet name="header">Logo</f:facet>    				
+                                            #{companyDTO.logo}
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">Name</f:facet>
+                                        <h:link value="#{companyDTO.name}" outcome="company">
+                                            <f:param name="entityId" value="#{companyDTO.id}"/>
+                                        </h:link>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">Tax number</f:facet>
+                                            #{companyDTO.taxNumber}
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">Seat</f:facet>
+                                            #{companyDTO.address.city}
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">Edit</f:facet>
+                                        <h:link value="Edit" outcome="editCompany">
+                                            <f:param name="entityId" value="#{companyDTO.id}"/>
+                                        </h:link>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">Delete</f:facet>
+                                        <h:form id="userForm">
+                                            <p:commandLink value="Delete" 
+                                                           onclick="if (!confirm('Are you sure you want to delete this company?'))
+                                                                       return false"
+                                                           action="#{companyController.deleteCompanyById(companyDTO.id)}"/>
+                                        </h:form>
+                                    </p:column>
+                                </p:dataTable>
+                            
                         </div>
                     </clientregistry:company-list>
                 </div>

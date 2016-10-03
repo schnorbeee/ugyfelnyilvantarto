@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,25 +24,25 @@ import javax.persistence.OneToMany;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "company_table")
-@NamedNativeQuery(name = "company.list.n.month.no.event",
-        query = "SELECT c FROM company_table c, event_table e WHERE c.company_id = e.company_id "
-                + "AND EXTRACT(MONTH FROM CURRENT_DATE) >= EXTRACT(MONTH FROM e.start_date) "
-                + "AND EXTRACT(MONTH FROM e.start_date) >= (EXTRACT(MONTH FROM CURRENT_DATE) - :n)")
 @NamedQueries({
+//    @NamedQuery(name = "company.list.n.month.no.event",
+//        query = "SELECT c FROM \"public\".company_table c, \"public\".event_table e WHERE c.company_id = e.company_id" +
+//"AND EXTRACT(MONTH FROM CURRENT_DATE) < EXTRACT(MONTH FROM e.start_date)" +
+//"AND EXTRACT(MONTH FROM e.start_date) < (EXTRACT(MONTH FROM CURRENT_DATE) - :n)"),
     @NamedQuery(name = "company.by.name.filter",
-                query = "SELECT c FROM company_table c WHERE c.name LIKE :name"),
+        query = "SELECT c FROM company_table c WHERE c.name LIKE :name"),
     @NamedQuery(name = "company.by.tax.number.filter",
-                query = "SELECT c FROM company_table c WHERE c.taxNumber LIKE :tax"),
+        query = "SELECT c FROM company_table c WHERE c.taxNumber LIKE :tax"),
     @NamedQuery(name = "company.list",
-                query = "SELECT c FROM company_table c ORDER BY c.name"),
+        query = "SELECT c FROM company_table c ORDER BY c.name"),
     @NamedQuery(name = "company.list.events.by.id",
-                query = "SELECT e FROM company_table c INNER JOIN c.events e WHERE c.id =:id"),
+        query = "SELECT e FROM company_table c INNER JOIN c.events e WHERE c.id =:id"),
     @NamedQuery(name = "company.list.projects.by.id",
-                query = "SELECT p FROM company_table c INNER JOIN c.projects p WHERE c.id =:id"),
+        query = "SELECT p FROM company_table c INNER JOIN c.projects p WHERE c.id =:id"),
     @NamedQuery(name = "company.list.contacters.by.id",
-                query = "SELECT con FROM company_table c INNER JOIN c.contacters con WHERE c.id =:id"),
+        query = "SELECT con FROM company_table c INNER JOIN c.contacters con WHERE c.id =:id"),
     @NamedQuery(name = "company.list.events.notes.by.id",
-                query = "SELECT n FROM company_table c INNER JOIN c.events e INNER JOIN e.notes n WHERE c.id =:id")
+        query = "SELECT n FROM company_table c INNER JOIN c.events e INNER JOIN e.notes n WHERE c.id =:id")
 })
 public class Company implements Serializable {
 
@@ -73,7 +73,7 @@ public class Company implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "project_id"))
     private List<Project> projects = new ArrayList<>();
 
-    @OneToMany(mappedBy = "company", targetEntity = ContactPerson.class)
+    @OneToMany(mappedBy = "company", targetEntity = ContactPerson.class, cascade = CascadeType.REMOVE)
     private List<ContactPerson> contacters = new ArrayList<>();
 
     public Company() {

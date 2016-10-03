@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
  * @author norbeee sch.norbeee@gmail.com
  */
 @Entity(name = "address_table")
-@NamedQueries ({
+@NamedQueries({
     @NamedQuery(name = "address.list", query = "SELECT a FROM address_table a"),
     @NamedQuery(name = "address.by.all.parameters", query = "SELECT a FROM address_table a WHERE a.city =:city AND a.country =:country AND a.zipCode =:zip AND a.street =:street AND a.houseNumber =:houseNumber")
 })
@@ -45,13 +45,13 @@ public class Address implements Serializable {
 
     @Column(name = "house_number", nullable = false)
     private String houseNumber;
-    
+
     @OneToMany(mappedBy = "address", targetEntity = Company.class, fetch = FetchType.EAGER)
     private List<Company> companies = new ArrayList<>();
-    
+
     @OneToMany(mappedBy = "address", targetEntity = Event.class, fetch = FetchType.EAGER)
     private List<Event> events = new ArrayList<>();
-    
+
     public Address() {
         //default contructor
     }
@@ -63,7 +63,7 @@ public class Address implements Serializable {
         this.street = newAddress.getStreet();
         this.houseNumber = newAddress.getHouseNumber();
     }
-    
+
     public Long getId() {
         return id;
     }

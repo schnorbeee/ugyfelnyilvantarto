@@ -96,7 +96,7 @@
                                         <h:dataTable value="#{companyController.getProjectsListByCompanyId(companyController.entityId)}" var="projectDTO" class="table table-bordered table-striped">
                                             <h:column>                    
                                                 <f:facet name="header">Name</f:facet>
-                                                <h:link value="#{projectDTO.name}" outcome="view-project">
+                                                <h:link value="#{projectDTO.name}" outcome="project">
                                                     <f:param name="entityId" value="#{projectDTO.id}"/>
                                                 </h:link>
                                             </h:column>
@@ -136,7 +136,7 @@
                                         <h:dataTable value="#{companyController.getEventsListByCompanyId(companyController.entityId)}" var="eventDTO" class="table table-bordered table-striped">
                                             <h:column>                    
                                                 <f:facet name="header">Title</f:facet>
-                                                <h:link value="#{eventDTO.title}" outcome="view-event">
+                                                <h:link value="#{eventDTO.title}" outcome="event">
                                                     <f:param name="entityId" value="#{eventDTO.id}"/>
                                                 </h:link>
                                             </h:column>
@@ -180,7 +180,7 @@
                                         <h:dataTable value="#{companyController.getContactersListByCompanyId(companyController.entityId)}" var="contactPersonDTO" class="table table-bordered table-striped">
                                             <h:column>                    
                                                 <f:facet name="header">Name</f:facet>
-                                                <h:link value="#{contactPersonDTO.firstName} #{contactPersonDTO.lastName}" outcome="view-contact-person">
+                                                <h:link value="#{contactPersonDTO.firstName} #{contactPersonDTO.lastName}" outcome="contactPerson">
                                                     <f:param name="entityId" value="#{contactPersonDTO.id}"/>
                                                 </h:link>
                                             </h:column>

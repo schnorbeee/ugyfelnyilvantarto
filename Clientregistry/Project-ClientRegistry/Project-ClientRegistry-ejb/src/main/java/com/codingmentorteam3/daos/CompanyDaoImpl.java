@@ -23,7 +23,7 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
     }
 
     public List<Company> getCompaniesListByNameFilter(String name, int limit, int offset) {
-        if (null != name) {
+        if (null != name || !"".equals(name)) {
             TypedQuery<Company> query = em.createNamedQuery("company.by.name.filter", Company.class);
             query.setParameter("name", "%" + name + "%");
             query.setFirstResult(offset);
@@ -62,21 +62,27 @@ public class CompanyDaoImpl extends AbstractDao<Company> {
         return query.getResultList();
     }
 
-    public List<Event> getEventsListByCompanyId(Long companyId) {
+    public List<Event> getEventsListByCompanyId(Long companyId, int limit, int offset) {
         TypedQuery<Event> query = em.createNamedQuery("company.list.events.by.id", Event.class);
         query.setParameter("id", companyId);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
         return query.getResultList();
     }
 
-    public List<Project> getProjectsListByCompanyId(Long companyId) {
+    public List<Project> getProjectsListByCompanyId(Long companyId, int limit, int offset) {
         TypedQuery<Project> query = em.createNamedQuery("company.list.projects.by.id", Project.class);
         query.setParameter("id", companyId);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
         return query.getResultList();
     }
 
-    public List<ContactPerson> getContactersListByCompanyId(Long companyId) {
+    public List<ContactPerson> getContactersListByCompanyId(Long companyId, int limit, int offset) {
         TypedQuery<ContactPerson> query = em.createNamedQuery("company.list.contacters.by.id", ContactPerson.class);
         query.setParameter("id", companyId);
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
         return query.getResultList();
     }
 

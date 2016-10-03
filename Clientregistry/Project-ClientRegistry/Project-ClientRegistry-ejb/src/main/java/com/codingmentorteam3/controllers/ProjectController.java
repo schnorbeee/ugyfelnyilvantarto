@@ -35,13 +35,14 @@ public class ProjectController extends PageableEntityController<Project> {
     private CompanyService companyService;
 
     //user method
-//    public String getProjectById(Long projectId) {
-//        Project project = projectService.getProject(projectId);
-//        if (null != project) {
-//            return "";
-//        }
-//        throw new BadRequestException(getNoEntityMessage());
-//    }
+    public ProjectDTO getProjectById() {
+        Project project = loadEntity(getEntityId());
+        if (null != project) {
+            return new ProjectDTO(project);
+        }
+        throw new BadRequestException(getNoEntityMessage());
+    }
+    
     //user method
     public ProjectDTO updateProject(ProjectBean updateProject, Long projectId) {
         Project oldProject = loadEntity(projectId);

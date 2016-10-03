@@ -40,16 +40,16 @@ public class CompanyService {
         return companyDao.getCompaniesList(limit, offset);
     }
 
-    public List<Project> getProjectsListByCompanyId(Long companyId) {
-        return companyDao.getProjectsListByCompanyId(companyId);
+    public List<Project> getProjectsListByCompanyId(Long companyId, Integer limit, Integer offset) {
+        return companyDao.getProjectsListByCompanyId(companyId, limit, offset);
     }
 
-    public List<Event> getEventsListByCompanyId(Long companyId) {
-        return companyDao.getEventsListByCompanyId(companyId);
+    public List<Event> getEventsListByCompanyId(Long companyId, Integer limit, Integer offset) {
+        return companyDao.getEventsListByCompanyId(companyId, limit, offset);
     }
 
-    public List<ContactPerson> getContactersListByCompanyId(Long companyId) {
-        return companyDao.getContactersListByCompanyId(companyId);
+    public List<ContactPerson> getContactersListByCompanyId(Long companyId, Integer limit, Integer offset) {
+        return companyDao.getContactersListByCompanyId(companyId, limit, offset);
     }
 
     public List<Company> getInactiveCompaniesList(Integer n, Integer limit, Integer offset) {

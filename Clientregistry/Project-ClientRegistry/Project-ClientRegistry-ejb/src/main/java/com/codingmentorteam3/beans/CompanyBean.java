@@ -2,6 +2,7 @@ package com.codingmentorteam3.beans;
 
 import com.codingmentorteam3.annotations.Validate;
 import com.codingmentorteam3.entities.Address;
+import com.codingmentorteam3.entities.Company;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -39,12 +40,17 @@ public class CompanyBean {
         // Default constructor
     }
 
+    public CompanyBean(String name, String taxNumber) {
+        this.name = name;
+        this.taxNumber = taxNumber;
+    }
+
     public CompanyBean(String name, Address address, String taxNumber) {
         this.name = name;
         this.address = address;
         this.taxNumber = taxNumber;
     }
-    
+
     public String getName() {
         return name;
     }

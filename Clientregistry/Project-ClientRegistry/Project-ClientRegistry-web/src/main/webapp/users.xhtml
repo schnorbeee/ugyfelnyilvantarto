@@ -6,6 +6,10 @@
       xmlns:clientregistry-list="http://xmlns.jcp.org/jsf/composite/clientregistry/list"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <f:metadata>
+        <f:viewParam name="offset" value="#{userController.offset}" />
+    </f:metadata>
+    
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -73,7 +77,7 @@
                                 </h:column>
                                 <h:column>    				
                                     <f:facet name="header">Username</f:facet>
-                                    <h:link value="#{userDTO.username}" outcome="company">
+                                    <h:link value="#{userDTO.username}" outcome="user">
                                         <f:param name="entityId" value="#{userDTO.id}"/>
                                     </h:link>
                                 </h:column>

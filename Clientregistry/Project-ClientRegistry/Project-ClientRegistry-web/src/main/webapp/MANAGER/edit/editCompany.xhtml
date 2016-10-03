@@ -3,8 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:clientregistry="http://xmlns.jcp.org/jsf/composite/clientregistry/detail"
-      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:clientregistry-component="http://xmlns.jcp.org/jsf/composite/clientregistry/component"
+      xmlns:clientregistry-view="http://xmlns.jcp.org/jsf/composite/clientregistry/view"
+      xmlns:clientregistry-detail="http://xmlns.jcp.org/jsf/composite/clientregistry/detail">
 
     <f:metadata>
         <f:viewParam name="entityId" value="#{companyController.entityId}" />
@@ -59,25 +61,26 @@
                     <hr/>
                     <div class="row">
                         <div class="col-sm-9">
-                            <h:form class="form-horizontal">
+                            <h:form id="entityForm" class="form-horizontal">
                                 <div class="form-group">
-                                    <clientregistry:company-detail companyBean="#{companyController.entity}"/>
+                                    <clientregistry-view:company-view companyDTO="#{companyController.companyById}"/>
                                 </div>
+                                <hr/>
+                                <div class="form-group">
+                                    <clientregistry-view:address-view addressDTO="#{companyController.addressByCompanyId}"/>
+                                </div>
+                                <div class="form-group">
+                                    <clientregistry-detail:company-detail companyBean="#{companyBean}"/>
+                                </div>
+                                <hr/>
+                                <div class="form-group">
+                                    <clientregistry-detail:address-detail addressBean="#{addressBean}"/>
+                                </div>
+                       
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="col-sm-4 col-sm-offset-8">
-                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Save personal info" action="#{companyController.updateCompanyPersonalInfos(companyBean, companyController.entityId)}"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/><hr/>
-                                <div class="form-group">
-                                    <clientregistry:address-detail addressBean="#{companyController.entity.address}"/>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="col-sm-4 col-sm-offset-8">
-                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Save new address" action="#{companyController.updateCompanyAddress(addressBean, companyController.entityId)}"/>
+                                            <h:commandButton class="btn btn-primary center-block btn-color-sign-in" value="Save" action="#{companyController.updateCompanyPersonalInfos(companyBean, addressBean, companyController.entityId)}"/>
                                         </div>
                                     </div>
                                 </div>
